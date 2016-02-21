@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="gantt/Gantt.css">
+<link rel="stylesheet" href="gantt/TimeLine.css">
+
+<h1>Gantt landing page!</h1>
+
+<div id="gantt" class="exposition_block">
+    <div class="gantt_wrapper">
+        <div class="tasks_block">
+            <div class="tasks_wrapper" ng-controller="TaskListController">
+                <div class="task_wrapper"
+                     ng-repeat="task in tasks"
+                     ng-controller="TaskController">
+                    <div class="task_line_wrapper" style="margin-left: {{task.position.left}}%; width: {{task.position.width}}%">
+                        <div class="top_block" ng-style="task.direction">
+                            <span class="task_name">{{task.name}}</span>
+                            <span class="date_label"> -
+                                {{task.dateInterval.start.format('D MMM YYYY')}} /
+                                {{task.dateInterval.end.format('D MMM YYYY')}}
+                            </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus {{task.isCompleted? 'done_green' : 'left_red'}}" ng-show="task.isMilestone"></div>
+                            <div class="task_line left_red" ng-hide="task.isMilestone">
+                                <div class="task_completed_part_label" ng-style="task.direction">
+                                    <b>{{task.percent_complete}}</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:{{task.percent_complete}}%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" ng-show="task.isParent"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<h2> TODO: $scope.task.isParent = $scope.task.parent_id == 0; - is not correct!</h2>

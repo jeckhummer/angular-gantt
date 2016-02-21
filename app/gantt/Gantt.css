@@ -1,0 +1,131 @@
+﻿.gantt_wrapper {
+    border: 1px solid #CCC;
+    /*margin-left: 40px;*/
+    position: relative;
+    background-color: white;
+}
+
+.task_line_sector {
+    float: left;
+}
+
+.task_completed_part,
+.task_line{
+    border-radius: 3px;
+}
+
+.task_line {
+    height: 17px;
+    position: relative;
+}
+
+.task_completed_part{
+    float:left;
+    height:100%;
+    border-radius: 4px;
+}
+
+.task_completed_part_label{
+    text-align: center;
+    font-size: 1.1em;
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    color:black;
+}
+
+.task_wrapper:last-child {
+    border:0;
+}
+
+.tasks_block {
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid #CCC;
+}
+
+.task_wrapper {
+    border-radius: 2px;
+    border-bottom: 1px dotted #CCC;
+    padding: 1px 0;    
+}
+
+.task_wrapper:last-child {
+    border-bottom:0;
+}
+
+.task_name {
+    text-align: center;
+    font-size: 1.1em;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.task_line_wrapper {
+    position: relative;
+}
+
+.task_wrapper:nth-child(odd) {
+    background-color: #FBFBFB;
+}
+
+.task_wrapper .date_label {
+    white-space: nowrap;
+    color: blue;    
+}
+
+.task_line_wrapper .top_block{
+    white-space: nowrap;
+    padding: 2px 0;
+    text-align: center;
+}
+
+.parent_indicator{
+    border: 7px solid #D4EF41;
+    border-bottom: 5px solid transparent;
+    margin-bottom: -6px;
+}
+
+.rhombus{
+    height: 14px;
+    width: 14px;
+    position: relative;
+    left:-6.5px;
+    transform: rotate(45deg);
+}
+
+.done_green{
+    background-color: #6DC36D;
+}
+
+.left_red{
+    background-color: #F57171;
+}
+
+.task_wrapper:last-child{
+    border-bottom:0;
+}
+
+.current_date_line{
+    position: absolute;
+    top:0;
+    height:100%;
+    border-right: 1px solid #FF2E2E;
+}
+
+.stripe{
+    float: left;
+    height:100%;
+    border-right: 1px solid #CCC;
+}
+
+.timeline_option{
+    display: block;
+}
+
+.gantt_timeline_options td{
+    vertical-align: middle;
+    padding:3px;
+}

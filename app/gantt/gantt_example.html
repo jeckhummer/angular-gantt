@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Gantt.css">
+    <link rel="stylesheet" href="TimeLine.css">
+    <style>
+        body {
+            color: #595959;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+
+        body * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .exposition_block {
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exposition_block">
+    <h2>Gantt timeline options:</h2>
+    <div class="gantt_timeline_options">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="checkbox" id="year_option" class="timeline_option" checked="">
+                </td>
+                <td>Year</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="week_option" class="timeline_option">
+                </td>
+                <td>Week</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="month_option" class="timeline_option" checked="">
+                </td>
+                <td>Month</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="gantt" class="exposition_block">
+    <div class="gantt_wrapper">
+        <div class="timeline_wrapper">
+            <div class="timeline_bar">
+                <div class="timeline_row">
+                    <div class="unit_label" style="display: none">year</div>
+                    <div class="timeline">
+
+                        <div class="timeline_unit_wrapper" style="width:3.4383954154727796%">
+                            <div class="timeline_unit">
+                                2015
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:96.56160458452722%">
+                            <div class="timeline_unit">
+                                2016
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="timeline_row">
+                    <div class="unit_label" style="display: none">month</div>
+                    <div class="timeline">
+
+                        <div class="timeline_unit_wrapper" style="width:3.4383954154727796%">
+                            <div class="timeline_unit">
+                                Dec
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                Jan
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.30945558739255%">
+                            <div class="timeline_unit">
+                                Feb
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                Mar
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.595988538681947%">
+                            <div class="timeline_unit">
+                                Apr
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                May
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.595988538681947%">
+                            <div class="timeline_unit">
+                                Jun
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                Jul
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                Aug
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.595988538681947%">
+                            <div class="timeline_unit">
+                                Sep
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.882521489971348%">
+                            <div class="timeline_unit">
+                                Oct
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:8.595988538681947%">
+                            <div class="timeline_unit">
+                                Nov
+                            </div>
+                        </div>
+
+                        <div class="timeline_unit_wrapper" style="width:0.5730659025787965%">
+                            <div class="timeline_unit">
+                                Dec
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tasks_block">
+            <div class="timeline_stripes">
+                <div class="stripe" style="width:3.4383954154727796%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.30945558739255%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.595988538681947%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.595988538681947%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.595988538681947%"></div>
+                <div class="stripe" style="width:8.882521489971348%"></div>
+                <div class="stripe" style="width:8.595988538681947%"></div>
+                <div class="stripe" style="width:0.5730659025787965%"></div>
+            </div>
+            <div class="tasks_wrapper">
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_1 " style="margin-left: 0%;
+                            width: 93.69627507163324%">
+                        <div class="top_block tb_1">
+                        <span class="t_1">
+                            <span class="task_name">Task 1</span>
+                            <span class="date_label"> - 20 Dec 2015 / 10 Nov 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_1">
+                                    <b>66</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:66%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:block"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_2 " style="margin-left: 0%;
+                            width: 29.799426934097422%">
+                        <div class="top_block tb_2">
+                        <span class="t_2">
+                            <span class="task_name">SubTask A</span>
+                            <span class="date_label"> - 20 Dec 2015 / 1 Apr 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus done_green"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_2">
+                                    <b>100</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_3 " style="margin-left: 29.512893982808023%;
+                            width: 39.541547277936964%">
+                        <div class="top_block tb_3">
+                        <span class="t_3">
+                            <span class="task_name">SubTask B</span>
+                            <span class="date_label"> - 1 Apr 2016 / 16 Aug 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_3">
+                                    <b>77</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:77%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_4 " style="margin-left: 68.76790830945558%;
+                            width: 24.92836676217765%">
+                        <div class="top_block tb_4">
+                        <span class="t_4">
+                            <span class="task_name">SubTask C</span>
+                            <span class="date_label"> - 16 Aug 2016 / 10 Nov 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_4">
+                                    <b>11</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:11%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_5 " style="margin-left: 44.126074498567334%;
+                            width: 55.873925501432666%">
+                        <div class="top_block tb_5">
+                        <span class="t_5">
+                            <span class="task_name">Task 2</span>
+                            <span class="date_label"> - 22 May 2016 / 2 Dec 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_5">
+                                    <b>50</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:50%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:block"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_6 millestone" style="margin-left: 44.126074498567334%;
+                            width: 0.28653295128939826%">
+                        <div class="top_block tb_6">
+                        <span class="t_6">
+                            <span class="task_name">Sub Millestone A</span>
+                            <span class="date_label"> - 22 May 2016 / 22 May 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus done_green"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_6">
+                                    <b>100</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_7 " style="margin-left: 44.126074498567334%;
+                            width: 11.174785100286533%">
+                        <div class="top_block tb_7">
+                        <span class="t_7">
+                            <span class="task_name">SubTask A</span>
+                            <span class="date_label"> - 22 May 2016 / 29 Jun 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_7">
+                                    <b>33</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:33%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_8 " style="margin-left: 55.014326647564474%;
+                            width: 38.68194842406877%">
+                        <div class="top_block tb_8">
+                        <span class="t_8">
+                            <span class="task_name">SubTask B</span>
+                            <span class="date_label"> - 29 Jun 2016 / 10 Nov 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_8">
+                                    <b>39</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:39%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_9 " style="margin-left: 93.40974212034384%;
+                            width: 6.303724928366762%">
+                        <div class="top_block tb_9" style="direction: rtl;">
+                        <span class="t_9">
+                            <span class="task_name">SubTask C</span>
+                            <span class="date_label"> - 10 Nov 2016 / 1 Dec 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_9" style="direction: rtl;">
+                                    <b>88</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:88%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="task_wrapper">
+                    <div class="task_line_wrapper tlw_10 millestone" style="margin-left: 99.42693409742121%;
+                            width: 0.28653295128939826%">
+                        <div class="top_block tb_10" style="direction: rtl;">
+                        <span class="t_10">
+                            <span class="task_name">Sub Millestone B</span>
+                            <span class="date_label"> - 1 Dec 2016 / 1 Dec 2016</span>
+                        </span>
+                        </div>
+                        <div class="bottom_block">
+                            <div class="rhombus left_red"></div>
+                            <div class="task_line left_red">
+                                <div class="task_completed_part_label pl_10" style="direction: rtl;">
+                                    <b>0</b>%
+                                </div>
+                                <div class="task_completed_part done_green" style="width:0%">
+                                </div>
+                            </div>
+                            <div class="parent_indicator" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+        <div class="current_date_line" style="width:18.33810888252149%;
+                            left:0%;
+                            display:block"></div>
+    </div>
+</div>
+</body>
+</html>

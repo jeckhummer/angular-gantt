@@ -1,17 +1,14 @@
 <link rel="stylesheet" href="gantt/Gantt.css">
-<link rel="stylesheet" href="gantt/TimeLine.css">
-
-<h1>Gantt landing page!</h1>
-
 <div id="gantt" class="exposition_block">
     <div class="gantt_wrapper">
+        <div ng-include="'timeline/timeline.html'" ng-controller="TimelineController"></div>
         <div class="tasks_block">
-            <div class="tasks_wrapper" ng-controller="TaskListController">
+            <div class="tasks_wrapper">
                 <div class="task_wrapper"
                      ng-repeat="task in tasks"
                      ng-controller="TaskController">
                     <div class="task_line_wrapper" style="margin-left: {{task.position.left}}%; width: {{task.position.width}}%">
-                        <div class="top_block" ng-style="task.direction">
+                        <div class="top_block" style="direction: {{task.closerToEnd ? 'rtl' : 'ltr'}}">
                             <span class="task_name">{{task.name}}</span>
                             <span class="date_label"> -
                                 {{task.dateInterval.start.format('D MMM YYYY')}} /
@@ -38,3 +35,4 @@
 </div>
 <br />
 <h2> TODO: $scope.task.isParent = $scope.task.parent_id == 0; - is not correct!</h2>
+<h2> TODO: extract timeline into directive!</h2>

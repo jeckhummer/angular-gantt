@@ -1,22 +1,23 @@
-/**
- * Created by Maksim on 2/21/2016.
- */
-
 'use strict';
+angular.module('timeline', ['ngSanitize']);
 
-angular.module('timeline', ['ngSanitize'])
-    .controller('TimelineController', function ($scope, TimelineTypes, TimeLineGrid, $sce) {
+(function () {
+    angular.module('timeline')
+        .controller('TimelineController', TimelineController);
+
+    function TimelineController (TimelineTypes, TimeLineGrid, $sce, $scope) {
+        var timeline = this;
         var timelineTypes = {
             'year': TimelineTypes.year,
             'month': TimelineTypes.month,
-            'half month': TimelineTypes.halfmonth,
+            'half month': TimelineTypes.halfMonth,
             'week': TimelineTypes.week
         };
 
-        $scope.grids = {};
-
+        timeline.grids = {};
         for(var name in timelineTypes){
-            $scope.grids[name] = TimeLineGrid.generate(timelineTypes[name], $scope.overallDateInterval);
-            $scope.grids[name].label = $sce.getTrustedHtml($scope.grids[name].label);
+            timeline.grids[name] = TimeLineGrid.generate(timelineTypes[name], $scope.tasksCtrl.overallDateInterval);
+            timeline.grids[name].label = $sce.getTrustedHtml(timeline.grids[name].label);
         }
-    })
+    }
+})();

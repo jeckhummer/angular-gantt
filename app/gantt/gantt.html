@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="gantt/Gantt.css">
 <div id="gantt" class="exposition_block">
     <div class="gantt_wrapper">
-        <div ng-include="'timeline/timeline.html'" ng-controller="TimelineController"></div>
+        <div ng-include="'timeline/timeline.html'" ng-controller="TimelineController as timelineCtrl"></div>
         <div class="tasks_block">
             <div class="tasks_wrapper">
                 <div class="task_wrapper"
-                     ng-repeat="task in tasks"
-                     ng-controller="TaskController">
-                    <div class="task_line_wrapper" style="margin-left: {{task.position.left}}%; width: {{task.position.width}}%">
+                     ng-repeat="task in tasksCtrl.tasks"
+                     ng-controller="TaskController as taskCtrl">
+                    <div class="task_line_wrapper"
+                         style="margin-left: {{task.position.left}}%; width: {{task.position.width}}%">
                         <div class="top_block" style="direction: {{task.closerToEnd ? 'rtl' : 'ltr'}}">
                             <span class="task_name">{{task.name}}</span>
                             <span class="date_label"> -

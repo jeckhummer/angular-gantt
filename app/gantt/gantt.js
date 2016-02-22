@@ -1,26 +1,39 @@
 'use strict';
+angular.module('gantt', ['ngRoute', 'timeline']);
 
-angular.module('gantt', ['ngRoute', 'timeline'])
+(function(){
+    angular.module('gantt').config(GanttRouteConfig);
 
-    .config(['$routeProvider', function ($routeProvider) {
+    function GanttRouteConfig ($routeProvider) {
         $routeProvider.when('/gantt', {
             templateUrl: 'gantt/gantt.html',
-            controller: 'TaskListController'
+            controller: 'TaskListController',
+            controllerAs: 'tasksCtrl'
         });
-    }])
+    }
+})();
 
-    .controller('TaskListController',function (tasks, $scope) {
-        $scope.tasks = tasks.getAll();
-        $scope.overallDateInterval = tasks.getDateInterval();
-    })
+(function(){
+    angular.module('gantt').controller('TaskListController', TaskListController);
 
-    .controller('TaskController',function($scope){
+    function TaskListController (tasks) {
+        var list = this;
+        list.tasks = tasks.getAll();
+        list.overallDateInterval = tasks.getDateInterval();
+    }
+})();
+
+(function(){
+    angular.module('gantt').controller('TaskController', TaskController);
+
+    function TaskController(tasks, $scope){
         var task = $scope.task;
-        task.position = DateIntervalPosition($scope.overallDateInterval, task.dateInterval);
+        task.position = DateIntervalPosition(tasks.getDateInterval(), task.dateInterval);
         task.closerToEnd =(100 - task.position.left - task.position.width) < +task.position.left;
         task.isParent = task.parent_id == 0;
         task.isMilestone = task.dateInterval.days == 1;
         task.isCompleted = task.percent_complete == 100;
-    });
+    }
+}());
 
 

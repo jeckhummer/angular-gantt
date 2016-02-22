@@ -2,7 +2,7 @@
 
 <div class="timeline_wrapper">
     <div class="timeline_bar">
-        <div ng-repeat="grid in grids" class="timeline_row">
+        <div ng-repeat="grid in timelineCtrl.grids" class="timeline_row">
             <div class="unit_label" style="display: none">{{grid.name}}</div>
             <div class="timeline">
                 <div ng-repeat="grid_item in grid.grid" class="timeline_unit_wrapper" style="width:{{grid_item.width}}%">

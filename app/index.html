@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]>
-<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<html lang="en" ng-app="app-dev" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html lang="en" ng-app="app-dev" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-<html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
+<html lang="en" ng-app="app-dev" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="app-dev" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,19 +52,50 @@
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
-<script src="gantt/gantt-test-data.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
-<script src="app.js"></script>
-<script src="gantt/gantt.js"></script>
-<script src="gantt/gantt-services.js"></script>
-<script src="gantt/log.js"></script>
-<script src="date/moment.js"></script>
-<script src="date/date-interval.js"></script>
-<script src="date/date-interval-position.js"></script>
-<script src="timeline/timeline.js"></script>
-<script src="timeline/timeline-types.service.js"></script>
-<script src="timeline/timeline-grid.service.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+
+<!--Apps-->
+<script src="app.config.js"></script>
+<script src="app-dev.config.js"></script>
+
+
+<!--Gantt-->
+    <!--Config-->
+    <script src="gantt/gantt.config.js"></script>
+
+    <!--Services-->
+    <script src="gantt/services/gantt-data-http.service.js"></script>
+    <script src="gantt/services/gantt-tasks.service.js"></script>
+    <script src="gantt/services/gantt-timeline.service.js"></script>
+
+    <!--Controllers-->
+    <script src="gantt/controllers/gantt.controller.js"></script>
+    <script src="gantt/controllers/task-list.controller.js"></script>
+    <script src="gantt/controllers/task.controller.js"></script>
+
+
+<!--Timeline-->
+    <!--Controllers-->
+    <script src="timeline/timeline.directive.js"></script>
+    <script src="timeline/timeline-stripes.directive.js"></script>
+
+    <!--Services-->
+    <script src="timeline/timeline-type.service.js"></script>
+    <script src="timeline/timeline-grid.service.js"></script>
+
+
+<!--Common-->
+    <!--Date-->
+    <script src="common/date/moment.js"></script>
+    <script src="common/date/date-interval.js"></script>
+    <script src="common/date/date-interval-position.js"></script>
+
+    <!--HTTP-->
+    <script src="common/http.service.js"></script>
+
+
 </body>
 </html>

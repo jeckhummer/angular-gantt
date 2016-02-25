@@ -1,13 +1,13 @@
 'use strict';
 (function () {
-    angular.module('timeline').factory('TimelineTypes', TimelineTypes);
+    angular.module('timeline').constant('TimelineTypes', TimelineTypes());
 
     function TimelineTypes() {
         var service = {
-            year: getYearType(),
-            month: getMonthType(),
-            halfMonth: getHalfMonthType(),
-            week: getWeekType()
+            'year': getYearType(),
+            'month': getMonthType(),
+            'half-month': getHalfMonthType(),
+            'week': getWeekType()
         };
         return service;
 

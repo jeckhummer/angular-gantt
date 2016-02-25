@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="timeline/TimeLine.css">
+<link rel="stylesheet" href="timeline/timeline.css">
 
 <div class="timeline_wrapper">
     <div class="timeline_bar">
-        <div ng-repeat="grid in timelineCtrl.grids" class="timeline_row">
-            <div class="unit_label" style="display: none">{{grid.name}}</div>
+        <div ng-repeat="gridObject in grids" class="timeline_row">
+            <div class="unit_label" >{{gridObject.label}}</div>
             <div class="timeline">
-                <div ng-repeat="grid_item in grid.grid" class="timeline_unit_wrapper" style="width:{{grid_item.width}}%">
+                <div ng-repeat="grid_item in gridObject.grid" class="timeline_unit_wrapper" style="width:{{grid_item.width}}%">
                     <div class="timeline_unit" ng-bind-html="grid_item.label"></div>
                 </div>
                 <div class="clear"></div>
@@ -13,8 +13,3 @@
         </div>
     </div>
 </div>
-
-<!--index: index,
-                label: type.render_label(index),
-                date_interval: boundaries,
-                width: position.width,-->

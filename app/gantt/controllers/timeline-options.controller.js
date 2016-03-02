@@ -16,7 +16,7 @@
                 $rootScope.$broadcast('notify-timeout-fade', msg);
             }, function (message){
                 var msg = `Saving timeline settings FAILED! Error: ${message}`;
-                $rootScope.$broadcast('notify-timeout-fade', msg);
+                $rootScope.$broadcast('notify', msg, true);
             });
 
             $rootScope.$broadcast('notify-fade', 'Saving timeline settings...', promise.catch());

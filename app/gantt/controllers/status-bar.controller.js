@@ -18,41 +18,43 @@
                 });
             },
             function(){
-                ctrl.message = getActiveMessage();
+                var ntf = getActiveNotification();
+                ctrl.notification = ntf;
             }
         );
 
-        function getActiveMessage(){
-            var msg = '';
+        function getActiveNotification(){
+            var ntf = {};
 
             // last notification with toDelete == false
             notificationStack.forEach(function(notification){
-                if(!notification.toDelete) msg = notification.message;
+                if(!notification.toDelete) ntf = notification;
             });
 
-            return msg;
+            return ntf;
         }
 
-        function pushNotification(event, message){
+        function pushNotification(event, message, isError){
             deleteNotification(lastNoFadeNotification);
-            lastNoFadeNotification = _pushNotification(message);
+            lastNoFadeNotification = _pushNotification(message, $q.reject(), isError);
         }
 
-        function pushFadeNotification(event, message, promise){
-            _pushNotification(message, promise);
+        function pushFadeNotification(event, message, promise, isError){
+            _pushNotification(message, promise, isError);
         }
 
-        function pushTimeoutFadeNotification(event, message){
+        function pushTimeoutFadeNotification(event, message, isError){
             var promise = $q(function (resolve) {
                 $timeout(resolve, fadeTimeout);
             });
-            _pushNotification(message, promise);
+            _pushNotification(message, promise, isError);
         }
 
-        function _pushNotification(message, promise){
+        function _pushNotification(message, promise, isError){
             var notification = {
                 message: message,
-                toDelete: false
+                toDelete: false,
+                isError: isError
             };
             notificationStack.push(notification);
 
@@ -64,7 +66,7 @@
         }
 
         function deleteNotification(notification){
-            notification.toDelete = true;
+            if(notification) notification.toDelete = true;
         }
     }
 })();

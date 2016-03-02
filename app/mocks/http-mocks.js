@@ -9,7 +9,7 @@
             .respond(200, GanttTimelineMock.options);
 
         $httpBackend.whenPOST(HttpService.getResourceUrl('gantt-timeline-options', 'post'))
-            .respond(200, GanttTimelineMock.response.success);
+            .respond(200, GanttTimelineMock.response.error);
 
         $httpBackend.whenGET().passThrough();
     }

@@ -5,12 +5,10 @@
         <div class="top-bar">
             <!--STATUS BAR-->
             <div ng-controller="StatusBarController as statusCtrl" class="btn-sm status-bar">
-                <!--<div ng-show="ganttCtrl.isEmpty">Loading tasks data ...</div>-->
-                <!--<div ng-hide="ganttCtrl.timelineLoaded">Loading user timeline settings ...</div>-->
-                <span ng-show="statusCtrl.message">Status:</span>
-                <!--<span ng-style="{color: statusCtrl.isAlert ? 'red': 'grey'}">-->
-                    {{statusCtrl.message}}
-                <!--</span>-->
+                <span ng-show="statusCtrl.notification.message">Status:</span>
+                <span ng-style="{color: statusCtrl.notification.isError ? 'red' : 'grey'}">
+                    {{statusCtrl.notification.message}}
+                </span>
             </div>
 
             <!--TABS-->

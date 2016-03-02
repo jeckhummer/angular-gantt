@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="dialog/dialog.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
     <style>
@@ -40,6 +42,7 @@
 <body>
 <ul class="menu">
     <li><a href="#/gantt">gantt</a></li>
+    <li><a href="#/test">test</a></li>
 </ul>
 
 <!--[if lt IE 7]>
@@ -52,14 +55,17 @@
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
+
+<!--Bower-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
 
 <!--Apps-->
 <script src="app.config.js"></script>
-<script src="app-dev.config.js"></script>
 
 
 <!--Gantt-->
@@ -73,18 +79,30 @@
 
     <!--Controllers-->
     <script src="gantt/controllers/gantt.controller.js"></script>
+    <script src="gantt/controllers/status-bar.controller.js"></script>
     <script src="gantt/controllers/task-list.controller.js"></script>
     <script src="gantt/controllers/task.controller.js"></script>
+    <script src="gantt/controllers/timeline-options.controller.js"></script>
 
 
 <!--Timeline-->
-    <!--Controllers-->
-    <script src="timeline/timeline.directive.js"></script>
-    <script src="timeline/timeline-stripes.directive.js"></script>
+    <!--Directives-->
+    <script src="timeline/timeline/timeline.directive.js"></script>
+    <script src="timeline/timeline-stripes/timeline-stripes.directive.js"></script>
+    <script src="timeline/timeline-options/timeline-options.directive.js"></script>
 
     <!--Services-->
-    <script src="timeline/timeline-type.service.js"></script>
-    <script src="timeline/timeline-grid.service.js"></script>
+    <script src="timeline/services/timeline-type.service.js"></script>
+    <script src="timeline/services/timeline-grid.service.js"></script>
+
+
+<!--Dialog-->
+    <script src="dialog/dialog.config.js"></script>
+    <script src="dialog/dialog.controller.js"></script>
+    <script src="dialog/dialog.directive.js"></script>
+    <script src="dialog/dialog-background.directive.js"></script>
+    <script src="dialog/dialog-window.directive.js"></script>
+    <script src="dialog/dialog-trigger.directive.js"></script>
 
 
 <!--Common-->
@@ -95,6 +113,19 @@
 
     <!--HTTP-->
     <script src="common/http.service.js"></script>
+
+<!--Test-->
+    <script src="test/test.config.js"></script>
+    <script src="test/test.controller.js"></script>
+    <script src="test/parent.directive.js"></script>
+    <script src="test/test.directive.js"></script>
+
+<!--Mocks-->
+    <script src="mocks/app-dev.config.js"></script>
+    <script src="mocks/http-mocks.js"></script>
+    <script src="mocks/http-delay-decorator.js"></script>
+    <script src="mocks/gantt-tasks-mock.js"></script>
+    <script src="mocks/gantt-timeline-mock.js"></script>
 
 
 </body>

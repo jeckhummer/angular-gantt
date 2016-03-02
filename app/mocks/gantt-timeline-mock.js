@@ -1,26 +1,8 @@
-'use strict';
-
-angular.module('app', [
-    'ngRoute',
-    'gantt',
-    'timeline',
-    'common',
-    'dialog'
-]);
-
 (function () {
-    angular.module('app').config(AppRouterConfig);
+    angular.module('app-dev').value('GanttTimelineMock', GanttTimelineMock());
 
-    function AppRouterConfig($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/gantt'});
-    }
-}());
-
-(function () {
-    angular.module('app').config(GanttTimelineConfig);
-
-    function GanttTimelineConfig(GanttTimelineServiceProvider) {
-        var config = [
+    function GanttTimelineMock() {
+        var options = [
             {
                 typeName: 'year',
                 label: 'Year',
@@ -36,17 +18,32 @@ angular.module('app', [
             {
                 typeName: 'half-month',
                 label: 'Half Month',
-                visible: true,
+                visible: false,
                 stripes: true,
             },
             {
                 typeName: 'week',
                 label: 'Week',
-                visible: true,
+                visible: false,
                 stripes: false,
             }
         ];
 
-        GanttTimelineServiceProvider.setTimelineDefaults(config);
+        var response = {
+            success: {
+                status: 'success',
+                message: ''
+            },
+            error: {
+                status: 'error',
+                message: 'Shit happens! Saving timeline config failed!'
+            },
+        };
+
+        var mock = {
+            options: options,
+            response: response
+        };
+        return mock;
     }
 })();

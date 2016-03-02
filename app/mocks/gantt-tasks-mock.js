@@ -1,52 +1,3 @@
-angular.module('app-dev', ['app', 'ngMockE2E']);
-
-(function () {
-    angular.module('app-dev').run(HttpMocks);
-
-    function HttpMocks($httpBackend, HttpService, GanttTasksMock, GanttTimelineOptionsMock) {
-        $httpBackend.whenGET(HttpService.getResourceUrl('gantt-tasks'))
-            .respond(200, GanttTasksMock);
-
-        $httpBackend.whenGET(HttpService.getResourceUrl('gantt-timeline-options'))
-            .respond(200, GanttTimelineOptionsMock);
-
-        $httpBackend.whenGET().passThrough();
-    }
-})();
-
-(function () {
-    angular.module('app-dev').config(HttpDelayDecorator);
-
-    function HttpDelayDecorator($provide) {
-        $provide.decorator("HttpService", DelayedHttpService);
-    }
-
-    function DelayedHttpService($delegate, $q) {
-        var service = {
-            getResource: getDelayedFunction($delegate.getResource, 1),
-            postResource: getDelayedFunction($delegate.postResource, 2),
-            getResourceUrl: $delegate.getResourceUrl
-        };
-        return service;
-
-        function getDelayedFunction(func, delayArgumentIndex) {
-            var delayedFunc = function () {
-                var args = arguments;
-                var delay = args[delayArgumentIndex] || 0;
-                var promise = $q(function (resolve) {
-                    setTimeout(function () {
-                        resolve();
-                    }, delay);
-                }).then(function () {
-                    return func.apply(service, args);
-                });
-                return promise;
-            };
-            return delayedFunc;
-        }
-    }
-})();
-
 (function () {
     angular.module('app-dev').value('GanttTasksMock', getGanttTasksMock());
 
@@ -151,40 +102,6 @@ angular.module('app-dev', ['app', 'ngMockE2E']);
                 },
                 parentID: 5,
                 percentComplete: 0,
-            }
-        ];
-        return mock;
-    }
-})();
-
-(function () {
-    angular.module('app-dev').value('GanttTimelineOptionsMock', GanttTimelineOptionsMock());
-
-    function GanttTimelineOptionsMock() {
-        var mock = [
-            {
-                typeName: 'year',
-                label: 'Year',
-                visible: true,
-                stripes: false
-            },
-            {
-                typeName: 'month',
-                label: 'Month',
-                visible: true,
-                stripes: true
-            },
-            {
-                typeName: 'half-month',
-                label: 'Half Month',
-                visible: false,
-                stripes: false
-            },
-            {
-                typeName: 'week',
-                label: 'Week',
-                visible: true,
-                stripes: false
             }
         ];
         return mock;

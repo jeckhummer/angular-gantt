@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="timeline/timeline-options/timeline-options.css">
+
+<div class="timeline_options">
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>Active</td>
+                <td>Grid</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(index, type) in config">
+            <td>{{type.label}}</td>
+            <td>
+                <input ng-model="type.visible"
+                       type="checkbox"
+                       class="timeline_option">
+            </td>
+            <td>
+                <input ng-model="$parent.stripesTypeName"
+                       type="radio"
+                       value="{{index}}"
+                       class="timeline_option">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div class="text-right">
+        <div ng-click="saveConfig()" class="btn btn-default btn-xs">Save</div>
+        <div ng-click="back()" class="btn btn-default btn-xs">Back</div>
+    </div>
+</div>

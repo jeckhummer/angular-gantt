@@ -9,9 +9,7 @@
 
 .timeline_unit {
     padding: 3px 0;
-    border-color: #CCC;
-    border-style: solid;
-    border-width: 0px;
+    border: 0px solid #CCC;
     border-left-width: 1px;
     overflow: hidden;
 }
@@ -19,6 +17,8 @@
 .timeline_row {
     position: relative;
     border-bottom: 1px solid #ccc;
+    background-color: #F7F7F7;
+    overflow: hidden;
 }
 
 .unit_label {
@@ -31,24 +31,9 @@
     text-transform: capitalize;
 }
 
-.timeline {
-    background-color: #F7F7F7;
-    overflow: hidden;
-}
-
-.timeline_stripes {
-    position: absolute;
-    top: 0;
-    left: 1px;
-    height: 100%;
-    width: 100%;
-    border-top: 0;
-    border-bottom: 0;
-    overflow: hidden;
-}
 
 .timeline_bar {
-    /*border: 1px solid #CCC;*/
+    border: 1px solid #CCC;
 }
 
 /*.timeline_row:last-child{

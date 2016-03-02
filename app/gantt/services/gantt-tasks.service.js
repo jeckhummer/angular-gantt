@@ -54,7 +54,7 @@
                 name: data.name,
                 id: data.id,
                 dateInterval: di,
-                parentId: data.parentID,
+                parentID: data.parentID,
                 percentComplete: data.percentComplete,
             };
             return task;

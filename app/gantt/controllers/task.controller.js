@@ -3,17 +3,17 @@
 
     function TaskController($scope){
         var taskCtrl = this;
-        var task = $scope.task;
-        var di = task.dateInterval;
 
-        taskCtrl.start = di.start;
-        taskCtrl.end = di.end;
-        taskCtrl.isParent = task.parentID == 0;
-        taskCtrl.isMilestone = di.days == 1;
-        taskCtrl.isCompleted = task.percentComplete == 100;
-        taskCtrl.percentComplete = task.percentComplete;
-        taskCtrl.name = task.name;
-        taskCtrl.position = DateIntervalPosition($scope.ganttCtrl.boundaries, di);
-        taskCtrl.closerToEnd = (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
+        taskCtrl.start = $scope.task.dateInterval.start;
+        taskCtrl.end = $scope.task.dateInterval.end;
+        taskCtrl.isParent = $scope.task.parentID == 0;
+        taskCtrl.isMilestone = $scope.task.dateInterval.days == 1;
+        taskCtrl.isCompleted = $scope.task.percentComplete == 100;
+        taskCtrl.percentComplete = $scope.task.percentComplete;
+        taskCtrl.name = $scope.task.name;
+        taskCtrl.position =
+            DateIntervalPosition($scope.ganttCtrl.boundaries, $scope.task.dateInterval);
+        taskCtrl.closerToEnd =
+            (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
     }
 })();

@@ -34,7 +34,7 @@
             }
 
             function saveConfig(){
-                GanttDataHTTPService.saveTimelineConfig(config);
+                return GanttDataHTTPService.saveConfig(config);
             }
 
             function notifyAboutChanges(){

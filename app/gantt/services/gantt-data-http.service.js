@@ -11,7 +11,7 @@
         return service;
 
         function getTasks(){
-            return HttpService.getResource('gantt-tasks', 3000);
+            return HttpService.getResource('gantt-tasks', 4000);
         }
 
         function getConfig(){
@@ -19,7 +19,8 @@
         }
 
         function saveConfig(config){
-            return HttpService.postResource('gantt-timeline-options', config);
+            console.log('saving gantt timeline config: ', config);
+            return HttpService.postResource('gantt-timeline-options', config, 3000);
         }
     }
 })();

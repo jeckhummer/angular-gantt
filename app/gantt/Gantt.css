@@ -1,131 +1,144 @@
-﻿.gantt_wrapper {
-    border: 1px solid #CCC;
-    /*margin-left: 40px;*/
+﻿.gantt_block {
+
+}
+
+.gantt_block .gantt {
     position: relative;
     background-color: white;
 }
 
-.task_line_sector {
+.gantt_block .top-bar{
+    margin-bottom: 3px;
+}
+
+.gantt_block .status-bar{
+    float:left;
+    font-size: 13px;
+    padding-left: 0px;
+}
+
+.gantt_block .tab {
+    margin-left: 3px;
+    margin-right: 0;
+}
+
+.gantt_block .tabs {
+    float: right;
+}
+
+.gantt_block .task_line_sector {
     float: left;
 }
 
 .task_completed_part,
-.task_line{
+.gantt_block .task_line {
     border-radius: 3px;
 }
 
-.task_line {
+.gantt_block .task_line {
     height: 17px;
     position: relative;
 }
 
-.task_completed_part{
-    float:left;
-    height:100%;
+.gantt_block .task_completed_part {
+    float: left;
+    height: 100%;
     border-radius: 4px;
 }
 
-.task_completed_part_label{
+.gantt_block .task_completed_part_label {
     text-align: center;
     font-size: 1.1em;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    color:black;
+    color: black;
 }
 
-.task_wrapper:last-child {
-    border:0;
+.gantt_block .task_wrapper:last-child {
+    border: 0;
 }
 
-.tasks_block {
+.gantt_block .tasks_block {
     position: relative;
     overflow: hidden;
-    border-top: 2px solid #CCC;
+    border: 1px solid #CCC;
 }
 
-.task_wrapper {
+.gantt_block .tasks_wrapper {
+    /*border: 1px solid #CCC;*/
+    border-top-width: 2px;
+}
+
+.gantt_block .task_wrapper {
     border-radius: 2px;
     border-bottom: 1px dotted #CCC;
-    padding: 1px 0;    
+    padding: 1px 0;
 }
 
-.task_wrapper:last-child {
-    border-bottom:0;
+.gantt_block .task_wrapper:last-child {
+    border-bottom: 0;
 }
 
-.task_name {
+.gantt_block .task_name {
     text-align: center;
     font-size: 1.1em;
     white-space: nowrap;
     font-weight: bold;
 }
 
-.task_line_wrapper {
+.gantt_block .task_line_wrapper {
     position: relative;
 }
 
-.task_wrapper:nth-child(odd) {
+.gantt_block .task_wrapper:nth-child(odd) {
     background-color: #FBFBFB;
 }
 
-.task_wrapper .date_label {
+.gantt_block .task_wrapper .date_label {
     white-space: nowrap;
-    color: blue;    
+    color: blue;
 }
 
-.task_line_wrapper .top_block{
+.gantt_block .task_line_wrapper .top_block {
     white-space: nowrap;
     padding: 2px 0;
     text-align: center;
 }
 
-.parent_indicator{
+.gantt_block .parent_indicator {
     border: 7px solid #D4EF41;
     border-bottom: 5px solid transparent;
     margin-bottom: -6px;
 }
 
-.rhombus{
+.gantt_block .rhombus {
     height: 14px;
     width: 14px;
     position: relative;
-    left:-6.5px;
+    left: -6.5px;
     transform: rotate(45deg);
 }
 
-.done_green{
+.gantt_block .done_green {
     background-color: #6DC36D;
 }
 
-.left_red{
+.gantt_block .left_red {
     background-color: #F57171;
 }
 
-.task_wrapper:last-child{
-    border-bottom:0;
+.gantt_block .task_wrapper:last-child {
+    border-bottom: 0;
 }
 
-.current_date_line{
+.gantt_block .current_date_line {
     position: absolute;
-    top:0;
-    height:100%;
+    top: 0;
+    height: 100%;
     border-right: 1px solid #FF2E2E;
 }
 
-.stripe{
-    float: left;
-    height:100%;
-    border-right: 1px solid #CCC;
-}
 
-.timeline_option{
-    display: block;
-}
-
-.gantt_timeline_options td{
-    vertical-align: middle;
-    padding:3px;
-}

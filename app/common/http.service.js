@@ -18,17 +18,25 @@ angular.module('common', []);
             return url;
         }
 
-        function getResource(resource) {
-            return $http.get(getResourceUrl(resource)).
-            then(
-                function (response) { return response.data; },
-                function (response) { return $q.reject(new Error(response.status + ' ' + response.data.error)); }
-            ).
-            catch(function (e) { return $q.reject(e.message) });
+        function handleHTTPPromise(promise) {
+            return promise.then(
+                function (response) {
+                    return response.data;
+                },
+                function (response) {
+                    return $q.reject(new Error(response.status + ' ' + response.data.error));
+                }
+            ).catch(function (e) {
+                return $q.reject(e.message)
+            });
         }
 
-        function postResource(resource, data){
-            return $http.post(getResourceUrl(resource, 'post'), data);
+        function getResource(resource) {
+            return handleHTTPPromise($http.get(getResourceUrl(resource)))
+        }
+
+        function postResource(resource, data) {
+            return handleHTTPPromise($http.post(getResourceUrl(resource, 'post'), data));
         }
     }
 })();

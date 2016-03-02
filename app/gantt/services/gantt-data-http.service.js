@@ -11,11 +11,11 @@
         return service;
 
         function getTasks(){
-            return HttpService.getResource('gantt-tasks', 4000);
+            return HttpService.getResource('gantt-tasks', 1000);
         }
 
         function getConfig(){
-            return HttpService.getResource('gantt-timeline-options', 6000);
+            return HttpService.getResource('gantt-timeline-options', 2000);
         }
 
         function saveConfig(config){

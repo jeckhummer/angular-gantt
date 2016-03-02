@@ -16,7 +16,7 @@
 
             // по классу иза того, что прежде я убираю аттрибут dialog-window (чтоб избежать inf.loop)
             var dialogWindows = el.find('.dialog-window');
-            var bg = el.find('[dialog-background] .fog-cover');
+            var bg = el.find(`${el.is('[dialog-background]') ? '' : '[dialog-background]'} .fog-cover`);
 
             dialogWindows.appendTo(bg);
         }

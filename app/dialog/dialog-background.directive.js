@@ -27,7 +27,6 @@
             });
 
             scope.deactivate = dialogCtrl.deactivate;
-
             $compile(element.children())(scope);
         }
     }

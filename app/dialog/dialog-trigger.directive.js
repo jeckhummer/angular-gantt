@@ -3,12 +3,12 @@
     angular.module('dialog')
         .directive('dialogTrigger', DialogTrigger);
 
-    function DialogTrigger($compile) {
+    function DialogTrigger($compile, $rootScope) {
         var directive = {
             restrict: 'A',
-            require: '^^dialog',
             scope: {
-                dialogName: '@dialogTrigger'
+                dialogName: '@dialogTrigger',
+                dialogGroup: '@dialogGroup'
             },
             link: link
         };
@@ -22,7 +22,7 @@
             $compile(element)(scope);
 
             function toggle(){
-                dialogCtrl.toggle(scope.dialogName);
+                $rootScope.$broadcast('dialog-toggle', scope.dialogName, scope.dialogGroup);
             }
         }
     }

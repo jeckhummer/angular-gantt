@@ -6,28 +6,36 @@
     function DialogBackground($compile) {
         var directive = {
             restrict: 'A',
-            require: '^dialog',
+            controller: 'DialogController as dialogCtrl',
             scope: true,
             link: link,
         };
         return directive;
 
-        function link(scope, element, attr, dialogCtrl){
-            element.css('position', 'relative');
-
+        function link(scope, element, attrs, dialogCtrl){
+            var groupName = attrs['dialog-background']; // try to replace to [scope : {...}]
             var background = angular.element(`
-                <div ng-show="isActive" ng-click="deactivate()" class="fog-cover"></div>
+                <span ng-bind="dialogCtrl.activeDialog"></span>
+                <div ng-show="dialogCtrl.isActive()"
+                     ng-click="dialogCtrl.deactivate()"
+                     class="fog-cover container-fluid"></div>
             `);
-            element.append(background);
+            $compile(background)(scope);
 
-            scope.$watch(function(){
-                return dialogCtrl.isActive();
-            }, function(){
-                scope.isActive = dialogCtrl.isActive();
+            var selector = `[dialog-window]${groupName ? '[dialog-group=' + groupName + ']' : ""}`;
+            $(element).find(selector).each((ind, window)=>{
+                var name = $(window).attr('dialog-window');
+                $(window).addClass('dialog-window');
+
+                var windowWrapper = $compile(`
+                    <div ng-click="$event.stopPropagation();"
+                         ng-show="dialogCtrl.dialogIsActive('${name}')"></div>
+                `)(scope); // try to fix: angular.element
+                windowWrapper.append(window);
+                background.append(windowWrapper);
             });
-
-            scope.deactivate = dialogCtrl.deactivate;
-            $compile(element.children())(scope);
+            element.css('position', 'relative');
+            element.append(background);
         }
     }
 })();

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="gantt/gantt.css">
 <div id="gantt" class="exposition_block">
 
-    <div dialog class="gantt_block">
+    <div class="gantt_block">
         <div class="top-bar">
             <!--STATUS BAR-->
             <div ng-controller="StatusBarController as statusCtrl" class="btn-sm status-bar">
@@ -12,17 +12,23 @@
             </div>
 
             <!--TABS-->
-            <div class="tabs">
-                <div dialog-trigger="settings" class="btn btn-default btn-sm tab">
+            <div class="btn-group tabs" role="group">
+                <button dialog-trigger="add-task" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    Add Task
+                </button>
+                <button dialog-trigger="settings" type="button" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     Settings
-                </div>
+                </button>
             </div>
+
             <div style="clear:both"></div>
         </div>
 
         <!--GANTT-->
         <div ng-controller="GanttController as ganttCtrl" dialog-background>
+
             <div ng-if="!ganttCtrl.isEmpty" class="gantt">
 
                 <!--TIMELINE-->
@@ -30,7 +36,8 @@
 
                 <!--TASKS-->
                 <div class="tasks_block">
-                    <timeline-stripes date-interval="ganttCtrl.boundaries" config="ganttCtrl.timelineConfig"></timeline-stripes>
+                    <timeline-stripes date-interval="ganttCtrl.boundaries"
+                                      config="ganttCtrl.timelineConfig"></timeline-stripes>
 
                     <div ng-controller="TaskListController as listCtrl" class="tasks_wrapper">
 
@@ -71,12 +78,68 @@
             </div>
 
             <!--TIME LINE SETTINGS-->
-            <div ng-controller="TimelineOptionsController as timelineCtrl">
-                <div dialog-window="settings" class="dialog-window-right">
-                    <timeline-options config="ganttCtrl.timelineConfig"
-                                      on-save="timelineCtrl.save"
-                                      on-back="timelineCtrl.back"></timeline-options>
-                </div>
+            <div ng-controller="TimelineOptionsController as timelineCtrl"
+                 dialog-window="settings"
+                 class="dialog-window-right">
+
+                <timeline-options config="ganttCtrl.timelineConfig"
+                                  on-save="timelineCtrl.save"
+                                  on-back="timelineCtrl.back"></timeline-options>
+            </div>
+
+            <!--TASK MANAGEMENT-->
+            <div ng-controller="TaskEditorController as taskEditorCtrl"
+                 dialog-window="add-task"
+                 class="col-md-offset-3 col-md-6">
+
+                <form ng-submit="taskEditorCtrl.saveTask()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input ng-model="taskEditorCtrl.task.name"
+                               class="form-control"
+                               required
+                               type="text"
+                               id="name"
+                               placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start">Start date</label>
+                                <input ng-model="taskEditorCtrl.task.date.start"
+                                       class="form-control"
+                                       type="date"
+                                       required
+                                       id="start">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end">End date</label>
+                                <input ng-model="taskEditorCtrl.task.date.end"
+                                       class="form-control"
+                                       type="date"
+                                       required
+                                       id="end">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="percentage-complete">Percentage complete</label>
+                        <input ng-model="taskEditorCtrl.task.percentComplete"
+                               required
+                               type="number"
+                               max="100"
+                               min="0"
+                               class="form-control"
+                               id="percentage-complete">
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-default">Save</button>
+                        <button type="button" dialog-trigger="add-task" class="btn btn-default">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -103,6 +166,7 @@
 <div style="margin:20px">
     <h2>TODOs:</h2>
     <ul class="todo todo-current">
+        <li> task context menu [mouse right click]</li>
         <li> $scope.task.isParent = $scope.task.parent_id == 0; - is not correct!</li>
         <li> 2 views for app and app-dev</li>
         <li> millestone (ng-if/ng-show) make more elegant</li>

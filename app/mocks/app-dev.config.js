@@ -5,7 +5,7 @@ angular.module('app-dev', ['app', 'ngMockE2E', 'test']);
 
     function AppRouterConfig($routeProvider) {
         $routeProvider.when('/test',{
-            templateUrl: "../test/test.html",
+            templateUrl: "../app/test/test.html",
             controller: "testController as ctrl"
         });
     }

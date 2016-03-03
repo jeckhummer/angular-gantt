@@ -1,11 +1,8 @@
-    <!--<div parent value="buy!">-->
-        <!--<button test value="hello!">GO!</button>-->
-    <!--</div>-->
-
-    <div dialog>
-        <div dialog-background>
-            hello!<br/>
-            world!
-        </div>
-        <button dialog-trigger="settings">GO!</button>
+<div ng-controller="testParentController as parent">
+    <div ng-controller="testChildController as child">
+        <form ng-submit="child.test()">
+            <button type="submit">submit!</button>
+        </form>
     </div>
+</div>
+

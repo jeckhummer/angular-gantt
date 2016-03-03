@@ -1,7 +1,7 @@
 (function () {
     angular.module('dialog').controller('DialogController', DialogController);
 
-    function DialogController($scope) {
+    function DialogController($rootScope, $scope) {
         var ctrl = this;
         ctrl.activeDialog = null;
         ctrl.toggle = toggle;
@@ -9,16 +9,17 @@
         ctrl.isActive = isActive;
         ctrl.deactivate = deactivate;
 
-        $scope.$on('dialog-toggle', function(even, dialogName){
-            ctrl.toggle(dialogName);
+        $scope.$on('dialog-toggle', function(even, dialogName, arg){
+            ctrl.toggle(dialogName, arg);
         });
 
-        function toggle(dialogName) {
+        function toggle(dialogName, arg) {
             if(ctrl.activeDialog == dialogName){
                 ctrl.activeDialog = null;
-                $scope.$broadcast(`${dialogName}-closed`);
+                $rootScope.$broadcast(`${dialogName}-closed`, arg);
             }else{
                 ctrl.activeDialog = dialogName;
+                $rootScope.$broadcast(`${dialogName}-opened`, arg);
             }
         }
 

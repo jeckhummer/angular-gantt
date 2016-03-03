@@ -3,26 +3,34 @@
     angular.module('dialog')
         .directive('dialogTrigger', DialogTrigger);
 
-    function DialogTrigger($compile) {
+    function DialogTrigger($compile, $rootScope) {
         var directive = {
             restrict: 'A',
-            require: '^^dialog',
+            transclude: 'element',
+            //template:'<ng-transclude></ng-transclude>',
             scope: {
-                dialogName: '@dialogTrigger'
+                dialogName: '@dialogTrigger',
+                group: '@dialogGroup',
+                arg: '=dialogArgument'
             },
             link: link
         };
         return directive;
 
-        function link(scope, element, attrs, dialogCtrl){
-            element.removeAttr('dialog-trigger');
-            element.attr('ng-click', `toggle()`);
+        function link(scope, element, attrs, dialogCtrl, $transclude){
             scope.toggle = toggle;
 
-            $compile(element)(scope);
+            var trigger = $transclude((element)=>{
+                element.attr('ng-click', `toggle()`);
+            });
+
+            trigger.removeAttr('dialog-trigger');
+            $compile(trigger)(scope);
+
+            element.after(trigger);
 
             function toggle(){
-                dialogCtrl.toggle(scope.dialogName);
+                $rootScope.$broadcast('dialog-toggle', scope.dialogName, scope.arg, scope.group);
             }
         }
     }

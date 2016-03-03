@@ -30,7 +30,7 @@
         body * {
             box-sizing: border-box;
             padding: 0;
-            margin: 0;
+            /*margin: 0;*/
         }
 
         .exposition_block {
@@ -63,6 +63,7 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!--Apps-->
 <script src="app.config.js"></script>
@@ -75,7 +76,10 @@
     <!--Services-->
     <script src="gantt/services/gantt-data-http.service.js"></script>
     <script src="gantt/services/gantt-tasks.service.js"></script>
+    <script src="gantt/services/gantt-task-factory.service.js"></script>
+    <script src="gantt/services/gantt-status-reporter.service.js"></script>
     <script src="gantt/services/gantt-timeline.service.js"></script>
+    <script src="gantt/services/date.service.js"></script>
 
     <!--Controllers-->
     <script src="gantt/controllers/gantt.controller.js"></script>
@@ -83,6 +87,13 @@
     <script src="gantt/controllers/task-list.controller.js"></script>
     <script src="gantt/controllers/task.controller.js"></script>
     <script src="gantt/controllers/timeline-options.controller.js"></script>
+    <script src="gantt/controllers/task-editor.controller.js"></script>
+
+    <!--Filters-->
+    <script src="gantt/filters/gantt-date.filter.js"></script>
+
+    <!--Directives-->
+    <script src="gantt/directives/date-interval.directive.js"></script>
 
 
 <!--Timeline-->
@@ -99,7 +110,6 @@
 <!--Dialog-->
     <script src="dialog/dialog.config.js"></script>
     <script src="dialog/dialog.controller.js"></script>
-    <script src="dialog/dialog.directive.js"></script>
     <script src="dialog/dialog-background.directive.js"></script>
     <script src="dialog/dialog-window.directive.js"></script>
     <script src="dialog/dialog-trigger.directive.js"></script>
@@ -119,6 +129,8 @@
     <script src="test/test.controller.js"></script>
     <script src="test/parent.directive.js"></script>
     <script src="test/test.directive.js"></script>
+    <script src="test/controllers/test-child.controller.js"></script>
+    <script src="test/controllers/test-parent.controller.js"></script>
 
 <!--Mocks-->
     <script src="mocks/app-dev.config.js"></script>

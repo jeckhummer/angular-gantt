@@ -36,7 +36,7 @@
 }
 
 .gantt_block .task_line {
-    height: 17px;
+    height: 19px;
     position: relative;
 }
 
@@ -72,18 +72,20 @@
     border-top-width: 2px;
 }
 
-.gantt_block .task_wrapper {
-    border-radius: 2px;
+.task_wrapper {
+    /*border-radius: 2px;*/
     border-bottom: 1px dotted #CCC;
-    padding: 1px 0;
+    height: 47px;
+    /*padding: 1px 0;*/
 }
 
-.gantt_block .task_wrapper:last-child {
+.task_wrapper:last-child {
     border-bottom: 0;
 }
 
 .gantt_block .task_name {
-    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-size: 1.1em;
     white-space: nowrap;
     font-weight: bold;
@@ -97,8 +99,9 @@
     background-color: #FBFBFB;
 }
 
-.gantt_block .task_wrapper .date_label {
+.gantt_block .date_label {
     white-space: nowrap;
+    font-size: 0.9em;
     color: blue;
 }
 
@@ -141,4 +144,22 @@
     border-right: 1px solid #FF2E2E;
 }
 
+.no-padding-row>[class*=col]{
+    padding: 0px !important;
+}
 
+.task-info{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 45px;
+    border-top:1px solid #CCC;
+    border-left:1px solid #CCC;
+    padding: 4px;
+}
+.task-info-block{
+    border:1px solid #CCC;
+}
+
+.task-info-block .task_wrapper{
+    padding: 4px;
+}

@@ -16,6 +16,10 @@
         $rootScope.$broadcast('notify-fade', 'Loading user timeline settings ...', timelineDefer.promise);
         $rootScope.$broadcast('notify-fade', 'Loading tasks data ...', dataDefer.promise);
 
+        ganttCtrl.json = function(val){
+            return JSON.stringify(val);
+        };
+
         function TimelineConfigChangesHandler(){
             ganttCtrl.timelineConfig = GanttTimelineService.getConfig();
             timelineDefer.resolve();

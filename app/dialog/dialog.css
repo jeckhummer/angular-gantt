@@ -11,10 +11,11 @@
     background-color: white;
     border-radius: 3px;
     border: 1px solid #CCC;
-    margin: 10px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .dialog-window-right{
+    margin-right: -5px;
     float: right;
-    padding: 10px;
 }

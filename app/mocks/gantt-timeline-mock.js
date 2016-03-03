@@ -36,7 +36,7 @@
             },
             error: {
                 status: 'error',
-                message: 'Shit happens! Saving timeline config failed!'
+                message: 'Shit happens!'
             },
         };
 

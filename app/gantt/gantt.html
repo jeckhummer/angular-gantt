@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="gantt/gantt.css">
 <div id="gantt" class="exposition_block">
 
-    <div dialog class="gantt_block">
+    <div class="gantt_block">
         <div class="top-bar">
             <!--STATUS BAR-->
             <div ng-controller="StatusBarController as statusCtrl" class="btn-sm status-bar">
@@ -12,71 +12,170 @@
             </div>
 
             <!--TABS-->
-            <div class="tabs">
-                <div dialog-trigger="settings" class="btn btn-default btn-sm tab">
+            <div class="btn-group tabs" role="group">
+                <button dialog-trigger="task-editor" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    Add Task
+                </button>
+                <button dialog-trigger="settings" type="button" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     Settings
-                </div>
+                </button>
             </div>
+
             <div style="clear:both"></div>
         </div>
 
         <!--GANTT-->
-        <div ng-controller="GanttController as ganttCtrl" dialog-background>
-            <div ng-if="!ganttCtrl.isEmpty" class="gantt">
+        <div ng-controller="GanttController as ganttCtrl">
 
-                <!--TIMELINE-->
-                <timeline date-interval="ganttCtrl.boundaries" config="ganttCtrl.timelineConfig"></timeline>
+            <div ng-if="!ganttCtrl.isEmpty" class="gantt container-fluid" dialog-background>
+                <div class="row no-padding-row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <!--TIMELINE-->
+                        <timeline date-interval="ganttCtrl.boundaries" config="ganttCtrl.timelineConfig"></timeline>
+                    </div>
+                </div>
 
-                <!--TASKS-->
-                <div class="tasks_block">
-                    <timeline-stripes date-interval="ganttCtrl.boundaries" config="ganttCtrl.timelineConfig"></timeline-stripes>
-
-                    <div ng-controller="TaskListController as listCtrl" class="tasks_wrapper">
-
+                <div class="row no-padding-row">
+                    <!--TASK INFO-->
+                    <div class="col-md-2 task-info-block">
                         <div ng-repeat="task in ganttCtrl.tasks"
-                             ng-controller="TaskController as taskCtrl"
-                             class="task_wrapper">
-
-                            <div class="task_line_wrapper"
-                                 style="margin-left: {{taskCtrl.position.left}}%; width: {{taskCtrl.position.width}}%">
-
-                                <div class="top_block" style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}">
-                                    <span class="task_name">{{taskCtrl.name}}</span>
-                                <span class="date_label"> -
-                                    {{taskCtrl.start.format('D MMM YYYY')}} /
-                                    {{taskCtrl.end.format('D MMM YYYY')}}
-                                </span>
-                                </div>
-
-                                <div class="bottom_block">
-                                    <div ng-show="taskCtrl.isMilestone"
-                                         class="rhombus {{taskCtrl.isCompleted? 'done_green' : 'left_red'}}"></div>
-                                    <div ng-hide="taskCtrl.isMilestone" class="task_line left_red">
-                                        <div style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}"
-                                             class="task_completed_part_label">
-                                            <b>{{taskCtrl.percentComplete}}</b>%
-                                        </div>
-                                        <div class="task_completed_part done_green"
-                                             style="width:{{taskCtrl.percentComplete}}%"></div>
-                                    </div>
-                                    <div ng-show="taskCtrl.isParent" class="parent_indicator"></div>
-                                </div>
-
+                             ng-controller="TaskController as taskCtrl" class="task_wrapper">
+                            <div dialog-trigger="task-editor" dialog-argument="task.id" class="task_name text-left">
+                                {{taskCtrl.name}}
                             </div>
-                            <div style="clear: both"></div>
+                            <div>
+                                <date-interval
+                                        start="taskCtrl.start"
+                                        end="taskCtrl.end"
+                                        class="date_label"></date-interval>
+                                <span class="label label-success pull-right" style="margin-top:3px;">
+                                    {{taskCtrl.percentComplete}}%
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+                    <!--TASK LINES-->
+                    <div class="col-md-10">
+                        <div class="tasks_block">
+                            <timeline-stripes date-interval="ganttCtrl.boundaries"
+                                              config="ganttCtrl.timelineConfig"></timeline-stripes>
+
+                            <div ng-controller="TaskListController as listCtrl" class="tasks_wrapper">
+
+                                <div ng-repeat="task in ganttCtrl.tasks"
+                                     ng-controller="TaskController as taskCtrl"
+                                     class="task_wrapper">
+
+                                    <div class="task_line_wrapper"
+                                         style="margin-left: {{taskCtrl.position.left}}%; width: {{taskCtrl.position.width}}%">
+
+                                        <div class="top_block"
+                                             style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}">
+                                            <span class="task_name">{{taskCtrl.name}}</span>
+                                            <date-interval
+                                                    start="taskCtrl.start"
+                                                    end="taskCtrl.end"
+                                                    class="date_label"></date-interval>
+                                        </div>
+
+                                        <div class="bottom_block">
+                                            <div ng-show="taskCtrl.isMilestone"
+                                                 class="rhombus {{taskCtrl.isCompleted? 'done_green' : 'left_red'}}"></div>
+                                            <div ng-hide="taskCtrl.isMilestone" class="task_line left_red">
+                                                <div style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}"
+                                                     class="task_completed_part_label">
+                                                    <b>{{taskCtrl.percentComplete}}</b>%
+                                                </div>
+                                                <div class="task_completed_part done_green"
+                                                     style="width:{{taskCtrl.percentComplete}}%"></div>
+                                            </div>
+                                            <div ng-show="taskCtrl.isParent" class="parent_indicator"></div>
+                                        </div>
+
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
+            <pre>{{ganttCtrl.tasks | json}}</pre>
+            <br/>
+            <br/>
+            {{ganttCtrl.boundaries | json}}
+
             <!--TIME LINE SETTINGS-->
-            <div ng-controller="TimelineOptionsController as timelineCtrl">
-                <div dialog-window="settings" class="dialog-window-right">
-                    <timeline-options config="ganttCtrl.timelineConfig"
-                                      on-save="timelineCtrl.save"
-                                      on-back="timelineCtrl.back"></timeline-options>
-                </div>
+            <div ng-controller="TimelineOptionsController as timelineCtrl"
+                 dialog-window="settings"
+                 class="dialog-window-right">
+
+                <timeline-options config="ganttCtrl.timelineConfig"
+                                  on-save="timelineCtrl.save"
+                                  on-back="timelineCtrl.back"></timeline-options>
+            </div>
+
+            <!--TASK EDITOR-->
+            <div ng-controller="TaskEditorController as taskEditorCtrl"
+                 dialog-window="task-editor"
+                 class="col-md-offset-3 col-md-6">
+
+                <form ng-submit="taskEditorCtrl.editMode ? taskEditorCtrl.updateTask() : taskEditorCtrl.addTask()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input ng-model="taskEditorCtrl.task.name"
+                               class="form-control"
+                               required
+                               type="text"
+                               id="name"
+                               placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start">Start date</label>
+                                <input ng-model="taskEditorCtrl.task._start"
+                                       class="form-control"
+                                       type="date"
+                                       required
+                                       id="start">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end">End date</label>
+                                <input ng-model="taskEditorCtrl.task._end"
+                                       class="form-control"
+                                       type="date"
+                                       required
+                                       id="end">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="percentage-complete">Percentage complete</label>
+                        <input ng-model="taskEditorCtrl.task.percentComplete"
+                               required
+                               type="number"
+                               max="100"
+                               min="0"
+                               class="form-control"
+                               id="percentage-complete">
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success">
+                            {{ !taskEditorCtrl.editMode ? 'Add Task' : 'Save Task'}}
+                        </button>
+                        <button type="button" dialog-trigger="task-editor" class="btn btn-default">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -103,6 +202,7 @@
 <div style="margin:20px">
     <h2>TODOs:</h2>
     <ul class="todo todo-current">
+        <li> task context menu [mouse right click]</li>
         <li> $scope.task.isParent = $scope.task.parent_id == 0; - is not correct!</li>
         <li> 2 views for app and app-dev</li>
         <li> millestone (ng-if/ng-show) make more elegant</li>

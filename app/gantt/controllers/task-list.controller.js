@@ -3,5 +3,6 @@
 
     function TaskListController(GanttTasksService) {
         var ctrl = this;
+        ctrl.tasks = GanttTasksService.getAll();
     }
 })();

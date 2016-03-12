@@ -107,6 +107,7 @@
             });
 
             boundaries = new DateInterval(moment.min(starts), moment.max(ends));
+            
         }
 
         function notifyAboutChanges() {

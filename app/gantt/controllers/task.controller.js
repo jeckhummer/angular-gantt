@@ -1,25 +1,34 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService){
+    function TaskController($rootScope, $scope, DateService, GanttTasksService){
         var taskCtrl = this;
-
-        taskCtrl.start = $scope.task.start;
-        taskCtrl.end = $scope.task.end;
-        taskCtrl.isParent = $scope.task.parentID == 0;
-        taskCtrl.isMilestone = $scope.task.dateInterval.days == 1;
-        taskCtrl.isCompleted = $scope.task.percentComplete == 100;
-        taskCtrl.percentComplete = $scope.task.percentComplete;
-        taskCtrl.name = $scope.task.name;
-        taskCtrl.position =
-            DateService.createDateIntervalPosition($scope.ganttCtrl.boundaries, $scope.task.dateInterval);
-        taskCtrl.closerToEnd =
-            (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
-
         taskCtrl.editTask = editTask;
+        $scope.$watch('$parent.task', init);
 
         function editTask(task){
             $rootScope.$broadcast('dialog-toggle', 'add-task', task);
+        }
+
+        function init(task){
+            if(task){
+                taskCtrl.name = task.name;
+                taskCtrl.start = task.start;
+                taskCtrl.end = task.end;
+                taskCtrl.isParent = task.parentID == 0;
+                taskCtrl.isMilestone = task.dateInterval.days == 1;
+                taskCtrl.isCompleted = task.percentComplete == 100;
+                taskCtrl.percentComplete = task.percentComplete;
+                taskCtrl.dateInterval = task.dateInterval;
+                initPosition();
+            }
+        }
+
+        function initPosition(){
+            taskCtrl.position =
+                DateService.createDateIntervalPosition(GanttTasksService.getBoundaries(), taskCtrl.dateInterval);
+            taskCtrl.closerToEnd =
+                (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
         }
     }
 })();

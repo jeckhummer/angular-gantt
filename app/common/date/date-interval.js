@@ -14,6 +14,10 @@ function DateInterval(date1, date2) {
             ' - ' + this.end.format() + 
             '  |  ' + this.days + ' days';
     }
+
+    this.isEqual = function(di){
+        return this.start.diff(di.start) === 0 && this.end.diff(di.end) === 0;
+    }
 }
 
 DateInterval.join = function (a, b) {

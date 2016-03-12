@@ -4,13 +4,17 @@
     function TaskController($rootScope, $scope, DateService, GanttTasksService){
         var taskCtrl = this;
         taskCtrl.editTask = editTask;
-        $scope.$watch('$parent.task', init);
+        $scope.$watchCollection('$parent.task', init);
+        $scope.$on('boundaries-changed', initPosition);
+
+        init($scope.$parent.task);
 
         function editTask(task){
             $rootScope.$broadcast('dialog-toggle', 'add-task', task);
         }
 
         function init(task){
+            console.log('init', task);
             if(task){
                 taskCtrl.name = task.name;
                 taskCtrl.start = task.start;
@@ -25,8 +29,9 @@
         }
 
         function initPosition(){
+            var boundaries = GanttTasksService.getBoundaries();
             taskCtrl.position =
-                DateService.createDateIntervalPosition(GanttTasksService.getBoundaries(), taskCtrl.dateInterval);
+                DateService.createDateIntervalPosition(boundaries, taskCtrl.dateInterval);
             taskCtrl.closerToEnd =
                 (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
         }

@@ -10,7 +10,7 @@
         ganttCtrl.isEmpty = true;
         ganttCtrl.timelineConfig = GanttTimelineService.getConfig();
 
-        $scope.$on('gantt-tasks-data-changed', TasksDataChangesHandler);
+        $scope.$on('tasks-changed', TasksDataChangesHandler);
         $scope.$on('gantt-timeline-config-changed', TimelineConfigChangesHandler);
 
         $rootScope.$broadcast('notify-fade', 'Loading user timeline settings ...', timelineDefer.promise);

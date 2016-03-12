@@ -79,7 +79,7 @@
             });
 
             calculateBoundaries();
-            notifyAboutChanges();
+            onTaskChanges();
         }
 
         function updateTask(data) {
@@ -91,7 +91,7 @@
             var index = searchTaskByID(data.id);
             tasks[index] = data;
             calculateBoundaries();
-            notifyAboutChanges();
+            onTaskChanges();
         }
 
         function calculateBoundaries() {
@@ -106,12 +106,19 @@
                 ends.push(end);
             });
 
-            boundaries = new DateInterval(moment.min(starts), moment.max(ends));
-            
+            var boundariesNew = new DateInterval(moment.min(starts), moment.max(ends));
+            if (!boundaries || !boundaries.isEqual(boundariesNew)) {
+                boundaries = boundariesNew;
+            }
+
+            onBoundariesChanges();
         }
 
-        function notifyAboutChanges() {
-            $rootScope.$broadcast('gantt-tasks-data-changed');
+        function onTaskChanges() {
+            $rootScope.$broadcast('tasks-changed');
+        }
+        function onBoundariesChanges() {
+            $rootScope.$broadcast('boundaries-changed', boundaries);
         }
     }
 })();

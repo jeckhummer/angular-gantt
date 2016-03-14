@@ -16,8 +16,19 @@
         return directive;
 
         function link($scope){
-            $scope.start = DateService.format($scope.startStr);
-            $scope.end = DateService.format($scope.endStr);
+            $scope.$watchCollection(getDates, init);
+
+            function getDates(){
+                return {
+                    start: $scope.startStr,
+                    end: $scope.endStr
+                };
+            }
+
+            function init(dates){
+                $scope.start = DateService.format(dates.start);
+                $scope.end = DateService.format(dates.end);
+            }
         }
     }
 })();

@@ -42,17 +42,19 @@
                     <div class="col-md-2 task-info-block">
                         <div ng-repeat="task in ganttCtrl.tasks"
                              ng-controller="TaskController as taskCtrl" class="task_wrapper">
-                            <div dialog-trigger="task-editor" dialog-argument="task.id" class="task_name text-left">
-                                {{taskCtrl.name}}
-                            </div>
-                            <div>
-                                <date-interval
-                                        start="taskCtrl.start"
-                                        end="taskCtrl.end"
-                                        class="date_label"></date-interval>
+                            <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
+                                <div class="task_name text-left">
+                                    {{taskCtrl.name}}
+                                </div>
+                                <div>
+                                    <date-interval
+                                            start="taskCtrl.start"
+                                            end="taskCtrl.end"
+                                            class="date_label"></date-interval>
                                 <span class="label label-success pull-right" style="margin-top:3px;">
                                     {{taskCtrl.percentComplete}}%
                                 </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                                                     start="taskCtrl.start"
                                                     end="taskCtrl.end"
                                                     class="date_label"></date-interval>
-                                        </div>
+                                            </div>
 
                                         <div class="bottom_block">
                                             <div ng-show="taskCtrl.isMilestone"

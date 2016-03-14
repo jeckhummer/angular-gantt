@@ -14,7 +14,6 @@
         }
 
         function init(task){
-            console.log('init', task);
             if(task){
                 taskCtrl.name = task.name;
                 taskCtrl.start = task.start;

@@ -7,13 +7,15 @@
         function Task(data) {
             var task = this;
 
-            task.setStartDate = setStartDate;
-            task.setEndDate = setEndDate;
-
             init(data);
 
             function init(data) {
                 Object.assign(task, data);
+
+                task.setStartDate = setStartDate;
+                task.setEndDate = setEndDate;
+                task.clone = clone;
+
                 task.setStartDate(task.start);
                 task.setEndDate(task.end);
             }
@@ -27,6 +29,8 @@
             }
 
             function setEndDate(dateStr) {
+                console.log(dateStr);
+                console.log(task);
                 task.end = dateStr;
                 task.endMoment = DateService.createMoment(task.end);
                 task.endDate = DateService.createDate(dateStr);
@@ -34,8 +38,12 @@
             }
 
             function initDateInterval() {
-                if(task.startMoment && task.endMoment)
+                if (task.startMoment && task.endMoment)
                     task.dateInterval = DateService.createDateInterval(task.startMoment, task.endMoment);
+            }
+
+            function clone() {
+                return new Task(task);
             }
         }
     }

@@ -22,7 +22,7 @@
                 });
                 initTaskDates(today, today);
             }else{
-                editor.task = GanttTasksService.getTask(taskID);
+                editor.task = GanttTasksService.getTask(taskID).clone();
             }
 
             editor.task._start = editor.task.startDate;
@@ -57,7 +57,7 @@
         }
 
         function notifyAboutChanges(){
-            $rootScope.$broadcast('gantt-tasks-data-changed');
+            $rootScope.$broadcast('tasks-changed');
         }
         // TODO: milestone
     }

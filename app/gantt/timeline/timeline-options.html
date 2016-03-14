@@ -1,0 +1,9 @@
+<!--TIME LINE OPTIONS-->
+<div ng-controller="TimelineOptionsController as timelineCtrl"
+     dialog-window="settings"
+     class="dialog-window-right">
+
+    <timeline-options config="ganttCtrl.timelineConfig"
+                      on-save="timelineCtrl.save"
+                      on-back="timelineCtrl.back"></timeline-options>
+</div>

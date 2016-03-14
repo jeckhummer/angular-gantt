@@ -29,8 +29,6 @@
             }
 
             function setEndDate(dateStr) {
-                console.log(dateStr);
-                console.log(task);
                 task.end = dateStr;
                 task.endMoment = DateService.createMoment(task.end);
                 task.endDate = DateService.createDate(dateStr);

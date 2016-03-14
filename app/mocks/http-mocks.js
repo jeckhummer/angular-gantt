@@ -6,7 +6,7 @@
             .respond(200, GanttTasksMock.tasks);
 
         $httpBackend.whenPOST(HttpService.getResourceUrl('gantt-task', 'post'))
-            .respond(200, GanttTasksMock.saveResponse.error);
+            .respond(200, GanttTasksMock.saveResponse.success);
 
         $httpBackend.whenGET(HttpService.getResourceUrl('gantt-timeline-options'))
             .respond(200, GanttTimelineMock.options);

@@ -70,6 +70,7 @@
 .gantt_block .tasks_wrapper {
     /*border: 1px solid #CCC;*/
     border-top-width: 2px;
+    cursor:pointer;
 }
 
 .task_wrapper {
@@ -101,7 +102,7 @@
 
 .gantt_block .date_label {
     white-space: nowrap;
-    font-size: 0.8em;
+    font-size: 0.85em;
     color: blue;
 }
 
@@ -144,7 +145,7 @@
     border-right: 1px solid #FF2E2E;
 }
 
-.no-padding-row>[class*=col]{
+.no-padding-row>[class*=col], .no-padding-row>.ng-scope>[class*=col]{
     padding: 0px !important;
 }
 

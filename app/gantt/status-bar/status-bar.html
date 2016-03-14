@@ -1,0 +1,7 @@
+<!--STATUS BAR-->
+<div ng-controller="StatusBarController as statusCtrl" class="btn-sm status-bar">
+    <span ng-show="statusCtrl.notification.message">Status:</span>
+    <span ng-style="{color: statusCtrl.notification.isError ? 'red' : 'grey'}">
+        {{statusCtrl.notification.message}}
+    </span>
+</div>

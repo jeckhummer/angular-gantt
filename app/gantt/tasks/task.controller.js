@@ -2,8 +2,8 @@
     angular.module('gantt').controller('TaskController', TaskController);
 
     function TaskController($rootScope, $scope, DateService, GanttTasksService){
-        var taskCtrl = this;
-        taskCtrl.editTask = editTask;
+        var ctrl = this;
+        ctrl.editTask = editTask;
         $scope.$watchCollection('$parent.task', init);
         $scope.$on('boundaries-changed', initPosition);
 
@@ -15,24 +15,26 @@
 
         function init(task){
             if(task){
-                taskCtrl.name = task.name;
-                taskCtrl.start = task.start;
-                taskCtrl.end = task.end;
-                taskCtrl.isParent = task.parentID == 0;
-                taskCtrl.isMilestone = task.dateInterval.days == 1;
-                taskCtrl.isCompleted = task.percentComplete == 100;
-                taskCtrl.percentComplete = task.percentComplete;
-                taskCtrl.dateInterval = task.dateInterval;
+                ctrl.name = task.name;
+                ctrl.start = task.start;
+                ctrl.end = task.end;
+                ctrl.isParent = task.parentID == 0;
+                ctrl.isMilestone = task.dateInterval.days == 1;
+                ctrl.isCompleted = task.percentComplete == 100;
+                ctrl.percentComplete = task.percentComplete;
+                ctrl.dateInterval = task.dateInterval;
                 initPosition();
             }
         }
 
         function initPosition(){
-            var boundaries = GanttTasksService.getBoundaries();
-            taskCtrl.position =
-                DateService.createDateIntervalPosition(boundaries, taskCtrl.dateInterval);
-            taskCtrl.closerToEnd =
-                (100 - taskCtrl.position.left - taskCtrl.position.width) < +taskCtrl.position.left;
+            if(ctrl.dateInterval){
+                var boundaries = GanttTasksService.getBoundaries();
+                ctrl.position =
+                    DateService.createDateIntervalPosition(boundaries, ctrl.dateInterval);
+                ctrl.closerToEnd =
+                    (100 - ctrl.position.left - ctrl.position.width) < +ctrl.position.left;
+            }
         }
     }
 })();

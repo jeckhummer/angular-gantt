@@ -5,7 +5,7 @@
     <div class="gantt_block">
         <div class="top-bar">
             <ng-include src="'gantt/status-bar/status-bar.html'"></ng-include>
-            <ng-include src="'gantt/tabs/tabs-bar.html'"></ng-include>
+            <ng-include src="'gantt/tabs.html'"></ng-include>
             <div style="clear:both"></div>
         </div>
 
@@ -27,9 +27,7 @@
                         <div class="tasks_block">
                             <timeline-stripes date-interval="ganttCtrl.boundaries"
                                               config="ganttCtrl.timelineConfig"></timeline-stripes>
-
                             <div class="tasks_wrapper" >
-
                                 <div ng-repeat="task in ganttCtrl.tasks" class="task_wrapper">
                                     <ng-include src="'gantt/tasks/task.html'"></ng-include>
                                     <div style="clear: both"></div>

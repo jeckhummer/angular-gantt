@@ -1,12 +1,14 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, $rootScope, GanttTasksService, GanttTaskFactoryService, $q, GanttStatusReporterService){
+    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService){
         var editor = this;
         var today = new Date();
 
         editor.addTask = addTask;
         editor.updateTask = updateTask;
+        editor.submit = submit;
+        editor.swapDates = swapDates;
 
         $scope.$on('task-editor-opened', init);
 
@@ -35,29 +37,48 @@
         }
 
         function addTask(){
-            initTaskDates(editor.task._start, editor.task._end);
             var promise = GanttTasksService.addTask(editor.task);
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
                 'task-editor'
             );
-            notifyAboutChanges();
         }
 
         function updateTask(){
-            initTaskDates(editor.task._start, editor.task._end);
             var promise = GanttTasksService.updateTask(editor.task);
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
                 'task-editor'
             );
-            notifyAboutChanges();
         }
 
-        function notifyAboutChanges(){
-            $rootScope.$broadcast('tasks-changed');
+        function submit(){
+            initTaskDates(editor.task._start, editor.task._end);
+            var isValidDateOrder = validateDatesOrder();
+
+            if(isValidDateOrder) editor.editMode ? editor.updateTask() : editor.addTask();
+            else $scope.taskForm.$error.datesOrder = true;
+        }
+
+        function validateDatesOrder(){
+            return getDaysBetween() >= 0;
+        }
+
+        function getDaysBetween(){
+            return editor.task.dateInterval.days;
+        }
+
+        function swapDates(){
+            var tmp = editor.task._start;
+            editor.task._start = editor.task._end;
+            editor.task._end = tmp;
+            $scope.taskForm.$error.datesOrder = validateDatesOrder();
+        }
+
+        function parsePercentageComplete(){
+
         }
         // TODO: milestone
     }

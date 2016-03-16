@@ -1,29 +1,37 @@
 <div dialog-trigger="task-editor" dialog-argument="task.id">
-    <div class="task_line_wrapper"
-         ng-controller="TaskController as taskCtrl"
-         style="margin-left: {{taskCtrl.position.left}}%; width: {{taskCtrl.position.width}}%">
 
-        <div class="top_block"
-             style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}">
-            <span class="task_name">{{taskCtrl.name}}</span>
-            <date-interval
-                    start="taskCtrl.start"
-                    end="taskCtrl.end"
-                    class="date_label"></date-interval>
-        </div>
+    <div ng-controller="TaskController as taskCtrl"
+         class="task_wrapper"s
+         ng-class-odd="'task_wrapper_odd'">
 
-        <div class="bottom_block">
-            <div ng-show="taskCtrl.isMilestone"
-                 class="rhombus {{taskCtrl.isCompleted? 'done_green' : 'left_red'}}"></div>
-            <div ng-hide="taskCtrl.isMilestone" class="task_line left_red">
-                <div style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}"
-                     class="task_completed_part_label">
-                    <b>{{taskCtrl.percentComplete}}</b>%
-                </div>
-                <div class="task_completed_part done_green"
-                     style="width:{{taskCtrl.percentComplete}}%"></div>
+        <timeline-stripes date-interval="ganttCtrl.boundaries" config="ganttCtrl.timelineConfig"></timeline-stripes>
+
+        <div class="task_line_wrapper"
+             style="margin-left: {{taskCtrl.position.left}}%; width: {{taskCtrl.position.width}}%">
+
+            <div class="top_block"
+                 style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}">
+                <span class="task_name">{{taskCtrl.name}}</span>
+                <date-interval
+                        start="taskCtrl.start"
+                        end="taskCtrl.end"
+                        class="date_label"></date-interval>
             </div>
-            <div ng-show="taskCtrl.isParent" class="parent_indicator"></div>
+
+            <div class="bottom_block">
+                <div ng-show="taskCtrl.isMilestone"
+                     class="rhombus {{taskCtrl.isCompleted? 'done_green' : 'left_red'}}"></div>
+                <div ng-hide="taskCtrl.isMilestone" class="task_line left_red">
+                    <div style="direction: {{taskCtrl.closerToEnd ? 'rtl' : 'ltr'}}" class="task_completed_part_label">
+                        <b>{{taskCtrl.percentComplete}}</b>%
+                    </div>
+                    <div class="task_completed_part done_green" style="width:{{taskCtrl.percentComplete}}%"></div>
+                </div>
+                <div ng-show="taskCtrl.isParent" class="parent_indicator"></div>
+            </div>
         </div>
+
+        <div ng-hide="taskCtrl.isMilestone || !taskCtrl.hasBaseline" class="baseline"
+             style="margin-left: {{taskCtrl.baselinePosition.left}}%; width:{{taskCtrl.baselinePosition.width}}%"></div>
     </div>
 </div>

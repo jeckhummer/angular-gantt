@@ -7,7 +7,8 @@
             getTasks: getTasks,
             getConfig: getConfig,
             saveConfig: saveConfig,
-            saveTask: saveTask
+            saveTask: saveTask,
+            getBaselines: getBaselines
         };
         return service;
 
@@ -27,6 +28,11 @@
         function saveConfig(config){
             console.log('saving gantt timeline config: ', config);
             return HttpService.postResource('gantt-timeline-options', config, 0);
+        }
+
+        function getBaselines(){
+            var baselines = HttpService.getResource('gantt-baselines', 0);
+            return baselines;
         }
     }
 })();

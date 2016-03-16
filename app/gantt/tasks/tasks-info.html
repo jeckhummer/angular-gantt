@@ -1,7 +1,8 @@
 <!--TASK INFO-->
 <div class="col-md-2 task-info-block">
     <div ng-repeat="task in ganttCtrl.tasks"
-         ng-controller="TaskController as taskCtrl" class="task_wrapper">
+         ng-controller="TaskController as taskCtrl" class="task_wrapper"
+         ng-class-odd="'task_wrapper_odd'">
         <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
             <div class="task_name text-left">
                 {{taskCtrl.name}}

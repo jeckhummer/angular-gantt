@@ -1,11 +1,12 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, GanttTasksService){
+    function TaskController($rootScope, $scope, DateService, GanttTasksService, GanttBaselinesService){
         var ctrl = this;
         ctrl.editTask = editTask;
         $scope.$watchCollection('$parent.task', init);
-        $scope.$on('boundaries-changed', initPosition);
+        $scope.$on('boundaries-changed', (boundaries) => initPosition(boundaries, ctrl));
+        $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
 
         init($scope.$parent.task);
 
@@ -15,6 +16,7 @@
 
         function init(task){
             if(task){
+                ctrl.id = task.id;
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
@@ -23,17 +25,27 @@
                 ctrl.isCompleted = task.percentComplete == 100;
                 ctrl.percentComplete = task.percentComplete;
                 ctrl.dateInterval = task.dateInterval;
-                initPosition();
+                initPosition(ctrl);
+                initBaseline(ctrl);
             }
         }
 
-        function initPosition(){
-            if(ctrl.dateInterval){
+        function initBaseline(task){
+            var baselineTask = GanttBaselinesService.getTask(task.id);
+            if(baselineTask){
+                initPosition(baselineTask);
+                task.baselinePosition = baselineTask.position;
+                task.hasBaseline = true;
+            }
+        }
+
+        function initPosition(task){
+            if(task.dateInterval){
                 var boundaries = GanttTasksService.getBoundaries();
-                ctrl.position =
-                    DateService.createDateIntervalPosition(boundaries, ctrl.dateInterval);
-                ctrl.closerToEnd =
-                    (100 - ctrl.position.left - ctrl.position.width) < +ctrl.position.left;
+                task.position =
+                    DateService.createDateIntervalPosition(boundaries, task.dateInterval);
+                task.closerToEnd =
+                    (100 - task.position.left - task.position.width) < +task.position.left;
             }
         }
     }

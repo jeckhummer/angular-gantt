@@ -4,10 +4,8 @@
     function GanttTasksService(GanttTaskFactoryService, GanttDataHTTPService, $rootScope, DateService) {
         var tasks = [];
         var newID = 1;
-        var boundaries;
 
         var service = {
-            getBoundaries: getBoundaries,
             getAll: getAll,
             isEmpty: isEmpty,
             updateTask: updateTask,
@@ -17,11 +15,6 @@
 
         init();
         return service;
-
-
-        function getBoundaries() {
-            return boundaries;
-        }
 
         function getAll() {
             return tasks;
@@ -78,7 +71,6 @@
                 if (newID <= task.id) newID = task.id + 1;
             });
 
-            calculateBoundaries();
             onTaskChanges();
         }
 
@@ -90,35 +82,11 @@
         function updateTaskLocally(data) {
             var index = searchTaskByID(data.id);
             tasks[index] = data;
-            calculateBoundaries();
             onTaskChanges();
-        }
-
-        function calculateBoundaries() {
-            var starts = [];
-            var ends = [];
-
-            angular.forEach(tasks, function (task) {
-                var start = DateService.createMoment(task.start);
-                var end = DateService.createMoment(task.end);
-
-                starts.push(start);
-                ends.push(end);
-            });
-
-            var boundariesNew = new DateInterval(moment.min(starts), moment.max(ends));
-            if (!boundaries || !boundaries.isEqual(boundariesNew)) {
-                boundaries = boundariesNew;
-            }
-
-            onBoundariesChanges();
         }
 
         function onTaskChanges() {
             $rootScope.$broadcast('tasks-changed');
-        }
-        function onBoundariesChanges() {
-            $rootScope.$broadcast('boundaries-changed', boundaries);
         }
     }
 })();

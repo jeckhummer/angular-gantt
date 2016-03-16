@@ -1,14 +1,15 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, GanttTasksService, GanttBaselinesService){
+    function TaskController($rootScope, $scope, DateService, GanttTimelineService, GanttBaselinesService){
         var ctrl = this;
         ctrl.editTask = editTask;
-        $scope.$watchCollection('$parent.task', init);
-        $scope.$on('boundaries-changed', (boundaries) => initPosition(boundaries, ctrl));
-        $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
 
         init($scope.$parent.task);
+
+        $scope.$watchCollection('$parent.task', init);
+        $scope.$on('boundaries-changed', () => initPosition(ctrl));
+        $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
 
         function editTask(task){
             $rootScope.$broadcast('dialog-toggle', 'add-task', task);
@@ -41,7 +42,7 @@
 
         function initPosition(task){
             if(task.dateInterval){
-                var boundaries = GanttTasksService.getBoundaries();
+                var boundaries = GanttTimelineService.getBoundaries();
                 task.position =
                     DateService.createDateIntervalPosition(boundaries, task.dateInterval);
                 task.closerToEnd =

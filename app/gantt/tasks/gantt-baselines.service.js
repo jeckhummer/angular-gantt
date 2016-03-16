@@ -8,6 +8,7 @@
         var service = {
             setCurrentBaseline: setCurrentBaseline,
             getTask: getTask,
+            getCurrentBaseline: getCurrentBaseline,
             addBaseline: addBaseline
         };
 
@@ -41,13 +42,17 @@
             }
         }
 
+        function getCurrentBaseline(){
+            return currentBaseline;
+        }
+
         function setCurrentBaseline(baselineName){
             currentBaseline = baselines[baselineName];
             onCurrentBaselineChanged();
         }
 
         function onBaselinesChanged(){
-            $rootScope.$broadcast('baselines-changed', baselines);
+            $rootScope.$broadcast('baselines-changed');
         }
 
         function onCurrentBaselineChanged(){

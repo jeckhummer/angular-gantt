@@ -11,6 +11,7 @@
         ganttCtrl.timelineConfig = GanttTimelineService.getConfig();
 
         $scope.$on('tasks-changed', TasksDataChangesHandler);
+        $scope.$on('boundaries-changed', BoundariesChangesHandler);
         $scope.$on('gantt-timeline-config-changed', TimelineConfigChangesHandler);
 
         $rootScope.$broadcast('notify-fade', 'Loading user timeline settings ...', timelineDefer.promise);
@@ -23,14 +24,16 @@
         function TimelineConfigChangesHandler(){
             ganttCtrl.timelineConfig = GanttTimelineService.getConfig();
             timelineDefer.resolve();
-            //ganttCtrl.timelineLoaded = true;
         }
 
         function TasksDataChangesHandler(){
             ganttCtrl.tasks = GanttTasksService.getAll();
-            ganttCtrl.boundaries = GanttTasksService.getBoundaries();
             ganttCtrl.isEmpty = GanttTasksService.isEmpty();
             dataDefer.resolve();
+        }
+
+        function BoundariesChangesHandler(){
+            ganttCtrl.boundaries = GanttTimelineService.getBoundaries();
         }
     }
 })();

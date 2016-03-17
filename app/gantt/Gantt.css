@@ -77,6 +77,10 @@
     cursor:pointer;
 }
 
+.task-selected{
+    background-color: #E4E4E4 !important;
+}
+
 .task_wrapper {
     border-bottom: 1px dotted #CCC;
     height: 47px;

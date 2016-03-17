@@ -3,13 +3,13 @@
     angular.module('dialog')
         .directive('dialogWindow', DialogWindow);
 
-    function DialogWindow($compile, $rootScope) {
+    function DialogWindow() {
         var directive = {
             restrict: 'A',
             link: link
         };
         return directive;
 
-        function link(scope, element, attr, dialogCtrl){ }
+        function link(scope, element, attr){ }
     }
 })();

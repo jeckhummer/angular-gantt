@@ -6,16 +6,15 @@
     function DialogBackground($compile) {
         var directive = {
             restrict: 'A',
-            controller: 'DialogController as dialogCtrl',
+            controller: 'DialogBackgroundController as dialogCtrl',
             scope: true,
             link: link,
         };
         return directive;
 
-        function link(scope, element, attrs, dialogCtrl){
+        function link(scope, element, attrs){
             var groupName = attrs['dialog-background'];
             var background = angular.element(`
-                <span ng-bind="dialogCtrl.activeDialog"></span>
                 <div ng-show="dialogCtrl.isActive()"
                      ng-click="dialogCtrl.deactivate()"
                      class="fog-cover container-fluid"></div>

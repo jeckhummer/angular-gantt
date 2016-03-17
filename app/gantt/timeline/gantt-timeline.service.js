@@ -31,6 +31,7 @@
                     });
 
                 $rootScope.$on('current-baseline-changed', calculateBoundaries);
+                $rootScope.$on('baselines-changed', calculateBoundaries);
                 $rootScope.$on('tasks-changed', calculateBoundaries);
             }
 

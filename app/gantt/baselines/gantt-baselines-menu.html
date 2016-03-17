@@ -1,0 +1,30 @@
+<!--BASELINES-->
+<div dialog-window="baselines" class="dialog-window-right">
+    <div ng-controller="GanttBaselinesController as baselinesCtrl">
+        <h5>Baselines</h5>
+        <div class="list-group">
+            <button ng-repeat="name in baselinesCtrl.baselineNames"
+                    ng-click="baselinesCtrl.toggleBaseline(name)"
+                    type="button"
+                    class="list-group-item"
+                    ng-class="{'active': baselinesCtrl.isCurrentBaseline(name)}">
+                {{name}}
+                <span ng-click="baselinesCtrl.deleteBaseline(name)"
+                      class="glyphicon glyphicon-remove pull-right"
+                      aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <form class="form-inline" name="baselineForm">
+            <input ng-model="baselinesCtrl.name"
+                   type="text"
+                   class="form-control"
+                   id="exampleInputAmount"
+                   placeholder="Save baseline as...">
+            <button ng-click="baselinesCtrl.addBaseline(baselinesCtrl.name)"
+                    type="submit"
+                    ng-disabled="baselinesCtrl.name == ''"
+                    class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>

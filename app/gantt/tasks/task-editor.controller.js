@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService){
+    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
         var editor = this;
         var today = new Date();
 
@@ -58,7 +58,10 @@
             initTaskDates(editor.task._start, editor.task._end);
             var isValidDateOrder = validateDatesOrder();
 
-            if(isValidDateOrder) editor.editMode ? editor.updateTask() : editor.addTask();
+            if(isValidDateOrder) {
+                editor.editMode ? editor.updateTask() : editor.addTask();
+                DialogService.toggleDialog('task-editor');
+            }
             else $scope.taskForm.$error.datesOrder = true;
         }
 
@@ -75,10 +78,6 @@
             editor.task._start = editor.task._end;
             editor.task._end = tmp;
             $scope.taskForm.$error.datesOrder = validateDatesOrder();
-        }
-
-        function parsePercentageComplete(){
-
         }
         // TODO: milestone
     }

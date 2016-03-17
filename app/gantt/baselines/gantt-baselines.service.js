@@ -3,23 +3,24 @@
 
     function GanttBaselinesService(GanttDataHTTPService, $rootScope, GanttTaskFactoryService) {
         var baselines = {};
-        var currentBaseline = null;
+        var currentBaselineName = null;
 
         var service = {
-            setCurrentBaseline: setCurrentBaseline,
+            toggleCurrentBaseline: toggleCurrentBaseline,
             getTask: getTask,
             getCurrentBaseline: getCurrentBaseline,
-            addBaseline: addBaseline
+            getBaselineNames: getBaselineNames,
+            addBaseline: addBaseline,
+            deleteBaseline: deleteBaseline,
+            getCurrentBaselineName: getCurrentBaselineName,
+            isCurrentBaseline: isCurrentBaseline
         };
 
         init();
         return service;
 
         function init(){
-            GanttDataHTTPService.getBaselines()
-                .then(addBaselines)
-                .then(onBaselinesChanged)
-                .then(()=>setCurrentBaseline('Saved Baseline 1'));
+            GanttDataHTTPService.getBaselines().then(addBaselines);
         }
 
         function addBaseline(name, baseline){
@@ -28,26 +29,48 @@
                 var baselineTask = GanttTaskFactoryService.create(baseline[i]);
                 baselines[name].push(baselineTask);
             }
+            onBaselinesChanged();
         }
 
         function addBaselines(_baselines){
             for(var name in _baselines){
                 addBaseline(name, _baselines[name]);
             }
+            onBaselinesChanged();
+        }
+
+        function deleteBaseline(name){
+            delete baselines[name];
+            onBaselinesChanged();
         }
 
         function getTask(taskID){
+            var currentBaseline = getCurrentBaseline();
             for(var i in currentBaseline){
                 if(currentBaseline[i].id == taskID) return currentBaseline[i];
             }
         }
 
         function getCurrentBaseline(){
-            return currentBaseline;
+            return baselines[currentBaselineName];
         }
 
-        function setCurrentBaseline(baselineName){
-            currentBaseline = baselines[baselineName];
+        function getCurrentBaselineName(){
+            return currentBaselineName;
+        }
+
+        function isCurrentBaseline(name){
+            return currentBaselineName == name;
+        }
+
+        function getBaselineNames(){
+            var names = [];
+            angular.forEach(baselines, (_, name)=> names.push(name));
+            return names;
+        }
+
+        function toggleCurrentBaseline(name){
+            currentBaselineName = currentBaselineName == name ? null : name;
             onCurrentBaselineChanged();
         }
 
@@ -56,7 +79,7 @@
         }
 
         function onCurrentBaselineChanged(){
-            $rootScope.$broadcast('current-baseline-changed', currentBaseline);
+            $rootScope.$broadcast('current-baseline-changed');
         }
     }
 })();

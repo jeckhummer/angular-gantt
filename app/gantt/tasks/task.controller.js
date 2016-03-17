@@ -8,7 +8,10 @@
         init($scope.$parent.task);
 
         $scope.$watchCollection('$parent.task', init);
+
         $scope.$on('boundaries-changed', () => initPosition(ctrl));
+        $scope.$on('boundaries-changed', () => initBaseline(ctrl));
+        $scope.$on('baselines-changed', () => initBaseline(ctrl));
         $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
 
         function editTask(task){
@@ -37,6 +40,8 @@
                 initPosition(baselineTask);
                 task.baselinePosition = baselineTask.position;
                 task.hasBaseline = true;
+            }else{
+                task.hasBaseline = false;
             }
         }
 

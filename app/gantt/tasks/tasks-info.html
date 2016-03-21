@@ -1,21 +1,29 @@
 <!--TASK INFO-->
 <div class="col-md-2 task-info-block">
     <div ng-repeat="task in ganttCtrl.tasks"
-         ng-controller="TaskController as taskCtrl" class="task_wrapper"
+         ng-controller="TaskController as taskCtrl"
          ng-class-odd="'task_wrapper_odd'">
-        <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
-            <div class="task_name text-left">
-                {{taskCtrl.name}}
-            </div>
-            <div>
-                <date-interval
-                    start="taskCtrl.start"
-                    end="taskCtrl.end"
-                    class="date_label"></date-interval>
 
-                <span class="label label-success pull-right" style="margin-top:3px;">
-                    {{taskCtrl.percentComplete}}%
-                </span>
+        <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
+
+            <div ng-controller="TaskSelectionController as selectCtrl"
+                 ng-click="selectCtrl.select($event, task.id, task)"
+                 ng-class="{'task-selected': selectCtrl.isSelected(task.id)}"
+                 class="task_wrapper">
+
+                <div class="task_name text-left">
+                    {{taskCtrl.name}}
+                </div>
+                <div>
+                    <date-interval
+                        start="taskCtrl.start"
+                        end="taskCtrl.end"
+                        class="date_label"></date-interval>
+
+                    <span class="label label-success pull-right" style="margin-top:3px;">
+                        {{taskCtrl.percentComplete}}%
+                    </span>
+                </div>
             </div>
         </div>
     </div>

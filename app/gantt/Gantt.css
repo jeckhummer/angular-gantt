@@ -79,6 +79,9 @@
 
 .task-selected{
     background-color: #E4E4E4 !important;
+    -moz-box-shadow:    inset 0px 0px 10px -3px #1F1F1F;
+    -webkit-box-shadow: inset 0px 0px 10px -3px #1F1F1F;
+    box-shadow:         inset 0px 0px 10px -3px #1F1F1F;
 }
 
 .task_wrapper {

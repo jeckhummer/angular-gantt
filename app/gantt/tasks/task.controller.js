@@ -4,8 +4,6 @@
     function TaskController($rootScope, $scope, DateService, GanttTimelineService, GanttBaselinesService){
         var ctrl = this;
         ctrl.editTask = editTask;
-        ctrl.select = select;
-        ctrl.isSelected = false;
 
         init($scope.$parent.task);
 
@@ -54,13 +52,6 @@
                     DateService.createDateIntervalPosition(boundaries, task.dateInterval);
                 task.closerToEnd =
                     (100 - task.position.left - task.position.width) < +task.position.left;
-            }
-        }
-
-        function select(event){
-            if(event.ctrlKey) {
-                ctrl.isSelected = !ctrl.isSelected;
-                event.stopPropagation();
             }
         }
     }

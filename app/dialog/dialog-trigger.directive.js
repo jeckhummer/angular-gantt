@@ -24,10 +24,12 @@
                 element.attr('ng-click', `triggerCtrl.toggle()`);
                 if(triggerCtrl.isToggle)
                     element.attr('ng-class', `{'active': triggerCtrl.isActive()}`);
+                var innerHtml = element.html();
+                element.empty();
+                element.removeAttr('dialog-trigger');
+                $compile(element)(scope);
+                element.html(innerHtml);
             });
-
-            trigger.removeAttr('dialog-trigger');
-            $compile(trigger)(scope);
             element.after(trigger);
         }
     }

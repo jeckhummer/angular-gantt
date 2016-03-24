@@ -5,29 +5,29 @@ angular.module('timeline', ['ngSanitize']);
     angular.module('timeline')
         .directive('timeline', TimelineDirective);
 
-    function TimelineDirective (TimelineTypes, TimeLineGridService, $sce) {
+    function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce) {
         var directive = {
             templateUrl: 'timeline/timeline/timeline.directive.html',
             restrict: 'E',
-            scope: {
-                'config': '=',
-                'dateInterval': '=',
-            },
+            scope: true,
             link: function ($scope) {
-                $scope.$watch('config', initGrids, true);
-                $scope.$watch('dateInterval', initGrids);
+                $scope.$on('timeline-config-changed', initGrids);
+                $scope.$on('boundaries-changed', initGrids);
 
                 function initGrids(){
+                    var dateInterval = TimelineService.getBoundaries();
+                    var config = TimelineService.getConfig();
+
                     $scope.grids = [];
 
-                    if($scope.dateInterval != null){
-                        $scope.config.forEach(function (configItem) {
+                    if(dateInterval != null){
+                        config.forEach(function (configItem) {
                            if(configItem.visible){
                                var type = TimelineTypes[configItem.typeName];
                                if(!type) throw `Unknown timeline type: ${configItem.typeName}`;
 
                                var gridObject = {
-                                   grid: TimeLineGridService.generate(type, $scope.dateInterval),
+                                   grid: TimeLineGridService.generate(type, dateInterval),
                                    label: $sce.getTrustedHtml(configItem.label)
                                };
                                $scope.grids.push(gridObject);

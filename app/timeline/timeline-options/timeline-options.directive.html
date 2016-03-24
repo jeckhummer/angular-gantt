@@ -14,11 +14,13 @@
             <td>{{type.label}}</td>
             <td>
                 <input ng-model="type.visible"
+                       ng-change="notifyAboutChanges()"
                        type="checkbox"
                        class="timeline_option">
             </td>
             <td>
                 <input ng-model="$parent.stripesTypeName"
+                       ng-change="onStripesTypeChange()"
                        type="radio"
                        value="{{index}}"
                        class="timeline_option">

@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('GanttTasksService', GanttTasksService);
 
-    function GanttTasksService(GanttTaskFactoryService, GanttDataHTTPService, $rootScope, DateService) {
+    function GanttTasksService(GanttTaskFactoryService, GanttDataHTTPService, $rootScope) {
         var tasks = [];
         var newID = 1;
 
@@ -10,7 +10,10 @@
             isEmpty: isEmpty,
             updateTask: updateTask,
             addTask: addTask,
-            getTask: getTask
+            deleteTask: deleteTask,
+            getTask: getTask,
+            getTasksCount: getTasksCount,
+            getTasksNames: getTasksNames
         };
 
         init();
@@ -61,6 +64,14 @@
             return GanttDataHTTPService.saveTask(data);
         }
 
+        function deleteTask(id){
+            tasks.forEach((task, i)=>{
+                if(task.id == id) tasks.splice(i, 1);
+            });
+
+            onTaskChanges();
+        }
+
         function addTaskLocally(data) {
             data = angular.isArray(data) ? data : [data];
 
@@ -87,6 +98,14 @@
 
         function onTaskChanges() {
             $rootScope.$broadcast('tasks-changed');
+        }
+
+        function getTasksCount(){
+            return tasks.length;
+        }
+
+        function getTasksNames(){
+            return tasks.map((task)=>task.name);
         }
     }
 })();

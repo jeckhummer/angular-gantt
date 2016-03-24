@@ -6,10 +6,13 @@
 
         <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
 
-            <div ng-controller="TaskSelectionController as selectCtrl"
-                 ng-click="selectCtrl.select($event, task.id, task)"
-                 ng-class="{'task-selected': selectCtrl.isSelected(task.id)}"
-                 class="task_wrapper">
+            <div ng-controller="TaskClickController as clickCtrl"
+                 ng-click="clickCtrl.onClick($event, task.id)"
+                 ng-right-click="clickCtrl.onRightClick($event,task.id)"
+                 ng-class="{'task-selected': clickCtrl.isSelected(task.id)}"
+                 class="task_wrapper"
+                 data-toggle="context"
+                 data-target="#context-menu">
 
                 <div class="task_name text-left">
                     {{taskCtrl.name}}
@@ -27,4 +30,6 @@
             </div>
         </div>
     </div>
+
+    <div ng-include="'gantt/tasks/task-context-menu.html'"></div>
 </div>

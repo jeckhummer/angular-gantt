@@ -1,12 +1,6 @@
 'use strict';
 
-angular.module('app', [
-    'ngRoute',
-    'gantt',
-    'timeline',
-    'common',
-    'dialog'
-]);
+angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
 
 (function () {
     angular.module('app').config(AppRouterConfig);
@@ -14,12 +8,12 @@ angular.module('app', [
     function AppRouterConfig($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/gantt'});
     }
-}());
+})();
 
 (function () {
-    angular.module('app').config(GanttTimelineConfig);
+    angular.module('timeline').config(TimelineConfig);
 
-    function GanttTimelineConfig(GanttTimelineServiceProvider) {
+    function TimelineConfig(TimelineServiceProvider) {
         var config = [
             {
                 typeName: 'year',
@@ -47,6 +41,44 @@ angular.module('app', [
             }
         ];
 
-        GanttTimelineServiceProvider.setTimelineDefaults(config);
+        TimelineServiceProvider.setTimelineDefaults(config);
+
+        TimelineServiceProvider.configureCalculateBoundariesTriggers([
+            'current-baseline-changed',
+            'baselines-changed',
+            'tasks-changed'
+        ]);
+
+        TimelineServiceProvider.configureCalculateBoundariesMethod(($injector)=>{
+            var GanttTasksService = $injector.get('GanttTasksService');
+            var GanttBaselinesService = $injector.get('GanttBaselinesService');
+
+            var starts = [];
+            var ends = [];
+            var tasks = GanttTasksService.getAll();
+            var boundaries;
+
+            angular.forEach(tasks, function (task) {
+                starts.push(task.startMoment);
+                ends.push(task.endMoment);
+
+                var baselineTask = GanttBaselinesService.getTask(task.id);
+                if(baselineTask){
+                    starts.push(baselineTask.startMoment);
+                    ends.push(baselineTask.endMoment);
+                }
+            });
+
+            var boundariesNew = new DateInterval(moment.min(starts), moment.max(ends));
+            if (!boundaries || !boundaries.isEqual(boundariesNew)) {
+                boundaries = boundariesNew;
+            }
+
+            return boundaries;
+        });
+
+        TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
+            $injector.get('GanttDataHTTPService')
+        );
     }
 })();

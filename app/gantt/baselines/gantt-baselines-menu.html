@@ -24,7 +24,22 @@
             <button ng-click="baselinesCtrl.addBaseline(baselinesCtrl.name)"
                     type="submit"
                     ng-disabled="baselinesCtrl.name == ''"
-                    class="btn btn-success">Save</button>
+                    class="btn btn-success">Save
+            </button>
         </form>
+
+        <div style="margin-top:7px;" class="text-center">
+            <small>
+                Tasks to save in baseline:
+                <span id="selected-tasks-names"
+                      class="tooltip-label"
+                      data-toggle="popover"
+                      data-placement="left"
+                      data-content="{{baselinesCtrl.getTaskNames()}}"
+                      style="cursor: pointer;">
+                    {{baselinesCtrl.getTasksCount()}}
+                </span>
+            </small>
+        </div>
     </div>
 </div>

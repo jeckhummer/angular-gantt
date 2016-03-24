@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, GanttTimelineService, GanttBaselinesService){
+    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService){
         var ctrl = this;
         ctrl.editTask = editTask;
 
@@ -47,7 +47,7 @@
 
         function initPosition(task){
             if(task.dateInterval){
-                var boundaries = GanttTimelineService.getBoundaries();
+                var boundaries = TimelineService.getBoundaries();
                 task.position =
                     DateService.createDateIntervalPosition(boundaries, task.dateInterval);
                 task.closerToEnd =

@@ -1,0 +1,25 @@
+<div ng-controller="ContextActionsController as cntxtActCtrl">
+    <button type="button"
+            class="btn btn-default btn-xs"
+            ng-click="cntxtActCtrl.selectAll()">
+        Select all
+    </button>
+    <button type="button"
+            class="btn btn-default btn-xs"
+            ng-click="cntxtActCtrl.unselectAll()">
+        Unselect all
+    </button>
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-click="cntxtActCtrl.unselectAll()">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </button>
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-click="cntxtActCtrl.narrowInfo()">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>

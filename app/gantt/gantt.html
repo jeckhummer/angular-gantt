@@ -13,20 +13,22 @@
         <div ng-controller="GanttController as ganttCtrl">
             <div ng-if="!ganttCtrl.isEmpty" class="gantt container-fluid" dialog-background>
                 <div class="row no-padding-row">
-                    <div class="col-md-2">
+                    <div class="col-md-{{ganttCtrl.getInfoBlockWidth()}}">
                         <div ng-include="'gantt/context-actions-bar/context-actions-bar.html'"></div>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-{{ganttCtrl.getTasksBlockWidth()}}">
                         <!--TIMELINE-->
                         <timeline></timeline>
                     </div>
                 </div>
 
                 <div class="row no-padding-row">
-                    <ng-include src="'gantt/tasks/tasks-info.html'"></ng-include>
+                    <div class="col-md-{{ganttCtrl.getInfoBlockWidth()}} task-info-block">
+                        <ng-include src="'gantt/tasks/tasks-info.html'"></ng-include>
+                    </div>
 
                     <!--TASK LINES-->
-                    <div class="col-md-10">
+                    <div class="col-md-{{ganttCtrl.getTasksBlockWidth()}}">
                         <div class="tasks_block">
                             <div class="tasks_wrapper">
                                 <div ng-repeat="task in ganttCtrl.tasks">

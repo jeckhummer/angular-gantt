@@ -13,12 +13,14 @@
     <div class="btn-group" role="group" aria-label="...">
         <button type="button"
                 class="btn btn-xs btn-default"
-                ng-click="cntxtActCtrl.unselectAll()">
+                ng-class="{'disabled': cntxtActCtrl.isNarrowest()}"
+                ng-click="cntxtActCtrl.narrowInfo()">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </button>
         <button type="button"
                 class="btn btn-xs btn-default"
-                ng-click="cntxtActCtrl.narrowInfo()">
+                ng-class="{'disabled': cntxtActCtrl.isWidest()}"
+                ng-click="cntxtActCtrl.expandInfo()">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </button>
     </div>

@@ -1,17 +1,16 @@
 (function(){
     angular.module('gantt').controller('GanttController', GanttController);
 
-    function GanttController (TimelineService, GanttTasksService, $scope, $q, $rootScope) {
+    function GanttController (GanttTasksService, GanttOptionsService, $scope, $q, $rootScope) {
         var ganttCtrl = this;
-
         var dataDefer = $q.defer();
 
         ganttCtrl.isEmpty = true;
+        ganttCtrl.getInfoBlockWidth = getInfoBlockWidth;
+        ganttCtrl.getTasksBlockWidth = getTasksBlockWidth;
 
         $scope.$on('tasks-changed', TasksDataChangesHandler);
-        //$scope.$on('boundaries-changed', BoundariesChangesHandler);
-
-        $rootScope.$broadcast('notify-fade', 'Loading tasks data ...', dataDefer.promise);
+        $rootScope.$broadcast('notify-fade', 'Loading tasks ...', dataDefer.promise);
 
         function TasksDataChangesHandler(){
             ganttCtrl.tasks = GanttTasksService.getAll();
@@ -19,8 +18,12 @@
             dataDefer.resolve();
         }
 
-        //function BoundariesChangesHandler(){
-        //    ganttCtrl.boundaries = TimelineService.getBoundaries();
-        //}
+        function getInfoBlockWidth(){
+            return GanttOptionsService.getInfoBlockWidth();
+        }
+
+        function getTasksBlockWidth(){
+            return 12 - getInfoBlockWidth();
+        }
     }
 })();

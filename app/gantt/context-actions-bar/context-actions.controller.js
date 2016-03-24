@@ -1,13 +1,15 @@
 (function () {
     angular.module('gantt').controller('ContextActionsController', ContextActionsController);
 
-    function ContextActionsController(TaskClickService) {
+    function ContextActionsController(GanttOptionsService ,TaskClickService) {
         var ctrl = this;
 
         ctrl.selectAll = selectAll;
         ctrl.unselectAll = unselectAll;
         ctrl.narrowInfo = narrowInfo;
         ctrl.expandInfo = expandInfo;
+        ctrl.isNarrowest = isNarrowest;
+        ctrl.isWidest = isWidest;
 
         function selectAll() {
             TaskClickService.selectAll();
@@ -18,11 +20,19 @@
         }
 
         function narrowInfo() {
-            // TODO
+            GanttOptionsService.decreaseInfoBlockWidth();
         }
 
         function expandInfo() {
-            // TODO
+            GanttOptionsService.increaseInfoBlockWidth();
+        }
+
+        function isNarrowest(){
+            return GanttOptionsService.isNarrowest();
+        }
+
+        function isWidest(){
+            return GanttOptionsService.isWidest();
         }
     }
 })();

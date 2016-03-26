@@ -3,19 +3,21 @@
     angular.module('gantt')
         .directive('dateInterval', DateInterval);
 
-    function DateInterval(DateService) {
+    function DateInterval(DateService, $sce) {
         var directive = {
             restrict: 'E',
             scope: {
                 startStr: '=start',
-                endStr: '=end'
+                endStr: '=end',
+                lineBreak: '@'
             },
-            template: '{{start}} / {{end}}',
+            template: '{{start}} <span ng-bind-html="separator"></span> {{end}}',
             link: link
         };
         return directive;
 
         function link($scope){
+            $scope.separator = $sce.getTrustedHtml($scope.lineBreak ? "<br />" : "/");
             $scope.$watchCollection(getDates, init);
 
             function getDates(){

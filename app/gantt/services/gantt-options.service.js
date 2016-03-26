@@ -3,8 +3,8 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
-        var INFO_BLOCK_MIN_WIDTH = 2;
-        var INFO_BLOCK_MAX_WIDTH = 6;
+        var INFO_BLOCK_MIN_WIDTH = 40;
+        var INFO_BLOCK_MAX_WIDTH = 50;
         var infoBlockWidth = INFO_BLOCK_MIN_WIDTH;
 
         var service = {

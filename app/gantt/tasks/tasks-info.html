@@ -1,7 +1,6 @@
 <!--TASK INFO-->
 <div ng-repeat="task in ganttCtrl.tasks"
-     ng-controller="TaskController as taskCtrl"
-     ng-class-odd="'task_wrapper_odd'">
+     ng-controller="TaskController as taskCtrl">
 
     <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
 
@@ -10,19 +9,30 @@
              ng-right-click="clickCtrl.onRightClick($event,task.id)"
              ng-class="{'task-selected': clickCtrl.isSelected(task.id)}"
              class="task_wrapper"
+             ng-class-odd="'task_wrapper_odd'"
              data-toggle="context"
              data-target="#context-menu">
 
-            <div class="task_name text-left">
-                {{taskCtrl.name}}
-            </div>
-            <div>
-                <date-interval start="taskCtrl.start" end="taskCtrl.end" class="date_label"></date-interval>
+            <div class="task-info-part" style="width: {{taskCtrl.hasBaseline ? 80 : 100}}%">
+                <div class="task_name text-left">
+                    {{taskCtrl.name}}
+                </div>
+                <div>
+                    <date-interval start="taskCtrl.start" end="taskCtrl.end" class="date_label"></date-interval>
 
                 <span class="label label-success pull-right" style="margin-top:3px;">
                     {{taskCtrl.percentComplete}}%
                 </span>
+                </div>
             </div>
+
+            <div ng-show="taskCtrl.hasBaseline" class="baseline-info-part" style="width: 20%">
+                <date-interval start="taskCtrl.baseline.dateInterval.start"
+                               end="taskCtrl.baseline.dateInterval.end"
+                               line-break="true"
+                               class="date_label"></date-interval>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

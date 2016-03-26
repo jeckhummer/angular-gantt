@@ -23,7 +23,7 @@
         }
 
         function getTasksBlockWidth(){
-            return 12 - getInfoBlockWidth();
+            return 100 - getInfoBlockWidth();
         }
     }
 })();

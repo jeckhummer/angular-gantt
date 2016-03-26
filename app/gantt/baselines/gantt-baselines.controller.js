@@ -8,7 +8,7 @@
         ctrl.addBaseline = addBaseline;
         ctrl.deleteBaseline = deleteBaseline;
         ctrl.getTasksCount = getTasksCount;
-        ctrl.getTaskNames = getTaskNames;
+        ctrl.getTasksNames = getTasksNames;
         ctrl.name = '';
 
         init();
@@ -57,7 +57,7 @@
                 "All Tasks";
         }
 
-        function getTaskNames(){
+        function getTasksNames(){
             var str = "";
 
             var selectedTasksNames = TaskClickService.getSelectedTasksNames();

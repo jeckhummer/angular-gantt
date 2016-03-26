@@ -38,7 +38,9 @@
             var baselineTask = GanttBaselinesService.getTask(task.id);
             if(baselineTask){
                 initPosition(baselineTask);
-                task.baselinePosition = baselineTask.position;
+                task.baseline = {};
+                task.baseline.position = baselineTask.position;
+                task.baseline.dateInterval = baselineTask.dateInterval;
                 task.hasBaseline = true;
             }else{
                 task.hasBaseline = false;

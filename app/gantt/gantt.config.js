@@ -1,4 +1,4 @@
-angular.module('gantt', ['ngRoute', 'timeline']);
+angular.module('gantt', ['ngRoute', 'timeline', 'ngSanitize']);
 
 (function () {
     angular.module('gantt').config(GanttRouteConfig);

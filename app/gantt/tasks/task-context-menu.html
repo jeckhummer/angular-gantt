@@ -1,9 +1,19 @@
 <div ng-controller="TaskContextMenuController as cntxtCtrl" id="context-menu">
     <ul class="dropdown-menu" role="menu">
-        <li  ng-show="cntxtCtrl.hasSelectedTasks()">
-            <a ng-click="cntxtCtrl.saveAsBaseline()">Save as baseline</a></li>
-        <li><a ng-click="cntxtCtrl.deleteTask()">Delete</a></li>
-        <li ng-show="cntxtCtrl.hasSelectedTasks()">
-            <a ng-click="cntxtCtrl.deleteSelectedTasks()">Delete selected</a></li>
+        <li>
+            <a ng-click="cntxtCtrl.toggleTask()">{{cntxtCtrl.getToggleLabel()}}</a>
+        </li>
+
+        <li ng-show="cntxtCtrl.isSelectedTask()">
+            <a ng-click="cntxtCtrl.saveAsBaseline()">Save as baseline</a>
+        </li>
+
+        <li>
+            <a ng-click="cntxtCtrl.deleteTask()">Delete</a>
+        </li>
+
+        <li ng-show="cntxtCtrl.isSelectedTask()">
+            <a ng-click="cntxtCtrl.deleteSelectedTasks()">Delete selected</a>
+        </li>
     </ul>
 </div>

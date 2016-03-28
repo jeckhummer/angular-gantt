@@ -59,12 +59,12 @@
         function submit(){
             initTaskDates(editor.task._start, editor.task._end);
             var isValidDateOrder = validateDatesOrder();
+            $scope.taskForm.$error.datesOrder = !isValidDateOrder;
 
             if(isValidDateOrder) {
                 editor.editMode ? editor.updateTask() : editor.addTask();
                 DialogService.toggleDialog('task-editor');
             }
-            else $scope.taskForm.$error.datesOrder = true;
         }
 
         function validateDatesOrder(){

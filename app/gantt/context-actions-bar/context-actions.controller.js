@@ -10,6 +10,10 @@
         ctrl.expandInfo = expandInfo;
         ctrl.isNarrowest = isNarrowest;
         ctrl.isWidest = isWidest;
+        ctrl.zoomIn = zoomIn;
+        ctrl.zoomOut = zoomOut;
+        ctrl.isMaxZoom = isMaxZoom;
+        ctrl.isMinZoom = isMinZoom;
 
         function selectAll() {
             TaskClickService.selectAll();
@@ -33,6 +37,22 @@
 
         function isWidest(){
             return GanttOptionsService.isWidest();
+        }
+
+        function isMaxZoom(){
+            return GanttOptionsService.isMaxZoom();
+        }
+
+        function isMinZoom(){
+            return GanttOptionsService.isMinZoom();
+        }
+
+        function zoomIn(){
+            GanttOptionsService.zoomIn();
+        }
+
+        function zoomOut(){
+            GanttOptionsService.zoomOut();
         }
     }
 })();

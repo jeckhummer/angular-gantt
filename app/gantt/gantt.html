@@ -11,35 +11,56 @@
 
         <!--GANTT-->
         <div ng-controller="GanttController as ganttCtrl">
-            <div ng-if="!ganttCtrl.isEmpty" class="gantt container-fluid" dialog-background>
+            <div ng-if="!ganttCtrl.isEmpty" class="gantt" dialog-background>
 
-                <div class="row no-padding-row">
-                    <div class="col-md-1" style="width:{{ganttCtrl.getInfoBlockWidth()}}%">
-                        <div ng-include="'gantt/context-actions-bar/context-actions-bar.html'"></div>
-                    </div>
-                    <div class="col-md-1" style="width:{{ganttCtrl.getTasksBlockWidth()}}%">
-                        <!--TIMELINE-->
-                        <timeline></timeline>
-                    </div>
-                </div>
+                <table class="gantt-backbone-table" style="width: 100%;">
+                    <tr>
+                        <td class="context-actions-bar">
+                            <div ng-include="'gantt/context-actions-bar/context-actions-bar.html'"></div>
+                        </td>
+                        <td rowspan="2"
+                            class="gantt-right-block"
+                            style="width:{{ganttCtrl.getTasksBlockWidth()}}%; overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}">
 
-                <div class="row no-padding-row">
-                    <div class="task-info-block col-md-1" style="width:{{ganttCtrl.getInfoBlockWidth()}}%">
-                        <ng-include src="'gantt/tasks/tasks-info.html'"></ng-include>
-                    </div>
+                            <div style="width: {{ganttCtrl.getZoom()}}%">
+                                <timeline></timeline>
+                            </div>
 
-                    <!--TASK LINES-->
-                    <div class="col-md-1" style="width:{{ganttCtrl.getTasksBlockWidth()}}%">
-                        <div class="tasks_block">
-                            <div class="tasks_wrapper">
+                            <div class="tasks_wrapper" style="width: {{ganttCtrl.getZoom()}}%">
                                 <div ng-repeat="task in ganttCtrl.tasks">
                                     <ng-include src="'gantt/tasks/task.html'"></ng-include>
                                     <div style="clear: both"></div>
                                 </div>
                             </div>
-                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="gantt-left-block"
+                            style="
+                                width:{{ganttCtrl.getInfoBlockWidth()}}%;
+                                vertical-align: bottom;
+                                overflow-x: {{ganttCtrl.isZoomed() ? 'scroll':'hidden'}}">
+                            <div class="task-info-block">
+                                <ng-include src="'gantt/tasks/tasks-info.html'"></ng-include>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="gantt-left-block" style="width:{{ganttCtrl.getInfoBlockWidth()}}%">
+                </div>
+
+                <div class="gantt-right-block"
+                     style="
+                         width:{{ganttCtrl.getTasksBlockWidth()}}%;
+                         overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}
+                     ">
+
+                    <div class="">
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
             </div>
 
             <ng-include src="'gantt/timeline/timeline-options.html'"></ng-include>

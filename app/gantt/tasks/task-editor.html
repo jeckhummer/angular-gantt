@@ -63,17 +63,45 @@
                            id="percentage-complete">
                 </div>
                 <div class="col-md-9">
+                    <label for="is-milestone" class="control-label">
+                        <input type="checkbox"
+                               name="isMilestone"
+                               id="is-milestone" ng-model="taskEditorCtrl.task.isMilestone"
+                               ng-change="taskEditorCtrl.setAsMilestone()">
+                        Milestone
+                    </label>
+
                     <input type="range"
                            name="percentComplete"
                            min="0"
                            max="100"
                            step="1"
                            string-to-number
-                           ng-model="taskEditorCtrl.task.percentComplete"
-                           style="margin-top:30px">
+                           ng-hide="taskEditorCtrl.task.isMilestone"
+                           ng-model="taskEditorCtrl.task.percentComplete">
+
+                    <label for="is-milestone"
+                           ng-show="taskEditorCtrl.task.isMilestone"
+                           class="control-label">
+
+                        <input type="checkbox"
+                               name="milestone-status"
+                               ng-click="taskEditorCtrl.toggleAsMilestone()">
+                        Passed
+                    </label>
+
+
                 </div>
             </div>
         </div>
+
+        <!--<div class="form-group">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-12">-->
+                    <!---->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="text-right">
             <button type="submit" class="btn btn-success">

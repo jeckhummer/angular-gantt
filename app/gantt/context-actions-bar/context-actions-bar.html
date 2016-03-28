@@ -24,4 +24,19 @@
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </button>
     </div>
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-class="{'disabled': cntxtActCtrl.isMinZoom()}"
+                ng-click="cntxtActCtrl.zoomOut()">
+            <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+        </button>
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-class="{'disabled': cntxtActCtrl.isMaxZoom()}"
+                ng-click="cntxtActCtrl.zoomIn()">
+            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+        </button>
+    </div>
 </div>

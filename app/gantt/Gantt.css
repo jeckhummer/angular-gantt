@@ -4,6 +4,7 @@
 
 .gantt_block .gantt {
     position: relative;
+    /*border: 1px solid #CCC;*/
     background-color: white;
 }
 
@@ -68,7 +69,7 @@
 
 .gantt_block .tasks_block {
     position: relative;
-    overflow: hidden;
+    overflow: auto;
     border: 1px solid #CCC;
 }
 
@@ -161,7 +162,7 @@
 /*}*/
 
 .task-info-block{
-    border:1px solid #CCC;
+    /*border:1px solid #CCC;*/
 }
 
 .task-info-block .task_wrapper{
@@ -209,4 +210,32 @@ button.list-group-item:focus{
 
 .task-info-part{
     float: left;
+}
+
+.baseline_date_label{
+    color: grey !important;
+}
+
+.gantt-left-block, .gantt-right-block{
+    vertical-align: bottom;
+}
+.gantt-left-block{
+    border-top: 0px !important;
+}
+.gantt-right-block{
+    overflow: auto;
+}
+
+.gantt-backbone-table{
+    width: 100%;
+}
+
+.gantt-backbone-table td{
+    border:1px solid #CCC;
+}
+
+.context-actions-bar{
+    vertical-align: middle;
+    border-bottom:0 !important;
+    padding: 13px;
 }

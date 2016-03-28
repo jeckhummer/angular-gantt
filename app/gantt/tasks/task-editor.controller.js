@@ -9,6 +9,8 @@
         editor.updateTask = updateTask;
         editor.submit = submit;
         editor.swapDates = swapDates;
+        editor.setAsMilestone = setAsMilestone;
+        editor.toggleAsMilestone = toggleAsMilestone;
 
         $scope.$on('task-editor-opened', init);
 
@@ -78,6 +80,14 @@
             editor.task._start = editor.task._end;
             editor.task._end = tmp;
             $scope.taskForm.$error.datesOrder = validateDatesOrder();
+        }
+
+        function setAsMilestone(){
+            editor.task._end = editor.task._start;
+        }
+
+        function toggleAsMilestone(){
+            editor.task.percentComplete = editor.task.percentComplete == 100 || editor.task.percentComplete == true ? 0 : 100;
         }
         // TODO: milestone
     }

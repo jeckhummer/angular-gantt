@@ -4,15 +4,17 @@
     function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
         var editor = this;
         var today = new Date();
+        var taskEndDateBackup;
 
         editor.addTask = addTask;
         editor.updateTask = updateTask;
         editor.submit = submit;
         editor.swapDates = swapDates;
-        editor.setAsMilestone = setAsMilestone;
-        editor.toggleAsMilestone = toggleAsMilestone;
+        editor.toggleIsMilestone = toggleIsMilestone;
 
         $scope.$on('task-editor-opened', init);
+
+        $("#is-milestone").bootstrapSwitch();
 
         function init(event, taskID){
             editor.editMode = taskID != null;
@@ -31,6 +33,8 @@
 
             editor.task._start = editor.task.startDate;
             editor.task._end = editor.task.endDate;
+
+            backupTaskEndDate();
         }
 
         function initTaskDates(startDate, endDate){
@@ -82,13 +86,23 @@
             $scope.taskForm.$error.datesOrder = validateDatesOrder();
         }
 
-        function setAsMilestone(){
-            editor.task._end = editor.task._start;
+        function toggleIsMilestone(){
+            if(!editor.task.isMilestone){
+                restoreTaskEndDate();
+            }else{
+                backupTaskEndDate();
+                editor.task._end = editor.task._start;
+            }
         }
 
-        function toggleAsMilestone(){
-            editor.task.percentComplete = editor.task.percentComplete == 100 || editor.task.percentComplete == true ? 0 : 100;
+        function backupTaskEndDate(){
+            taskEndDateBackup = editor.task._end;
         }
+
+        function restoreTaskEndDate(){
+            if(taskEndDateBackup) editor.task._end = taskEndDateBackup;
+        }
+
         // TODO: milestone
     }
 })();

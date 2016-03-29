@@ -1,4 +1,4 @@
-angular.module('gantt', ['ngRoute', 'timeline', 'ngSanitize']);
+angular.module('gantt', ['ngRoute', 'timeline', 'ngSanitize', 'frapontillo.bootstrap-switch']);
 
 (function () {
     angular.module('gantt').config(GanttRouteConfig);

@@ -5,14 +5,44 @@
 
     <form ng-submit="taskEditorCtrl.submit()" name="taskForm">
         <div class="form-group" ng-class="{'has-error': taskForm.name.$invalid}">
-            <label for="name" class="control-label">Name</label>
-            <input ng-model="taskEditorCtrl.task.name"
-                   class="form-control"
-                   name="name"
-                   required
-                   type="text"
-                   id="name"
-                   placeholder="Task Name">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="name" class="control-label">Name</label>
+                    <input ng-model="taskEditorCtrl.task.name"
+                           class="form-control"
+                           name="name"
+                           required
+                           type="text"
+                           id="name"
+                           placeholder="Task Name">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input bs-switch
+                   ng-change="taskEditorCtrl.toggleIsMilestone()"
+                   ng-model="taskEditorCtrl.task.isMilestone"
+                   type="checkbox"
+                   switch-label="Melistone"
+                   switch-active="true"
+                   switch-on-text="YES"
+                   switch-off-text="NO"
+                   switch-on-color="success"
+                   switch-off-color="default">
+
+            <span ng-show="taskEditorCtrl.task.isMilestone">
+                <input bs-switch
+                   ng-change="taskEditorCtrl.task.toggleAsMilestone()"
+                   ng-model="taskEditorCtrl.task.isCompleted"
+                   type="checkbox"
+                   switch-label="Passed"
+                   switch-active="true"
+                   switch-on-text="YES"
+                   switch-off-text="NO"
+                   switch-on-color="success"
+                   switch-off-color="danger">
+            </span>
         </div>
 
         <div class="form-group" ng-class="{'has-error':taskForm.$error.datesOrder}">
@@ -25,7 +55,9 @@
                            required
                            id="start">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6"
+                     ng-hide="taskEditorCtrl.task.isMilestone">
+
                     <label class="control-label" for="end">End date</label>
                     <input ng-model="taskEditorCtrl.task._end"
                            class="form-control"
@@ -49,7 +81,10 @@
             </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': taskForm.percentComplete.$invalid}">
+        <div class="form-group"
+             ng-class="{'has-error': taskForm.percentComplete.$invalid}"
+             ng-hide="taskEditorCtrl.task.isMilestone">
+
             <div class="row">
                 <div class="col-md-3">
                     <label for="percentage-complete" class="control-label">% complete</label>
@@ -63,34 +98,15 @@
                            id="percentage-complete">
                 </div>
                 <div class="col-md-9">
-                    <label for="is-milestone" class="control-label">
-                        <input type="checkbox"
-                               name="isMilestone"
-                               id="is-milestone" ng-model="taskEditorCtrl.task.isMilestone"
-                               ng-change="taskEditorCtrl.setAsMilestone()">
-                        Milestone
-                    </label>
-
+                    <label for="percentage-complete-range" class="control-label"></label>
                     <input type="range"
+                           id="percentage-complete-range"
                            name="percentComplete"
                            min="0"
                            max="100"
                            step="1"
                            string-to-number
-                           ng-hide="taskEditorCtrl.task.isMilestone"
                            ng-model="taskEditorCtrl.task.percentComplete">
-
-                    <label for="is-milestone"
-                           ng-show="taskEditorCtrl.task.isMilestone"
-                           class="control-label">
-
-                        <input type="checkbox"
-                               name="milestone-status"
-                               ng-click="taskEditorCtrl.toggleAsMilestone()">
-                        Passed
-                    </label>
-
-
                 </div>
             </div>
         </div>

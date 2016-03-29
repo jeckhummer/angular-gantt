@@ -29,7 +29,6 @@
                 task.startMoment = DateService.createMoment(task.start);
                 task.startDate = DateService.createDate(dateStr);
                 calcDateInterval();
-                calcIsMilestone();
             }
 
             function setEndDate(dateStr) {
@@ -37,7 +36,6 @@
                 task.endMoment = DateService.createMoment(task.end);
                 task.endDate = DateService.createDate(dateStr);
                 calcDateInterval();
-                calcIsMilestone();
             }
 
             function setPercentComplete(val){

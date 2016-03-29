@@ -24,9 +24,9 @@
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
+                ctrl.isMilestone = task.isMilestone;
                 ctrl.isParent = task.parentID == 0;
-                ctrl.isMilestone = task.dateInterval.days == 1;
-                ctrl.isCompleted = task.percentComplete == 100;
+                ctrl.isCompleted = task.isCompleted;
                 ctrl.percentComplete = task.percentComplete;
                 ctrl.dateInterval = task.dateInterval;
                 initPosition(ctrl);

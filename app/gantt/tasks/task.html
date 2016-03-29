@@ -5,6 +5,14 @@
     <div dialog-trigger="task-editor" dialog-argument="task.id">
         <timeline-stripes></timeline-stripes>
 
+        <div ng-show="taskCtrl.hasBaseline">
+            <div ng-show="!taskCtrl.isMilestone" class="baseline"
+                 style="margin-left: {{taskCtrl.baseline.position.left}}%; width:{{taskCtrl.baseline.position.width}}%"></div>
+            <div ng-show="taskCtrl.isMilestone"
+                 class="rhombus baseline-rhombus"
+                 style="margin-left: {{taskCtrl.baseline.position.left}}%;"></div>
+        </div>
+
         <div class="task_line_wrapper"
              style="margin-left: {{taskCtrl.position.left}}%; width: {{taskCtrl.position.width}}%">
 
@@ -29,8 +37,5 @@
                 <div ng-show="taskCtrl.isParent" class="parent_indicator"></div>
             </div>
         </div>
-
-        <div ng-hide="taskCtrl.isMilestone || !taskCtrl.hasBaseline" class="baseline"
-             style="margin-left: {{taskCtrl.baseline.position.left}}%; width:{{taskCtrl.baseline.position.width}}%"></div>
     </div>
 </div>

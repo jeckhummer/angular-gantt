@@ -24,11 +24,12 @@
                    ng-change="taskEditorCtrl.toggleIsMilestone()"
                    ng-model="taskEditorCtrl.task.isMilestone"
                    type="checkbox"
+                   switch-size="small"
                    switch-label="Melistone"
                    switch-active="true"
                    switch-on-text="YES"
                    switch-off-text="NO"
-                   switch-on-color="success"
+                   switch-on-color="primary"
                    switch-off-color="default">
 
             <span ng-show="taskEditorCtrl.task.isMilestone">
@@ -36,6 +37,7 @@
                    ng-change="taskEditorCtrl.task.toggleAsMilestone()"
                    ng-model="taskEditorCtrl.task.isCompleted"
                    type="checkbox"
+                   switch-size="small"
                    switch-label="Passed"
                    switch-active="true"
                    switch-on-text="YES"

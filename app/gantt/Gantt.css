@@ -133,6 +133,12 @@
     transform: rotate(45deg);
 }
 
+.gantt_block .baseline-rhombus{
+    background-color: grey;
+    position: absolute;
+    top: 24px;
+}
+
 .gantt_block .done_green {
     background-color: #6DC36D;
 }

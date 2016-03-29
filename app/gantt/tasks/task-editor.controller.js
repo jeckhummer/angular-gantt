@@ -26,7 +26,8 @@
                     parentID: 0,
                     percentComplete: 0
                 });
-                initTaskDates(today, today);
+                editor.task.setStartDate(today);
+                editor.task.setEndDate(today);
             }else{
                 editor.task = GanttTasksService.getTask(taskID).clone();
             }
@@ -35,11 +36,6 @@
             editor.task._end = editor.task.endDate;
 
             backupTaskEndDate();
-        }
-
-        function initTaskDates(startDate, endDate){
-            editor.task.setStartDate(startDate);
-            editor.task.setEndDate(endDate);
         }
 
         function addTask(){
@@ -61,7 +57,9 @@
         }
 
         function submit(){
-            initTaskDates(editor.task._start, editor.task._end);
+            editor.task.setStartDate(editor.task._start);
+            editor.task.setEndDate(editor.task.isMilestone ? editor.task._start : editor.task._end);
+
             var isValidDateOrder = validateDatesOrder();
             $scope.taskForm.$error.datesOrder = !isValidDateOrder;
 
@@ -72,11 +70,8 @@
         }
 
         function validateDatesOrder(){
-            return getDaysBetween() >= 0;
-        }
-
-        function getDaysBetween(){
-            return editor.task.dateInterval.days;
+            console.log(editor.task.dateInterval.days);
+            return editor.task.isMilestone || editor.task.dateInterval.days > 0;
         }
 
         function swapDates(){

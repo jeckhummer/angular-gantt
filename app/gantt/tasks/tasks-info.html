@@ -19,15 +19,27 @@
             <div>
                 <date-interval start="taskCtrl.start"
                                end="taskCtrl.end"
-                               class="date_label"></date-interval>
+                               class="date_label"
+                               is-milestone="taskCtrl.isMilestone"></date-interval>
+
                 <span ng-show="taskCtrl.hasBaseline">
-                     |
-                    <date-interval start="taskCtrl.baseline.dateInterval.start"
+                     | <date-interval start="taskCtrl.baseline.dateInterval.start"
                                    end="taskCtrl.baseline.dateInterval.end"
-                                   class="date_label baseline_date_label"></date-interval>
+                                   class="date_label baseline_date_label"
+                                   is-milestone="taskCtrl.isMilestone"></date-interval>
                 </span>
-                <span class="label label-success pull-right" style="margin-top:3px;">
-                    {{taskCtrl.percentComplete}}%
+                <span class="label pull-right"
+                      ng-class="{
+                        'label-success': taskCtrl.isCompleted,
+                        'label-info': taskCtrl.percentComplete >= 66 && taskCtrl.percentComplete < 100,
+                        'label-warning': taskCtrl.percentComplete >= 33 && taskCtrl.percentComplete < 66,
+                        'label-danger': taskCtrl.percentComplete < 33
+                      }"
+                      style="margin-top:3px; width:35px;">
+                    <span ng-hide="taskCtrl.isMilestone">{{taskCtrl.percentComplete}}%</span>
+                    <span ng-show="taskCtrl.isMilestone">
+                        <span class="glyphicon glyphicon-{{taskCtrl.isCompleted ? 'ok' : 'remove'}}" aria-hidden="true"></span>
+                    </span>
                 </span>
             </div>
 

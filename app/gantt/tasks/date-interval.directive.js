@@ -9,9 +9,10 @@
             scope: {
                 startStr: '=start',
                 endStr: '=end',
+                isMilestone: '=',
                 lineBreak: '@'
             },
-            template: '{{start}} <span ng-bind-html="separator"></span> {{end}}',
+            template: '{{start}} <span ng-hide="isMilestone"> <span ng-bind-html="separator"></span> {{end}}</span>',
             link: link
         };
         return directive;

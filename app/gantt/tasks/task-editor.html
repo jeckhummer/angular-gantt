@@ -20,6 +20,39 @@
         </div>
 
         <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label" for="parent-id">Parent Task</label>
+
+                    <span class="glyphicon pull-right glyphicon-remove"
+                          aria-hidden="true"
+                          ng-click="taskEditorCtrl.parentTaskFilter = ''"
+                          style="color:#CCC; cursor:pointer; padding: 3px 3px 0 3px;"></span>
+
+                    <input ng-model="taskEditorCtrl.pare.ntTaskFilter"
+                           type="search"
+                           class="pull-right text-right bottom-line-input"
+                           placeholder="Filter"
+                           style="width:200px;">
+
+                    <select
+                        name="parent-id"
+                        class="form-control"
+                        id="parent-id"
+                        ng-options="task.id as task.name
+                        for task in taskEditorCtrl.parentTasks
+                        | filter: taskEditorCtrl.parentTasksPredicate
+                        | filter: {name: taskEditorCtrl.parentTaskFilter}"
+                        ng-model="taskEditorCtrl.task.parentID">
+                            <option value="">--</option>
+                    </select>
+                    <!--ID: {{taskEditorCtrl.task.id}} <br/>-->
+                    <!--PID: {{taskEditorCtrl.task.parentID}}-->
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <input bs-switch
                    ng-change="taskEditorCtrl.toggleIsMilestone()"
                    ng-model="taskEditorCtrl.task.isMilestone"
@@ -34,16 +67,16 @@
 
             <span ng-show="taskEditorCtrl.task.isMilestone">
                 <input bs-switch
-                   ng-change="taskEditorCtrl.task.toggleAsMilestone()"
-                   ng-model="taskEditorCtrl.task.isCompleted"
-                   type="checkbox"
-                   switch-size="small"
-                   switch-label="Passed"
-                   switch-active="true"
-                   switch-on-text="YES"
-                   switch-off-text="NO"
-                   switch-on-color="success"
-                   switch-off-color="danger">
+                       ng-change="taskEditorCtrl.task.toggleAsMilestone()"
+                       ng-model="taskEditorCtrl.task.isCompleted"
+                       type="checkbox"
+                       switch-size="small"
+                       switch-label="Passed"
+                       switch-active="true"
+                       switch-on-text="YES"
+                       switch-off-text="NO"
+                       switch-on-color="success"
+                       switch-off-color="danger">
             </span>
         </div>
 
@@ -114,11 +147,11 @@
         </div>
 
         <!--<div class="form-group">-->
-            <!--<div class="row">-->
-                <!--<div class="col-md-12">-->
-                    <!---->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+        <!---->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div class="text-right">

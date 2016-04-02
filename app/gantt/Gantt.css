@@ -245,3 +245,10 @@ button.list-group-item:focus{
     border-bottom:0 !important;
     padding: 13px;
 }
+
+.bottom-line-input{
+    border: 0;
+    border-bottom: 1px solid #CCC;
+    outline: 0;
+    padding: 0 2px;
+}

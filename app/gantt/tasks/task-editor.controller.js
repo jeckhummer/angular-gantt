@@ -1,45 +1,54 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
-        var editor = this;
+    function TaskEditorController($scope, $filter, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
+        var ctrl = this;
         var today = new Date();
         var taskEndDateBackup;
 
-        editor.addTask = addTask;
-        editor.updateTask = updateTask;
-        editor.submit = submit;
-        editor.swapDates = swapDates;
-        editor.toggleIsMilestone = toggleIsMilestone;
+        ctrl.addTask = addTask;
+        ctrl.updateTask = updateTask;
+        ctrl.submit = submit;
+        ctrl.swapDates = swapDates;
+        ctrl.toggleIsMilestone = toggleIsMilestone;
+        ctrl.parentTasksPredicate = parentTasksPredicate;
 
-        $scope.$on('task-editor-opened', init);
+        $scope.$on('task-editor-opened', initTask);
+        $scope.$on('task-editor-opened', initParentTasks);
 
         $("#is-milestone").bootstrapSwitch();
 
-        function init(event, taskID){
-            editor.editMode = taskID != null;
+        function initParentTasks(){
+            ctrl.parentTasks =  GanttTasksService.getAll();
+        }
 
-            if(!editor.editMode){
+        function parentTasksPredicate(value){
+            return value.id != ctrl.task.id;
+        }
+        function initTask(event, taskID){
+            ctrl.editMode = taskID != null;
+
+            if(!ctrl.editMode){
                 var today = new Date();
-                editor.task = GanttTaskFactoryService.create({
+                ctrl.task = GanttTaskFactoryService.create({
                     name: 'New Task',
                     parentID: 0,
                     percentComplete: 0
                 });
-                editor.task.setStartDate(today);
-                editor.task.setEndDate(today);
+                ctrl.task.setStartDate(today);
+                ctrl.task.setEndDate(today);
             }else{
-                editor.task = GanttTasksService.getTask(taskID).clone();
+                ctrl.task = GanttTasksService.getTask(taskID).clone();
             }
 
-            editor.task._start = editor.task.startDate;
-            editor.task._end = editor.task.endDate;
+            ctrl.task._start = ctrl.task.startDate;
+            ctrl.task._end = ctrl.task.endDate;
 
             backupTaskEndDate();
         }
 
         function addTask(){
-            var promise = GanttTasksService.addTask(editor.task);
+            var promise = GanttTasksService.addTask(ctrl.task);
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
@@ -48,7 +57,7 @@
         }
 
         function updateTask(){
-            var promise = GanttTasksService.updateTask(editor.task);
+            var promise = GanttTasksService.updateTask(ctrl.task);
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
@@ -57,45 +66,45 @@
         }
 
         function submit(){
-            editor.task.setStartDate(editor.task._start);
-            editor.task.setEndDate(editor.task.isMilestone ? editor.task._start : editor.task._end);
+            ctrl.task.setStartDate(ctrl.task._start);
+            ctrl.task.setEndDate(ctrl.task.isMilestone ? ctrl.task._start : ctrl.task._end);
 
             var isValidDateOrder = validateDatesOrder();
             $scope.taskForm.$error.datesOrder = !isValidDateOrder;
 
             if(isValidDateOrder) {
-                editor.editMode ? editor.updateTask() : editor.addTask();
+                ctrl.editMode ? ctrl.updateTask() : ctrl.addTask();
                 DialogService.toggleDialog('task-editor');
             }
         }
 
         function validateDatesOrder(){
-            console.log(editor.task.dateInterval.days);
-            return editor.task.isMilestone || editor.task.dateInterval.days > 0;
+            console.log(ctrl.task.dateInterval.days);
+            return ctrl.task.isMilestone || ctrl.task.dateInterval.days > 0;
         }
 
         function swapDates(){
-            var tmp = editor.task._start;
-            editor.task._start = editor.task._end;
-            editor.task._end = tmp;
+            var tmp = ctrl.task._start;
+            ctrl.task._start = ctrl.task._end;
+            ctrl.task._end = tmp;
             $scope.taskForm.$error.datesOrder = validateDatesOrder();
         }
 
         function toggleIsMilestone(){
-            if(!editor.task.isMilestone){
+            if(!ctrl.task.isMilestone){
                 restoreTaskEndDate();
             }else{
                 backupTaskEndDate();
-                editor.task._end = editor.task._start;
+                ctrl.task._end = ctrl.task._start;
             }
         }
 
         function backupTaskEndDate(){
-            taskEndDateBackup = editor.task._end;
+            taskEndDateBackup = ctrl.task._end;
         }
 
         function restoreTaskEndDate(){
-            if(taskEndDateBackup) editor.task._end = taskEndDateBackup;
+            if(taskEndDateBackup) ctrl.task._end = taskEndDateBackup;
         }
 
         // TODO: milestone

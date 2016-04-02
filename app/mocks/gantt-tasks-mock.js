@@ -3,11 +3,11 @@
 
     function getGanttTasksMock() {
         var tasks = [
-            { id: 1, name: "Task 1", start: "2015-12-20", end: "2016-11-10", parentID: 0, percentComplete: 66, isMilestone: false},
+            { id: 1, name: "Task 1", start: "2015-12-20", end: "2016-11-10", parentID: null, percentComplete: 66, isMilestone: false},
             { id: 2, name: "SubTask A", start: "2015-12-20", end: "2016-04-01", parentID: 1, percentComplete: 100, isMilestone: false},
             { id: 3, name: "SubTask B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false},
             { id: 4, name: "SubTask C", start: "2016-08-16", end: "2016-11-10", parentID: 1, percentComplete: 11, isMilestone: false},
-            { id: 5, name: "Task 2", start: "2016-05-22", end: "2016-12-02", parentID: 0, percentComplete: 50, isMilestone: false},
+            { id: 5, name: "Task 2", start: "2016-05-22", end: "2016-12-02", parentID: null, percentComplete: 50, isMilestone: false},
             { id: 6, name: "Sub Milestone A long name bla bla bla", start: "2016-05-22", end: "2016-05-22", parentID: 5, percentComplete: 100, isMilestone: true},
             { id: 7, name: "SubTask A", start: "2016-05-22", end: "2016-06-29", parentID: 5, percentComplete: 33, isMilestone: false},
             { id: 8, name: "SubTask B", start: "2016-06-29", end: "2016-11-10", parentID: 5, percentComplete: 39, isMilestone: false},

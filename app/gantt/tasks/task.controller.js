@@ -1,11 +1,12 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService){
+    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService, GanttOptionsService){
         var ctrl = this;
         ctrl.editTask = editTask;
         ctrl.moveTaskUp = moveTaskUp;
         ctrl.moveTaskDown = moveTaskDown;
+        ctrl.indent = GanttOptionsService.indentOptions;
 
         //init($scope.$parent.task);
 
@@ -27,6 +28,7 @@
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
+                ctrl.nestingDepth = task.nestingDepth;
                 ctrl.isMilestone = task.isMilestone;
                 ctrl.isLastTaskWithinSiblings = GanttTasksService.isLastTaskWithinSiblings(task.id);
                 ctrl.isFirstTaskWithinSiblings = GanttTasksService.isFirstTaskWithinSiblings(task.id);

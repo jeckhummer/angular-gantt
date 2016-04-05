@@ -12,7 +12,8 @@
              data-toggle="context"
              data-target="#context-menu">
 
-            <div class="pull-left btn-group-vertical btn-group-xs">
+            <div class="pull-left btn-group-vertical btn-group-xs"
+                 style="margin-right: {{5 + taskCtrl.indent.getValue() * taskCtrl.nestingDepth}}px">
                 <button class="btn btn-default"
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isFirstTaskWithinSiblings}"
@@ -27,8 +28,8 @@
                 </button>
             </div>
 
-            <div class="task_name text-left">
-                {{taskCtrl.name}} - {{taskCtrl.order}}
+            <div class="task_name text-left" style="">
+                {{taskCtrl.name}} | ord: {{taskCtrl.order}} ind: {{taskCtrl.nestingDepth}}
             </div>
             <div>
                 <date-interval start="taskCtrl.start"

@@ -39,4 +39,19 @@
             <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
         </button>
     </div>
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-class="{'disabled': cntxtActCtrl.indent.isMin()}"
+                ng-click="cntxtActCtrl.indent.dec()">
+            <span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span>
+        </button>
+        <button type="button"
+                class="btn btn-xs btn-default"
+                ng-class="{'disabled': cntxtActCtrl.indent.isMax()}"
+                ng-click="cntxtActCtrl.indent.inc()">
+            <span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span>
+        </button>
+    </div>
 </div>

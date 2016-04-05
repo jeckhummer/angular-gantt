@@ -65,12 +65,6 @@
             return data;
         }
 
-        function addTask(data) {
-            data.id = newID;
-            addTaskLocally([data]);
-            return GanttDataHTTPService.saveTask(data);
-        }
-
         function deleteTask(id) {
             tasks.forEach((task, i)=> {
                 if (task.id == id) tasks.splice(i, 1);
@@ -78,11 +72,21 @@
             onTaskChanges();
         }
 
+        function addTask(data) {
+            data.id = newID;
+            addTaskLocally([data]);
+            return GanttDataHTTPService.saveTask(data);
+        }
+
         function addTaskLocally(data) {
             data = angular.isArray(data) ? data : [data];
 
             angular.forEach(data, function (taskData) {
                 var task = GanttTaskFactoryService.create(taskData);
+                var siblings = _getSubTasks(taskData.parentID);
+                var order = taskData.order ? taskData.order : _getOrderBoundaries(siblings).max + 1;
+
+                task.order = order;
                 tasks.push(task);
 
                 if (newID <= task.id) newID = task.id + 1;
@@ -102,24 +106,29 @@
 
             var parentChanged = data.parentID != task.parentID;
             if (parentChanged) {
-                var subs = _getSubTasks(data.parentID);
-                var order;
-
-                var strategy = GanttOptionsService.getTaskMovementStrategy();
-                if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.APPEND) {
-                    order = _getOrderBoundaries(subs).max + 1;
-                } else
-                if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.PREPEND) {
-                    angular.forEach(subs, function(subTask){
-                        subTask.order++;
-                    });
-                    order = 1;
-                }
+                var order = _moveTasksAndGetNewOrderIndex(data.parentID);
                 data.order = order;
             }
 
             tasks[index] = data;
             onTaskChanges();
+        }
+
+        function _moveTasksAndGetNewOrderIndex(parentID){
+            var subs = _getSubTasks(parentID);
+            var order;
+
+            var strategy = GanttOptionsService.getTaskMovementStrategy();
+            if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.APPEND) {
+                order = _getOrderBoundaries(subs).max + 1;
+            } else
+            if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.PREPEND) {
+                angular.forEach(subs, function(subTask){
+                    subTask.order++;
+                });
+                order = 1;
+            }
+            return order;
         }
 
         function onTaskChanges() {
@@ -159,20 +168,27 @@
         function _orderTasks() {
             var sortedTasks = [];
             var initLevel = getHighLevelTasks();
+            var nestingDepth = -1;
 
-            _orderRecursive(initLevel);
+            _sortRecursive(initLevel);
 
-            function _orderRecursive(tasksLevel) {
+            function _sortRecursive(tasksLevel) {
+                nestingDepth++;
                 _sortTasksByOrder(tasksLevel);
 
                 angular.forEach(tasksLevel, function (task) {
-                    sortedTasks = sortedTasks.concat(task);
+                    task.nestingDepth = nestingDepth;
+                    sortedTasks.push(task);
+                    //angular.forEach(sortedTasks, function (task) {
+                    //    task.nestingDepth = ;
+                    //});
 
                     var subTasks = _getSubTasks(task.id);
                     if (subTasks.length) {
-                        _orderRecursive(subTasks);
+                        _sortRecursive(subTasks);
                     }
                 });
+                nestingDepth--;
             }
 
             tasks = sortedTasks;
@@ -222,8 +238,8 @@
         }
 
         function _getOrderBoundaries(tasks){
-            var max = 1;
-            var min = 1;
+            var max = 0;
+            var min = 0;
 
             angular.forEach(tasks, function (sibling) {
                 var order = sibling.order;

@@ -14,6 +14,7 @@
         ctrl.zoomOut = zoomOut;
         ctrl.isMaxZoom = isMaxZoom;
         ctrl.isMinZoom = isMinZoom;
+        ctrl.indent = GanttOptionsService.indentOptions;
 
         function selectAll() {
             TaskClickService.selectAll();

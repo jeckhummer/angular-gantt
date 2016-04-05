@@ -3,6 +3,8 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
+        var indentOptions = new GradientOption(0, 50, 5, 45);
+
         var INFO_BLOCK_MIN_WIDTH = 30;
         var INFO_BLOCK_MAX_WIDTH = 50;
         var WIDTH_STEP = 1;
@@ -16,9 +18,15 @@
             'PREPEND': 1
         };
 
+        var DEFAULT_INDENT_WIDTH = 15;
+        var INDENT_WIDTH_MAX = 50;
+        var INDENT_WIDTH_MIN = 0;
+        var INDENT_WIDTH_STEP = 5;
+
         var infoBlockWidth = INFO_BLOCK_MIN_WIDTH;
         var zoom = ZOOM_MIN;
         var taskMovementStrategy = TASK_MOVEMENT_STRATEGIES.PREPEND;
+        var indentWidth = DEFAULT_INDENT_WIDTH;
 
         var service = {
             getInfoBlockWidth: getInfoBlockWidth,
@@ -32,7 +40,8 @@
             isMaxZoom: isMaxZoom,
             isMinZoom: isMinZoom,
             getTaskMovementStrategy: getTaskMovementStrategy,
-            TASK_MOVEMENT_STRATEGIES: TASK_MOVEMENT_STRATEGIES
+            TASK_MOVEMENT_STRATEGIES: TASK_MOVEMENT_STRATEGIES,
+            indentOptions: indentOptions
         };
         return service;
 

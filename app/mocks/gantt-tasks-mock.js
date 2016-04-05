@@ -10,8 +10,9 @@
             { id: 8, name: "SubTask B", start: "2016-06-29", end: "2016-11-10", parentID: 5, percentComplete: 39, isMilestone: false, order:3},
             { id: 10, name: "SMS B", start: "2016-12-01", end: "2016-12-01", parentID: 5, percentComplete: 0, isMilestone: true, order:5},
             { id: 1, name: "Task 1", start: "2015-12-20", end: "2016-11-10", parentID: null, percentComplete: 66, isMilestone: false, order: 1},
-            { id: 2, name: "SubTask A", start: "2015-12-20", end: "2016-04-01", parentID: 1, percentComplete: 100, isMilestone: false, order: 1},
-            { id: 4, name: "SubTask C", start: "2016-08-16", end: "2016-11-10", parentID: 1, percentComplete: 11, isMilestone: false, order: 3},
+            { id: 2, name: "SubTask A", start: "2015-12-20", end: "2016-04-01", parentID: 1, percentComplete: 55, isMilestone: false, order: 1},
+            { id: 11, name: "SubTask AA", start: "2015-12-25", end: "2016-03-15", parentID: 2, percentComplete: 55, isMilestone: false, order: 1},
+            { id: 4, name: "SubTask C", start: "2016-08-16", end: "2016-11-10", parentID: 1, percentComplete: 100, isMilestone: false, order: 3},
             { id: 3, name: "SubTask B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
         ];
 

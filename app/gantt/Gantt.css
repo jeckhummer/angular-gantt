@@ -91,6 +91,10 @@
     position: relative;
 }
 
+.task_wrapper:hover {
+    background-color: #F1F1F1 !important;
+}
+
 .gantt_block .task_name {
     text-overflow: ellipsis;
     overflow: hidden;

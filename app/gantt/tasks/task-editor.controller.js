@@ -12,6 +12,7 @@
         ctrl.swapDates = swapDates;
         ctrl.toggleIsMilestone = toggleIsMilestone;
         ctrl.parentTasksPredicate = parentTasksPredicate;
+        ctrl.moveTaskToBegining = moveTaskToBegining;
 
         $scope.$on('task-editor-opened', initTask);
         $scope.$on('task-editor-opened', initParentTasks);
@@ -80,7 +81,6 @@
         }
 
         function validateDatesOrder(){
-            console.log(ctrl.task.dateInterval.days);
             return ctrl.task.isMilestone || ctrl.task.dateInterval.days > 0;
         }
 
@@ -106,6 +106,10 @@
 
         function restoreTaskEndDate(){
             if(taskEndDateBackup) ctrl.task._end = taskEndDateBackup;
+        }
+
+        function moveTaskToBegining(id){
+            GanttTasksService.moveTaskToBegining(id);
         }
 
         // TODO: milestone

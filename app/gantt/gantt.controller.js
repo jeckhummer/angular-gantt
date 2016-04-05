@@ -16,6 +16,7 @@
 
         function TasksDataChangesHandler(){
             ganttCtrl.tasks = GanttTasksService.getAll();
+            ganttCtrl.taskIDs = GanttTasksService.getTasksIDs();
             ganttCtrl.isEmpty = GanttTasksService.isEmpty();
             dataDefer.resolve();
         }

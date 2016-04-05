@@ -51,10 +51,6 @@
                 task.isCompleted = task.percentComplete == 100;
             }
 
-            function calcIsMilestone(){
-                task.isMilestone = task.dateInterval && task.dateInterval.days == 1;
-            }
-
             function calcDateInterval() {
                 if (task.startMoment && task.endMoment)
                     task.dateInterval = DateService.createDateInterval(task.startMoment, task.endMoment);

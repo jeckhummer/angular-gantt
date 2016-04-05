@@ -49,6 +49,10 @@ angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
             'tasks-changed'
         ]);
 
+        TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
+            $injector.get('GanttDataHTTPService')
+        );
+
         TimelineServiceProvider.configureCalculateBoundariesMethod(($injector)=>{
             var GanttTasksService = $injector.get('GanttTasksService');
             var GanttBaselinesService = $injector.get('GanttBaselinesService');
@@ -76,9 +80,5 @@ angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
 
             return boundaries;
         });
-
-        TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
-            $injector.get('GanttDataHTTPService')
-        );
     }
 })();

@@ -1,7 +1,7 @@
 <div ng-repeat="task in ganttCtrl.tasks"
      ng-controller="TaskController as taskCtrl">
 
-    <div dialog-trigger="task-editor" dialog-argument="task.id" style="cursor: pointer">
+    <div dialog-trigger="task-editor" dialog-argument="taskCtrl.id" style="cursor: pointer">
 
         <div ng-controller="TaskClickController as clickCtrl"
              ng-click="clickCtrl.onClick($event, task.id)"
@@ -12,8 +12,23 @@
              data-toggle="context"
              data-target="#context-menu">
 
+            <div class="pull-left btn-group-vertical btn-group-xs">
+                <button class="btn btn-default"
+                        style="font-size:11px;"
+                        ng-class="{'disabled': taskCtrl.isFirstTaskWithinSiblings}"
+                        ng-click="taskCtrl.moveTaskUp(taskCtrl.id, $event)">
+                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-default"
+                        style="font-size:11px;"
+                        ng-class="{'disabled': taskCtrl.isLastTaskWithinSiblings}"
+                        ng-click="taskCtrl.moveTaskDown(taskCtrl.id, $event)">
+                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                </button>
+            </div>
+
             <div class="task_name text-left">
-                {{taskCtrl.name}}
+                {{taskCtrl.name}} - {{taskCtrl.order}}
             </div>
             <div>
                 <date-interval start="taskCtrl.start"

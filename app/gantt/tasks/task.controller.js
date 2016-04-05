@@ -1,11 +1,13 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService){
+    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService){
         var ctrl = this;
         ctrl.editTask = editTask;
+        ctrl.moveTaskUp = moveTaskUp;
+        ctrl.moveTaskDown = moveTaskDown;
 
-        init($scope.$parent.task);
+        //init($scope.$parent.task);
 
         $scope.$watchCollection('$parent.task', init);
 
@@ -21,11 +23,14 @@
         function init(task){
             if(task){
                 ctrl.id = task.id;
+                ctrl.order = task.order;
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
                 ctrl.isMilestone = task.isMilestone;
-                ctrl.isParent = task.parentID == 0;
+                ctrl.isLastTaskWithinSiblings = GanttTasksService.isLastTaskWithinSiblings(task.id);
+                ctrl.isFirstTaskWithinSiblings = GanttTasksService.isFirstTaskWithinSiblings(task.id);
+                ctrl.isParent = task.isParent;
                 ctrl.isCompleted = task.isCompleted;
                 ctrl.percentComplete = task.percentComplete;
                 ctrl.dateInterval = task.dateInterval;
@@ -55,6 +60,20 @@
                 task.closerToEnd =
                     (100 - task.position.left - task.position.width) < +task.position.left;
             }
+        }
+
+        function moveTaskUp(id, event){
+            GanttTasksService.moveTaskUp(id);
+            event.stopPropagation();
+        }
+
+        function moveTaskDown(id, event){
+            GanttTasksService.moveTaskDown(id);
+            event.stopPropagation();
+        }
+
+        function isLastTaskWithinSiblings(){
+
         }
     }
 })();

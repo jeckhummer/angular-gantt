@@ -3,7 +3,7 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
-        var INFO_BLOCK_MIN_WIDTH = 28;
+        var INFO_BLOCK_MIN_WIDTH = 30;
         var INFO_BLOCK_MAX_WIDTH = 50;
         var WIDTH_STEP = 1;
 
@@ -11,8 +11,14 @@
         var ZOOM_MIN = 100;
         var ZOOM_STEP = 50;
 
+        var TASK_MOVEMENT_STRATEGIES = {
+            'APPEND': 0,
+            'PREPEND': 1
+        };
+
         var infoBlockWidth = INFO_BLOCK_MIN_WIDTH;
         var zoom = ZOOM_MIN;
+        var taskMovementStrategy = TASK_MOVEMENT_STRATEGIES.PREPEND;
 
         var service = {
             getInfoBlockWidth: getInfoBlockWidth,
@@ -24,7 +30,9 @@
             zoomIn: zoomIn,
             zoomOut: zoomOut,
             isMaxZoom: isMaxZoom,
-            isMinZoom: isMinZoom
+            isMinZoom: isMinZoom,
+            getTaskMovementStrategy: getTaskMovementStrategy,
+            TASK_MOVEMENT_STRATEGIES: TASK_MOVEMENT_STRATEGIES
         };
         return service;
 
@@ -66,6 +74,10 @@
 
         function isMinZoom(){
             return zoom == ZOOM_MIN;
+        }
+
+        function getTaskMovementStrategy(){
+            return taskMovementStrategy;
         }
     }
 })();

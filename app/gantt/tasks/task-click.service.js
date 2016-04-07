@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('TaskClickService', TaskClickService);
 
-    function TaskClickService(GanttTasksService) {
+    function TaskClickService(GanttTasksService, $rootScope) {
         var tasksSelectionMap = {};
         var selectedTasksCount = 0;
         var lastRightClicked = null;
@@ -24,6 +24,7 @@
         return service;
 
         function init() {
+            $rootScope.$on('gantt-reloaded', unselectAll);
         }
 
         function toggleTask(id) {

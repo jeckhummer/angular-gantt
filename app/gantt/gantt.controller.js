@@ -11,7 +11,6 @@
         ganttCtrl.getZoom = getZoom;
         ganttCtrl.isZoomed = isZoomed;
         ganttCtrl.infoBlockWidth = GanttOptionsService.infoBlockWidthOptions;
-        console.log(ganttCtrl.infoBlockWidthOptions);
 
         $scope.$on('tasks-changed', TasksDataChangesHandler);
         $rootScope.$broadcast('notify-fade', 'Loading tasks ...', dataDefer.promise);

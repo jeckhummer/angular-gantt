@@ -1,5 +1,9 @@
 <!--TABS-->
-<div class="btn-group btn-group-sm tabs" role="group" aria-label="tabs">
+<div ng-controller="TabsController as tabsCtrl" class="btn-group btn-group-sm tabs" role="group" aria-label="tabs">
+    <button ng-click="tabsCtrl.reload()" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+        Reload
+    </button>
     <button dialog-trigger="task-editor" dialog-toggle="true" type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Add Task

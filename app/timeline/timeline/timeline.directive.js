@@ -11,6 +11,8 @@ angular.module('timeline', ['ngSanitize']);
             restrict: 'E',
             scope: true,
             link: function ($scope) {
+                initGrids();
+
                 $scope.$on('timeline-config-changed', initGrids);
                 $scope.$on('boundaries-changed', initGrids);
 

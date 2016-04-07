@@ -19,7 +19,8 @@
             isLastTaskWithinSiblings: isLastTaskWithinSiblings,
             isFirstTaskWithinSiblings: isFirstTaskWithinSiblings,
             moveTaskDown: moveTaskDown,
-            moveTaskUp: moveTaskUp
+            moveTaskUp: moveTaskUp,
+            reload: reload
         };
 
         init();
@@ -30,9 +31,17 @@
         }
 
         function reload() {
-            GanttDataHTTPService.getTasks()
+            var promise = GanttDataHTTPService.getTasks()
                 .then(clearTasks)
-                .then(addTaskLocally);
+                .then(addTaskLocally)
+                .then(_notifyAboutReload);
+
+            $rootScope.$broadcast('notify-fade','Reloading gantt...', promise);
+            return promise;
+        }
+
+        function _notifyAboutReload(){
+            $rootScope.$broadcast('gantt-reloaded');
         }
 
         function getAll() {
@@ -73,9 +82,14 @@
         }
 
         function addTask(data) {
-            data.id = newID;
-            addTaskLocally([data]);
-            return GanttDataHTTPService.saveTask(data);
+            return reload()
+                .then(function () {
+                    data.id = newID;
+                    addTaskLocally([data]);
+                })
+                .then(function () {
+                    return GanttDataHTTPService.saveTask(data);
+                });
         }
 
         function addTaskLocally(data) {
@@ -114,16 +128,15 @@
             onTaskChanges();
         }
 
-        function _moveTasksAndGetNewOrderIndex(parentID){
+        function _moveTasksAndGetNewOrderIndex(parentID) {
             var subs = _getSubTasks(parentID);
             var order;
 
             var strategy = GanttOptionsService.getTaskMovementStrategy();
             if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.APPEND) {
                 order = _getOrderBoundaries(subs).max + 1;
-            } else
-            if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.PREPEND) {
-                angular.forEach(subs, function(subTask){
+            } else if (strategy == GanttOptionsService.TASK_MOVEMENT_STRATEGIES.PREPEND) {
+                angular.forEach(subs, function (subTask) {
                     subTask.order++;
                 });
                 order = 1;
@@ -237,7 +250,7 @@
             }
         }
 
-        function _getOrderBoundaries(tasks){
+        function _getOrderBoundaries(tasks) {
             var max = 0;
             var min = 0;
 

@@ -247,7 +247,7 @@ button.list-group-item:focus{
 .context-actions-bar{
     vertical-align: middle;
     border-bottom:0 !important;
-    padding: 13px;
+    padding: 13px 5px;
 }
 
 .bottom-line-input{

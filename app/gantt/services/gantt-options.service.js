@@ -3,7 +3,13 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
-        var indentOptions = new GradientOption(0, 50, 5, 45);
+        var indentOptions = new GradientOption(0, 50, 5, 15);
+        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 25);
+
+        var options = {
+            indentOptions : indentOptions,
+            infoBlockWidthOptions: infoBlockWidthOptions
+        };
 
         var INFO_BLOCK_MIN_WIDTH = 30;
         var INFO_BLOCK_MAX_WIDTH = 50;
@@ -41,7 +47,8 @@
             isMinZoom: isMinZoom,
             getTaskMovementStrategy: getTaskMovementStrategy,
             TASK_MOVEMENT_STRATEGIES: TASK_MOVEMENT_STRATEGIES,
-            indentOptions: indentOptions
+            indentOptions: options.indentOptions,
+            infoBlockWidthOptions: options.infoBlockWidthOptions
         };
         return service;
 

@@ -28,6 +28,7 @@ var baselines = {
 
 
 // TIMELINE OPTIONS:
+// Options data should be related to a specific user
 //select - you sent array of objects (see below)
 var timelineOptions = [
     {

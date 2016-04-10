@@ -57,12 +57,13 @@
             var promise = _getPromise('saveTask', function () {
                 var index = searchTaskByID(task.id);
                 GanttTasksMock.tasks[index] = task;
+                return GanttTasksMock.saveResponse.success;
             });
 
             function searchTaskByID(id) {
                 var index;
-                for (var i in tasks) {
-                    if (tasks[i].id == id) {
+                for (var i in _tasks) {
+                    if (_tasks[i].id == id) {
                         index = i;
                         break;
                     }
@@ -70,7 +71,7 @@
                 return index;
             }
 
-            return ;
+            return promise;
         }
 
         function getConfig(){

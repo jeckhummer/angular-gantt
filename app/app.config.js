@@ -50,7 +50,7 @@ angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
         ]);
 
         TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
-            $injector.get('GanttDataHTTPService')
+            $injector.get('GanttDataProviderService')
         );
 
         TimelineServiceProvider.configureCalculateBoundariesMethod(($injector)=>{
@@ -81,4 +81,15 @@ angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
             return boundaries;
         });
     }
+})();
+
+(function () {
+    //angular.module('app').config(HttpServiceConfig);
+    //
+    //function HttpServiceConfig(HttpServiceProvider){
+    //
+    //    HttpServiceProvider.setUrlMapping();
+    //}
+    //
+    //function urlMapping
 })();

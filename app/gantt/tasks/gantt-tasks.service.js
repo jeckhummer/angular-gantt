@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('GanttTasksService', GanttTasksService);
 
-    function GanttTasksService(GanttTaskFactoryService, GanttDataHTTPService, GanttOptionsService, $rootScope) {
+    function GanttTasksService(GanttTaskFactoryService, GanttDataProviderService, GanttOptionsService, $rootScope) {
         var tasks = [];
         var newID = 1;
 
@@ -31,7 +31,7 @@
         }
 
         function reload() {
-            var promise = GanttDataHTTPService.getTasks()
+            var promise = GanttDataProviderService.getTasks()
                 .then(clearTasks)
                 .then(addTaskLocally)
                 .then(_notifyAboutReload);
@@ -88,7 +88,7 @@
                     addTaskLocally([data]);
                 })
                 .then(function () {
-                    return GanttDataHTTPService.saveTask(data);
+                    return GanttDataProviderService.saveTask(data);
                 });
         }
 
@@ -99,11 +99,10 @@
                 var task = GanttTaskFactoryService.create(taskData);
                 var siblings = _getSubTasks(taskData.parentID);
                 var order = taskData.order ? taskData.order : _getOrderBoundaries(siblings).max + 1;
-
                 task.order = order;
-                tasks.push(task);
 
                 if (newID <= task.id) newID = task.id + 1;
+                tasks.push(task);
             });
 
             onTaskChanges();
@@ -111,7 +110,7 @@
 
         function updateTask(data) {
             updateTaskLocally(data);
-            return GanttDataHTTPService.saveTask(data);
+            return GanttDataProviderService.saveTask(data);
         }
 
         function updateTaskLocally(data) {
@@ -192,9 +191,6 @@
                 angular.forEach(tasksLevel, function (task) {
                     task.nestingDepth = nestingDepth;
                     sortedTasks.push(task);
-                    //angular.forEach(sortedTasks, function (task) {
-                    //    task.nestingDepth = ;
-                    //});
 
                     var subTasks = _getSubTasks(task.id);
                     if (subTasks.length) {
@@ -259,6 +255,7 @@
                 max = Math.max(order, max);
                 min = Math.min(order, min);
             });
+
             var boundaries = {max: max, min: min};
             return boundaries;
         }

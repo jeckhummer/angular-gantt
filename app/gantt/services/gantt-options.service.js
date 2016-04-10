@@ -3,8 +3,8 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
-        var indentOptions = new GradientOption(0, 50, 5, 15);
-        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 25);
+        var indentOptions = new GradientOption(0, 50, 5, 35);
+        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 30);
 
         var options = {
             indentOptions : indentOptions,

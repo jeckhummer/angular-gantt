@@ -76,7 +76,7 @@
     <script src="gantt/gantt.config.js"></script>
 
     <!--Services-->
-    <script src="gantt/services/gantt-data-http.service.js"></script>
+    <script src="gantt/services/gantt-data-provider.service.js"></script>
     <script src="gantt/tasks/gantt-tasks.service.js"></script>
     <script src="gantt/tasks/gantt-task-factory.service.js"></script>
     <script src="gantt/status-bar/gantt-status-reporter.service.js"></script>
@@ -126,6 +126,8 @@
 
 
 <!--Common-->
+    <script src="common/common.config.js"></script>
+
     <!--Date-->
     <script src="common/date/moment.js"></script>
     <script src="common/date/date-interval.js"></script>
@@ -139,6 +141,7 @@
     <script src="common/ng-right-click.directive.js"></script>
 
     <script src="common/gradient-option.js"></script>
+    <script src="common/url-mapper.js"></script>
 
 <!--Test-->
     <script src="test/test.config.js"></script>
@@ -152,13 +155,14 @@
 <!--Apps-->
     <script src="app.config.js"></script>
 
-<!--Mocks-->
-    <script src="mocks/app-dev.config.js"></script>
-    <script src="mocks/http-mocks.js"></script>
-    <script src="mocks/http-delay-decorator.js"></script>
-    <script src="mocks/gantt-tasks-mock.js"></script>
-    <script src="mocks/gantt-timeline-mock.js"></script>
-    <script src="mocks/gantt-baselines-mock.js"></script>
+<!--Dev-->
+    <script src="dev/app-dev.config.js"></script>
+    <script src="dev/mocks/http-mocks.js"></script>
+    <script src="dev/http-delay-decorator.js"></script>
+    <script src="dev/mocks/gantt-tasks-mock.js"></script>
+    <script src="dev/mocks/gantt-timeline-mock.js"></script>
+    <script src="dev/mocks/gantt-baselines.mock.js"></script>
+    <script src="dev/mocks/gantt-data-provider.service.mock.js"></script>
 
 <script src="common/events-to-console-reflector.js"></script>
 

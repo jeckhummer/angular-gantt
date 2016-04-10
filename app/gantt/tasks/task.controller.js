@@ -8,8 +8,6 @@
         ctrl.moveTaskDown = moveTaskDown;
         ctrl.indent = GanttOptionsService.indentOptions;
 
-        //init($scope.$parent.task);
-
         $scope.$watchCollection('$parent.task', init);
 
         $scope.$on('boundaries-changed', () => initPosition(ctrl));
@@ -72,10 +70,6 @@
         function moveTaskDown(id, event){
             GanttTasksService.moveTaskDown(id);
             event.stopPropagation();
-        }
-
-        function isLastTaskWithinSiblings(){
-
         }
     }
 })();

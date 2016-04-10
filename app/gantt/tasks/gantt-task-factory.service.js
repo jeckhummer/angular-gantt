@@ -1,4 +1,4 @@
-(function () {
+    (function () {
     angular.module('gantt').service('GanttTaskFactoryService', GanttTaskFactoryService);
 
     function GanttTaskFactoryService(DateService) {

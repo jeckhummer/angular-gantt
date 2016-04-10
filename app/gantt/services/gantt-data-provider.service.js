@@ -1,8 +1,8 @@
 'use strict';
 (function () {
-    angular.module('gantt').factory('GanttDataHTTPService', GanttDataHTTPService);
+    angular.module('gantt').factory('GanttDataProviderService', GanttDataProviderService);
 
-    function GanttDataHTTPService(HttpService) {
+    function GanttDataProviderService(HttpService) {
         var service = {
             getTasks: getTasks,
             getConfig: getConfig,

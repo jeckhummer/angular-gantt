@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, $filter, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
+    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
         var ctrl = this;
         var today = new Date();
         var taskEndDateBackup;
@@ -33,7 +33,7 @@
                 var today = new Date();
                 ctrl.task = GanttTaskFactoryService.create({
                     name: 'New Task',
-                    parentID: 0,
+                    parentID: null,
                     percentComplete: 0,
                     isMilestone: false
                 });

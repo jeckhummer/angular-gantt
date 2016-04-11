@@ -1,7 +1,7 @@
 (function () {
-    angular.module('app-dev').value('GanttTasksMock', getGanttTasksMock());
+    angular.module('app-dev').value('GanttTasksTestData', getGanttTasksTestData());
 
-    function getGanttTasksMock() {
+    function getGanttTasksTestData() {
         var tasks = [
             { id: 5, name: "Task 2", start: "2016-05-22", end: "2016-12-02", parentID: null, percentComplete: 50, isMilestone: false, order: 2},
             { id: 6, name: "SMS A", start: "2016-05-22", end: "2016-05-22", parentID: 5, percentComplete: 100, isMilestone: true, order:1},
@@ -19,7 +19,9 @@
         var saveResponse = {
             success: {
                 status: 'success',
-                message: ''
+                message: '',
+                id: 99,
+                order: 1
             },
             error: {
                 status: 'error',

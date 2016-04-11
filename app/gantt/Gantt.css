@@ -260,3 +260,26 @@ button.list-group-item:focus{
 .dialogs{
     display: none;
 }
+
+.processing-lock {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80%;
+    width: 100%;
+}
+
+.processing-lock td {
+    vertical-align: middle;
+}
+
+.processing-lock span{
+    background-color: rgba(255,255,255,0.9);
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    font-size: 15px;
+    padding: 40px;
+}

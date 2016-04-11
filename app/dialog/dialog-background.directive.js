@@ -16,7 +16,7 @@
             var groupName = attrs['dialog-background'];
             var background = angular.element(`
                 <div ng-show="dialogCtrl.isActive()"
-                     ng-click="dialogCtrl.deactivate()"
+                     ng-click="dialogCtrl.onClick()"
                      class="fog-cover container-fluid"></div>
             `);
             $compile(background)(scope);

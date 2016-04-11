@@ -13,7 +13,7 @@
         ctrl.toggleIsMilestone = toggleIsMilestone;
         ctrl.parentTasksPredicate = parentTasksPredicate;
         ctrl.moveTaskToBegining = moveTaskToBegining;
-        ctrl.isActive = DialogService.isActiveDialog('task-editor');
+        ctrl.isLoading = false;
 
         $scope.$on('task-editor-opened', initTask);
         $scope.$on('task-editor-opened', initParentTasks);
@@ -52,20 +52,28 @@
 
         function addTask(){
             var promise = GanttTasksService.addTask(ctrl.task);
+
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
                 'task-editor'
             );
+
+            toggleLoadingAnimation();
+            promise.then(toggleLoadingAnimation);
         }
 
         function updateTask(){
             var promise = GanttTasksService.updateTask(ctrl.task);
+
             GanttStatusReporterService.trackDialog(
                 promise,
                 'Saving task',
                 'task-editor'
             );
+
+            //toggleLoadingAnimation();
+            //promise.then(toggleLoadingAnimation);
         }
 
         function submit(){
@@ -77,7 +85,6 @@
 
             if(isValidDateOrder) {
                 ctrl.editMode ? ctrl.updateTask() : ctrl.addTask();
-                DialogService.toggleDialog('task-editor');
             }
         }
 
@@ -113,6 +120,9 @@
             GanttTasksService.moveTaskToBegining(id);
         }
 
-        // TODO: milestone
+        function toggleLoadingAnimation(){
+            var blockingMode = true;
+            DialogService.toggleDialog('processing-lock', null, blockingMode);
+        }
     }
 })();

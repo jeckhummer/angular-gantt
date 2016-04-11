@@ -7,7 +7,7 @@
         ctrl.toggle = toggle;
         ctrl.dialogIsActive = dialogIsActive;
         ctrl.isActive = isActive;
-        ctrl.deactivate = deactivate;
+        ctrl.onClick = onClick;
 
         function toggle(dialogName, arg) {
             DialogService.toggleDialog(dialogName, arg);
@@ -19,6 +19,13 @@
 
         function isActive(){
             return DialogService.isActive();
+        }
+
+        function onClick(){
+            var inBlockingMode = DialogService.isInBlockingMode();
+            if(!inBlockingMode){
+                deactivate();
+            }
         }
 
         function deactivate(){

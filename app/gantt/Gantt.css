@@ -256,3 +256,7 @@ button.list-group-item:focus{
     outline: 0;
     padding: 0 2px;
 }
+
+.dialogs{
+    display: none;
+}

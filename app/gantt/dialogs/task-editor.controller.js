@@ -13,6 +13,7 @@
         ctrl.toggleIsMilestone = toggleIsMilestone;
         ctrl.parentTasksPredicate = parentTasksPredicate;
         ctrl.moveTaskToBegining = moveTaskToBegining;
+        ctrl.isActive = DialogService.isActiveDialog('task-editor');
 
         $scope.$on('task-editor-opened', initTask);
         $scope.$on('task-editor-opened', initParentTasks);

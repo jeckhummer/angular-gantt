@@ -56,6 +56,8 @@
                 calculateBoundariesTriggers.forEach((event)=>{
                     $rootScope.$on(event, calculateBoundaries);
                 });
+
+                calculateBoundaries();
             }
 
             function getConfig(){

@@ -286,7 +286,6 @@
             }
 
             tasks = sortedTasks;
-            orderTestPrint();
         }
 
         function _sortTasksByOrder(siblingTasks) {

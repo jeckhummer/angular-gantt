@@ -1,1 +1,1 @@
-angular.module('test',[]);
+angular.module('test',['common', 'app-dev']);

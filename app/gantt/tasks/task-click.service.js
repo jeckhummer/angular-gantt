@@ -24,7 +24,7 @@
         return service;
 
         function init() {
-            $rootScope.$on('gantt-reloaded', unselectAll);
+            $rootScope.$on('tasks-changed', unselectAll);
         }
 
         function toggleTask(id) {

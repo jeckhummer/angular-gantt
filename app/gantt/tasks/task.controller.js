@@ -26,7 +26,7 @@
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
-                ctrl.nestingDepth = task.nestingDepth;
+                ctrl.nestingDepth = task.level - 1;
                 ctrl.isMilestone = task.isMilestone;
                 ctrl.isLastTaskWithinSiblings = GanttTasksService.isLastTaskWithinSiblings(task.id);
                 ctrl.isFirstTaskWithinSiblings = GanttTasksService.isFirstTaskWithinSiblings(task.id);

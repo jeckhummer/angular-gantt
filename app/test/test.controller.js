@@ -1,11 +1,13 @@
-angular.module('test').controller('testController', function(TreeFactory, GanttTasksTestData){
+angular.module('test').controller('testController', function(TreeFactoryService, GanttTasksTestData){
     var self = this;
 
     var tasks = GanttTasksTestData.tasks;
     var treeDataProviderFactory = new TreeDataProviderFactory(IDGetter, parentIDGetter, orderGetter);
-    var tree = TreeFactory.create(tasks, treeDataProviderFactory);
+    var tree = TreeFactoryService.create(tasks, treeDataProviderFactory);
 
-    self.nodes = tree.getAll();
+    self.nodes = tree.getAll(function (node) {
+        return Object.assign(node, {test: 'test'});
+    });
 
     function IDGetter(data){
         return data.id;
@@ -19,5 +21,3 @@ angular.module('test').controller('testController', function(TreeFactory, GanttT
         return data.order;
     }
 });
-
-// depth, preCalculated ChildList, array push auto order calculation

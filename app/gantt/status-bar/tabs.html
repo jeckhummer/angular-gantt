@@ -1,22 +1,40 @@
 <!--TABS-->
 <div ng-controller="TabsController as tabsCtrl" class="btn-group btn-group-sm tabs" role="group" aria-label="tabs">
-    <button ng-click="tabsCtrl.reload()" type="button" class="btn btn-default">
+    <button ng-click="tabsCtrl.reload()"
+            type="button"
+            class="btn btn-default">
         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
         Reload
     </button>
-    <button dialog-trigger="task-editor" dialog-toggle="true" type="button" class="btn btn-default">
+
+    <button dialog-trigger="task-editor"
+            dialog-toggle="true"
+            type="button"
+            class="btn btn-default">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Add Task
     </button>
-    <button dialog-trigger="baselines" dialog-toggle="true" type="button" class="btn btn-default">
+
+    <button dialog-trigger="baselines"
+            dialog-toggle="true"
+            type="button"
+            class="btn btn-default">
         <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
         Baselines
     </button>
-    <button dialog-trigger="settings" dialog-toggle="true" type="button" class="btn btn-default">
+
+    <button dialog-trigger="settings"
+            dialog-toggle="true"
+            type="button"
+            class="btn btn-default">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         Settings
     </button>
-    <button dialog-trigger="processing-lock" dialog-toggle="true" type="button" class="btn btn-default">
+
+    <button dialog-trigger="processing-lock"
+            dialog-toggle="true"
+            type="button"
+            class="btn btn-default">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         Settings
     </button>

@@ -12,4 +12,5 @@ function TreeNode(treeDataProvider){
 
     _node.childIDs = [];
     _node.deleted = false;
+    _node.level = 1;
 }

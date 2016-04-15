@@ -8,6 +8,8 @@
         var service = {
             getActiveDialog: getActiveDialog,
             toggleDialog: toggleDialog,
+            activateDialog: activateDialog,
+            deactivateDialog: deactivateDialog,
             isActiveDialog: isActiveDialog,
             isActive: isActive,
             deactivate: deactivate,
@@ -20,14 +22,22 @@
         }
 
         function toggleDialog(dialogName, arg, block) {
-            if (activeDialog == dialogName) {
-                activeDialog = null;
-                $rootScope.$broadcast(`${dialogName}-closed`, arg);
+            if (!isActiveDialog(dialogName)) {
+                activateDialog(dialogName, arg, block);
             } else {
-                activeDialog = dialogName;
-                blockingMode = block;
-                $rootScope.$broadcast(`${dialogName}-opened`, arg);
+                deactivateDialog(dialogName);
             }
+        }
+
+        function activateDialog(dialogName, arg, block){
+            activeDialog = dialogName;
+            blockingMode = block;
+            $rootScope.$broadcast(`${dialogName}-opened`, arg);
+        }
+
+        function deactivateDialog(dialogName){
+            deactivate();
+            $rootScope.$broadcast(`${dialogName}-closed`, arg);
         }
 
         function isActiveDialog(dialogName) {

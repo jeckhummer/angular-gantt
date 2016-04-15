@@ -47,12 +47,12 @@
                     </tr>
                 </table>
 
-                <div class="gantt-left-block" style="width:{{ganttCtrl.getInfoBlockWidth()}}%">
+                <div class="gantt-left-block" style="width:{{ganttCtrl.infoBlockWidth.getValue()}}%">
                 </div>
 
                 <div class="gantt-right-block"
                      style="
-                         width:{{ganttCtrl.getTasksBlockWidth()}}%;
+                         width:{{100 - ganttCtrl.infoBlockWidth.getValue()}}%;
                          overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}
                      ">
 

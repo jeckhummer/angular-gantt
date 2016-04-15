@@ -1,4 +1,4 @@
-angular.module('app-dev', ['app', 'ngMockE2E', 'test']);
+angular.module('app-dev', ['app', 'ngMockE2E', 'test', 'devRootScope']);
 
 (function () {
     angular.module('app-dev').config(AppRouterConfig);

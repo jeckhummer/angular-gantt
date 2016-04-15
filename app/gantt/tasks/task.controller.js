@@ -1,7 +1,8 @@
 (function(){
     angular.module('gantt').controller('TaskController', TaskController);
 
-    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService, GanttOptionsService){
+    function TaskController($rootScope, $scope, DateService, TimelineService, GanttBaselinesService,
+                            GanttTasksService, GanttOptionsService, GanttTasksHierarchyService){
         var ctrl = this;
         ctrl.editTask = editTask;
         ctrl.moveTaskUp = moveTaskUp;
@@ -22,15 +23,15 @@
         function init(task){
             if(task){
                 ctrl.id = task.id;
-                ctrl.order = task.order;
+                ctrl.order = GanttTasksHierarchyService.get(task.id).order;
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;
-                ctrl.nestingDepth = task.level - 1;
+                ctrl.nestingDepth = GanttTasksHierarchyService.get(task.id).level - 1;
                 ctrl.isMilestone = task.isMilestone;
-                ctrl.isLastTaskWithinSiblings = GanttTasksService.isLastTaskWithinSiblings(task.id);
-                ctrl.isFirstTaskWithinSiblings = GanttTasksService.isFirstTaskWithinSiblings(task.id);
-                ctrl.isParent = task.isParent;
+                ctrl.isFirstTaskWithinSiblings = GanttTasksHierarchyService.isFirstChild(task.id);
+                ctrl.isLastTaskWithinSiblings = GanttTasksHierarchyService.isLastChild(task.id);
+                ctrl.isParent = GanttTasksHierarchyService.isParent(task.id);
                 ctrl.isCompleted = task.isCompleted;
                 ctrl.percentComplete = task.percentComplete;
                 ctrl.dateInterval = task.dateInterval;

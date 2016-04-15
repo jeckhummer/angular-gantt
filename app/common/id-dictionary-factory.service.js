@@ -52,8 +52,13 @@
             return _dict[id];
         }
 
-        function getRange(){
-            return _range;
+        function getRange(IDs){
+            if(IDs !== undefined){
+                var range = IDs.map((ID)=> get(ID));
+                return range;
+            }else{
+                return _range;
+            }
         }
 
         function processRange(processor){

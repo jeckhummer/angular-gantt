@@ -22,6 +22,10 @@
             _init();
 
             tree.getAll = getAll;
+            tree.get = get;
+            tree.isLastChild = isLastChild;
+            tree.isFirstChild = isFirstChild;
+            tree.isParent = isParent;
 
             function _init(){
                 _rootNode = new TreeNode();
@@ -90,8 +94,47 @@
                 }
             }
 
+            function get(id){
+                return _dictionary.get(id);
+            }
+
             function NodeIDProvider(node){
                 return node.ID;
+            }
+
+            function isLastChild(id){
+                var node = _dictionary.get(id);
+                var order = node.order;
+                var siblings = _getSiblings(id);
+                var _isLastChild = order == siblings.length;
+                return _isLastChild;
+            }
+
+            function isFirstChild(id){
+                var node = _dictionary.get(id);
+                var order = node.order;
+                var _isFirstChild = order == 1;
+                return _isFirstChild;
+            }
+
+            function isParent(id){
+                var children = _getChildren(id);
+                return id != null && children.length > 0;
+            }
+
+            function _getSiblings(id){
+                var node = _dictionary.get(id);
+                var parentID = node.parentID;
+                if (parentID !== null) {
+                    return _getChildren(parentID);
+                }else{
+                    return node;
+                }
+            }
+
+            function _getChildren(id){
+                var node = _dictionary.get(id);
+                return _dictionary.getRange(node.childIDs);
             }
         }
     }

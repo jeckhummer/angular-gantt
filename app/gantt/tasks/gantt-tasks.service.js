@@ -1,8 +1,8 @@
 (function () {
     angular.module('gantt').factory('GanttTasksService', GanttTasksService);
 
-    function GanttTasksService(GanttTasksDictionaryService, GanttTaskFactoryService, $rootScope,
-                               GanttTasksDataProviderService, GanttTasksHierarchyService) {
+    function GanttTasksService(GanttTasksDictionaryService, GanttTaskFactoryService, DialogService,
+                               $rootScope, GanttTasksDataProviderService, GanttTasksHierarchyService) {
         var service = {
             reload: reload,
             getAll: getAll,
@@ -37,6 +37,7 @@
             var promise = GanttTasksDataProviderService.addTask(data)
                 .then(_initTasks, _notifyAboutError('Saving task'));
 
+            _processingLock(promise);
             $rootScope.$broadcast('notify-fade', 'Saving task...', promise);
             return promise;
         }
@@ -45,6 +46,7 @@
             var promise = GanttTasksDataProviderService.updateTask(data)
                 .then(_initTasks, _notifyAboutError('Updating task'));
 
+            _processingLock(promise);
             $rootScope.$broadcast('notify-fade', 'Updating task...', promise);
             return promise;
         }
@@ -53,6 +55,7 @@
             var promise = GanttTasksDataProviderService.deleteTask(id)
                 .then(_initTasks, _notifyAboutError('Deleting task'));
 
+            _processingLock(promise);
             $rootScope.$broadcast('notify-fade', 'Deleting task...', promise);
             return promise;
         }
@@ -61,6 +64,7 @@
             var promise = GanttTasksDataProviderService.getTasks()
                 .then(_initTasks,_notifyAboutError('Fetching tasks'));
 
+            _processingLock(promise);
             $rootScope.$broadcast('notify-fade', 'Reloading gantt...', promise);
             return promise;
         }
@@ -80,6 +84,13 @@
                 var msg = `${description} error: ${error}`;
                 $rootScope.$broadcast('notify', msg, isError);
             }
+        }
+
+        function _processingLock(promise){
+            DialogService.activateDialog('processing-lock', null, true);
+            promise.then(function () {
+                DialogService.deactivateDialog('processing-lock');
+            });
         }
     }
 })();

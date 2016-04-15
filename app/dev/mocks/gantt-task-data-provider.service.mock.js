@@ -19,7 +19,7 @@
         //var _DELAY_ENABLED = false;
 
         var _DELAYS = {
-            getTask: 1000,
+            getTask: 3000,
             saveTask: 3000,
             deleteTask: 2000
         };

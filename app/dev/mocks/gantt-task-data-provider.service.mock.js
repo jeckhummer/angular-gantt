@@ -5,12 +5,12 @@
         $provide.decorator("GanttTasksDataProviderService", GanttTaskDataProviderServiceMock);
     }
 
-    function GanttTaskDataProviderServiceMock($q, HttpService, GanttTasksTestData, GanttTimelineMock, GanttBaselinesMock, $timeout) {
+    function GanttTaskDataProviderServiceMock(GanttTasksTestData, $timeout) {
         var service = {
             getTasks: getTasks,
             saveTask: saveTask,
             deleteTask: deleteTask,
-            swapTasks: swapTasks
+
         };
 
         var _tasks = [];
@@ -19,7 +19,7 @@
         //var _DELAY_ENABLED = false;
 
         var _DELAYS = {
-            getTask: 3000,
+            getTask: 2000,
             saveTask: 3000,
             deleteTask: 2000
         };

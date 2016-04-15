@@ -12,6 +12,8 @@
             updateTask: updateTask,
             addTask: addTask,
             deleteTask: deleteTask,
+            moveTaskUp: moveTaskUp,
+            moveTaskDown: moveTaskDown,
             isEmpty: GanttTasksDictionaryService.isEmpty
         };
 
@@ -34,39 +36,27 @@
         }
 
         function addTask(data) {
-            var promise = GanttTasksDataProviderService.addTask(data)
-                .then(_initTasks, _notifyAboutError('Saving task'));
-
-            _processingLock(promise);
-            $rootScope.$broadcast('notify-fade', 'Saving task...', promise);
-            return promise;
+            return _modifyGanttState(()=>GanttTasksDataProviderService.addTask(data), 'Saving task');
         }
 
         function updateTask(data) {
-            var promise = GanttTasksDataProviderService.updateTask(data)
-                .then(_initTasks, _notifyAboutError('Updating task'));
-
-            _processingLock(promise);
-            $rootScope.$broadcast('notify-fade', 'Updating task...', promise);
-            return promise;
+            return _modifyGanttState(()=>GanttTasksDataProviderService.updateTask(data), 'Updating task');
         }
 
         function deleteTask(id) {
-            var promise = GanttTasksDataProviderService.deleteTask(id)
-                .then(_initTasks, _notifyAboutError('Deleting task'));
-
-            _processingLock(promise);
-            $rootScope.$broadcast('notify-fade', 'Deleting task...', promise);
-            return promise;
+            return _modifyGanttState(()=>GanttTasksDataProviderService.deleteTask(id), 'Deleting task');
         }
 
         function reload() {
-            var promise = GanttTasksDataProviderService.getTasks()
-                .then(_initTasks,_notifyAboutError('Fetching tasks'));
+            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Fetching tasks');
+        }
 
-            _processingLock(promise);
-            $rootScope.$broadcast('notify-fade', 'Reloading gantt...', promise);
-            return promise;
+        function moveTaskUp(id){
+            return _modifyGanttState(()=>GanttTasksDataProviderService.moveTaskUp(id), 'Moving task');
+        }
+
+        function moveTaskDown(id){
+            return _modifyGanttState(()=>GanttTasksDataProviderService.moveTaskDown(id), 'Moving task');
         }
 
         function _initTasks(tasksData) {
@@ -91,6 +81,13 @@
             promise.then(function () {
                 DialogService.deactivateDialog('processing-lock');
             });
+        }
+
+        function _modifyGanttState(action, msg){
+            var promise = action().then(_initTasks,_notifyAboutError(msg));
+            _processingLock(promise);
+            $rootScope.$broadcast('notify-fade', msg + '...', promise);
+            return promise;
         }
     }
 })();

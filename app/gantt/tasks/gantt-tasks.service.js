@@ -2,7 +2,8 @@
     angular.module('gantt').factory('GanttTasksService', GanttTasksService);
 
     function GanttTasksService(GanttTasksDictionaryService, GanttTaskFactoryService, DialogService,
-                               $rootScope, GanttTasksDataProviderService, GanttTasksHierarchyService) {
+                               $rootScope, GanttTasksDataProviderService, GanttTasksHierarchyService,
+                               GanttOptionsService) {
         var service = {
             reload: reload,
             getAll: getAll,
@@ -25,7 +26,7 @@
         }
 
         function getAll(){
-            var tasks = GanttTasksHierarchyService.getAll((node) => GanttTasksDictionaryService.get(node.ID));
+            var tasks = GanttTasksHierarchyService.getAllTasks();
             return tasks;
         }
 
@@ -36,7 +37,9 @@
         }
 
         function addTask(data) {
-            return _modifyGanttState(()=>GanttTasksDataProviderService.addTask(data), 'Saving task');
+            var prepend = GanttOptionsService.getTaskAdditionStrategy();
+            //data.parentID = 999;
+            return _modifyGanttState(()=>GanttTasksDataProviderService.addTask(data, prepend), 'Saving task');
         }
 
         function updateTask(data) {
@@ -76,16 +79,13 @@
             }
         }
 
-        function _processingLock(promise){
-            DialogService.activateDialog('processing-lock', null, true);
-            promise.then(function () {
-                DialogService.deactivateDialog('processing-lock');
-            });
-        }
-
         function _modifyGanttState(action, msg){
-            var promise = action().then(_initTasks,_notifyAboutError(msg));
-            _processingLock(promise);
+            var promise = action()
+                .then(_initTasks, _notifyAboutError(msg))
+                .finally(()=>DialogService.deactivateDialog('processing-lock'));
+
+            DialogService.activateDialog('processing-lock', null, true);
+
             $rootScope.$broadcast('notify-fade', msg + '...', promise);
             return promise;
         }

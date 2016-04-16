@@ -23,6 +23,7 @@
         _self.add = add;
         _self.addRange = addRange;
         _self.get = get;
+        _self.remove = remove;
         _self.getRange = getRange;
         _self.reset= reset;
         _self.processRange = processRange;
@@ -59,6 +60,14 @@
             }else{
                 return _range;
             }
+        }
+
+        function remove(id){
+            var object = get(id);
+            var index = _range.indexOf(object);
+
+            delete _dict[id];
+            _range.splice(index, 1);
         }
 
         function processRange(processor){

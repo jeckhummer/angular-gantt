@@ -28,14 +28,14 @@
     <div class="btn-group" role="group" aria-label="...">
         <button type="button"
                 class="btn btn-xs btn-default"
-                ng-class="{'disabled': cntxtActCtrl.isMinZoom()}"
-                ng-click="cntxtActCtrl.zoomOut()">
+                ng-class="{'disabled': cntxtActCtrl.zoom.isMin()}"
+                ng-click="cntxtActCtrl.zoom.dec()">
             <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
         </button>
         <button type="button"
                 class="btn btn-xs btn-default"
-                ng-class="{'disabled': cntxtActCtrl.isMaxZoom()}"
-                ng-click="cntxtActCtrl.zoomIn()">
+                ng-class="{'disabled': cntxtActCtrl.zoom.isMax()}"
+                ng-click="cntxtActCtrl.zoom.inc()">
             <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
         </button>
     </div>

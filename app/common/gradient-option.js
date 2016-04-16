@@ -19,13 +19,13 @@ function GradientOption(minValue, maxValue, step, defaultValue){
 
     function inc(){
         if(self.value < maxValue) {
-            self.value += step;
+            self.value = Math.min(maxValue, self.value + step);
         }
     }
 
     function dec(){
         if(self.value > minValue) {
-            self.value -= step;
+            self.value = Math.max(minValue, self.value - step);
         }
     }
 

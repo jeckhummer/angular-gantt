@@ -15,6 +15,7 @@
         ctrl.isMaxZoom = isMaxZoom;
         ctrl.isMinZoom = isMinZoom;
         ctrl.indent = GanttOptionsService.indentOptions;
+        ctrl.zoom = GanttOptionsService.zoomOptions;
         ctrl.infoBlockWidthOptions = GanttOptionsService.infoBlockWidthOptions;
 
         function selectAll() {

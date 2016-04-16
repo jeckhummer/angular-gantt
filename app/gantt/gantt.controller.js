@@ -7,7 +7,7 @@
         var dataDefer = $q.defer();
 
         ganttCtrl.isEmpty = true;
-        ganttCtrl.getZoom = getZoom;
+        ganttCtrl.zoom = GanttOptionsService.zoomOptions;
         ganttCtrl.isZoomed = isZoomed;
         ganttCtrl.infoBlockWidth = GanttOptionsService.infoBlockWidthOptions;
 
@@ -25,7 +25,7 @@
         }
 
         function isZoomed(){
-            var zoom = getZoom();
+            var zoom = GanttOptionsService.zoomOptions.getValue();
             return  100 < zoom;
         }
     }

@@ -22,11 +22,11 @@
                             class="gantt-right-block"
                             style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}">
 
-                            <div style="width: {{ganttCtrl.getZoom()}}%">
+                            <div style="width: {{ganttCtrl.zoom.getValue()}}%">
                                 <timeline></timeline>
                             </div>
 
-                            <div class="tasks_wrapper" style="width: {{ganttCtrl.getZoom()}}%">
+                            <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%">
                                 <div ng-repeat="task in ganttCtrl.tasks">
                                     <ng-include src="'gantt/tasks/task.html'"></ng-include>
                                     <div style="clear: both"></div>

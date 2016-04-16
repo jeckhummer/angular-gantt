@@ -34,7 +34,7 @@
                 var today = new Date();
                 ctrl.task = GanttTaskFactoryService.create({
                     name: 'New Task',
-                    parentID: null,
+                    parentID: 0,
                     percentComplete: 0,
                     isMilestone: false
                 });
@@ -51,16 +51,16 @@
         }
 
         function addTask(){
-            var promise = GanttTasksService.addTask(ctrl.task);
+            return GanttTasksService.addTask(ctrl.task);
 
-            GanttStatusReporterService.trackDialog(
-                promise,
-                'Saving task',
-                'task-editor'
-            );
-
-            toggleLoadingAnimation();
-            promise.then(toggleLoadingAnimation);
+            //GanttStatusReporterService.trackDialog(
+            //    promise,
+            //    'Saving task',
+            //    'task-editor'
+            //);
+            //
+            //toggleLoadingAnimation();
+            //promise.then(toggleLoadingAnimation);
         }
 
         function updateTask(){

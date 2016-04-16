@@ -11,11 +11,7 @@
         return service;
 
         function trackDialog(promise, descr, dialogName, keepDialogOpen){
-            var _promise = promise.then(function(response){
-                return response.status == "success" ?
-                    $q.resolve(response.message):
-                    $q.reject(response.message);
-            }).then(function (){
+            var _promise = promise.then(function (){
                 var msg = `${descr} ${SUCCESS_SUFFIX}`;
                 $rootScope.$broadcast('notify-timeout-fade', msg);
 

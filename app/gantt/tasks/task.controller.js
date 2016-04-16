@@ -23,7 +23,7 @@
         function init(task){
             if(task){
                 ctrl.id = task.id;
-                ctrl.order = GanttTasksHierarchyService.get(task.id).order;
+                ctrl.order = GanttTasksHierarchyService.get(task.id).getOrder();
                 ctrl.name = task.name;
                 ctrl.start = task.start;
                 ctrl.end = task.end;

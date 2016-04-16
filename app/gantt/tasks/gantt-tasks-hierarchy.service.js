@@ -6,7 +6,8 @@
 
         var service = {
             get: get,
-            getAll: getAll,
+            getAllTasks: getAllTasks,
+            getAllNodes: getAllNodes,
             isFirstChild: isFirstChild,
             isLastChild: isLastChild,
             isParent: isParent
@@ -18,11 +19,11 @@
 
         function _init(){
             var tasks = GanttTasksDictionaryService.getRange();
-            _tree = new TreeFactoryService.create(tasks, new _DataProviderFactoryService);
+            _tree = new TreeFactoryService.create(tasks, new _DataAdapterFactoryService());
         }
 
-        function _DataProviderFactoryService(){
-            var service = new TreeDataProviderFactory(IDGetter, parentIDGetter, orderGetter);
+        function _DataAdapterFactoryService(){
+            var service = new TreeDataAdapterFactory(IDGetter, parentIDGetter, orderGetter);
             return service;
 
             function IDGetter(data){
@@ -43,9 +44,14 @@
             return task;
         }
 
-        function getAll(processor){
-            var tasks = _tree.getAll(processor);
+        function getAllTasks(){
+            var tasks = _tree.getAll((node) => GanttTasksDictionaryService.get(node.getID()));
             return tasks;
+        }
+
+        function getAllNodes(){
+            var nodes = _tree.getAll();
+            return nodes;
         }
 
         function isFirstChild(id){

@@ -1,14 +1,6 @@
 'use strict';
 
-angular.module('app', ['ngRoute', 'gantt', 'timeline', 'common', 'dialog' ]);
-
-(function () {
-    angular.module('app').config(AppRouterConfig);
-
-    function AppRouterConfig($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/gantt'});
-    }
-})();
+angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
 
 (function () {
     angular.module('timeline').config(TimelineConfig);

@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('GanttBaselinesService', GanttBaselinesService);
 
-    function GanttBaselinesService(GanttDataProviderService, $rootScope, GanttTaskFactoryService) {
+    function GanttBaselinesService(GanttBaselinesDataProviderService, $rootScope, GanttTaskFactoryService) {
         var baselines = {};
         var currentBaselineName = null;
 
@@ -20,7 +20,7 @@
         return service;
 
         function init(){
-            GanttDataProviderService.getBaselines().then(addBaselines);
+            GanttBaselinesDataProviderService.getBaselines().then(addBaselines);
         }
 
         function addBaseline(name, baseline){

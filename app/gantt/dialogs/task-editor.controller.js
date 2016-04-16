@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttStatusReporterService, DialogService){
+    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService){
         var ctrl = this;
         var today = new Date();
         var taskEndDateBackup;
@@ -52,28 +52,10 @@
 
         function addTask(){
             return GanttTasksService.addTask(ctrl.task);
-
-            //GanttStatusReporterService.trackDialog(
-            //    promise,
-            //    'Saving task',
-            //    'task-editor'
-            //);
-            //
-            //toggleLoadingAnimation();
-            //promise.then(toggleLoadingAnimation);
         }
 
         function updateTask(){
-            var promise = GanttTasksService.updateTask(ctrl.task);
-
-            GanttStatusReporterService.trackDialog(
-                promise,
-                'Saving task',
-                'task-editor'
-            );
-
-            //toggleLoadingAnimation();
-            //promise.then(toggleLoadingAnimation);
+            return GanttTasksService.updateTask(ctrl.task);
         }
 
         function submit(){
@@ -118,11 +100,6 @@
 
         function moveTaskToBegining(id){
             GanttTasksService.moveTaskToBegining(id);
-        }
-
-        function toggleLoadingAnimation(){
-            var blockingMode = true;
-            DialogService.toggleDialog('processing-lock', null, blockingMode);
         }
     }
 })();

@@ -71,23 +71,32 @@
             $rootScope.$broadcast('tasks-changed', tasks);
         }
 
-        function _notifyAboutError(description) {
-            return function (error) {
-                var isError = true;
-                var msg = `${description} error: ${error}`;
-                $rootScope.$broadcast('notify', msg, isError);
-            }
-        }
-
         function _modifyGanttState(action, msg){
             var promise = action()
-                .then(_initTasks, _notifyAboutError(msg))
-                .finally(()=>DialogService.deactivateDialog('processing-lock'));
+                .then(
+                    function (data) {
+                        $rootScope.$broadcast('notify-timeout-fade', `${msg} SUCCEED!`);
+                        _initTasks(data);
+                    },
+                    function () {
+                        var isError = true;
+                        var _msg = `${msg} FAILED! error: ${error}`;
+                        $rootScope.$broadcast('notify', _msg, isError);
+                    })
+                .finally(function () {
+                    DialogService.deactivateDialog('processing-lock');
+                });
 
             DialogService.activateDialog('processing-lock', null, true);
 
             $rootScope.$broadcast('notify-fade', msg + '...', promise);
             return promise;
+        }
+
+        function _notifyAboutError(description) {
+            return function (error) {
+
+            }
         }
     }
 })();

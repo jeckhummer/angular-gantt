@@ -1,6 +1,8 @@
-<div ng-controller="TaskController as taskCtrl"
+<div ng-repeat="task in $parent.$parent.ganttCtrl.tasks"
+     ng-controller="TaskController as taskCtrl"
      class="task_wrapper"
      ng-class-odd="'task_wrapper_odd'">
+
 
     <div dialog-trigger="task-editor" dialog-argument="task.id">
         <timeline-stripes></timeline-stripes>
@@ -39,4 +41,6 @@
             </div>
         </div>
     </div>
+
+    <div style="clear: both"></div>
 </div>

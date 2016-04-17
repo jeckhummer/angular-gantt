@@ -1,13 +1,11 @@
 angular.module('test').directive('test', TestDirective);
 
-function TestDirective($compile){
+function TestDirective(){
     var directive = {
-        restrict: 'A',
-        transclude: true,
-        template:'[<ng-transclude></ng-transclude>]',
-        scope: true,
-        link: ($scope, element)=>{
-        },
+        restrict: 'E',
+        template:'test-directive',
+        scope: {},
+        link: ($scope, element)=>{ }
     };
     return directive;
 }

@@ -33,6 +33,7 @@
         }
 
         function addBaselines(_baselines){
+            console.log(_baselines);
             for(var name in _baselines){
                 addBaseline(name, _baselines[name]);
             }

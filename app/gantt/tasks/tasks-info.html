@@ -1,4 +1,4 @@
-<div ng-repeat="task in ganttCtrl.tasks"
+<div ng-repeat="task in $parent.$parent.ganttCtrl.tasks"
      ng-controller="TaskController as taskCtrl">
 
     <div dialog-trigger="task-editor" dialog-argument="taskCtrl.id" style="cursor: pointer">
@@ -63,4 +63,4 @@
     </div>
 </div>
 
-<div ng-include="'jsWidgets/angular-gantt/app/gantt/tasks/task-context-menu.html'"></div>
+<url-locale-include alias="task-context-menu"></url-locale-include>

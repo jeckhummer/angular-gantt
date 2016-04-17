@@ -42,7 +42,7 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
         ]);
 
         TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
-            $injector.get('GanttDataProviderService')
+            $injector.get('GanttConfigDataProviderService')
         );
 
         TimelineServiceProvider.configureCalculateBoundariesMethod(($injector)=>{

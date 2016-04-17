@@ -3,9 +3,9 @@
     angular.module('timeline')
         .directive('timelineStripes', TimelineStripesDirective);
 
-    function TimelineStripesDirective(TimeLineGridService, TimelineService, TimelineTypes) {
+    function TimelineStripesDirective(TimeLineGridService, TimelineService, TimelineTypes, URLLocaleService) {
         var directive = {
-            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline-stripes/timeline-stripes.directive.html',
+            templateUrl: URLLocaleService.getURL('timeline.stripes'),
             restrict: 'E',
             scope: true,
             link: function ($scope) {

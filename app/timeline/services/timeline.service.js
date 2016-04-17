@@ -56,7 +56,7 @@
             function init(){
                 configurationProvider = configurationProviderInjector($injector);
 
-                configurationProvider.getConfig()
+                configurationProvider.getTimelineConfig()
                     .then(configureTimeline)
                     .then(onTimelineConfigChanged)
                     .catch(function (error) {

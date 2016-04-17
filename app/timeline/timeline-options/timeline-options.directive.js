@@ -3,9 +3,9 @@
     angular.module('timeline')
         .directive('timelineOptions', TimelineOptionsDirective);
 
-    function TimelineOptionsDirective(TimelineService, $rootScope) {
+    function TimelineOptionsDirective(URLLocaleService, TimelineService, $rootScope) {
         var directive = {
-            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline-options/timeline-options.directive.html',
+            templateUrl: URLLocaleService.getURL('timeline.options'),
             restrict: 'E',
             scope: {
                 'onSave': '&',

@@ -1,8 +1,8 @@
 (function () {
-    angular.module('app-dev').value('GanttTimelineMock', GanttTimelineMock());
+    angular.module('app-dev').value('GanttTimelineTestData', getGanttTimelineTestData());
 
-    function GanttTimelineMock() {
-        var options = [
+    function getGanttTimelineTestData() {
+        var timelineConfig = [
             {
                 typeName: 'year',
                 label: 'Year',
@@ -18,7 +18,7 @@
             {
                 typeName: 'half-month',
                 label: 'Half Month',
-                visible: true,
+                visible: false,
                 stripes: true,
             },
             {
@@ -40,10 +40,10 @@
             },
         };
 
-        var mock = {
-            options: options,
+        var testData = {
+            timelineConfig: timelineConfig,
             response: response
         };
-        return mock;
+        return testData;
     }
 })();

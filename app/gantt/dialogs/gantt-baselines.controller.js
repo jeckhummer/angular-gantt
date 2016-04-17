@@ -11,10 +11,12 @@
         ctrl.getTasksNames = getTasksNames;
         ctrl.name = '';
 
+        $scope.$on('baselines-changed', initNames);
         init();
 
         function init(){
-            $scope.$on('baselines-changed', initNames);
+            initNames();
+
             $('#selected-tasks-names').popover({
                 'trigger': 'hover',
                 'html': true,

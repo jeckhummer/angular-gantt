@@ -5,9 +5,9 @@ angular.module('timeline', ['ngSanitize']);
     angular.module('timeline')
         .directive('timeline', TimelineDirective);
 
-    function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce) {
+    function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce, URLLocaleService) {
         var directive = {
-            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline/timeline.directive.html',
+            templateUrl: URLLocaleService.getURL('timeline.timeline'),
             restrict: 'E',
             scope: true,
             link: function ($scope) {

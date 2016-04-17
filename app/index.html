@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="dialog/dialog.css">
     <link rel="stylesheet" href="gantt/gantt.css">
 
+    <link rel="stylesheet" href="timeline/timeline-options/timeline-options.css">
+    <link rel="stylesheet" href="timeline/timeline/timeline.css">
+    <link rel="stylesheet" href="timeline/timeline-stripes/timeline-stripes.css">
+
 
     <style>
         body {
@@ -38,7 +42,9 @@
 <body>
 
 <div ng-app="app-dev">
-    <ng-include src="'gantt/gantt.html'"></ng-include>
+    <!--<url-locale-include alias="test"></url-locale-include>-->
+    <url-locale-include alias="gantt"></url-locale-include>
+    <!--<ng-include src="'gantt/gantt.html'"></ng-include>-->
 </div>
 
 <!--Bower-->
@@ -59,8 +65,10 @@
     <script src="gantt/gantt.config.js"></script>
 
     <!--Services-->
+    <script src="gantt/services/gantt-http.service.js"></script>
     <script src="gantt/services/gantt-data-provider.service.js"></script>
     <script src="gantt/services/gantt-baselines-data-provider.service.js"></script>
+    <script src="gantt/services/gantt-config-data-provider.service.js"></script>
     <script src="gantt/services/gantt-tasks.service.js"></script>
     <script src="gantt/services/gantt-tasks-dictionary.service.js"></script>
     <script src="gantt/services/gantt-tasks-hierarchy.service.js"></script>
@@ -129,35 +137,33 @@
     <script src="common/tree/tree-data-adapter-factory.js"></script>
     <script src="common/tree/tree-factory.service.js"></script>
 
+    <!--URL-Locale-->
+    <script src="common/url-locale.service.js"></script>
+    <script src="common/url-locale-include.directive.js"></script>
+
     <!--Others-->
-    <script src="common/http.service.js"></script>
     <script src="common/gradient-option.js"></script>
-    <script src="common/url-mapper.js"></script>
     <script src="common/id-dictionary-factory.service.js"></script>
     <script src="common/events-to-console-reflector.js"></script>
 
-<!--Apps-->
+<!--Config-->
     <script src="app.config.js"></script>
+    <script src="app-url-locale.config.js"></script>
 
 <!--Dev-->
     <script src="dev/app-dev.config.js"></script>
-    <script src="dev/mocks/http-mocks.js"></script>
     <script src="dev/http-delay-decorator.js"></script>
     <script src="dev/mocks/gantt-tasks-test-data.js"></script>
-    <script src="dev/mocks/gantt-timeline-mock.js"></script>
-    <script src="dev/mocks/gantt-baselines.mock.js"></script>
-    <script src="dev/mocks/gantt-task-data-adapter.service.mock.js"></script>
+    <script src="dev/mocks/gantt-config-test-data.js"></script>
+    <script src="dev/mocks/gantt-baselines-test-data.js"></script>
+    <script src="dev/mocks/gantt-baselines-data-provider.service.mock.js"></script>
+    <script src="dev/mocks/gantt-config-data-provider.service.mock.js"></script>
+    <script src="dev/mocks/gantt-task-data-provider.service.mock.js"></script>
 
 <!--Test-->
     <script src="test/test.config.js"></script>
     <script src="test/test.controller.js"></script>
-    <script src="test/parent.directive.js"></script>
     <script src="test/test.directive.js"></script>
-    <script src="test/controllers/test-child.controller.js"></script>
-    <script src="test/controllers/test-parent.controller.js"></script>
-
-
-
 
 </body>
 </html>

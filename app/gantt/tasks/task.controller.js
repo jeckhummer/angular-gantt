@@ -9,7 +9,7 @@
         ctrl.moveTaskDown = moveTaskDown;
         ctrl.indent = GanttOptionsService.indentOptions;
 
-        $scope.$watchCollection('$parent.task', init);
+        $scope.$watchCollection('task', init);
 
         $scope.$on('boundaries-changed', () => initPosition(ctrl));
         $scope.$on('boundaries-changed', () => initBaseline(ctrl));

@@ -43,11 +43,11 @@
         }
 
         function moveTaskUp(){
-            return HttpService.sendRequest('gantt-task', task);
+            //return GanttHttpService.sendRequest('gantt-task', task);
         }
 
         function moveTaskDown(){
-            return HttpService.sendRequest('gantt-task', task);
+            //return GanttHttpService.sendRequest('gantt-task', task);
         }
     }
 })();

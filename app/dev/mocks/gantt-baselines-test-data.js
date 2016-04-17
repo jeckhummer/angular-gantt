@@ -1,6 +1,6 @@
 (function () {
-    angular.module('app-dev').value('GanttBaselinesMock', getGanttBaselinesMock());
-    function getGanttBaselinesMock() {
+    angular.module('app-dev').value('GanttBaselinesTestData', getGanttBaselinesTestData());
+    function getGanttBaselinesTestData() {
         var baselines = {
             'Saved Baseline 1': [
                 {id: 1, name: "Task 1", start: "2015-10-20", end: "2016-11-10", parentID: 0},

@@ -1,11 +1,11 @@
 (function () {
-    angular.module('app-dev').config(GanttTaskDataAdapterServiceMockConfig);
+    angular.module('app-dev').config(GanttTaskDataProviderServiceMockConfig);
 
-    function GanttTaskDataAdapterServiceMockConfig($provide) {
-        $provide.decorator("GanttTasksDataProviderService", GanttTaskDataAdapterServiceMock);
+    function GanttTaskDataProviderServiceMockConfig($provide) {
+        $provide.decorator("GanttTasksDataProviderService", GanttTaskDataProviderServiceMock);
     }
 
-    function GanttTaskDataAdapterServiceMock(GanttTasksTestData, $timeout, $q, HttpService,
+    function GanttTaskDataProviderServiceMock(GanttTasksTestData, $timeout, $q,
                                              IDDictionaryFactoryService, TreeFactoryService) {
         var _dictionary;
         var _tree;

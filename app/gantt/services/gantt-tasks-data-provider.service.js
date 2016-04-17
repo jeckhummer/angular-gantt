@@ -2,7 +2,7 @@
 (function () {
     angular.module('gantt').factory('GanttTasksDataProviderService', GanttTasksDataProviderService);
 
-    function GanttTasksDataProviderService(HttpService) {
+    function GanttTasksDataProviderService(GanttHttpService) {
         var service = {
             getTasks: getTasks,
             updateTask: updateTask,
@@ -14,12 +14,13 @@
         return service;
 
         function getTasks(){
-            return HttpService.getResource('gantt-tasks');
+            return GanttHttpService.sendRequest('GetTasks');
         }
 
-        function addTask(task){
+        function addTask(task, prepend){
             console.log('adding gantt task: ', task);
-            var promise = HttpService.postResource('gantt-task', task);
+            var data = { task: JSON.stringify(task), prepend: prepend};
+            var promise = GanttHttpService.sendRequest('SaveTask', data);
 
             promise.then(function (serverData) {
                 task.id = serverData.id;
@@ -30,9 +31,9 @@
             return promise;
         }
 
-        function updateTask(){
+        function updateTask(task){
             console.log('updating gantt task: ', task);
-            var promise = HttpService.postResource('gantt-task', task);
+            var promise = GanttHttpService.sendRequest('SaveTask', { task: JSON.stringify(task), prepend: 0});
 
             return promise;
         }
@@ -42,11 +43,11 @@
         }
 
         function moveTaskUp(){
-            return HttpService.postResource('gantt-task', task);
+            return HttpService.sendRequest('gantt-task', task);
         }
 
         function moveTaskDown(){
-            return HttpService.postResource('gantt-task', task);
+            return HttpService.sendRequest('gantt-task', task);
         }
     }
 })();

@@ -3,8 +3,8 @@
 
     <div class="gantt_block">
         <div class="top-bar">
-            <ng-include src="'gantt/status-bar/status-bar.html'"></ng-include>
-            <ng-include src="'gantt/status-bar/tabs.html'"></ng-include>
+            <ng-include src="'jsWidgets/angular-gantt/app/gantt/status-bar/status-bar.html'"></ng-include>
+            <ng-include src="'jsWidgets/angular-gantt/app/gantt/status-bar/tabs.html'"></ng-include>
             <div style="clear:both"></div>
         </div>
 
@@ -15,7 +15,7 @@
                 <table class="gantt-backbone-table" style="width: 100%;">
                     <tr>
                         <td class="context-actions-bar">
-                            <div ng-include="'gantt/context-actions-bar/context-actions-bar.html'"></div>
+                            <div ng-include="'jsWidgets/angular-gantt/app/gantt/context-actions-bar/context-actions-bar.html'"></div>
                         </td>
                         <td rowspan="2"
                             class="gantt-right-block"
@@ -27,7 +27,7 @@
 
                             <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%">
                                 <div ng-repeat="task in ganttCtrl.tasks">
-                                    <ng-include src="'gantt/tasks/task.html'"></ng-include>
+                                    <ng-include src="'jsWidgets/angular-gantt/app/gantt/tasks/task.html'"></ng-include>
                                     <div style="clear: both"></div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 vertical-align: bottom;
                                 overflow-x: {{ganttCtrl.isZoomed() ? 'scroll' : 'hidden'}}">
                             <div class="task-info-block">
-                                <ng-include src="'gantt/tasks/tasks-info.html'"></ng-include>
+                                <ng-include src="'jsWidgets/angular-gantt/app/gantt/tasks/tasks-info.html'"></ng-include>
                             </div>
                         </td>
                     </tr>
@@ -66,10 +66,10 @@
     </div>
 
     <div class="dialogs">
-        <ng-include src="'gantt/dialogs/timeline-options.html'"></ng-include>
-        <ng-include src="'gantt/dialogs/task-editor.html'"></ng-include>
-        <ng-include src="'gantt/dialogs/gantt-baselines-menu.html'"></ng-include>
-        <ng-include src="'gantt/dialogs/processing-lock.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/dialogs/timeline-options.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/dialogs/task-editor.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/dialogs/gantt-baselines-menu.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/dialogs/processing-lock.html'"></ng-include>
     </div>
 
     <style>

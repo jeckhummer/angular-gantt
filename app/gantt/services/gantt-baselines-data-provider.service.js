@@ -2,7 +2,7 @@
 (function () {
     angular.module('gantt').factory('GanttBaselinesDataProviderService', GanttBaselinesDataProviderService);
 
-    function GanttBaselinesDataProviderService(HttpService) {
+    function GanttBaselinesDataProviderService(GanttHttpService) {
         var service = {
             getBaselines: getBaselines
         };
@@ -15,7 +15,7 @@
         }
 
         function getBaselines(){
-            var baselines = HttpService.getResource('gantt-baselines', 0);
+            var baselines = GanttHttpService.sendRequest('GetBaselines');
             return baselines;
         }
     }

@@ -5,7 +5,7 @@
 
     function TimelineOptionsDirective(TimelineService, $rootScope) {
         var directive = {
-            templateUrl: 'timeline/timeline-options/timeline-options.directive.html',
+            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline-options/timeline-options.directive.html',
             restrict: 'E',
             scope: {
                 'onSave': '&',

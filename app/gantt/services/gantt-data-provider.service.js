@@ -2,7 +2,7 @@
 (function () {
     angular.module('gantt').factory('GanttDataProviderService', GanttDataProviderService);
 
-    function GanttDataProviderService(HttpService) {
+    function GanttDataProviderService(GanttHttpService) {
         var service = {
             getConfig: getConfig,
             saveConfig: saveConfig,
@@ -11,16 +11,16 @@
         return service;
 
         function getConfig(){
-            return HttpService.getResource('gantt-timeline-options', 0);
+            return GanttHttpService.sendRequest('GetTimelineOptions');
         }
 
         function saveConfig(config){
             console.log('saving gantt timeline config: ', config);
-            return HttpService.postResource('gantt-timeline-options', config, 0);
+            return GanttHttpService.sendRequest('gantt-timeline-options', config);
         }
 
         function getBaselines(){
-            var baselines = HttpService.getResource('gantt-baselines', 0);
+            var baselines = GanttHttpService.sendRequest('GetBaselines');
             return baselines;
         }
     }

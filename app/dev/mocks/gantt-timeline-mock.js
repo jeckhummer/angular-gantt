@@ -18,7 +18,7 @@
             {
                 typeName: 'half-month',
                 label: 'Half Month',
-                visible: false,
+                visible: true,
                 stripes: true,
             },
             {

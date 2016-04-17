@@ -78,7 +78,7 @@
                         $rootScope.$broadcast('notify-timeout-fade', `${msg} SUCCEED!`);
                         _initTasks(data);
                     },
-                    function () {
+                    function (error) {
                         var isError = true;
                         var _msg = `${msg} FAILED! error: ${error}`;
                         $rootScope.$broadcast('notify', _msg, isError);

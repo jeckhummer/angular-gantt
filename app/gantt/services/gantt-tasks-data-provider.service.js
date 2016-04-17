@@ -5,9 +5,11 @@
     function GanttTasksDataProviderService(HttpService) {
         var service = {
             getTasks: getTasks,
-            addTask: addTask,
             updateTask: updateTask,
-            deleteTask: deleteTask
+            addTask: addTask,
+            deleteTask: deleteTask,
+            moveTaskUp: moveTaskUp,
+            moveTaskDown: moveTaskDown
         };
         return service;
 

@@ -5,7 +5,7 @@
         $provide.decorator("GanttTasksDataProviderService", GanttTaskDataAdapterServiceMock);
     }
 
-    function GanttTaskDataAdapterServiceMock(GanttTasksTestData, $timeout, $q,
+    function GanttTaskDataAdapterServiceMock(GanttTasksTestData, $timeout, $q, HttpService,
                                              IDDictionaryFactoryService, TreeFactoryService) {
         var _dictionary;
         var _tree;

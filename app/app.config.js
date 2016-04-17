@@ -74,14 +74,3 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
         });
     }
 })();
-
-(function () {
-    //angular.module('app').config(HttpServiceConfig);
-    //
-    //function HttpServiceConfig(HttpServiceProvider){
-    //
-    //    HttpServiceProvider.setUrlMapping();
-    //}
-    //
-    //function urlMapping
-})();

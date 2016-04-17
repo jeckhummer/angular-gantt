@@ -18,7 +18,17 @@
         provider.configureConfigurationProviderInjector = configureConfigurationProviderInjector;
         provider.$get = TimelineService;
 
-        function configureTimeline(_config){
+        function configureTimeline(_config) {
+            _config.forEach(function (type) {
+                if (type.visible === "true") {
+                    type.visible = true;
+                }
+
+                if (type.visible === "false") {
+                    type.visible = false;
+                }
+            });
+            //_config.visible = Boolean.parse(_config.visible);
             config = _config;
         }
 

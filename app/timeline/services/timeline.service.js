@@ -75,7 +75,7 @@
             }
 
             function saveConfig(){
-                return configurationProvider.saveConfig(config);
+                return configurationProvider.saveTimelineConfig(config);
             }
 
             function getBoundaries(){

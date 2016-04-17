@@ -4,7 +4,8 @@
 
     function GanttConfigDataProviderService() {
         var service = {
-            getTimelineConfig: getTimelineConfig
+            getTimelineConfig: getTimelineConfig,
+            saveTimelineConfig: saveTimelineConfig
         };
         
         _init();
@@ -15,6 +16,10 @@
         }
 
         function getTimelineConfig(){
+
+        }
+
+        function saveTimelineConfig(){
 
         }
     }

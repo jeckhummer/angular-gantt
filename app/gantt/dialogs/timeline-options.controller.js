@@ -19,17 +19,14 @@
         }
 
         function save(){
-            var promise = TimelineService.saveConfig().then(function(response){
-                return response.status == "success" ?
-                    $q.resolve(response.message):
-                    $q.reject(response.message);
-            }).then(function (){
-                var msg = `Saving timeline settings SUCCEED!`;
-                $rootScope.$broadcast('notify-timeout-fade', msg);
-            }, function (message){
-                var msg = `Saving timeline settings FAILED! Error: ${message}`;
-                $rootScope.$broadcast('notify', msg, true);
-            });
+            var promise = TimelineService.saveConfig()
+                .then(function (){
+                    var msg = `Saving timeline settings SUCCEED!`;
+                    $rootScope.$broadcast('notify-timeout-fade', msg);
+                }, function (message){
+                    var msg = `Saving timeline settings FAILED! Error: ${message}`;
+                    $rootScope.$broadcast('notify', msg, true);
+                });
 
             $rootScope.$broadcast('notify-fade', 'Saving timeline settings...', promise.catch());
             toggleDialog();

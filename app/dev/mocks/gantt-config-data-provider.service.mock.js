@@ -8,7 +8,8 @@
 
     function GanttConfigDataProviderServiceMock($q, GanttTimelineTestData) {
         var service = {
-            getTimelineConfig: getTimelineConfig
+            getTimelineConfig: getTimelineConfig,
+            saveTimelineConfig: saveTimelineConfig
         };
 
         _init();
@@ -20,6 +21,10 @@
 
         function getTimelineConfig() {
             return $q.resolve(GanttTimelineTestData.timelineConfig);
+        }
+
+        function saveTimelineConfig(){
+            return $q.resolve();
         }
     }
 })();

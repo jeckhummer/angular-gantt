@@ -1,4 +1,8 @@
-﻿.gantt_block {
+﻿#gantt .reorder_btn.disabled{
+    opacity: 0.25 !important;
+}
+
+.gantt_block {
 
 }
 

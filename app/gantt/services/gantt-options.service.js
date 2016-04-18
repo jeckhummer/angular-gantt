@@ -18,7 +18,8 @@
             TASK_ADDITION_STRATEGIES: TASK_ADDITION_STRATEGIES,
             zoomOptions: zoomOptions,
             indentOptions: indentOptions,
-            infoBlockWidthOptions: infoBlockWidthOptions
+            infoBlockWidthOptions: infoBlockWidthOptions,
+            masterMode: true
         };
         return service;
 

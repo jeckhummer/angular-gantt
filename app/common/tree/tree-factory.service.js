@@ -149,7 +149,7 @@
                 var node = get(id);
                 var order = node.getOrder();
                 var siblings = _getSiblingNodes(id);
-                var _isLastChild = order == siblings.length;
+                var _isLastChild = order == siblings.length + 1;
                 return _isLastChild;
             }
 

@@ -7,11 +7,15 @@
         var _range;
         var _prefix = "";
 
-        provider.init = init;
+        provider.initMapping = initMapping;
+        provider.setPrefix = setPrefix;
         provider.$get = $get;
 
-        function init(range, prefix){
-            _range = range;
+        function initMapping(mapping){
+            _range = mapping;
+        }
+
+        function setPrefix(prefix){
             _prefix = prefix;
         }
 

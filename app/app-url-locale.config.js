@@ -25,7 +25,7 @@
             { name: 'test', url: 'test/test.html'}
         ];
 
-        var prefix = '';
+        var prefix = 'jsWidgets/angular-gantt/app/';
 
         URLLocaleServiceProvider.init(urlMapping, prefix);
     }

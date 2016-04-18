@@ -14,7 +14,7 @@
                 function (response) {
                     var str = response.data.d;
                     var data = JSON.parse(str);
-                    console.log('http ', data);
+                    console.log('http received', data);
                     return data;
                 },
                 function (response) {
@@ -26,6 +26,7 @@
         }
 
         function sendRequest(url, data) {
+            console.log('http sent', data);
             data = Object.assign(_getConfigObj(), data);
             return handleHTTPPromise($http.post(_urlPrefix + url, data));
         }
@@ -34,7 +35,7 @@
             return {
                 uid: 1,
                 docid: 6,
-                logUid: 8
+                logUid: 1
             };
         }
     }

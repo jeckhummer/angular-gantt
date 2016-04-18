@@ -23,6 +23,9 @@
 
                 function initOptions(){
                     $scope.config = TimelineService.getConfig();
+                    $scope.config.forEach(function (type) {
+                        type.stripes = type.stripes === "true" || type.stripes === "True" || type.stripes === true;
+                    });
                     $scope.stripesTypeName = getStripesTypeIndex();
                 }
 
@@ -30,7 +33,7 @@
                     $scope.config.forEach((elem, ind) => elem.stripes = ind == typeIndex);
                 }
 
-                function getStripesTypeIndex(){
+                function getStripesTypeIndex() {
                     for(var i in $scope.config){
                         if(isStripesType($scope.config[i])){
                             return i;

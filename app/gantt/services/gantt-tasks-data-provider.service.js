@@ -38,8 +38,13 @@
             return promise;
         }
 
-        function deleteTask(id){
+        function deleteTask(id) {
+            var data = {
+                id: id
+            };
+            var promise = GanttHttpService.sendRequest('DeleteTask', data);
 
+            return promise;
         }
 
         function moveTaskUp(){

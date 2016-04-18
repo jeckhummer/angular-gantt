@@ -20,23 +20,29 @@
         return service;
 
         function init(){
-            GanttBaselinesDataProviderService.getBaselines().then(addBaselines);
+            GanttBaselinesDataProviderService.getBaselines().then(_initBaselines);
         }
 
-        function addBaseline(name, baseline){
+        function _initBaseline(name, baseline) {
             baselines[name] = [];
-            for(var i in baseline){
+            for (var i in baseline) {
                 var baselineTask = GanttTaskFactoryService.create(baseline[i]);
                 baselines[name].push(baselineTask);
             }
             onBaselinesChanged();
         }
 
-        function addBaselines(_baselines){
-            for(var name in _baselines){
-                addBaseline(name, _baselines[name]);
+        function _initBaselines(baselines) {
+            for(var name in baselines){
+                _initBaseline(name, baselines[name]);
             }
-            onBaselinesChanged();
+        }
+
+        function addBaseline(name, baseline){
+            GanttBaselinesDataProviderService.saveBaselines(name, baseline)
+                .then(function () {
+                    _initBaseline(name, baseline);
+                });
         }
 
         function deleteBaseline(name){

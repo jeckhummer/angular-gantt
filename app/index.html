@@ -42,9 +42,10 @@
 <body>
 
 <div ng-app="app-dev">
-    <!--<url-locale-include alias="test"></url-locale-include>-->
-    <url-locale-include alias="gantt"></url-locale-include>
-    <!--<ng-include src="'gantt/gantt.html'"></ng-include>-->
+    <div ng-controller="InitializationController as initCtrl"
+         ng-init="initCtrl.setMasterMode(true)">
+        <url-locale-include alias="gantt"></url-locale-include>
+    </div>
 </div>
 
 <!--Bower-->
@@ -80,6 +81,7 @@
     <script src="gantt/services/gantt-options.service.js"></script>
 
     <!--Controllers-->
+    <script src="gantt/initialization.controller.js"></script>
     <script src="gantt/dialogs/gantt-baselines.controller.js"></script>
     <script src="gantt/gantt.controller.js"></script>
     <script src="gantt/status-bar/status-bar.controller.js"></script>

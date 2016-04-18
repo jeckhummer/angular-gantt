@@ -1,8 +1,10 @@
+<div  class="exposition_block">
 
-<div id="gantt" class="exposition_block">
-
-    <div class="gantt_block">
-        <div class="top-bar">
+    <div ng-controller="GanttController as ganttCtrl"
+         class="gantt_block"
+         id="gantt">
+        <div ng-show="ganttCtrl.masterMode"
+             class="top-bar">
             <url-locale-include alias="status-bar"></url-locale-include>
             <url-locale-include alias="tabs"></url-locale-include>
 
@@ -10,65 +12,52 @@
         </div>
 
         <!--GANTT-->
-        <div ng-controller="GanttController as ganttCtrl">
-            <div ng-if="!ganttCtrl.isEmpty" class="gantt" dialog-background>
+        <div ng-if="!ganttCtrl.isEmpty" class="gantt" dialog-background>
 
-                <table class="gantt-backbone-table" style="width: 100%;">
-                    <tr>
-                        <td class="context-actions-bar">
-                            <url-locale-include alias="context-actions-bar"></url-locale-include>
-                        </td>
-                        <td rowspan="2"
-                            class="gantt-right-block"
-                            style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}">
+            <table class="gantt-backbone-table" style="width: 100%;">
+                <tr>
+                    <td ng-show="ganttCtrl.masterMode"
+                        class="context-actions-bar">
+                        <url-locale-include alias="context-actions-bar"></url-locale-include>
+                    </td>
+                    <td rowspan="2"
+                        class="gantt-right-block"
+                        style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}">
 
-                            <div style="width: {{ganttCtrl.zoom.getValue()}}%">
-                                <timeline></timeline>
-                            </div>
+                        <div style="width: {{ganttCtrl.zoom.getValue()}}%">
+                            <timeline></timeline>
+                        </div>
 
-                            <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%">
-                                <url-locale-include alias="task"></url-locale-include>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="gantt-left-block"
-                            style="
+                        <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%">
+                            <url-locale-include alias="task"></url-locale-include>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="gantt-left-block"
+                        ng-show="ganttCtrl.masterMode"
+                        style="
                                 width:{{ganttCtrl.infoBlockWidth.getValue()}}%;
                                 vertical-align: bottom;
                                 overflow-x: {{ganttCtrl.isZoomed() ? 'scroll' : 'hidden'}}">
-                            <div class="task-info-block">
-                                <url-locale-include alias="task-info"></url-locale-include>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class="gantt-left-block" style="width:{{ganttCtrl.infoBlockWidth.getValue()}}%">
-                </div>
-
-                <div class="gantt-right-block"
-                     style="
-                         width:{{100 - ganttCtrl.infoBlockWidth.getValue()}}%;
-                         overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}
-                     ">
-
-                    <div class="">
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-            </div>
-
+                        <div class="task-info-block">
+                            <url-locale-include alias="task-info"></url-locale-include>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
         </div>
+
+        <div class="dialogs">
+            <url-locale-include alias="timeline-options"></url-locale-include>
+            <url-locale-include alias="task-editor"></url-locale-include>
+            <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
+            <url-locale-include alias="processing-lock"></url-locale-include>
+        </div>
+
     </div>
 
-    <div class="dialogs">
-        <url-locale-include alias="timeline-options"></url-locale-include>
-        <url-locale-include alias="task-editor"></url-locale-include>
-        <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
-        <url-locale-include alias="processing-lock"></url-locale-include>
-    </div>
 
     <style>
         .todo {
@@ -87,8 +76,8 @@
         }
     </style>
 
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <div style="margin:20px; display:none">
         <h2>TODOs:</h2>

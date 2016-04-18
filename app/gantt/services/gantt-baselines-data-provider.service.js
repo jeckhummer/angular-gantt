@@ -5,17 +5,18 @@
     function GanttBaselinesDataProviderService(GanttHttpService) {
         var service = {
             getBaselines: getBaselines,
-            saveBaselines: saveBaselines
+            saveBaselines: saveBaselines,
+            deleteBaseline: deleteBaseline
         };
-        
+
         _init();
         return service;
-        
-        function _init(){
-            
+
+        function _init() {
+
         }
 
-        function getBaselines(){
+        function getBaselines() {
             var promise = GanttHttpService.sendRequest('GetBaselines')
                 .then(function (data) {
                     var baselines = {};
@@ -39,6 +40,15 @@
             };
 
             var promise = GanttHttpService.sendRequest('SaveBaseline', data);
+            return promise;
+        }
+
+        function deleteBaseline(name) {
+            var data = {
+                baseline: name
+            };
+
+            var promise = GanttHttpService.sendRequest('DeleteBaseline', data);
             return promise;
         }
     }

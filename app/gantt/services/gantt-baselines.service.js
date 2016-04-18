@@ -46,8 +46,11 @@
         }
 
         function deleteBaseline(name){
-            delete baselines[name];
-            onBaselinesChanged();
+            GanttBaselinesDataProviderService.deleteBaseline(name)
+                .then(function () {
+                    delete baselines[name];
+                    onBaselinesChanged();
+                });
         }
 
         function getTask(taskID){

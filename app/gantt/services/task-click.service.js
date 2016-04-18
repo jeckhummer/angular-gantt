@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('TaskClickService', TaskClickService);
 
-    function TaskClickService(GanttTasksService, $rootScope) {
+    function TaskClickService(GanttTasksService, $rootScope, GanttTasksDictionaryService) {
         var tasksSelectionMap = {};
         var selectedTasksCount = 0;
         var lastRightClicked = null;
@@ -33,13 +33,13 @@
         }
 
         function selectAll() {
-            var tasks = GanttTasksService.getAll();
+            var tasks = _getAllTasks();
             tasks.forEach((task)=>tasksSelectionMap[task.id] = true);
             selectedTasksCount = GanttTasksService.getTasksCount();
         }
 
         function unselectAll() {
-            var tasks = GanttTasksService.getAll();
+            var tasks = _getAllTasks();
             tasks.forEach((task)=>tasksSelectionMap[task.id] = false);
             selectedTasksCount = 0;
         }
@@ -61,7 +61,7 @@
         }
 
         function getSelectedTasks() {
-            var tasks = GanttTasksService.getAll();
+            var tasks = _getAllTasks();
             var selected = tasks.filter((task)=>tasksSelectionMap[task.id]);
             return selected;
         }
@@ -77,6 +77,11 @@
         function getSelectedTasksNames() {
             var names = getSelectedTasks().map((task)=>task.name);
             return names;
+        }
+
+        function _getAllTasks() {
+            var tasks = GanttTasksDictionaryService.getRange();
+            return tasks;
         }
     }
 })();

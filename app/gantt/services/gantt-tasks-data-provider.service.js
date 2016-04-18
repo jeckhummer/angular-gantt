@@ -47,12 +47,22 @@
             return promise;
         }
 
-        function moveTaskUp(){
-            //return GanttHttpService.sendRequest('gantt-task', task);
+        function moveTaskUp(id) {
+            var data = {
+                id: id,
+                orderType: "up"
+            };
+            var promise = GanttHttpService.sendRequest('UpDownTask', data);
+            return promise;
         }
 
-        function moveTaskDown(){
-            //return GanttHttpService.sendRequest('gantt-task', task);
+        function moveTaskDown(id) {
+            var data = {
+                id: id,
+                orderType: "down"
+            };
+            var promise = GanttHttpService.sendRequest('UpDownTask', data);
+            return promise;
         }
     }
 })();

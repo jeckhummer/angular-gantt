@@ -1,7 +1,8 @@
 (function(){
     angular.module('gantt').controller('GanttBaselinesController', GanttBaselinesController);
 
-    function GanttBaselinesController (GanttBaselinesService, GanttTasksService, TaskClickService, $scope) {
+    function GanttBaselinesController(GanttBaselinesService, GanttTasksDictionaryService,
+                                      GanttTasksService, TaskClickService, $scope) {
         var ctrl = this;
         ctrl.toggleBaseline = toggleBaseline;
         ctrl.isCurrentBaseline = isCurrentBaseline;
@@ -9,6 +10,7 @@
         ctrl.deleteBaseline = deleteBaseline;
         ctrl.getTasksCount = getTasksCount;
         ctrl.getTasksNames = getTasksNames;
+        ctrl.onDeleteClick = onDeleteClick;
         ctrl.name = '';
 
         $scope.$on('baselines-changed', initNames);
@@ -37,11 +39,16 @@
 
         function addBaseline(name){
             var selectedTasks = TaskClickService.getSelectedTasks();
-            var allTasks = GanttTasksService.getAll();
+            var allTasks = GanttTasksDictionaryService.getRange();
             var tasks = selectedTasks.length ? selectedTasks : allTasks;
 
             GanttBaselinesService.addBaseline(name, tasks);
             ctrl.name = '';
+        }
+
+        function onDeleteClick(event, name) {
+            event.stopPropagation();
+            deleteBaseline(name);
         }
 
         function deleteBaseline(name){

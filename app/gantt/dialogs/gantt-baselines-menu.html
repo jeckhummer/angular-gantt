@@ -9,7 +9,7 @@
                     class="list-group-item"
                     ng-class="{'active': baselinesCtrl.isCurrentBaseline(name)}">
                 {{name}}
-                <span ng-click="baselinesCtrl.deleteBaseline(name)"
+                <span ng-click="baselinesCtrl.onDeleteClick($event,name)"
                       class="glyphicon glyphicon-remove pull-right"
                       aria-hidden="true"></span>
             </button>

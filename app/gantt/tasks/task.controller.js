@@ -2,13 +2,12 @@
     angular.module('gantt').controller('TaskController', TaskController);
 
     function TaskController($scope, DateService, TimelineService, GanttBaselinesService,
-                            GanttTasksService, GanttOptionsService, GanttTasksHierarchyService,
-                            DialogService){
+                            GanttTasksService, GanttOptionsService, GanttTasksHierarchyService){
         var ctrl = this;
-        ctrl.openTaskEditor = openTaskEditor;
         ctrl.moveTaskUp = moveTaskUp;
         ctrl.moveTaskDown = moveTaskDown;
         ctrl.indent = GanttOptionsService.indentOptions;
+        ctrl.masterMode = GanttOptionsService.masterMode;
 
         $scope.$watchCollection('task', init);
 
@@ -16,12 +15,6 @@
         $scope.$on('boundaries-changed', () => initBaseline(ctrl));
         $scope.$on('baselines-changed', () => initBaseline(ctrl));
         $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
-
-        function openTaskEditor(id){
-            if(GanttOptionsService.masterMode){
-                DialogService.toggleDialog('task-editor', id);
-            }
-        }
 
         function init(task){
             if(task){

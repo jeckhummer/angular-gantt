@@ -6,11 +6,13 @@
         ctrl.isActive = isActive;
         ctrl.toggle = toggle;
 
-        function toggle(){
-            DialogService.toggleDialog(ctrl.dialogName, ctrl.arg, ctrl.group);
+        function toggle() {
+            if (!ctrl.disabled) {
+                DialogService.toggleDialog(ctrl.dialogName, ctrl.arg, ctrl.group);
+            }
         }
 
-        function isActive(){
+        function isActive() {
             return DialogService.isActiveDialog(ctrl.dialogName);
         }
     }

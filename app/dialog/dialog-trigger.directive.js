@@ -13,7 +13,8 @@
                 dialogName: '@dialogTrigger',
                 isToggle: '@dialogToggle',
                 group: '@dialogGroup',
-                arg: '=dialogArgument'
+                arg: '=dialogArgument',
+                disabled: '=dialogDisabled'
             },
             link: link
         };

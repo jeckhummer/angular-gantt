@@ -14,13 +14,13 @@
 
             <div class="pull-left btn-group-vertical btn-group-xs"
                  style="margin-right: {{5 + taskCtrl.indent.getValue() * taskCtrl.nestingDepth}}px">
-                <button class="btn btn-default"
+                <button class="btn btn-default icon_btn"
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isFirstTaskWithinSiblings}"
                         ng-click="taskCtrl.moveTaskUp(taskCtrl.id, $event)">
                     <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </button>
-                <button class="btn btn-default"
+                <button class="btn btn-default icon_btn"
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isLastTaskWithinSiblings}"
                         ng-click="taskCtrl.moveTaskDown(taskCtrl.id, $event)">

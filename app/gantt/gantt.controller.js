@@ -2,7 +2,7 @@
     angular.module('gantt').controller('GanttController', GanttController);
 
     function GanttController (GanttTasksService, GanttOptionsService, $scope,
-                              $q, $rootScope, GanttTasksHierarchyService) {
+                              $q, $rootScope) {
         var ganttCtrl = this;
         var dataDefer = $q.defer();
 

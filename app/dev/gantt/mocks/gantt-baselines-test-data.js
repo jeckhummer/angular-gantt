@@ -1,5 +1,5 @@
 (function () {
-    angular.module('app-dev').value('GanttBaselinesTestData', getGanttBaselinesTestData());
+    angular.module('dev.gantt.mocks').value('GanttBaselinesTestData', getGanttBaselinesTestData());
     function getGanttBaselinesTestData() {
         var baselines = {
             'Saved Baseline 1': [

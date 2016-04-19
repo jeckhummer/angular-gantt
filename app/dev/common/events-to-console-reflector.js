@@ -1,5 +1,5 @@
 (function () {
-    angular.module('devRootScope',[]).config(RootScopeDecorator);
+    angular.module('dev.common.events-to-console-reflector',[]).config(RootScopeDecorator);
 
     function RootScopeDecorator($provide) {
         $provide.decorator("$rootScope", EventToConsoleReflector);

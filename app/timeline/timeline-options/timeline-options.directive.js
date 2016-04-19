@@ -7,15 +7,10 @@
         var directive = {
             templateUrl: URLLocaleService.getURL('timeline.options'),
             restrict: 'E',
-            scope: {
-                'onSave': '&',
-                'onBack': '&'
-            },
+            scope: true,
             link: function ($scope) {
                 initOptions();
 
-                $scope.saveConfig = $scope.onSave();
-                $scope.back = $scope.onBack();
                 $scope.notifyAboutChanges = notifyAboutChanges;
                 $scope.onStripesTypeChange = onStripesTypeChange;
 
@@ -23,9 +18,6 @@
 
                 function initOptions(){
                     $scope.config = TimelineService.getConfig();
-                    $scope.config.forEach(function (type) {
-                        type.stripes = type.stripes === "true" || type.stripes === "True" || type.stripes === true;
-                    });
                     $scope.stripesTypeName = getStripesTypeIndex();
                 }
 

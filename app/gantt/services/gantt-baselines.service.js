@@ -1,7 +1,8 @@
 (function () {
     angular.module('gantt').factory('GanttBaselinesService', GanttBaselinesService);
 
-    function GanttBaselinesService(GanttBaselinesDataProviderService, $rootScope, GanttTaskFactoryService) {
+    function GanttBaselinesService(GanttBaselinesDataProviderService, $rootScope,
+                                   GanttTaskFactoryService, NotificationService) {
         var baselines = {};
         var currentBaselineName = null;
 
@@ -20,7 +21,9 @@
         return service;
 
         function init(){
-            GanttBaselinesDataProviderService.getBaselines().then(_initBaselines);
+            var suppressOK = true;
+            var promise = GanttBaselinesDataProviderService.getBaselines().then(_initBaselines);
+            NotificationService.notify('Loading baselines', promise, suppressOK);
         }
 
         function _initBaseline(name, baseline) {
@@ -39,10 +42,11 @@
         }
 
         function addBaseline(name, baseline){
-            GanttBaselinesDataProviderService.saveBaselines(name, baseline)
+            var promise = GanttBaselinesDataProviderService.saveBaseline(name, baseline)
                 .then(function () {
                     _initBaseline(name, baseline);
                 });
+            NotificationService.notify('Saving baseline', promise);
         }
 
         function deleteBaseline(name){

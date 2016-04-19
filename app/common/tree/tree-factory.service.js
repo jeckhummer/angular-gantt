@@ -1,6 +1,7 @@
+'use strict';
+
 (function () {
-    'use strict';
-    angular.module('common').service('TreeFactoryService', TreeFactoryService);
+    angular.module('common.tree').service('TreeFactoryService', TreeFactoryService);
 
     function TreeFactoryService(IDDictionaryFactoryService) {
         this.create = create;

@@ -9,9 +9,11 @@
 
         var TASK_ADDITION_STRATEGIES = {
             'PREPEND': 0,
-            'APPEND': 1,
+            'APPEND': 1
         };
         var taskMovementStrategy = TASK_ADDITION_STRATEGIES.PREPEND;
+
+        var _masterMode = true;
 
         var service = {
             getTaskAdditionStrategy: getTaskAdditionStrategy,
@@ -19,9 +21,26 @@
             zoomOptions: zoomOptions,
             indentOptions: indentOptions,
             infoBlockWidthOptions: infoBlockWidthOptions,
-            masterMode: true
+            isMasterMode: isMasterMode,
+            toggleMasterMode: toggleMasterMode,
+            setMasterMode: setMasterMode
         };
         return service;
+
+        function isMasterMode(){
+            return _masterMode;
+        }
+
+        function toggleMasterMode(){
+            console.log('master mode',_masterMode);
+            _masterMode = !_masterMode;
+            return _masterMode;
+        }
+
+        function setMasterMode(val){
+            _masterMode = val;
+            return _masterMode;
+        }
 
         function getTaskAdditionStrategy(){
             return taskMovementStrategy;

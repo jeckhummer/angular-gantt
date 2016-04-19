@@ -1,5 +1,5 @@
 (function () {
-    angular.module('common').component('urlLocaleInclude', {
+    angular.module('common.locale.url').component('urlLocaleInclude', {
         template: '<ng-include src="$ctrl.url"></ng-include>',
         controller: URLLocaleController,
         bindings: {

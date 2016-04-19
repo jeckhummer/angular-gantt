@@ -3,9 +3,11 @@
     <div ng-controller="GanttController as ganttCtrl"
          class="gantt_block"
          id="gantt">
-        <div ng-show="ganttCtrl.masterMode"
-             class="top-bar">
-            <url-locale-include alias="status-bar"></url-locale-include>
+        <div class="top-bar">
+            <div class="btn-sm status-bar">
+                <status></status>
+            </div>
+
             <url-locale-include alias="tabs"></url-locale-include>
 
             <div style="clear:both"></div>
@@ -16,7 +18,7 @@
 
             <table class="gantt-backbone-table" style="width: 100%;">
                 <tr>
-                    <td ng-show="ganttCtrl.masterMode"
+                    <td ng-show="ganttCtrl.isMasterMode()"
                         class="context-actions-bar">
                         <url-locale-include alias="context-actions-bar"></url-locale-include>
                     </td>
@@ -35,7 +37,7 @@
                 </tr>
                 <tr>
                     <td class="gantt-left-block"
-                        ng-show="ganttCtrl.masterMode"
+                        ng-show="ganttCtrl.isMasterMode()"
                         style="
                                 width:{{ganttCtrl.infoBlockWidth.getValue()}}%;
                                 vertical-align: bottom;
@@ -50,7 +52,7 @@
         </div>
 
         <div class="dialogs">
-            <url-locale-include alias="timeline-options"></url-locale-include>
+            <url-locale-include alias="options"></url-locale-include>
             <url-locale-include alias="task-editor"></url-locale-include>
             <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
             <url-locale-include alias="processing-lock"></url-locale-include>

@@ -7,7 +7,7 @@
         ctrl.moveTaskUp = moveTaskUp;
         ctrl.moveTaskDown = moveTaskDown;
         ctrl.indent = GanttOptionsService.indentOptions;
-        ctrl.masterMode = GanttOptionsService.masterMode;
+        ctrl.isMasterMode = GanttOptionsService.isMasterMode;
 
         $scope.$watchCollection('task', init);
 

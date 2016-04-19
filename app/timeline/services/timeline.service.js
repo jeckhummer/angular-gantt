@@ -20,16 +20,14 @@
 
         function configureTimeline(_config) {
             _config.forEach(function (type) {
-                if (type.visible === "true") {
-                    type.visible = true;
-                }
-
-                if (type.visible === "false") {
-                    type.visible = false;
-                }
+                type.visible = _parseBoolean(type.visible);
+                type.stripes = _parseBoolean(type.stripes);
             });
-            //_config.visible = Boolean.parse(_config.visible);
             config = _config;
+        }
+
+        function _parseBoolean(str){
+            return str === true || str === "True" || str === "true";
         }
 
         function configureCalculateBoundariesTriggers(events){

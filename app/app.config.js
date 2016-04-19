@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
+angular.module('app', ['gantt', 'timeline', 'common', 'dialog']);
 
 (function () {
     angular.module('timeline').config(TimelineConfig);
@@ -81,8 +81,7 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
     function URLLocaleServiceConfig(URLLocaleServiceProvider){
         var urlMapping = [
             { name: 'gantt', url: 'gantt/gantt.html'},
-            { name: 'status-bar', url: 'gantt/status-bar/status-bar.html'},
-            { name: 'tabs', url: 'gantt/status-bar/tabs.html'},
+            { name: 'tabs', url: 'gantt/tabs/tabs.html'},
             { name: 'context-actions-bar', url: 'gantt/context-actions-bar/context-actions-bar.html'},
             { name: 'task', url: 'gantt/tasks/task.html'},
             { name: 'task-info', url: 'gantt/tasks/tasks-info.html'},
@@ -92,7 +91,7 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog' ]);
             { name: 'timeline.options', url: 'timeline/timeline-options/timeline-options.directive.html'},
             { name: 'timeline.stripes', url: 'timeline/timeline-stripes/timeline-stripes.directive.html'},
 
-            { name: 'timeline-options', url: 'gantt/dialogs/options.html'},
+            { name: 'options', url: 'gantt/dialogs/options/options.html'},
             { name: 'task-editor', url: 'gantt/dialogs/task-editor.html'},
             { name: 'gantt-baselines-menu', url: 'gantt/dialogs/gantt-baselines-menu.html'},
             { name: 'processing-lock', url: 'gantt/dialogs/processing-lock.html'},

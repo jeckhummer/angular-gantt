@@ -1,9 +1,9 @@
 (function () {
     angular.module('gantt').factory('GanttTasksService', GanttTasksService);
 
-    function GanttTasksService(GanttTasksDictionaryService, GanttTaskFactoryService, DialogService,
-                               $rootScope, GanttTasksDataProviderService, GanttTasksHierarchyService,
-                               GanttOptionsService) {
+    function GanttTasksService(GanttTasksDictionaryService, GanttTaskFactoryService, $rootScope,
+                               GanttTasksDataProviderService, GanttTasksHierarchyService,
+                               GanttOptionsService, NotificationService) {
         var service = {
             reload: reload,
             getAll: getAll,
@@ -51,7 +51,8 @@
         }
 
         function reload() {
-            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Fetching tasks');
+            var suppressOK = true;
+            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Fetching tasks', suppressOK);
         }
 
         function moveTaskUp(id){
@@ -71,32 +72,10 @@
             $rootScope.$broadcast('tasks-changed', tasks);
         }
 
-        function _modifyGanttState(action, msg){
-            var promise = action()
-                .then(
-                    function (data) {
-                        $rootScope.$broadcast('notify-timeout-fade', `${msg} SUCCEED!`);
-                        _initTasks(data);
-                    },
-                    function (error) {
-                        var isError = true;
-                        var _msg = `${msg} FAILED! error: ${error}`;
-                        $rootScope.$broadcast('notify', _msg, isError);
-                    })
-                .finally(function () {
-                    DialogService.deactivateDialog('processing-lock');
-                });
-
-            DialogService.activateDialog('processing-lock', null, true);
-
-            $rootScope.$broadcast('notify-fade', msg + '...', promise);
+        function _modifyGanttState(action, msg, suppressOK){
+            var promise = action().then(_initTasks);
+            NotificationService.notifyLock(msg, promise, suppressOK);
             return promise;
-        }
-
-        function _notifyAboutError(description) {
-            return function (error) {
-
-            }
         }
     }
 })();

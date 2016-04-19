@@ -1,5 +1,5 @@
 (function () {
-    angular.module('app-dev').config(GanttTaskDataProviderServiceMockConfig);
+    angular.module('dev.gantt.mocks').config(GanttTaskDataProviderServiceMockConfig);
 
     function GanttTaskDataProviderServiceMockConfig($provide) {
         $provide.decorator("GanttTasksDataProviderService", GanttTaskDataProviderServiceMock);
@@ -20,10 +20,10 @@
         };
 
         var _DELAY_ENABLED = true;
-        //var _DELAY_ENABLED = false;
+        var _DELAY_ENABLED = false;
 
         var _DELAYS = {
-            getTasks: 500,
+            getTasks: 5000,
             addTask: 3500,
             updateTask: 3000,
             deleteTask: 3000

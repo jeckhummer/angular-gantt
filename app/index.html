@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<!--Bower-->
+<!--BOWER-->
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
@@ -61,11 +61,42 @@
 <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
 <script src="bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
 
-<!--Gantt-->
-    <!--Config-->
+<!--COMMON-->
+    <!--DATE-->
+    <script src="common/date/moment.js"></script>
+    <script src="common/date/date-interval.js"></script>
+    <script src="common/date/date-interval-position.js"></script>
+
+    <!--TREE-->
+    <script src="common/tree/tree.config.js"></script>
+    <script src="common/tree/tree-node.js"></script>
+    <script src="common/tree/tree-data-adapter-factory.js"></script>
+    <script src="common/tree/tree-factory.service.js"></script>
+
+    <!--LOCALE-->
+    <script src="common/locale/locale.config.js"></script>
+
+    <!--URL-->
+    <script src="common/locale/url/url.config.js"></script>
+    <script src="common/locale/url/url-locale.service.js"></script>
+    <script src="common/locale/url/url-locale-include.component.js"></script>
+
+    <!--STATUS-->
+    <script src="common/status/status.config.js"></script>
+    <script src="common/status/status.service.js"></script>
+    <script src="common/status/status.component.js"></script>
+
+<script src="common/common.config.js"></script>
+<script src="common/gradient-option.js"></script>
+<script src="common/id-dictionary-factory.service.js"></script>
+<script src="common/string-to-number.directive.js"></script>
+<script src="common/ng-right-click.directive.js"></script>
+
+<!--GANTT-->
+    <!--CONFIG-->
     <script src="gantt/gantt.config.js"></script>
 
-    <!--Services-->
+    <!--SERVICES-->
     <script src="gantt/services/gantt-http.service.js"></script>
     <script src="gantt/services/gantt-baselines-data-provider.service.js"></script>
     <script src="gantt/services/gantt-config-data-provider.service.js"></script>
@@ -74,43 +105,43 @@
     <script src="gantt/services/gantt-tasks-hierarchy.service.js"></script>
     <script src="gantt/services/gantt-tasks-data-provider.service.js"></script>
     <script src="gantt/services/gantt-task-factory.service.js"></script>
-    <script src="gantt/status-bar/tabs.controller.js"></script>
     <script src="gantt/services/gantt-baselines.service.js"></script>
     <script src="gantt/services/date.service.js"></script>
     <script src="gantt/services/task-click.service.js"></script>
     <script src="gantt/services/gantt-options.service.js"></script>
+    <script src="gantt/services/notification.service.js"></script>
 
-    <!--Controllers-->
+    <!--CONTROLLERS-->
+    <script src="gantt/dialogs/options/options.controller.js"></script>
     <script src="gantt/initialization.controller.js"></script>
     <script src="gantt/dialogs/gantt-baselines.controller.js"></script>
     <script src="gantt/gantt.controller.js"></script>
-    <script src="gantt/status-bar/status-bar.controller.js"></script>
     <script src="gantt/tasks/task.controller.js"></script>
     <script src="gantt/tasks/task-click.controller.js"></script>
-    <script src="gantt/dialogs/options.controller.js"></script>
+    <script src="gantt/dialogs/options/timeline-options.controller.js"></script>
     <script src="gantt/dialogs/task-editor.controller.js"></script>
     <script src="gantt/tasks/task-context-menu.controller.js"></script>
     <script src="gantt/context-actions-bar/context-actions.controller.js"></script>
+    <script src="gantt/tabs/tabs.controller.js"></script>
 
-    <!--Filters-->
+    <!--FILTERS-->
     <script src="gantt/gantt-date.filter.js"></script>
 
-    <!--Directives-->
+    <!--DIRECTIVES-->
     <script src="gantt/tasks/date-interval.directive.js"></script>
 
-<!--Timeline-->
-    <!--Directives-->
+<!--TIMELINE-->
+    <!--DIRECTIVES-->
     <script src="timeline/timeline/timeline.directive.js"></script>
     <script src="timeline/timeline-stripes/timeline-stripes.directive.js"></script>
     <script src="timeline/timeline-options/timeline-options.directive.js"></script>
 
-    <!--Services-->
+    <!--SERVICES-->
     <script src="timeline/services/timeline-type.service.js"></script>
     <script src="timeline/services/timeline-grid.service.js"></script>
     <script src="timeline/services/timeline.service.js"></script>
 
-
-<!--Dialog-->
+<!--DIALOG-->
     <script src="dialog/dialog.config.js"></script>
     <script src="dialog/dialog.service.js"></script>
     <script src="dialog/dialog-background.controller.js"></script>
@@ -119,48 +150,26 @@
     <script src="dialog/dialog-trigger.directive.js"></script>
     <script src="dialog/dialog-trigger.controller.js"></script>
 
-
-<!--Common-->
-    <script src="common/common.config.js"></script>
-
-    <!--Date-->
-    <script src="common/date/moment.js"></script>
-    <script src="common/date/date-interval.js"></script>
-    <script src="common/date/date-interval-position.js"></script>
-
-    <!--DIRECTIVES-->
-    <script src="common/string-to-number.directive.js"></script>
-    <script src="common/ng-right-click.directive.js"></script>
-
-    <!--Tree-->
-    <script src="common/tree/tree-node.js"></script>
-    <script src="common/tree/tree-nodes-ordered-list.js"></script>
-    <script src="common/tree/tree-data-adapter-factory.js"></script>
-    <script src="common/tree/tree-factory.service.js"></script>
-
-    <!--URL-Locale-->
-    <script src="common/url-locale.service.js"></script>
-    <script src="common/url-locale-include.directive.js"></script>
-
-    <!--Others-->
-    <script src="common/gradient-option.js"></script>
-    <script src="common/id-dictionary-factory.service.js"></script>
-    <script src="common/events-to-console-reflector.js"></script>
-
-<!--Config-->
+<!--CONFIG-->
     <script src="app.config.js"></script>
+    <script src="app-dev.config.js"></script>
 
-<!--Dev-->
-    <script src="dev/app-dev.config.js"></script>
-    <script src="dev/http-delay-decorator.js"></script>
-    <script src="dev/mocks/gantt-tasks-test-data.js"></script>
-    <script src="dev/mocks/gantt-config-test-data.js"></script>
-    <script src="dev/mocks/gantt-baselines-test-data.js"></script>
-    <script src="dev/mocks/gantt-baselines-data-provider.service.mock.js"></script>
-    <script src="dev/mocks/gantt-config-data-provider.service.mock.js"></script>
-    <script src="dev/mocks/gantt-task-data-provider.service.mock.js"></script>
+<!--DEV-->
+    <!--COMMON-->
+    <script src="dev/common/http-delay-decorator.js"></script>
+    <script src="dev/common/events-to-console-reflector.js"></script>
 
-<!--Test-->
+    <!--GANTT-->
+        <!--MOCKS-->
+        <script src="dev/gantt/mocks/gantt-mocks.config.js"></script>
+        <script src="dev/gantt/mocks/gantt-tasks-test-data.js"></script>
+        <script src="dev/gantt/mocks/gantt-config-test-data.js"></script>
+        <script src="dev/gantt/mocks/gantt-baselines-test-data.js"></script>
+        <script src="dev/gantt/mocks/gantt-baselines-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-config-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-task-data-provider.service.mock.js"></script>
+
+<!--TEST-->
     <script src="test/test.config.js"></script>
     <script src="test/test.controller.js"></script>
     <script src="test/test.directive.js"></script>

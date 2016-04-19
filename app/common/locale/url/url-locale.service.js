@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    angular.module('common').provider('URLLocaleService', URLLocaleServiceProvider);
+    angular.module('common.locale.url').provider('URLLocaleService', URLLocaleServiceProvider);
 
     function URLLocaleServiceProvider(){
         var provider = this;
@@ -20,7 +20,7 @@
         }
 
         function $get(){
-            var service = new URLLocale(_range, _prefix)
+            var service = new URLLocale(_range, _prefix);
             return service;
         }
     }

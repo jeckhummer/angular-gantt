@@ -3,7 +3,7 @@
     angular.module('dialog')
         .directive('dialogTrigger', DialogTrigger);
 
-    function DialogTrigger($compile) {
+    function DialogTrigger($compile, GanttOptionsService) {
         var directive = {
             restrict: 'A',
             transclude: 'element',
@@ -28,6 +28,7 @@
                 var innerHtml = element.html();
                 element.empty();
                 element.removeAttr('dialog-trigger');
+                console.log(element.attr('ng-show'), GanttOptionsService.isMasterMode());
                 $compile(element)(scope);
                 element.html(innerHtml);
             });

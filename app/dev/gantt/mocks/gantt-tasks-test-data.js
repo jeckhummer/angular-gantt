@@ -1,5 +1,5 @@
 (function () {
-    angular.module('app-dev').value('GanttTasksTestData', getGanttTasksTestData());
+    angular.module('dev.gantt.mocks').value('GanttTasksTestData', getGanttTasksTestData());
 
     function getGanttTasksTestData() {
         var tasks = [

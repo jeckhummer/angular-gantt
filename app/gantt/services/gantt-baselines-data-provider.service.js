@@ -5,7 +5,7 @@
     function GanttBaselinesDataProviderService(GanttHttpService) {
         var service = {
             getBaselines: getBaselines,
-            saveBaselines: saveBaselines,
+            saveBaseline: saveBaseline,
             deleteBaseline: deleteBaseline
         };
 
@@ -31,7 +31,7 @@
             return promise;
         }
 
-        function saveBaselines(name, tasks) {
+        function saveBaseline(name, tasks) {
             var data = {
                 json: JSON.stringify({
                     baseline: name,

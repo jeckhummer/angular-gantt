@@ -1,5 +1,5 @@
 (function () {
-    angular.module('app-dev').value('GanttTimelineTestData', getGanttTimelineTestData());
+    angular.module('dev.gantt.mocks').value('GanttTimelineTestData', getGanttTimelineTestData());
 
     function getGanttTimelineTestData() {
         var timelineConfig = [

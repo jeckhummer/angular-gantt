@@ -1,8 +1,8 @@
 (function () {
-    angular.module('app-dev').config(HttpDelayDecorator);
+    angular.module('dev.common.http-delay-decorator', []).config(HttpDelayDecorator);
 
     function HttpDelayDecorator($provide) {
-        //$provide.decorator("HttpService", DelayedHttpService);
+        $provide.decorator("HttpService", DelayedHttpService);
     }
 
     function DelayedHttpService($delegate, $q) {

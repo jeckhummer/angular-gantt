@@ -4,10 +4,6 @@
     function InitializationController (GanttOptionsService) {
         var initCtrl = this;
 
-        initCtrl.setMasterMode = setMasterMode;
-
-        function setMasterMode(val){
-            GanttOptionsService.masterMode = !!val;
-        }
+        initCtrl.setMasterMode = GanttOptionsService.setMasterMode;
     }
 })();

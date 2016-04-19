@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('OptionsController', OptionsController);
 
-    function OptionsController ($rootScope, GanttOptionsService) {
+    function OptionsController ($scope, GanttOptionsService) {
         var ctrl = this;
 
         ctrl.save = save;
@@ -9,7 +9,7 @@
         ctrl.toggleMasterMode = GanttOptionsService.toggleMasterMode;
 
         function save(){
-            $rootScope.$broadcast('options.save');
+            $scope.$broadcast('options.save');
         }
     }
 })();

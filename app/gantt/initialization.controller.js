@@ -12,6 +12,5 @@
             GanttOptionsService.setLogUserID(logUserID);
             GanttOptionsService.setDOCID(DOCID);
         }
-
     }
 })();

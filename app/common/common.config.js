@@ -2,7 +2,8 @@
 
 (function () {
     angular.module('common', [
-        'common.tree',
+        'common.struct.tree',
+        'common.struct.tree',
         'common.status',
         'common.locale',
         'common.date'

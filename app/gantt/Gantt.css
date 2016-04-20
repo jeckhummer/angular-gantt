@@ -90,6 +90,7 @@
 
 .gantt_block .tasks_wrapper {
     border-top-width: 2px;
+    position: relative;
     cursor:pointer;
 }
 
@@ -297,4 +298,12 @@ button.list-group-item:focus{
     border-radius:2px;
     font-size: 15px;
     padding: 40px;
+}
+
+.today-line{
+    border-right: 1px solid red;
+    position: absolute;
+    top:0px;
+    height:100%;
+    width:0px;
 }

@@ -2,7 +2,7 @@
     angular.module('gantt').controller('GanttController', GanttController);
 
     function GanttController (GanttTasksService, GanttOptionsService, $scope,
-                              $q, $rootScope) {
+                              $q, $rootScope, TimelineService) {
         var ganttCtrl = this;
         var dataDefer = $q.defer();
 
@@ -11,6 +11,7 @@
         ganttCtrl.isZoomed = isZoomed;
         ganttCtrl.infoBlockWidth = GanttOptionsService.infoBlockWidthOptions;
         ganttCtrl.isMasterMode = GanttOptionsService.isMasterMode;
+        ganttCtrl.getTodayLineLeft = TimelineService.getTodayLineWidth;
 
         $scope.$on('tasks-changed', TasksDataChangesHandler);
         $rootScope.$broadcast('notify-fade', 'Loading tasks ...', dataDefer.promise);

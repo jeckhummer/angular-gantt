@@ -4,6 +4,7 @@
     angular.module('common', [
         'common.tree',
         'common.status',
-        'common.locale'
+        'common.locale',
+        'common.date'
     ]);
 }());

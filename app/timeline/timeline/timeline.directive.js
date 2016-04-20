@@ -1,5 +1,4 @@
 'use strict';
-angular.module('timeline', ['ngSanitize']);
 
 (function () {
     angular.module('timeline')

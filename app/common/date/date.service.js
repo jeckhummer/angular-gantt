@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    angular.module('gantt').factory('DateService', DateService);
+    angular.module('common.date').factory('DateService', DateService);
 
     function DateService() {
         var today = moment().format('YYYY-MM-DD');

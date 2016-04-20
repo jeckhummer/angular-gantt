@@ -6,7 +6,6 @@
         var provider = this;
 
         var config = [];
-        var boundaries;
         var calculateBoundariesTriggers = [];
         var calculateBoundariesMethod;
         var configurationProvider;
@@ -42,11 +41,15 @@
             configurationProviderInjector = func;
         }
 
-        function TimelineService($rootScope, $injector) {
+        function TimelineService($rootScope, $injector, DateService) {
+            var boundaries;
+            var _todayLineWidth = 0;
+
             var service = {
                 getConfig: getConfig,
                 saveConfig: saveConfig,
-                getBoundaries: getBoundaries
+                getBoundaries: getBoundaries,
+                getTodayLineWidth: getTodayLineWidth
             };
             init();
             return service;
@@ -80,8 +83,17 @@
                 return boundaries;
             }
 
+            function getTodayLineWidth(){
+                return _todayLineWidth;
+            }
+
             function calculateBoundaries() {
                 boundaries = calculateBoundariesMethod($injector);
+
+                var todayMoment = DateService.createMoment(DateService.today);
+                var todayDateInterval = DateService.createDateInterval(boundaries.start, todayMoment);
+                _todayLineWidth = DateService.createDateIntervalPosition(boundaries, todayDateInterval).width;
+
                 onBoundariesChanges();
             }
 

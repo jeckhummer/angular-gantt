@@ -16,6 +16,8 @@
             { id: 3, name: "SubTask B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
         ];
 
+        //tasks = [];
+
         var saveResponse = {
             success: {
                 status: 'success',

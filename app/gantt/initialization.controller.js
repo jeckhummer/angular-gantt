@@ -4,9 +4,14 @@
     function InitializationController (GanttOptionsService) {
         var initCtrl = this;
 
-        initCtrl.setMasterMode = GanttOptionsService.setMasterMode;
-        initCtrl.setUserID = GanttOptionsService.setUserID;
-        initCtrl.setLogUserID = GanttOptionsService.setLogUserID;
-        initCtrl.setDOCID = GanttOptionsService.setDOCID;
+        initCtrl.init = init;
+
+        function init(masterMode, userID, logUserID, DOCID){
+            GanttOptionsService.setMasterMode(masterMode);
+            GanttOptionsService.setUserID(userID);
+            GanttOptionsService.setLogUserID(logUserID);
+            GanttOptionsService.setDOCID(DOCID);
+        }
+
     }
 })();

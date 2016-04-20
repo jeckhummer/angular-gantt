@@ -25,6 +25,8 @@
             color: #595959;
             font-family: "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: 13px;
+
+            padding: 10px;
         }
 
         body * {
@@ -43,10 +45,7 @@
 
 <div ng-app="app-dev">
     <div ng-controller="InitializationController as initCtrl"
-         ng-init="initCtrl.setMasterMode(true)"
-         ng-init="initCtrl.setUserID(1)"
-         ng-init="initCtrl.setLogUserID(1)"
-         ng-init="initCtrl.setDOCID(6)">
+         ng-init="initCtrl.init(true, 1, 1, 6)">
         <url-locale-include alias="gantt"></url-locale-include>
     </div>
 </div>

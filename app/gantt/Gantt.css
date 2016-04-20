@@ -8,8 +8,19 @@
 
 .gantt_block .gantt {
     position: relative;
-    /*border: 1px solid #CCC;*/
     background-color: white;
+}
+
+.gantt_block .gantt.empty{
+    height: 450px;
+    border: 1px solid #CCC;
+    background-color: #FBFBFB;
+}
+
+.gantt_block .empty-stub{
+    padding-top:200px;
+    text-align: center;
+    font-size: 1.5em;
 }
 
 .gantt_block .top-bar{

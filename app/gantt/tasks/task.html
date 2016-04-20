@@ -4,7 +4,7 @@
      ng-class-odd="'task_wrapper_odd'">
 
 
-    <div dialog-trigger="task-editor" dialog-argument="task.id" dialog-disabled="!taskCtrl.masterMode">
+    <div dialog-trigger="task-editor" dialog-argument="task.id" dialog-disabled="!taskCtrl.isMasterMode()">
         <timeline-stripes></timeline-stripes>
 
         <div ng-show="taskCtrl.hasBaseline">

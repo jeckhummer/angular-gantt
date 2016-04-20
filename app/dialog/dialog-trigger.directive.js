@@ -28,7 +28,6 @@
                 var innerHtml = element.html();
                 element.empty();
                 element.removeAttr('dialog-trigger');
-                console.log(element.attr('ng-show'), GanttOptionsService.isMasterMode());
                 $compile(element)(scope);
                 element.html(innerHtml);
             });

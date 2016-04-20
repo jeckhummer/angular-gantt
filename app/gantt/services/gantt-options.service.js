@@ -14,6 +14,9 @@
         var taskMovementStrategy = TASK_ADDITION_STRATEGIES.PREPEND;
 
         var _masterMode = true;
+        var _DOCID = 0;
+        var _UID = 0;
+        var _LOGUID = 0;
 
         var service = {
             getTaskAdditionStrategy: getTaskAdditionStrategy,
@@ -23,7 +26,13 @@
             infoBlockWidthOptions: infoBlockWidthOptions,
             isMasterMode: isMasterMode,
             toggleMasterMode: toggleMasterMode,
-            setMasterMode: setMasterMode
+            setMasterMode: setMasterMode,
+            getUserID: getUserID,
+            setUserID: setUserID,
+            getLogUserID: getLogUserID,
+            setLogUserID: setLogUserID,
+            getDOCID: getDOCID,
+            setDOCID: setDOCID
         };
         return service;
 
@@ -44,6 +53,30 @@
 
         function getTaskAdditionStrategy(){
             return taskMovementStrategy;
+        }
+
+        function getUserID(){
+            return _UID;
+        }
+
+        function setUserID(UID){
+            _UID = UID;
+        }
+
+        function getLogUserID(){
+            return _LOGUID;
+        }
+
+        function setLogUserID(LOGUID){
+            _LOGUID = LOGUID;
+        }
+
+        function getDOCID(){
+            return _DOCID;
+        }
+
+        function setDOCID(DOCID){
+            _DOCID = DOCID;
         }
     }
 })();

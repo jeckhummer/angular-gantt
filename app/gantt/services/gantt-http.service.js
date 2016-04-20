@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('GanttHttpService', GanttHttpService);
 
-    function GanttHttpService($q, $http) {
+    function GanttHttpService($q, $http, GanttOptionsService) {
         var _urlPrefix = "GanttApi.asmx/";
 
         var service = {
@@ -33,9 +33,9 @@
 
         function _getConfigObj() {
             return {
-                uid: 1,
-                docid: 6,
-                logUid: 1
+                uid: GanttOptionsService.getUserID(),
+                docid: GanttOptionsService.getDOCID(),
+                logUid: GanttOptionsService.getLogUserID()
             };
         }
     }

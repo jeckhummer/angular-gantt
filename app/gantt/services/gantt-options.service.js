@@ -4,7 +4,7 @@
 
     function GanttOptionsService() {
         var indentOptions = new GradientOption(0, 50, 5, 35);
-        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 30);
+        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 35);
         var zoomOptions = new GradientOption(100, 100000, 50, 100);
 
         var TASK_ADDITION_STRATEGIES = {

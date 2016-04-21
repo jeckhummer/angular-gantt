@@ -32,7 +32,7 @@
                     </td>
                     <td rowspan="2"
                         class="gantt-right-block"
-                        style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: top;">
+                        style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: bottom;">
 
                         <div style="width: {{ganttCtrl.zoom.getValue()}}%">
                             <timeline></timeline>
@@ -66,6 +66,8 @@
             <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
             <url-locale-include alias="processing-lock"></url-locale-include>
         </div>
+
+        <url-locale-include alias="task-context-menu"></url-locale-include>
 
     </div>
 

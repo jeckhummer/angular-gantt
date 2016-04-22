@@ -30,7 +30,8 @@
                 ctrl.isParent = GanttTasksHierarchyService.isParent(task.id);
                 ctrl.isCompleted = task.isCompleted;
                 ctrl.percentComplete = task.percentComplete;
-                ctrl.dateInterval = task.dateInterval;
+                ctrl.dateInterval = task.dateInterval
+                ctrl.parentID = task.parentID;
                 initPosition(ctrl);
                 initBaseline(ctrl);
             }

@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('TaskEditorController', TaskEditorController);
 
-    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService){
+    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttTasksHierarchyService){
         var ctrl = this;
         var today = new Date();
         var taskEndDateBackup;
@@ -25,8 +25,12 @@
         }
 
         function parentTasksPredicate(value){
-            return value.id != ctrl.task.id;
+            var id = ctrl.task.id;
+            var isItself = value.id != id;
+            var isChild = GanttTasksHierarchyService.isChildOf(value.id, id);
+            return  isItself && !   isChild;
         }
+
         function initTask(event, taskID){
             ctrl.editMode = taskID != null;
 

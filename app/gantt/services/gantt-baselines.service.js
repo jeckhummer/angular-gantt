@@ -46,15 +46,16 @@
                 .then(function () {
                     _initBaseline(name, baseline);
                 });
-            NotificationService.notify('Saving baseline', promise);
+            return promise;
         }
 
         function deleteBaseline(name){
-            GanttBaselinesDataProviderService.deleteBaseline(name)
+            var promise = GanttBaselinesDataProviderService.deleteBaseline(name)
                 .then(function () {
                     delete baselines[name];
                     onBaselinesChanged();
                 });
+            return promise;
         }
 
         function getTask(taskID){

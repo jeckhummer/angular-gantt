@@ -3,7 +3,7 @@
     angular.module('dialog')
         .directive('dialogTrigger', DialogTrigger);
 
-    function DialogTrigger($compile, GanttOptionsService) {
+    function DialogTrigger($compile) {
         var directive = {
             restrict: 'A',
             transclude: 'element',

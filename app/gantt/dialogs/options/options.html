@@ -1,29 +1,33 @@
-<div ng-controller="OptionsController as optionsCtrl"
-     dialog-window="settings"
-     class="dialog-window dialog-window-right">
+<div dialog-window="settings" class="dialog-window">
+    <div ng-controller="OptionsController as optionsCtrl"
+         class="panel panel-info">
 
-    <div class="text-center">
-        <input bs-switch
-               ng-change="optionsCtrl.toggleMasterMode()"
-               ng-model="optionsCtrl.masterMode"
-               type="checkbox"
-               switch-size="small"
-               switch-label-width="90"
-               switch-label="Master mode"
-               switch-active="true"
-               switch-on-text="ON"
-               switch-off-text="OFF"
-               switch-on-color="success"
-               switch-off-color="danger">
-    </div>
-    <br/>
+        <div class="panel-heading"><h5 class="panel-title">Options</h5></div>
+        <div class="panel-body">
+            <div class="text-center">
+                <input bs-switch
+                       ng-change="optionsCtrl.toggleMasterMode()"
+                       ng-model="optionsCtrl.masterMode"
+                       type="checkbox"
+                       switch-size="small"
+                       switch-label-width="90"
+                       switch-label="Master mode"
+                       switch-active="true"
+                       switch-on-text="ON"
+                       switch-off-text="OFF"
+                       switch-on-color="success"
+                       switch-off-color="danger">
+            </div>
+            <br/>
 
-    <div ng-controller="TimelineOptionsController as timelineCtrl">
-        <timeline-options></timeline-options>
-    </div>
+            <div ng-controller="TimelineOptionsController as timelineCtrl">
+                <timeline-options></timeline-options>
+            </div>
 
-    <br/>
-    <div class="text-right">
-        <div ng-click="optionsCtrl.save()" class="btn btn-default btn-sm">Save</div>
+            <br/>
+            <div class="text-center">
+                <div ng-click="optionsCtrl.save()" class="btn btn-default btn-sm" style="width:100px;">Save</div>
+            </div>
+        </div>
     </div>
 </div>

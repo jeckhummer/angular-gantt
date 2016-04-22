@@ -1,68 +1,69 @@
-<!--TASK EDITOR-->
-<div ng-controller="TaskEditorController as taskEditorCtrl"
-     dialog-window="task-editor"
-     class="col-md-offset-3 col-md-5 dialog-window-right">
+<div dialog-window="task-editor" class="dialog-window" style="width:450px;">
+    <div ng-controller="TaskEditorController as taskEditorCtrl"
+         class="panel panel-info">
 
-    <ng-form name="taskForm">
-        <div class="form-group" ng-class="{'has-error': taskForm.name.$invalid}">
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="name" class="control-label">Name</label>
-                    <input ng-model="taskEditorCtrl.task.name"
-                           class="form-control"
-                           name="name"
-                           required
-                           type="text"
-                           id="name"
-                           placeholder="Task Name">
+        <div class="panel-heading"><h3 class="panel-title">Task editor</h3></div>
+        <div class="panel-body">
+            <ng-form name="taskForm">
+                <div class="form-group" ng-class="{'has-error': taskForm.name.$invalid}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="name" class="control-label">Name</label>
+                            <input ng-model="taskEditorCtrl.task.name"
+                                   class="form-control"
+                                   name="name"
+                                   required
+                                   type="text"
+                                   id="name"
+                                   placeholder="Task Name">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="control-label" for="parent-id">Parent Task</label>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="control-label" for="parent-id">Parent Task</label>
 
                     <span class="glyphicon pull-right glyphicon-remove"
                           aria-hidden="true"
                           ng-click="taskEditorCtrl.parentTaskFilter = ''"
                           style="color:#CCC; cursor:pointer; padding: 3px 3px 0 3px;"></span>
 
-                    <input ng-model="taskEditorCtrl.parentTaskFilter"
-                           type="search"
-                           class="pull-right text-right bottom-line-input"
-                           placeholder="Filter"
-                           style="width:200px;">
+                            <input ng-model="taskEditorCtrl.parentTaskFilter"
+                                   type="search"
+                                   class="pull-right text-right bottom-line-input"
+                                   placeholder="Filter"
+                                   style="width:200px;">
 
-                    <select
-                        name="parent-id"
-                        class="form-control"
-                        id="parent-id"
-                        ng-options="task.id as task.name
+                            <select
+                                    name="parent-id"
+                                    class="form-control"
+                                    id="parent-id"
+                                    ng-options="task.id as task.name
                         for task in taskEditorCtrl.parentTasks
                         | filter: taskEditorCtrl.parentTasksPredicate
                         | filter: {name: taskEditorCtrl.parentTaskFilter}"
-                        ng-model="taskEditorCtrl.task.parentID">
-                            <option value="">--</option>
-                    </select>
-                    <!--{{taskEditorCtrl.task.parentID}}-->
+                                    ng-model="taskEditorCtrl.task.parentID">
+                                <option value="">--</option>
+                            </select>
+                            <!--{{taskEditorCtrl.task.parentID}}-->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <input bs-switch
-                   ng-change="taskEditorCtrl.toggleIsMilestone()"
-                   ng-model="taskEditorCtrl.task.isMilestone"
-                   type="checkbox"
-                   switch-size="small"
-                   switch-label="Milestone"
-                   switch-active="true"
-                   switch-on-text="YES"
-                   switch-off-text="NO"
-                   switch-on-color="primary"
-                   switch-off-color="default">
+                <div class="form-group">
+                    <input bs-switch
+                           ng-change="taskEditorCtrl.toggleIsMilestone()"
+                           ng-model="taskEditorCtrl.task.isMilestone"
+                           type="checkbox"
+                           switch-size="small"
+                           switch-label="Milestone"
+                           switch-active="true"
+                           switch-on-text="YES"
+                           switch-off-text="NO"
+                           switch-on-color="primary"
+                           switch-off-color="default">
 
             <span ng-show="taskEditorCtrl.task.isMilestone">
                 <input bs-switch
@@ -77,79 +78,81 @@
                        switch-on-color="success"
                        switch-off-color="danger">
             </span>
-        </div>
-
-        <div class="form-group" ng-class="{'has-error':taskForm.$error.datesOrder}">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label" for="start">Start date</label>
-                    <input ng-model="taskEditorCtrl.task._start"
-                           class="form-control"
-                           type="date"
-                           required
-                           id="start">
                 </div>
-                <div class="col-md-6"
+
+                <div class="form-group" ng-class="{'has-error':taskForm.$error.datesOrder}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label" for="start">Start date</label>
+                            <input ng-model="taskEditorCtrl.task._start"
+                                   class="form-control"
+                                   type="date"
+                                   required
+                                   id="start">
+                        </div>
+                        <div class="col-md-6"
+                             ng-hide="taskEditorCtrl.task.isMilestone">
+
+                            <label class="control-label" for="end">End date</label>
+                            <input ng-model="taskEditorCtrl.task._end"
+                                   class="form-control"
+                                   type="date"
+                                   required
+                                   id="end">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" ng-show="taskForm.$error.datesOrder">
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Error!</strong> Invalid dates order. Do you want to swap dates?
+                            <button class="btn btn-warning btn-xs pull-right"
+                                    ng-click="taskEditorCtrl.swapDates()"
+                                    type="button">Swap dates
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{'has-error': taskForm.percentComplete.$invalid}"
                      ng-hide="taskEditorCtrl.task.isMilestone">
 
-                    <label class="control-label" for="end">End date</label>
-                    <input ng-model="taskEditorCtrl.task._end"
-                           class="form-control"
-                           type="date"
-                           required
-                           id="end">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="percentage-complete" class="control-label">% complete</label>
+                            <input ng-model="taskEditorCtrl.task.percentComplete"
+                                   required
+                                   name="percentComplete"
+                                   type="number"
+                                   max="100"
+                                   min="0"
+                                   class="form-control"
+                                   id="percentage-complete">
+                        </div>
+                        <div class="col-md-9">
+                            <label for="percentage-complete-range" class="control-label"></label>
+                            <input type="range"
+                                   id="percentage-complete-range"
+                                   name="percentComplete"
+                                   min="0"
+                                   max="100"
+                                   step="1"
+                                   string-to-number
+                                   ng-model="taskEditorCtrl.task.percentComplete">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12" ng-show="taskForm.$error.datesOrder">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Error!</strong> Invalid dates order. Do you want to swap dates?
-                    <button class="btn btn-warning btn-xs pull-right"
-                            ng-click="taskEditorCtrl.swapDates()"
-                            type="button">Swap dates
+                <div class="text-right">
+                    <button ng-click="taskEditorCtrl.submit()" type="button" class="btn btn-success">
+                        {{ !taskEditorCtrl.editMode ? 'Add Task' : 'Save Task'}}
                     </button>
-                    <div class="clearfix"></div>
+                    <button type="button" dialog-trigger="task-editor" class="btn btn-default">Cancel</button>
                 </div>
-            </div>
+            </ng-form>
         </div>
-
-        <div class="form-group"
-             ng-class="{'has-error': taskForm.percentComplete.$invalid}"
-             ng-hide="taskEditorCtrl.task.isMilestone">
-
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="percentage-complete" class="control-label">% complete</label>
-                    <input ng-model="taskEditorCtrl.task.percentComplete"
-                           required
-                           name="percentComplete"
-                           type="number"
-                           max="100"
-                           min="0"
-                           class="form-control"
-                           id="percentage-complete">
-                </div>
-                <div class="col-md-9">
-                    <label for="percentage-complete-range" class="control-label"></label>
-                    <input type="range"
-                           id="percentage-complete-range"
-                           name="percentComplete"
-                           min="0"
-                           max="100"
-                           step="1"
-                           string-to-number
-                           ng-model="taskEditorCtrl.task.percentComplete">
-                </div>
-            </div>
-        </div>
-
-        <div class="text-right">
-            <button ng-click="taskEditorCtrl.submit()" type="button" class="btn btn-success">
-                {{ !taskEditorCtrl.editMode ? 'Add Task' : 'Save Task'}}
-            </button>
-            <button type="button" dialog-trigger="task-editor" class="btn btn-default">Cancel</button>
-        </div>
-    </ng-form>
+    </div>
 </div>

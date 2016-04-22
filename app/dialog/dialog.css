@@ -5,14 +5,16 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.4);
+    padding: 10px;
 }
 
 .dialog-window{
-    background-color: white;
-    border-radius: 3px;
-    border: 1px solid #CCC;
-    margin-top: 10px;
-    padding: 10px;
+    float: right;
+    /*background-color: white;*/
+    /*border-radius: 3px;*/
+    /*border: 1px solid #CCC;*/
+    /*margin-top: 10px;*/
+    /*padding: 10px;*/
 }
 
 .dialog-window-right{

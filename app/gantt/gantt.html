@@ -1,11 +1,13 @@
-<div  class="exposition_block">
+<div class="exposition_block">
 
     <div ng-controller="GanttController as ganttCtrl"
          class="gantt_block"
          id="gantt">
         <div class="top-bar">
-            <div class="btn-sm status-bar">
-                <status></status>
+            <div class="gantt-toolbox">
+                <url-locale-include alias="context-actions-bar"></url-locale-include>
+
+                <!--<status></status>-->
             </div>
 
             <url-locale-include alias="tabs"></url-locale-include>
@@ -14,9 +16,9 @@
         </div>
 
         <!--GANTT-->
-        <div  class="gantt"
-              dialog-background
-              ng-class="{'empty': ganttCtrl.isEmpty}">
+        <div class="gantt"
+             dialog-background
+             ng-class="{'empty': ganttCtrl.isEmpty}">
 
             <div class="empty-stub" ng-show="ganttCtrl.isEmpty">
                 No tasks to display...
@@ -26,9 +28,10 @@
                    class="gantt-backbone-table"
                    style="width: 100%;">
                 <tr>
-                    <td ng-show="ganttCtrl.isMasterMode()"
-                        class="context-actions-bar">
-                        <url-locale-include alias="context-actions-bar"></url-locale-include>
+                    <td ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info">
+                        <span class="gantt-project-name">Super Duper Mega Project</span>
+                        <br />
+                        <span class="gantt-project-baseline">Baseline: &nbsp; Saved Baseline 1 - 22/04/2016</span>
                     </td>
                     <td rowspan="2"
                         class="gantt-right-block"

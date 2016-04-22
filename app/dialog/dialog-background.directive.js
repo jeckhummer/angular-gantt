@@ -17,7 +17,7 @@
             var background = angular.element(`
                 <div ng-show="dialogCtrl.isActive()"
                      ng-click="dialogCtrl.onClick()"
-                     class="fog-cover container-fluid"></div>
+                     class="fog-cover"></div>
             `);
             $compile(background)(scope);
             element.css('position', 'relative');
@@ -30,9 +30,7 @@
             $rootScope.$broadcast('dialog-background-loaded');
 
             function _initDialogWindow(window){
-                //var selector = `[dialog-window]${groupName ? '[dialog-group=' + groupName + ']' : ""}`;
                 var name = $(window).attr('dialog-window');
-                $(window).addClass('dialog-window');
 
                 var windowWrapper = $compile(`
                     <div ng-click="$event.stopPropagation();"

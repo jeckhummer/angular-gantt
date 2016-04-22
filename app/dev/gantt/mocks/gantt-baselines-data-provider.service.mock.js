@@ -11,7 +11,8 @@
 
         var service = {
             getBaselines: getBaselines,
-            saveBaseline: saveBaseline
+            saveBaseline: saveBaseline,
+            deleteBaseline: deleteBaseline
         };
 
         var _DELAY_ENABLED = true;
@@ -19,7 +20,8 @@
 
         var _DELAYS = {
             getBaselines: 1 * 1000,
-            saveBaseline: 2 * 1000
+            saveBaseline: 2 * 1000,
+            deleteBaseline: 2 * 1000
         };
 
         _init();
@@ -39,6 +41,13 @@
         function saveBaseline(name, baseline){
             var promise = _getPromise('saveBaseline', function () {
                 _baselines[name] = baseline;
+            });
+            return promise;
+        }
+
+        function deleteBaseline(name){
+            var promise = _getPromise('deleteBaseline', function () {
+                delete _baselines[name];
             });
             return promise;
         }

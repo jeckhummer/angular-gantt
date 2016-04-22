@@ -13,6 +13,9 @@
         ctrl.onDeleteClick = onDeleteClick;
         ctrl.name = '';
 
+        ctrl.inProcess = false;
+        ctrl.processTest = '';
+
         $scope.$on('baselines-changed', initNames);
         init();
 
@@ -42,7 +45,15 @@
             var allTasks = GanttTasksDictionaryService.getRange();
             var tasks = selectedTasks.length ? selectedTasks : allTasks;
 
-            GanttBaselinesService.addBaseline(name, tasks);
+            var promise = GanttBaselinesService.addBaseline(name, tasks);
+
+            ctrl.inProcess = true;
+            ctrl.processText = 'Saving baseline...';
+
+            promise.finally(function () {
+                ctrl.inProcess = false;
+            });
+
             ctrl.name = '';
         }
 
@@ -52,7 +63,14 @@
         }
 
         function deleteBaseline(name){
-            GanttBaselinesService.deleteBaseline(name);
+            var promise = GanttBaselinesService.deleteBaseline(name);
+
+            ctrl.inProcess = true;
+            ctrl.processText = 'Deleting baseline...';
+
+            promise.finally(function () {
+                ctrl.inProcess = false;
+            });
         }
 
         function getTasksCount(){

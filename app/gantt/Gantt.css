@@ -27,12 +27,6 @@
     margin-bottom: 3px;
 }
 
-.gantt_block .status-bar{
-    float:left;
-    font-size: 13px;
-    padding-left: 0px;
-}
-
 .gantt_block .tab {
     margin-left: 3px;
     margin-right: 0;
@@ -96,7 +90,7 @@
 
 .task-selected{
     height:46px;
-    background-color: #E4E4E4 !important;
+    background-color: #EEEEEE !important;
     -moz-box-shadow:    inset 0px 0px 10px -3px #1F1F1F;
     -webkit-box-shadow: inset 0px 0px 10px -3px #1F1F1F;
     box-shadow:         inset 0px 0px 10px -3px #1F1F1F;
@@ -307,4 +301,23 @@ button.list-group-item:focus{
     top:0px;
     height:100%;
     width:0px;
+}
+
+.gantt-toolbox{
+    float: left;
+}
+
+.gantt-project-info{
+    height: 50px;
+    background-color: #EEEEEE;
+    padding: 5px;
+}
+
+.gantt-project-name{
+    font-weight:bold;
+    font-size: 1.2em;
+}
+
+.gantt-project-baseline{
+
 }

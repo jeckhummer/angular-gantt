@@ -1,7 +1,7 @@
 (function () {
     angular.module('gantt').factory('GanttTasksHierarchyService', GanttTasksHierarchyService);
 
-    function GanttTasksHierarchyService(GanttTasksDictionaryService, TreeFactoryService, $rootScope) {
+    function GanttTasksHierarchyService(GanttTasksDictionaryService, $rootScope) {
         var _tree;
 
         var service = {
@@ -10,7 +10,8 @@
             getAllNodes: getAllNodes,
             isFirstChild: isFirstChild,
             isLastChild: isLastChild,
-            isParent: isParent
+            isParent: isParent,
+            isChildOf: isChildOf
         };
 
         $rootScope.$on('tasks-changed', _init);
@@ -19,12 +20,7 @@
 
         function _init(){
             var tasks = GanttTasksDictionaryService.getRange();
-            _tree = new TreeFactoryService.create(tasks, new _DataAdapterFactoryService());
-        }
-
-        function _DataAdapterFactoryService(){
-            var service = new TreeDataAdapterFactory(IDGetter, parentIDGetter, orderGetter);
-            return service;
+            _tree = new Tree(tasks, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGetter, orderSetter);
 
             function IDGetter(data){
                 return data.id;
@@ -36,6 +32,18 @@
 
             function orderGetter(data){
                 return data.order;
+            }
+
+            function IDSetter(data, val){
+                data.id = val;
+            }
+
+            function parentIDSetter(data, val){
+                data.parentID = val;
+            }
+
+            function orderSetter(data, val){
+                data.order = val;
             }
         }
 
@@ -64,6 +72,24 @@
 
         function isParent(id){
             return _tree.isParent(id);
+        }
+
+        function isChildOf(id, suspectParentID){
+            var node = get(id);
+            var parentNode = get(node.getParentID());
+            var parentID = parentNode.getID();
+            var isChild = false;
+
+            while(parentID !== null){
+                if(parentID == suspectParentID){
+                    isChild = true;
+                    break;
+                }
+                parentNode = get(parentID);
+                parentID = parentNode.getParentID();
+            }
+
+            return isChild;
         }
     }
 })();

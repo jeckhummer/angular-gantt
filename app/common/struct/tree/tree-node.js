@@ -1,67 +1,117 @@
-function TreeNode(treeDataAdapter){
+function TreeNode(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGetter, orderSetter){
     var _node = this;
-    var _dataAdapter = treeDataAdapter ? treeDataAdapter : new TreeDataAdapterStub();
+    var _order = 1;
+    var _ID = 0;
+    var _parentID = null;
+    var _children = new OrderDelegate([],
+        function (node, val) { node.setOrder(val); },
+        function (node) { return node.getOrder(); }
+    );
 
-    _node.getOrder = _dataAdapter.getOrder;
-    _node.getID = _dataAdapter.getID;
-    _node.getParentID = _dataAdapter.getParentID;
+    _node.level = 0;
 
-    _node.setOrder = _dataAdapter.setOrder;
-    _node.setID = _dataAdapter.setID;
-    _node.setParentID = _dataAdapter.setParentID;
+    _node.getOrder = getOrder;
+    _node.setOrder = setOrder;
+    _node.getID = getID;
+    _node.setID = setID;
+    _node.getParentID = getParentID;
+    _node.setParentID = setParentID;
 
-    _node.childIDs = [];
-    _node.deleted = false;
-    _node.level = 1;
-}
+    _node.getChildren = getChildren;
+    _node.populateChildren = populateChildren;
+    _node.insertChild = insertChild;
+    _node.appendChild = appendChild;
+    _node.prependChild = prependChild;
+    _node.insertChildAfter = insertChildAfter;
+    _node.insertChildBefore = insertChildBefore;
+    _node.removeChild = removeChild;
+    _node.isFirstChild = isFirstChild;
+    _node.isLastChild = isLastChild;
 
-function TreeDataAdapterStub(data){
-    var _data = data;
-    var _ID = 0, _order = 1, _parentID = null;
-
-    return {
-        getID: getID,
-        setID: setID,
-
-        getOrder: getOrder,
-        setOrder: setOrder,
-        incOrder: incOrder,
-        decOrder: decOrder,
-
-        getParentID: getParentID,
-        setParentID: setParentID,
-
-        getData: getData
-    };
-
-    function getID(){
-        return _ID;
+    function getOrder() {
+        if(orderGetter && data !== {}){
+            return orderGetter(data);
+        }else{
+            return _order;
+        }
     }
-    function setID(val){
-        _ID = val;
-    }
-
-    function getParentID(){
-        return _parentID;
-    }
-    function setParentID(val){
-        _parentID = val;
+    function setOrder(val) {
+        if(orderGetter){
+            orderSetter(data, val);
+        }else{
+            _order = val;
+        }
     }
 
-    function getOrder(){
-        return _order;
+    function getID() {
+        if(IDGetter){
+            return IDGetter(data);
+        }else{
+            return _ID;
+        }
     }
-    function setOrder(val){
-        _order= val;
-    }
-    function incOrder(){
-        setOrder(getOrder() + 1);
-    }
-    function decOrder(){
-        setOrder(getOrder() - 1);
+    function setID(val) {
+        if(IDSetter){
+            IDSetter(data, val);
+        }else{
+            _ID = val;
+        }
     }
 
-    function getData(){
-        return _data;
+    function getParentID () {
+        if(parentIDGetter){
+            return parentIDGetter(data);
+        }else{
+            return _parentID;
+        }
+    }
+    function setParentID (val) {
+        if(parentIDSetter){
+            parentIDSetter(data, val);
+        }else{
+            _parentID = val;
+        }
+    }
+
+
+    function getChildren(){
+        return _children.getOrderedList();
+    }
+
+    function populateChildren(nodes){
+        _children.populate(nodes);
+    }
+
+    function insertChild(node, order){
+        var position = order - 1;
+        _children.insert(node, position);
+    }
+
+    function appendChild(node){
+        _children.append(node);
+    }
+
+    function prependChild(node){
+        _children.prepend(node);
+    }
+
+    function insertChildAfter(node, nodeBefore){
+        _children.insertAfter(node, nodeBefore);
+    }
+
+    function insertChildBefore(node, nodeAfter){
+        _children.insertBefore(node, nodeAfter);
+    }
+
+    function removeChild(node){
+        _children.remove(node);
+    }
+
+    function isFirstChild(node){
+        return _children.isFirst(node);
+    }
+
+    function isLastChild(node){
+        return _children.isLast(node);
     }
 }

@@ -1,8 +1,8 @@
 (function () {
     angular.module('gantt').factory('GanttTasksDictionaryService', GanttTasksDictionaryService);
 
-    function GanttTasksDictionaryService(IDDictionaryFactoryService) {
-        var dictionary = IDDictionaryFactoryService.create(TaskIDProvider);
+    function GanttTasksDictionaryService() {
+        var dictionary = new IDDictionary(TaskIDProvider);
         return dictionary;
 
         function TaskIDProvider(task){

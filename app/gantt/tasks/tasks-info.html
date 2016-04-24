@@ -18,13 +18,16 @@
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isFirstTaskWithinSiblings}"
                         ng-click="taskCtrl.moveTaskUp(taskCtrl.id, $event)">
-                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"
+                          style=" position: relative; left:-1px;"></span>
                 </button>
+
                 <button class="btn btn-default icon_btn"
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isLastTaskWithinSiblings}"
                         ng-click="taskCtrl.moveTaskDown(taskCtrl.id, $event)">
-                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"
+                          style=" position: relative; left:-1px;"></span>
                 </button>
             </div>
 

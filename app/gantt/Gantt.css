@@ -303,14 +303,14 @@ button.list-group-item:focus{
     width:0px;
 }
 
-.gantt-toolbox{
+.gantt-toolbar{
     float: left;
 }
 
 .gantt-project-info{
     height: 50px;
     background-color: #EEEEEE;
-    padding: 5px;
+    padding-left: 10px;
 }
 
 .gantt-project-name{
@@ -319,5 +319,5 @@ button.list-group-item:focus{
 }
 
 .gantt-project-baseline{
-
+    color: #929292;
 }

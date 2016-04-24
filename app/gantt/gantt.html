@@ -1,118 +1,75 @@
-<div class="exposition_block">
+<div ng-controller="GanttController as ganttCtrl"
+     class="gantt_block"
+     id="gantt">
+    <div class="top-bar">
+        <div class="gantt-toolbar">
+            <url-locale-include alias="toolbar"></url-locale-include>
 
-    <div ng-controller="GanttController as ganttCtrl"
-         class="gantt_block"
-         id="gantt">
-        <div class="top-bar">
-            <div class="gantt-toolbox">
-                <url-locale-include alias="context-actions-bar"></url-locale-include>
-
-                <!--<status></status>-->
-            </div>
-
-            <url-locale-include alias="tabs"></url-locale-include>
-
-            <div style="clear:both"></div>
+            <!--<status></status>-->
         </div>
 
-        <!--GANTT-->
-        <div class="gantt"
-             dialog-background
-             ng-class="{'empty': ganttCtrl.isEmpty}">
+        <url-locale-include alias="tabs"></url-locale-include>
 
-            <div class="empty-stub" ng-show="ganttCtrl.isEmpty">
-                No tasks to display...
-            </div>
+        <div style="clear:both"></div>
+    </div>
 
-            <table ng-if="!ganttCtrl.isEmpty"
-                   class="gantt-backbone-table"
-                   style="width: 100%;">
-                <tr>
-                    <td ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info">
-                        <span class="gantt-project-name">Super Duper Mega Project</span>
-                        <br />
-                        <span class="gantt-project-baseline">Baseline: &nbsp; Saved Baseline 1 - 22/04/2016</span>
-                    </td>
-                    <td rowspan="2"
-                        class="gantt-right-block"
-                        style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: bottom;">
+    <!--GANTT-->
+    <div class="gantt"
+         dialog-background
+         ng-class="{'empty': ganttCtrl.isEmpty}">
 
-                        <div style="width: {{ganttCtrl.zoom.getValue()}}%">
-                            <timeline></timeline>
-                        </div>
+        <div class="empty-stub" ng-show="ganttCtrl.isEmpty">
+            No tasks to display...
+        </div>
 
-                        <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%;">
-                            <url-locale-include alias="task"></url-locale-include>
-                            <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft()}}%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="gantt-left-block"
-                        ng-show="ganttCtrl.isMasterMode()"
-                        style="
+        <table ng-if="!ganttCtrl.isEmpty"
+               class="gantt-backbone-table"
+               style="width: 100%;">
+            <tr>
+                <td ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info">
+                    <div class="gantt-project-name">Super Duper Mega Project</div>
+                    <div class="gantt-project-baseline"
+                         ng-show="ganttCtrl.getCurrentBaselineName() != null">
+                        Baseline: &nbsp; {{ganttCtrl.getCurrentBaselineName()}}
+                    </div>
+                </td>
+                <td rowspan="2"
+                    class="gantt-right-block"
+                    style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: bottom;">
+
+                    <div style="width: {{ganttCtrl.zoom.getValue()}}%">
+                        <timeline></timeline>
+                    </div>
+
+                    <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%;">
+                        <url-locale-include alias="task"></url-locale-include>
+                        <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft()}}%"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="gantt-left-block"
+                    ng-show="ganttCtrl.isMasterMode()"
+                    style="
                                 width:{{ganttCtrl.infoBlockWidth.getValue()}}%;
                                 vertical-align: bottom;
                                 overflow-x: {{ganttCtrl.isZoomed() ? 'scroll' : 'hidden'}}">
-                        <div class="task-info-block">
-                            <url-locale-include alias="task-info"></url-locale-include>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="dialogs">
-            <url-locale-include alias="options"></url-locale-include>
-            <url-locale-include alias="task-editor"></url-locale-include>
-            <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
-            <url-locale-include alias="processing-lock"></url-locale-include>
-        </div>
-
-        <url-locale-include alias="task-context-menu"></url-locale-include>
-
+                    <div class="task-info-block">
+                        <url-locale-include alias="task-info"></url-locale-include>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="clearfix"></div>
     </div>
 
-
-    <style>
-        .todo {
-            font-weight: bold;
-            font-size: 15px;
-            margin-top: 20px;
-        }
-
-        .todo.todo-done li {
-            color: green;
-        }
-
-        .todo.todo-canceled li {
-            color: grey;
-            text-decoration: line-through;
-        }
-    </style>
-
-    <br/>
-    <br/>
-
-    <div style="margin:20px; display:none">
-        <h2>TODOs:</h2>
-        <ul class="todo todo-current">
-            <li> 2 views for app and app-dev</li>
-        </ul>
-        <ul class="todo todo-done">
-            <li> $scope.task.isParent = $scope.task.parent_id == 0; - is not correct!</li>
-            <li> task context menu [mouse right click]</li>
-            <li> ng-if="dateInterval" not working in timeline directive</li>
-            <li> extract timeline into directive!</li>
-            <li> list.overallDateInterval resolve!</li>
-            <li> multiple stripe types</li>
-        </ul>
-        <ul class="todo todo-canceled">
-            <li> millestone (ng-if/ng-show) make more elegant</li>
-            <li> use $router resolve to load dependencies for gantt data(and settings)?</li>
-            <li> user service in common http service?</li>
-            <li> wrapper for httpMock, not for common.http.service</li>
-        </ul>
+    <div class="dialogs">
+        <url-locale-include alias="options"></url-locale-include>
+        <url-locale-include alias="task-editor"></url-locale-include>
+        <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
+        <url-locale-include alias="processing-lock"></url-locale-include>
     </div>
 
+    <url-locale-include alias="task-context-menu"></url-locale-include>
+
+</div>

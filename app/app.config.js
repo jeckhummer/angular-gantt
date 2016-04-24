@@ -82,7 +82,7 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog']);
         var urlMapping = [
             { name: 'gantt', url: 'gantt/gantt.html'},
             { name: 'tabs', url: 'gantt/tabs/tabs.html'},
-            { name: 'context-actions-bar', url: 'gantt/context-actions-bar/context-actions-bar.html'},
+            { name: 'toolbar', url: 'gantt/context-actions-bar/context-actions-bar.html'},
             { name: 'task', url: 'gantt/tasks/task.html'},
             { name: 'task-info', url: 'gantt/tasks/tasks-info.html'},
             { name: 'task-context-menu', url: 'gantt/tasks/task-context-menu.html'},

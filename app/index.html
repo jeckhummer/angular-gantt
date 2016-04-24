@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="dialog/dialog.css">
     <link rel="stylesheet" href="gantt/gantt.css">
 
-    <link rel="stylesheet" href="timeline/timeline-options/timeline-options.css">
-    <link rel="stylesheet" href="timeline/timeline/timeline.css">
-    <link rel="stylesheet" href="timeline/timeline-stripes/timeline-stripes.css">
-
+    <link rel="stylesheet" href="timeline/timeline.css">
 
     <style>
         body {
@@ -43,7 +40,7 @@
 </head>
 <body>
 
-<div ng-app="app-dev">
+<div ng-app="app-dev" class="exposition_block">
     <div ng-controller="InitializationController as initCtrl"
          ng-init="initCtrl.init(true, 1, 1, 6)">
         <url-locale-include alias="gantt"></url-locale-include>

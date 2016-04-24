@@ -33,3 +33,42 @@
 .timeline_bar {
     background-color: #EEEEEE;
 }
+
+.timeline_option{
+    /*display: block;*/
+}
+
+.timeline_options td{
+    vertical-align: middle;
+    padding: 2px 5px;
+    text-align: center;
+}
+
+.timeline_options td:first-child{
+    text-align: center;
+}
+
+.stripe{
+    height:100%;
+    border-left: 1px solid #CCC;
+}
+
+.stripe_wrapper:first-child .stripe{
+    border:0px !important;
+}
+
+.stripe_wrapper{
+    float: left;
+    height:100%;
+}
+
+.timeline_stripes{
+    position: absolute;
+    height:100%;
+    width: 100%;
+    top:0px;
+    left:0px;
+    border-top: 0;
+    border-bottom: 0;
+    overflow: hidden;
+}

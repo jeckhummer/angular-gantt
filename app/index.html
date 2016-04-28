@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css">
+    <link rel="stylesheet" href="bower_components/angular-resizable/angular-resizable.min.css">
 
     <link rel="stylesheet" href="dialog/dialog.css">
     <link rel="stylesheet" href="gantt/gantt.css">
@@ -42,10 +43,14 @@
 
 <div ng-app="app-dev" class="exposition_block">
     <div ng-controller="InitializationController as initCtrl"
-         ng-init="initCtrl.init(true, 1, 1, 6)">
+         ng-init="initCtrl.init(true, 1, 1, 6, 'Super Duper Mega Project')">
         <url-locale-include alias="gantt"></url-locale-include>
     </div>
 </div>
+<!--<div ng-app="app-dev" class="exposition_block">-->
+    <!--<url-locale-include alias="test"></url-locale-include>-->
+<!--</div>-->
+
 
 <!--BOWER-->
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -59,6 +64,7 @@
 <script src="bower_components/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
 <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
 <script src="bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
+<script src="bower_components/angular-resizable/angular-resizable.min.js"></script>
 
 <!--COMMON-->
     <!--DATE-->

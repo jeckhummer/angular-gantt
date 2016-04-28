@@ -17,6 +17,7 @@
         var _DOCID = 0;
         var _UID = 0;
         var _LOGUID = 0;
+        var _projectName = '--';
 
         var service = {
             getTaskAdditionStrategy: getTaskAdditionStrategy,
@@ -32,7 +33,9 @@
             getLogUserID: getLogUserID,
             setLogUserID: setLogUserID,
             getDOCID: getDOCID,
-            setDOCID: setDOCID
+            setDOCID: setDOCID,
+            getProjectName: getProjectName,
+            setProjectName: setProjectName
         };
         return service;
 
@@ -77,6 +80,14 @@
 
         function setDOCID(DOCID){
             _DOCID = DOCID;
+        }
+
+        function getProjectName() {
+            return _projectName;
+        }
+        
+        function setProjectName(projectName) {
+            _projectName = projectName;
         }
     }
 })();

@@ -13,6 +13,7 @@
         ganttCtrl.isMasterMode = GanttOptionsService.isMasterMode;
         ganttCtrl.getTodayLineLeft = TimelineService.getTodayLineWidth;
         ganttCtrl.getCurrentBaselineName = GanttBaselinesService.getCurrentBaselineName;
+        ganttCtrl.getProjectName = GanttOptionsService.getProjectName;
 
         $scope.$on('tasks-changed', TasksDataChangesHandler);
         $rootScope.$broadcast('notify-fade', 'Loading tasks ...', dataDefer.promise);

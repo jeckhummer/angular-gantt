@@ -1,6 +1,32 @@
+<style>
+    .ss-container{
+        display: flex;
+        flex-flow: row nowrap;
+        /*justify-content: space-around;*/
+        /*align-content: space-around;*/
+        height: 400px;
+        background-color: #EEE;
+    }
+    .ss-flex-item{
+        background-color: #CCC;
+        align-self: stretch;
+        flex: 1;
+        margin: 7px;
+        border: 1px solid #BBB;
+    }
+
+    .ss-flex-item.resizable{
+        flex: 0 0 300px;
+    }
+</style>
+
 <div ng-app="test">
 
-    <div ng-controller="testController">
+    <div class="ss-container">
+        <div class="ss-flex-item"
+             resizable r-directions="['right']"
+             r-flex="true"></div>
+        <div class="ss-flex-item"></div>
     </div>
 
 </div>

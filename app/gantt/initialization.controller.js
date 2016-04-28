@@ -6,11 +6,12 @@
 
         initCtrl.init = init;
 
-        function init(masterMode, userID, logUserID, DOCID){
+        function init(masterMode, userID, logUserID, DOCID, projectName){
             GanttOptionsService.setMasterMode(masterMode);
             GanttOptionsService.setUserID(userID);
             GanttOptionsService.setLogUserID(logUserID);
             GanttOptionsService.setDOCID(DOCID);
+            GanttOptionsService.setProjectName(projectName);
         }
     }
 })();

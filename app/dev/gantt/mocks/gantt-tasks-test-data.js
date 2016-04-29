@@ -13,7 +13,12 @@
             { id: 2, name: "SubTask 1A", start: "2015-12-20", end: "2016-04-01", parentID: 1, percentComplete: 55, isMilestone: false, order: 1},
             { id: 11, name: "SubTask 1AA", start: "2015-12-25", end: "2016-03-15", parentID: 2, percentComplete: 55, isMilestone: false, order: 1},
             { id: 4, name: "SubTask 1C", start: "2016-08-16", end: "2016-11-10", parentID: 1, percentComplete: 100, isMilestone: false, order: 3},
-            { id: 3, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            { id: 12, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            // { id: 13, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            // { id: 14, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            // { id: 15, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            // { id: 16, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
+            // { id: 17, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
         ];
 
         //tasks = [];

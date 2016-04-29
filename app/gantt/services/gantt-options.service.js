@@ -4,7 +4,6 @@
 
     function GanttOptionsService() {
         var indentOptions = new GradientOption(0, 50, 5, 35);
-        var infoBlockWidthOptions = new GradientOption(25, 50, 2, 35);
         var zoomOptions = new GradientOption(100, 100000, 50, 100);
 
         var TASK_ADDITION_STRATEGIES = {
@@ -24,7 +23,6 @@
             TASK_ADDITION_STRATEGIES: TASK_ADDITION_STRATEGIES,
             zoomOptions: zoomOptions,
             indentOptions: indentOptions,
-            infoBlockWidthOptions: infoBlockWidthOptions,
             isMasterMode: isMasterMode,
             toggleMasterMode: toggleMasterMode,
             setMasterMode: setMasterMode,
@@ -35,7 +33,9 @@
             getDOCID: getDOCID,
             setDOCID: setDOCID,
             getProjectName: getProjectName,
-            setProjectName: setProjectName
+            setProjectName: setProjectName,
+            LEFT_BLOCK_MAX_WIDTH: 45,
+            LEFT_BLOCK_MIN_WIDTH: 20
         };
         return service;
 

@@ -1,10 +1,8 @@
-
 <div class="timeline_bar">
     <div ng-repeat="gridObject in grids" class="timeline_row">
         <div ng-repeat="grid_item in gridObject.grid" class="timeline_unit_wrapper"
              style="width:{{grid_item.width}}%">
             <div class="timeline_unit" ng-bind-html="grid_item.label"></div>
         </div>
-        <div class="clear"></div>
     </div>
 </div>

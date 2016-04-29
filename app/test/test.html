@@ -1,10 +1,9 @@
 <style>
     .ss-container{
         display: flex;
-        flex-flow: row nowrap;
+        /*flex-flow: row nowrap;*/
         /*justify-content: space-around;*/
         /*align-content: space-around;*/
-        height: 400px;
         background-color: #EEE;
     }
     .ss-flex-item{
@@ -18,15 +17,36 @@
     .ss-flex-item.resizable{
         flex: 0 0 300px;
     }
+
+    .ss-wrapper{
+
+    }
 </style>
 
 <div ng-app="test">
 
-    <div class="ss-container">
-        <div class="ss-flex-item"
-             resizable r-directions="['right']"
-             r-flex="true"></div>
-        <div class="ss-flex-item"></div>
+    <div class="ss-wrapper" ng-controller="testController as ctrl">
+        <div class="ss-container">
+            <div class="ss-flex-item"
+                 resizable r-directions="['right']"
+                 r-width="ctrl.width"
+                 r-flex="true">
+                1
+            </div>
+            <div class="ss-flex-item">
+                2
+            </div>
+        </div>
+        <div class="ss-container" style="height:400px">
+            <div class="ss-flex-item"
+                 r-width="ctrl.width"
+                 resizable r-directions="['right']"
+                 r-no-throttle="true"
+                 r-flex="true">
+            </div>
+            <div class="ss-flex-item">
+            </div>
+        </div>
     </div>
 
 </div>

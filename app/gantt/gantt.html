@@ -22,46 +22,52 @@
             No tasks to display...
         </div>
 
-        <table ng-if="!ganttCtrl.isEmpty"
-               class="gantt-backbone-table"
-               style="width: 100%;">
-            <tr>
-                <td ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info">
-                    <div class="gantt-project-name">
-                        {{ganttCtrl.getProjectName()}}
-                    </div>
-                    <div class="gantt-project-baseline"
-                         ng-show="ganttCtrl.getCurrentBaselineName() != null">
+        <div ng-if="!ganttCtrl.isEmpty" class="gantt-container">
+            <div class="gantt-row-block">
+                <div ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info"
+                     resizable r-directions="['right']" r-width="ganttCtrl.leftBlockWidth" r-flex="true"
+                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}%; max-width: {{ganttCtrl.leftBlockMaxWidth}}%;">
+
+                    <div class="gantt-project-name"> {{ganttCtrl.getProjectName()}} </div>
+
+                    <div class="gantt-project-baseline" ng-show="ganttCtrl.getCurrentBaselineName() != null">
                         Baseline: &nbsp; {{ganttCtrl.getCurrentBaselineName()}}
                     </div>
-                </td>
-                <td rowspan="2"
-                    class="gantt-right-block"
-                    style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: bottom;">
+                </div>
 
-                    <div style="width: {{ganttCtrl.zoom.getValue()}}%">
-                        <timeline></timeline>
+                <div class="gantt-timeline-block" style="overflow: {{ganttCtrl.isZoomed() ? 'auto':'hidden'}}; vertical-align: bottom;">
+                    <div class="full-wrapper" style="overflow-y: scroll; overflow-x: hidden;">
+                        <div style="width: {{ganttCtrl.zoom.getValue()}}%">
+                            <timeline style="position: relative; display: block; left: -{{ganttCtrl.scrollPositionLeft}}px;"></timeline>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="tasks_wrapper" style="width: {{ganttCtrl.zoom.getValue()}}%;">
-                        <url-locale-include alias="task"></url-locale-include>
-                        <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft()}}%"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="gantt-left-block"
-                    ng-show="ganttCtrl.isMasterMode()"
-                    style="
-                                width:{{ganttCtrl.infoBlockWidth.getValue()}}%;
-                                vertical-align: bottom;
-                                overflow-x: {{ganttCtrl.isZoomed() ? 'scroll' : 'hidden'}}">
-                    <div class="task-info-block">
+            <div class="gantt-row-block">
+                <div class="task-info-block" ng-show="ganttCtrl.isMasterMode()"
+                     resizable r-directions="['right']" r-width="ganttCtrl.leftBlockWidth" r-flex="true"
+                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}%; max-width: {{ganttCtrl.leftBlockMaxWidth}}%;">
+
+                    <div style="position: relative; top: -{{ganttCtrl.scrollPositionTop}}px;">
                         <url-locale-include alias="task-info"></url-locale-include>
                     </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+
+                <div class="tasks_wrapper"
+                     style="overflow-x: scroll"
+                     ng-scroll="ganttCtrl.onScroll($event)">
+
+                    <div class="full-wrapper">
+                        <div style="width: {{ganttCtrl.zoom.getValue()}}%;">
+                            <url-locale-include alias="task">
+                            </url-locale-include>
+                        </div>
+                        <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft() * ganttCtrl.zoom.getValue()/100}}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="clearfix"></div>
     </div>
 

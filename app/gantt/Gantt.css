@@ -88,7 +88,7 @@
     cursor: pointer;
     display: flex;
     flex: 1;
-    max-height: 500px;
+    max-height: 517px;
     overflow-y: scroll;
 }
 
@@ -100,15 +100,6 @@
     box-shadow: inset 0px 0px 10px -3px #1F1F1F;
 }
 
-.task_wrapper {
-    border-bottom: 1px dotted #CCC;
-    height: 47px;
-    position: relative;
-}
-
-.task_wrapper:hover {
-    background-color: #F1F1F1 !important;
-}
 
 .gantt_block .task_name {
     text-overflow: ellipsis;
@@ -122,9 +113,6 @@
     position: relative;
 }
 
-.gantt_block .task_wrapper_odd {
-    background-color: #FBFBFB;
-}
 
 .gantt_block .date_label {
     white-space: nowrap;
@@ -177,28 +165,13 @@
     padding: 0px !important;
 }
 
-.gantt-project-info {
-    background-color: #EEEEEE;
-    padding-left: 10px;
-    margin-right: 15px;
-    display: flex;
-    align-self: stretch;
-    border-bottom: 1px solid #CCC;
-}
 
-.task-info-block {
-    max-height: 500px;
-    overflow: hidden;
-}
 
 .gantt-timeline-block {
     display: flex;
     flex: 1;
 }
 
-.task-info-block .task_wrapper {
-    padding: 4px;
-}
 
 .baseline {
     position: absolute;
@@ -308,15 +281,6 @@ button.list-group-item:focus {
     float: left;
 }
 
-.gantt-project-name {
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.gantt-project-baseline {
-    color: #929292;
-}
-
 .rg-left span, .rg-right span {
     border: 0;
 }
@@ -327,15 +291,58 @@ button.list-group-item:focus {
     margin-right: 0px;
 }
 
-.task-info-block, .gantt-project-info {
-    margin-right: 0px;
-    padding-right: 5px;
-    transition: all 500ms;
-    transition-timing-function: ease;
-}
 
 .full-wrapper{
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+
+/*Project info block (top-left area)*/
+.gantt_block .gantt-project-info {
+    background-color: #EEEEEE;
+    padding-left: 10px;
+    margin-right: 15px;
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid #CCC;
+}
+.gantt_block .task-info-block,
+.gantt_block .gantt-project-info {
+    margin-right: 0px;
+    padding-right: 5px;
+    transition: all 500ms;
+    transition-timing-function: ease;
+}
+.gantt_block .gantt-project-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.gantt_block .gantt-project-baseline {
+    color: #929292;
+}
+
+/*Task info block*/
+.gantt_block .task-info-block {
+    max-height: 517px;
+    overflow: hidden;
+}
+.gantt_block .task-info-block .task_wrapper {
+    padding: 4px;
+}
+
+/*Task block*/
+.gantt_block .task_wrapper {
+    border-bottom: 1px dotted #CCC;
+    height: 47px;
+    position: relative;
+}
+.gantt_block .task_wrapper:hover {
+    background-color: #F1F1F1 !important;
+}
+.gantt_block .task_wrapper_odd {
+    background-color: #FBFBFB;
 }

@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="tasks_wrapper"
-                     style="overflow-x: scroll"
+                     style="overflow-x: {{ganttCtrl.isZoomed() ? 'scroll' : 'hidden'}}"
                      ng-scroll="ganttCtrl.onScroll($event)">
 
                     <div class="full-wrapper">

@@ -13,7 +13,7 @@
         ganttCtrl.getTodayLineLeft = TimelineService.getTodayLineWidth;
         ganttCtrl.getCurrentBaselineName = GanttBaselinesService.getCurrentBaselineName;
         ganttCtrl.getProjectName = GanttOptionsService.getProjectName;
-        ganttCtrl.leftBlockWidth = GanttOptionsService.LEFT_BLOCK_MIN_WIDTH;
+        ganttCtrl.leftBlockWidth = 1000;
         ganttCtrl.leftBlockMinWidth = GanttOptionsService.LEFT_BLOCK_MIN_WIDTH;
         ganttCtrl.leftBlockMaxWidth = GanttOptionsService.LEFT_BLOCK_MAX_WIDTH;
         ganttCtrl.onScroll = onScroll;

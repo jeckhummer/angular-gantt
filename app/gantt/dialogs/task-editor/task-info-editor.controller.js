@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('TaskEditorController', TaskEditorController);
+    angular.module('gantt').controller('TaskInfoEditorController', TaskInfoEditorController);
 
-    function TaskEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttTasksHierarchyService){
+    function TaskInfoEditorController($scope, GanttTasksService, GanttTaskFactoryService, GanttTasksHierarchyService){
         var ctrl = this;
         var today = new Date();
         var taskEndDateBackup;

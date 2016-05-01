@@ -22,10 +22,10 @@
         var _DELAY_ENABLED = false;
 
         var _DELAYS = {
-            getTasks: 5000,
-            addTask: 3500,
-            updateTask: 3000,
-            deleteTask: 3000
+            getTasks: 2000,
+            addTask: 3000,
+            updateTask: 2000,
+            deleteTask: 2000
         };
 
         _init(GanttTasksTestData.tasks);

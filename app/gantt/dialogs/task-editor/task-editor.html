@@ -1,0 +1,28 @@
+<div dialog-window="task-editor" class="dialog-window panel panel-info" id="task-editor" style="width:470px;">
+    <div class="panel-heading"><h3 class="panel-title">Task editor</h3></div>
+    <div ng-controller="TaskEditorController" class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" id="task-editor-tabs">
+            <li role="presentation" class="active">
+                <a href="#info-editor" aria-controls="home" role="tab">
+                    Info
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#resources-editor" aria-controls="profile" role="tab">
+                    Resources
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="info-editor">
+                <url-locale-include alias="task-info-editor"></url-locale-include>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="resources-editor">
+                <url-locale-include alias="task-resources-editor"></url-locale-include>
+            </div>
+        </div>
+    </div>
+</div>

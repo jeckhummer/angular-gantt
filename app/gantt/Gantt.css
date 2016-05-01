@@ -101,13 +101,6 @@
 }
 
 
-.gantt_block .task_name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 1.1em;
-    white-space: nowrap;
-    font-weight: bold;
-}
 
 .gantt_block .task_line_wrapper {
     position: relative;
@@ -331,7 +324,19 @@ button.list-group-item:focus {
     overflow: hidden;
 }
 .gantt_block .task-info-block .task_wrapper {
+    display: flex;
+    flex-wrap: nowrap;
     padding: 4px;
+}
+.gantt_block .task_name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.1em;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.gantt_block .task_dates_block{
+    white-space:nowrap;
 }
 
 /*Task block*/
@@ -345,4 +350,12 @@ button.list-group-item:focus {
 }
 .gantt_block .task_wrapper_odd {
     background-color: #FBFBFB;
+}
+
+/*Task editor*/
+#task-editor .nav > li > a {
+    padding: 5px 12px !important;
+}
+#task-editor .nav{
+    margin-bottom: 10px;
 }

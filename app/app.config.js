@@ -92,7 +92,11 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog']);
             { name: 'timeline.stripes', url: 'timeline/timeline-stripes/timeline-stripes.directive.html'},
 
             { name: 'options', url: 'gantt/dialogs/options/options.html'},
-            { name: 'task-editor', url: 'gantt/dialogs/task-editor.html'},
+
+            { name: 'task-editor', url: 'gantt/dialogs/task-editor/task-editor.html'},
+                { name: 'task-info-editor', url: 'gantt/dialogs/task-editor/task-info-editor.html'},
+                { name: 'task-resources-editor', url: 'gantt/dialogs/task-editor/task-resources-editor.html'},
+
             { name: 'gantt-baselines-menu', url: 'gantt/dialogs/gantt-baselines-menu.html'},
             { name: 'processing-lock', url: 'gantt/dialogs/processing-lock.html'},
 

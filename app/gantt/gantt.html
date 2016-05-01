@@ -26,7 +26,7 @@
             <div class="gantt-row-block">
                 <div ng-show="ganttCtrl.isMasterMode()" class="gantt-project-info"
                      resizable r-directions="['right']" r-width="ganttCtrl.leftBlockWidth" r-flex="true"
-                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}%; max-width: {{ganttCtrl.leftBlockMaxWidth}}%;">
+                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}; max-width: {{ganttCtrl.leftBlockMaxWidth}};">
 
                     <div class="gantt-project-name"> {{ganttCtrl.getProjectName()}} </div>
 
@@ -47,7 +47,7 @@
             <div class="gantt-row-block">
                 <div class="task-info-block" ng-show="ganttCtrl.isMasterMode()"
                      resizable r-directions="['right']" r-width="ganttCtrl.leftBlockWidth" r-flex="true"
-                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}%; max-width: {{ganttCtrl.leftBlockMaxWidth}}%;">
+                     style="min-width: {{ganttCtrl.leftBlockMinWidth}}; max-width: {{ganttCtrl.leftBlockMaxWidth}};">
 
                     <div style="position: relative; top: -{{ganttCtrl.scrollPositionTop}}px;">
                         <url-locale-include alias="task-info"></url-locale-include>

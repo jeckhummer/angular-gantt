@@ -3,7 +3,7 @@
     angular.module('gantt').factory('GanttOptionsService', GanttOptionsService);
 
     function GanttOptionsService() {
-        var indentOptions = new GradientOption(0, 50, 5, 35);
+        var indentOptions = new GradientOption(0, 50, 5, 10);
         var zoomOptions = new GradientOption(100, 100000, 50, 100);
 
         var TASK_ADDITION_STRATEGIES = {
@@ -34,8 +34,8 @@
             setDOCID: setDOCID,
             getProjectName: getProjectName,
             setProjectName: setProjectName,
-            LEFT_BLOCK_MAX_WIDTH: 45,
-            LEFT_BLOCK_MIN_WIDTH: 20
+            LEFT_BLOCK_MAX_WIDTH: "45%",
+            LEFT_BLOCK_MIN_WIDTH: "250px"
         };
         return service;
 

@@ -12,8 +12,8 @@
              data-toggle="context"
              data-target="#context-menu">
 
-            <div class="pull-left btn-group-vertical btn-group-xs"
-                 style="margin-right: {{5 + taskCtrl.indent.getValue() * taskCtrl.nestingDepth}}px">
+            <div class="btn-group-vertical btn-group-xs"
+                 style="margin-right: {{5 + taskCtrl.indent.getValue() * taskCtrl.nestingDepth}}px;">
                 <button class="btn btn-default icon_btn"
                         style="font-size:11px;"
                         ng-class="{'disabled': taskCtrl.isFirstTaskWithinSiblings}"
@@ -31,36 +31,34 @@
                 </button>
             </div>
 
-            <div class="task_name text-left" style="">
-                {{taskCtrl.name}}
-                <!-- - id {{taskCtrl.id}} - order {{taskCtrl.order}} - p {{taskCtrl.parentID}}-->
-            </div>
             <div>
-                <date-interval start="taskCtrl.start"
-                               end="taskCtrl.end"
-                               class="date_label"
-                               is-milestone="taskCtrl.isMilestone"></date-interval>
-
-                <span ng-show="taskCtrl.hasBaseline">
-                     | <date-interval start="taskCtrl.baseline.dateInterval.start"
-                                   end="taskCtrl.baseline.dateInterval.end"
-                                   class="date_label baseline_date_label"
+                <div class="task_name text-left" style="">
+                    {{taskCtrl.name}}
+                    <!-- - id {{taskCtrl.id}} - order {{taskCtrl.order}} - p {{taskCtrl.parentID}}-->
+                </div>
+                <div class="task_dates_block">
+                    <date-interval start="taskCtrl.start"
+                                   end="taskCtrl.end"
+                                   class="date_label"
                                    is-milestone="taskCtrl.isMilestone"></date-interval>
-                </span>
-                <span class="label pull-right"
-                      ng-class="{
-                        'label-success': taskCtrl.isCompleted,
-                        'label-info': taskCtrl.percentComplete >= 66 && taskCtrl.percentComplete < 100,
-                        'label-warning': taskCtrl.percentComplete >= 33 && taskCtrl.percentComplete < 66,
-                        'label-danger': taskCtrl.percentComplete < 33
-                      }"
-                      style="margin-top:3px; width:35px;">
-                    <span ng-hide="taskCtrl.isMilestone">{{taskCtrl.percentComplete}}%</span>
-                    <span ng-show="taskCtrl.isMilestone">
-                        <span class="glyphicon glyphicon-{{taskCtrl.isCompleted ? 'ok' : 'remove'}}" aria-hidden="true"></span>
+
+                    <span ng-show="taskCtrl.hasBaseline">
+                         | <date-interval start="taskCtrl.baseline.dateInterval.start"
+                                          end="taskCtrl.baseline.dateInterval.end"
+                                          class="date_label baseline_date_label"
+                                          is-milestone="taskCtrl.isMilestone"></date-interval>
                     </span>
-                </span>
+                </div>
             </div>
+
+            <span class="label pull-right {{taskCtrl.labelColorClass}}"
+                  style="width:35px; position: absolute; right: 3px; bottom: 3px;">
+                <span ng-hide="taskCtrl.isMilestone">{{taskCtrl.percentComplete}}%</span>
+                <span ng-show="taskCtrl.isMilestone">
+                    <span class="glyphicon glyphicon-{{taskCtrl.isCompleted ? 'ok' : 'remove'}}"
+                          aria-hidden="true"></span>
+                </span>
+            </span>
         </div>
     </div>
 </div>

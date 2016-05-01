@@ -19,19 +19,39 @@
         function init(task){
             if(task){
                 ctrl.id = task.id;
-                ctrl.order = GanttTasksHierarchyService.get(task.id).getOrder();
                 ctrl.name = task.name;
+                ctrl.isMilestone = task.isMilestone;
+
                 ctrl.start = task.start;
                 ctrl.end = task.end;
+                ctrl.dateInterval = task.dateInterval;
+
+                ctrl.parentID = task.parentID;
+                ctrl.isParent = GanttTasksHierarchyService.isParent(task.id);
+                ctrl.order = GanttTasksHierarchyService.get(task.id).getOrder();
                 ctrl.nestingDepth = GanttTasksHierarchyService.get(task.id).level - 1;
-                ctrl.isMilestone = task.isMilestone;
                 ctrl.isFirstTaskWithinSiblings = GanttTasksHierarchyService.isFirstChild(task.id);
                 ctrl.isLastTaskWithinSiblings = GanttTasksHierarchyService.isLastChild(task.id);
-                ctrl.isParent = GanttTasksHierarchyService.isParent(task.id);
+
                 ctrl.isCompleted = task.isCompleted;
                 ctrl.percentComplete = task.percentComplete;
-                ctrl.dateInterval = task.dateInterval
-                ctrl.parentID = task.parentID;
+
+                if(ctrl.isCompleted){
+                    ctrl.labelColorClass = 'label-success';
+                }else{
+                    if(ctrl.isMilestone){
+                        ctrl.labelColorClass = 'label-danger';
+                    }else{
+                        if(ctrl.percentComplete >= 66 && ctrl.percentComplete < 100){
+                            ctrl.labelColorClass = 'label-info';
+                        } else if(ctrl.percentComplete >= 33 && ctrl.percentComplete < 66){
+                            ctrl.labelColorClass = 'label-warning';
+                        } else if(ctrl.percentComplete < 33){
+                            ctrl.labelColorClass = 'label-danger';
+                        }
+                    }
+                }
+
                 initPosition(ctrl);
                 initBaseline(ctrl);
             }

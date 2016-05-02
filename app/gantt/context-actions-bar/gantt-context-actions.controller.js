@@ -1,7 +1,7 @@
 (function () {
-    angular.module('gantt').controller('ContextActionsController', ContextActionsController);
+    angular.module('gantt').controller('GanttContextActionsController', GanttContextActionsController);
 
-    function ContextActionsController(GanttOptionsService ,TaskClickService) {
+    function GanttContextActionsController(GanttOptionsService ,TaskClickService) {
         var ctrl = this;
 
         ctrl.selectAll = selectAll;

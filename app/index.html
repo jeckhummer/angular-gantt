@@ -42,11 +42,11 @@
 <body>
 
 <div ng-app="app-dev" class="exposition_block">
-    <div ng-controller="InitializationController as initCtrl"
-         ng-init="initCtrl.init(true, 1, 1, 6, 'Super Duper Mega Project')">
+    <!--<url-locale-include alias="test"></url-locale-include>-->
+    <div ng-controller="GanttInitializationController as initCtrl"
+         ng-init="initCtrl.init(true, 1, 1, 6, 'Smart Gantt')">
         <url-locale-include alias="gantt"></url-locale-include>
     </div>
-    <!--<url-locale-include alias="test"></url-locale-include>-->
 </div>
 
 
@@ -63,6 +63,7 @@
 <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
 <script src="bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
 <script src="bower_components/angular-resizable/angular-resizable.min.js"></script>
+<script src="bower_components/immutable/dist/immutable.min.js"></script>
 
 <!--COMMON-->
     <!--DATE-->
@@ -107,38 +108,41 @@
 
     <!--SERVICES-->
     <script src="gantt/services/gantt-http.service.js"></script>
-    <script src="gantt/services/gantt-baselines-data-provider.service.js"></script>
-    <script src="gantt/services/gantt-config-data-provider.service.js"></script>
+    <script src="gantt/baselines/gantt-baselines-data-provider.service.js"></script>
+    <script src="gantt/data-providers/gantt-config-data-provider.service.js"></script>
     <script src="gantt/services/gantt-tasks.service.js"></script>
+    <script src="gantt/resources/gantt-resources-data-provider.service.js"></script>
+    <script src="gantt/resources/gantt-resources.service.js"></script>
     <script src="gantt/services/gantt-tasks-dictionary.service.js"></script>
     <script src="gantt/services/gantt-tasks-hierarchy.service.js"></script>
-    <script src="gantt/services/gantt-tasks-data-provider.service.js"></script>
+    <script src="gantt/tasks/gantt-tasks-data-provider.service.js"></script>
     <script src="gantt/services/gantt-task-factory.service.js"></script>
-    <script src="gantt/services/gantt-baselines.service.js"></script>
-    <script src="gantt/services/task-click.service.js"></script>
+    <script src="gantt/baselines/gantt-baselines.service.js"></script>
+    <script src="gantt/services/gantt-task-click.service.js"></script>
     <script src="gantt/services/gantt-options.service.js"></script>
-    <script src="gantt/services/notification.service.js"></script>
+    <script src="gantt/services/gantt-notification.service.js"></script>
 
     <!--CONTROLLERS-->
-    <script src="gantt/dialogs/options/options.controller.js"></script>
-    <script src="gantt/initialization.controller.js"></script>
-    <script src="gantt/dialogs/gantt-baselines.controller.js"></script>
+    <script src="gantt/options/gantt-options.controller.js"></script>
+    <script src="gantt/gantt-initialization.controller.js"></script>
+    <script src="gantt/baselines/gantt-baselines.controller.js"></script>
     <script src="gantt/gantt.controller.js"></script>
-    <script src="gantt/tasks/task.controller.js"></script>
-    <script src="gantt/tasks/task-click.controller.js"></script>
-    <script src="gantt/dialogs/options/timeline-options.controller.js"></script>
-    <script src="gantt/dialogs/task-editor/task-editor.controller.js"></script>
-    <script src="gantt/dialogs/task-editor/task-info-editor.controller.js"></script>
-    <script src="gantt/dialogs/task-editor/task-resources-editor.controller.js"></script>
-    <script src="gantt/tasks/task-context-menu.controller.js"></script>
-    <script src="gantt/context-actions-bar/context-actions.controller.js"></script>
-    <script src="gantt/tabs/tabs.controller.js"></script>
+    <script src="gantt/tasks/gantt-task.controller.js"></script>
+    <script src="gantt/tasks/gantt-task-click.controller.js"></script>
+    <script src="gantt/options/gantt-timeline-options.controller.js"></script>
+    <script src="gantt/tasks/task-editor/gantt-task-editor.controller.js"></script>
+    <script src="gantt/tasks/task-editor/gantt-task-info-editor.controller.js"></script>
+    <script src="gantt/resources/gantt-task-resources-editor.controller.js"></script>
+    <script src="gantt/resources/gantt-task-resource.controller.js"></script>
+    <script src="gantt/tasks/context-menu/gantt-task-context-menu.controller.js"></script>
+    <script src="gantt/context-actions-bar/gantt-context-actions.controller.js"></script>
+    <script src="gantt/tabs/gantt-tabs.controller.js"></script>
 
     <!--FILTERS-->
-    <script src="gantt/gantt-date.filter.js"></script>
+    <script src="gantt/date/gantt-date.filter.js"></script>
 
     <!--DIRECTIVES-->
-    <script src="gantt/tasks/date-interval.directive.js"></script>
+    <script src="gantt/date/date-interval.directive.js"></script>
 
 <!--TIMELINE-->
     <script src="timeline/timeline.config.js"></script>
@@ -170,16 +174,19 @@
     <!--COMMON-->
     <script src="dev/common/http-delay-decorator.js"></script>
     <script src="dev/common/events-to-console-reflector.js"></script>
+    <script src="dev/common/delay-wrapper-factory-service.js"></script>
 
     <!--GANTT-->
         <!--MOCKS-->
         <script src="dev/gantt/mocks/gantt-mocks.config.js"></script>
-        <script src="dev/gantt/mocks/gantt-tasks-test-data.js"></script>
-        <script src="dev/gantt/mocks/gantt-config-test-data.js"></script>
         <script src="dev/gantt/mocks/gantt-baselines-test-data.js"></script>
         <script src="dev/gantt/mocks/gantt-baselines-data-provider.service.mock.js"></script>
         <script src="dev/gantt/mocks/gantt-config-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-config-test-data.js"></script>
         <script src="dev/gantt/mocks/gantt-task-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-tasks-test-data.js"></script>
+        <script src="dev/gantt/mocks/gantt-resources-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-resources-test-data.js"></script>
 
 <!--TEST-->
     <script src="test/test.config.js"></script>

@@ -239,7 +239,7 @@ button.list-group-item:focus {
     display: none;
 }
 
-.processing-lock {
+.gantt-processing-lock {
     background-color: transparent;
     border: 0;
     position: absolute;
@@ -249,11 +249,11 @@ button.list-group-item:focus {
     width: 100%;
 }
 
-.processing-lock td {
+.gantt-processing-lock td {
     vertical-align: middle;
 }
 
-.processing-lock span {
+.gantt-processing-lock span {
     background-color: rgba(255, 255, 255, 0.9);
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -358,4 +358,36 @@ button.list-group-item:focus {
 }
 #task-editor .nav{
     margin-bottom: 10px;
+}
+    /*Resources*/
+    #task-resources-list .left-block .list-group-item-heading{
+        font-size: 15px !important;
+    }
+    #task-resources-list .right-block .list-group-item-heading{
+        font-size: 14px !important;
+        font-weight:normal;
+    }
+    #task-resources-list.list-group-item{
+        display: flex;
+    }
+    #task-resources-list .left-block{
+        overflow: hidden;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    #task-resources-list .right-block{
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 100px;
+    }
+    #task-resources-list .right-block *{
+        text-align: center;
+    }
+
+/*Common*/
+.nowrap-ellipsis-text{
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }

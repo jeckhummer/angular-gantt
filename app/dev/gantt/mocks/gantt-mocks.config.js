@@ -1,5 +1,5 @@
 'use strict';
 
 (function () {
-    angular.module('dev.gantt.mocks', []);
+    angular.module('dev.gantt.mocks', ['dev.common.delay-wrapper']);
 }());

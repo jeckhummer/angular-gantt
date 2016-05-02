@@ -24,7 +24,7 @@
 
             $('#selected-tasks-names').popover({
                 'trigger': 'hover',
-                'html': true,
+                'html': true
             });
         }
 

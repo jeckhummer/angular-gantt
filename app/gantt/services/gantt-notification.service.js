@@ -34,9 +34,9 @@
         }
 
         function notifyLock(msg, promise, suppressOK) {
-            DialogService.activateDialog('processing-lock', null, true);
+            DialogService.activateDialog('gantt-processing-lock', null, true);
             var _promise = notify(msg, promise, suppressOK).finally(function () {
-                DialogService.deactivateDialog('processing-lock');
+                DialogService.deactivateDialog('gantt-processing-lock');
             });
             return _promise;
         }

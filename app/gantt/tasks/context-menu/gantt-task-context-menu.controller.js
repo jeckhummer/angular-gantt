@@ -1,7 +1,7 @@
 (function () {
-    angular.module('gantt').controller('TaskContextMenuController', TaskContextMenuController);
+    angular.module('gantt').controller('GanttTaskContextMenuController', GanttTaskContextMenuController);
 
-    function TaskContextMenuController(DialogService, GanttTasksService, TaskClickService) {
+    function GanttTaskContextMenuController(DialogService, GanttTasksService, TaskClickService) {
         var ctrl = this;
 
         ctrl.saveAsBaseline = saveAsBaseline;

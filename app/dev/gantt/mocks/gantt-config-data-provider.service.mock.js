@@ -1,12 +1,12 @@
 'use strict';
 (function () {
-    angular.module('dev.gantt.mocks').config(GanttConfigDataProviderServiceMockConfig);
+    angular.module('dev.gantt.mocks').config(GanttOptionsDataProviderServiceMockConfig);
 
-    function GanttConfigDataProviderServiceMockConfig($provide) {
-        $provide.decorator("GanttConfigDataProviderService", GanttConfigDataProviderServiceMock);
+    function GanttOptionsDataProviderServiceMockConfig($provide) {
+        $provide.decorator("GanttOptionsDataProviderService", GanttOptionsDataProviderServiceMock);
     }
 
-    function GanttConfigDataProviderServiceMock($q, GanttTimelineTestData, $timeout) {
+    function GanttOptionsDataProviderServiceMock($q, GanttTimelineTestData, $timeout) {
         var service = {
             getTimelineConfig: getTimelineConfig,
             saveTimelineConfig: saveTimelineConfig

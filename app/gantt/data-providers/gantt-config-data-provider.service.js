@@ -1,8 +1,8 @@
 'use strict';
 (function () {
-    angular.module('gantt').factory('GanttConfigDataProviderService', GanttConfigDataProviderService);
+    angular.module('gantt').factory('GanttOptionsDataProviderService', GanttOptionsDataProviderService);
 
-    function GanttConfigDataProviderService(GanttHttpService) {
+    function GanttOptionsDataProviderService(GanttHttpService) {
         var service = {
             getTimelineConfig: getTimelineConfig,
             saveTimelineConfig: saveTimelineConfig

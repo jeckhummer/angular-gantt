@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('TaskController', TaskController);
+    angular.module('gantt').controller('GanttTaskController', GanttTaskController);
 
-    function TaskController($scope, DateService, TimelineService, GanttBaselinesService,
+    function GanttTaskController($scope, DateService, TimelineService, GanttBaselinesService,
                             GanttTasksService, GanttOptionsService, GanttTasksHierarchyService){
         var ctrl = this;
         ctrl.moveTaskUp = moveTaskUp;

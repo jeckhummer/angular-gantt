@@ -42,7 +42,7 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog']);
         ]);
 
         TimelineServiceProvider.configureConfigurationProviderInjector(($injector)=>
-            $injector.get('GanttConfigDataProviderService')
+            $injector.get('GanttOptionsDataProviderService')
         );
 
         TimelineServiceProvider.configureCalculateBoundariesMethod(($injector)=>{
@@ -81,24 +81,24 @@ angular.module('app', ['gantt', 'timeline', 'common', 'dialog']);
     function URLLocaleServiceConfig(URLLocaleServiceProvider){
         var urlMapping = [
             { name: 'gantt', url: 'gantt/gantt.html'},
-            { name: 'tabs', url: 'gantt/tabs/tabs.html'},
-            { name: 'toolbar', url: 'gantt/context-actions-bar/context-actions-bar.html'},
-            { name: 'task', url: 'gantt/tasks/task.html'},
-            { name: 'task-info', url: 'gantt/tasks/tasks-info.html'},
-            { name: 'task-context-menu', url: 'gantt/tasks/task-context-menu.html'},
+            { name: 'tabs', url: 'gantt/tabs/gantt-tabs.html'},
+            { name: 'toolbar', url: 'gantt/context-actions-bar/gantt-context-actions-bar.html'},
+            { name: 'task', url: 'gantt/tasks/gantt-task.html'},
+            { name: 'task-info', url: 'gantt/tasks/gantt-tasks-info.html'},
+            { name: 'task-context-menu', url: 'gantt/tasks/context-menu/gantt-task-context-menu.html'},
 
             { name: 'timeline.timeline', url: 'timeline/timeline/timeline.directive.html'},
             { name: 'timeline.options', url: 'timeline/timeline-options/timeline-options.directive.html'},
             { name: 'timeline.stripes', url: 'timeline/timeline-stripes/timeline-stripes.directive.html'},
 
-            { name: 'options', url: 'gantt/dialogs/options/options.html'},
+            { name: 'options', url: 'gantt/options/gantt-options.html'},
 
-            { name: 'task-editor', url: 'gantt/dialogs/task-editor/task-editor.html'},
-                { name: 'task-info-editor', url: 'gantt/dialogs/task-editor/task-info-editor.html'},
-                { name: 'task-resources-editor', url: 'gantt/dialogs/task-editor/task-resources-editor.html'},
+            { name: 'task-editor', url: 'gantt/tasks/task-editor/gantt-task-editor.html'},
+                { name: 'task-info-editor', url: 'gantt/tasks/task-editor/gantt-task-info-editor.html'},
+                { name: 'task-resources-editor', url: 'gantt/resources/gantt-task-resources-editor.html'},
 
-            { name: 'gantt-baselines-menu', url: 'gantt/dialogs/gantt-baselines-menu.html'},
-            { name: 'processing-lock', url: 'gantt/dialogs/processing-lock.html'},
+            { name: 'gantt-baselines-menu', url: 'gantt/baselines/gantt-baselines-menu.html'},
+            { name: 'gantt-processing-lock', url: 'gantt/tabs/gantt-processing-lock.html'},
 
             { name: 'test', url: 'test/test.html'}
         ];

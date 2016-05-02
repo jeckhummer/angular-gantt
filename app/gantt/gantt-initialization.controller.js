@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('InitializationController', InitializationController);
+    angular.module('gantt').controller('GanttInitializationController', GanttInitializationController);
 
-    function InitializationController (GanttOptionsService) {
+    function GanttInitializationController (GanttOptionsService) {
         var initCtrl = this;
 
         initCtrl.init = init;

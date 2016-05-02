@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('TabsController', TabsController);
+    angular.module('gantt').controller('GanttTabsController', GanttTabsController);
 
-    function TabsController (GanttTasksService, GanttOptionsService) {
+    function GanttTabsController (GanttTasksService, GanttOptionsService) {
         var ctrl = this;
         ctrl.reload = reload;
         ctrl.ganttIsEmpty = GanttTasksService.isEmpty;

@@ -6,4 +6,3 @@ angular.module('gantt', [
     'common',
     'angularResizable'
 ]);
-

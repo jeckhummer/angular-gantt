@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('TimelineOptionsController', TimelineOptionsController);
+    angular.module('gantt').controller('GanttTimelineOptionsController', GanttTimelineOptionsController);
 
-    function TimelineOptionsController ($scope, $rootScope, $q, TimelineService,
+    function GanttTimelineOptionsController ($scope, $q, TimelineService,
                                         DialogService, NotificationService) {
         var ctrl = this;
         var timelineDefer = $q.defer();

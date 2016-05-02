@@ -22,7 +22,7 @@
         var _DELAY_ENABLED = false;
 
         var _DELAYS = {
-            getTasks: 2000,
+            getTasks: 7000,
             addTask: 3000,
             updateTask: 2000,
             deleteTask: 2000

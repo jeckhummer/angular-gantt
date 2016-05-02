@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('TaskClickController', TaskClickController);
+    angular.module('gantt').controller('GanttTaskClickController', GanttTaskClickController);
 
-    function TaskClickController(TaskClickService){
+    function GanttTaskClickController(TaskClickService){
         var ctrl = this;
 
         ctrl.select = select;

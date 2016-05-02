@@ -1,7 +1,7 @@
 (function(){
-    angular.module('gantt').controller('OptionsController', OptionsController);
+    angular.module('gantt').controller('GanttOptionsController', GanttOptionsController);
 
-    function OptionsController ($scope, GanttOptionsService) {
+    function GanttOptionsController ($scope, GanttOptionsService) {
         var ctrl = this;
 
         ctrl.save = save;

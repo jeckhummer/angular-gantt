@@ -1,9 +1,9 @@
 <div ng-repeat="task in $parent.$parent.ganttCtrl.tasks"
-     ng-controller="TaskController as taskCtrl">
+     ng-controller="GanttTaskController as taskCtrl">
 
     <div dialog-trigger="task-editor" dialog-argument="taskCtrl.id" style="cursor: pointer">
 
-        <div ng-controller="TaskClickController as clickCtrl"
+        <div ng-controller="GanttTaskClickController as clickCtrl"
              ng-click="clickCtrl.onClick($event, task.id)"
              ng-right-click="clickCtrl.onRightClick($event,task.id)"
              ng-class="{'task-selected': clickCtrl.isSelected(task.id)}"

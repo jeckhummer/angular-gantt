@@ -10,7 +10,7 @@
             if (!ctrl.disabled && !DialogService.isInBlockingMode()) {
                 DialogService.toggleDialog(ctrl.dialogName, ctrl.arg, ctrl.group);
             }
-        }
+        }   
 
         function isActive() {
             return DialogService.isActiveDialog(ctrl.dialogName);

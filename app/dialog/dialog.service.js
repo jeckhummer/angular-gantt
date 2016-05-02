@@ -53,6 +53,7 @@
         }
 
         function deactivate() {
+            blockingMode = false;
             activeDialog = null;
         }
     }

@@ -7,7 +7,7 @@
         ctrl.toggle = toggle;
 
         function toggle() {
-            if (!ctrl.disabled) {
+            if (!ctrl.disabled && !DialogService.isInBlockingMode()) {
                 DialogService.toggleDialog(ctrl.dialogName, ctrl.arg, ctrl.group);
             }
         }

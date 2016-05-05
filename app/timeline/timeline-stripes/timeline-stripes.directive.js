@@ -3,9 +3,9 @@
     angular.module('timeline')
         .directive('timelineStripes', TimelineStripesDirective);
 
-    function TimelineStripesDirective(TimeLineGridService, TimelineService, TimelineTypes, URLLocaleService) {
+    function TimelineStripesDirective(TimeLineGridService, TimelineService, TimelineTypes) {
         var directive = {
-            templateUrl: URLLocaleService.getURL('timeline.stripes'),
+            templateUrl: 'timeline/timeline-stripes/timeline-stripes.directive.html',
             restrict: 'E',
             scope: true,
             link: function ($scope) {

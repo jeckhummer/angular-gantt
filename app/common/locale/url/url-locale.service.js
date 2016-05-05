@@ -63,11 +63,13 @@
         }
 
         function addURLRange(range){
-            range.forEach(function (obj) {
-                var name = obj.name;
-                var url = obj.url;
-                addURL(name, url);
-            });
+            if(range){
+                range.forEach(function (obj) {
+                    var name = obj.name;
+                    var url = obj.url;
+                    addURL(name, url);
+                });
+            }
         }
     }
 })();

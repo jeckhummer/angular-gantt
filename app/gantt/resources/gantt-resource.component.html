@@ -1,0 +1,23 @@
+<a ng-init="$ctrl.init(resource)"
+   class="list-group-item"
+   id="task-resources-list"
+   ng-class="{'active': $ctrl.isAssignedToThisProject}">
+
+    <div class="left-block">
+        <h5 class="list-group-item-heading nowrap-ellipsis-text">{{$ctrl.name}}</h5>
+        <div class="list-group-item-text">
+            <div ng-show="$ctrl.projects.length > 0" class="nowrap-ellipsis-text">
+                <i>Projects :</i> {{$ctrl.projectsString}}
+            </div>
+            <div ng-hide="$ctrl.projects.length > 0" class="nowrap-ellipsis-text">
+                This resource is fully available.
+            </div>
+        </div>
+    </div>
+    <div class="right-block">
+        <h5 class="list-group-item-heading">Employment:</h5>
+        <div class="employment-block">
+            <b>{{$ctrl.employmentHours}}</b> hrs. &nbsp; <b>{{$ctrl.employmentPercentage}}%</b>
+        </div>
+    </div>
+</a>

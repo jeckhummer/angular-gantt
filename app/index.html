@@ -40,15 +40,15 @@
     </style>
 </head>
 <body>
+<!--<base href="/jsWidgets/angular-gantt/app/">-->
 
 <div ng-app="app-dev" class="exposition_block">
     <!--<url-locale-include alias="test"></url-locale-include>-->
     <div ng-controller="GanttInitializationController as initCtrl"
-         ng-init="initCtrl.init(true, 1, 1, 6, 'Smart Gantt')">
-        <url-locale-include alias="gantt"></url-locale-include>
+         ng-init="initCtrl.init(true, 1, 1, 6, 3)">
+        <ng-include src="'gantt/gantt.html'"></ng-include>
     </div>
 </div>
-
 
 <!--BOWER-->
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -73,14 +73,19 @@
     <script src="common/date/date-interval.js"></script>
     <script src="common/date/date-interval-position.js"></script>
 
-    <!--STRUCT-->
-        <!--ORDER DELEGATE-->
-        <script src="common/struct/order-delegate.js"></script>
+    <!--CLASSES-->
+        <script src="common/classes/order-delegate.js"></script>
+        <script src="common/classes/state-manager.js"></script>
+        <script src="common/classes/gradient-option.js"></script>
 
         <!--TREE-->
-        <script src="common/struct/tree/tree-node.js"></script>
-        <script src="common/struct/tree/tree-data-adapter-factory.js"></script>
-        <script src="common/struct/tree/tree.js"></script>
+        <script src="common/classes/tree/tree-node.js"></script>
+        <script src="common/classes/tree/tree-data-adapter-factory.js"></script>
+        <script src="common/classes/tree/tree.js"></script>
+
+        <!--DICTIONARY-->
+        <script src="common/classes/dictionary/id-dictionary.js"></script>
+        <script src="common/classes/dictionary/dictionary.js"></script>
 
     <!--LOCALE-->
     <script src="common/locale/locale.config.js"></script>
@@ -96,8 +101,6 @@
     <script src="common/status/status.component.js"></script>
 
 <script src="common/common.config.js"></script>
-<script src="common/gradient-option.js"></script>
-<script src="common/id-dictionary.js"></script>
 <script src="common/string-to-number.directive.js"></script>
 <script src="common/ng-right-click.directive.js"></script>
 <script src="common/ng-scroll.js"></script>
@@ -108,35 +111,46 @@
 
     <!--SERVICES-->
     <script src="gantt/services/gantt-http.service.js"></script>
-    <script src="gantt/baselines/gantt-baselines-data-provider.service.js"></script>
-    <script src="gantt/data-providers/gantt-config-data-provider.service.js"></script>
-    <script src="gantt/services/gantt-tasks.service.js"></script>
+    <script src="gantt/services/gantt-notification.service.js"></script>
+
+    <script src="gantt/options/gantt-options-data-provider.service.js"></script>
+    <script src="gantt/options/gantt-options.service.js"></script>
+
     <script src="gantt/resources/gantt-resources-data-provider.service.js"></script>
     <script src="gantt/resources/gantt-resources.service.js"></script>
-    <script src="gantt/services/gantt-tasks-dictionary.service.js"></script>
-    <script src="gantt/services/gantt-tasks-hierarchy.service.js"></script>
-    <script src="gantt/tasks/gantt-tasks-data-provider.service.js"></script>
-    <script src="gantt/services/gantt-task-factory.service.js"></script>
+
+    <script src="gantt/tasks/services/gantt-tasks-dictionary.service.js"></script>
+    <script src="gantt/tasks/services/gantt-tasks-hierarchy.service.js"></script>
+    <script src="gantt/tasks/services/gantt-tasks-data-provider.service.js"></script>
+    <script src="gantt/tasks/services/gantt-task-factory.service.js"></script>
+    <script src="gantt/tasks/services/gantt-task-click.service.js"></script>
+    <script src="gantt/tasks/services/gantt-tasks.service.js"></script>
+
+    <script src="gantt/baselines/gantt-baselines-data-provider.service.js"></script>
     <script src="gantt/baselines/gantt-baselines.service.js"></script>
-    <script src="gantt/services/gantt-task-click.service.js"></script>
-    <script src="gantt/services/gantt-options.service.js"></script>
-    <script src="gantt/services/gantt-notification.service.js"></script>
+
+    <script src="gantt/projects/gantt-projects-dictionary.service.js"></script>
+    <script src="gantt/projects/gantt-projects-data-provider.service.js"></script>
+    <script src="gantt/projects/gantt-projects.service.js"></script>
 
     <!--CONTROLLERS-->
     <script src="gantt/options/gantt-options.controller.js"></script>
-    <script src="gantt/gantt-initialization.controller.js"></script>
+    <script src="gantt/controllers/gantt-initialization.controller.js"></script>
     <script src="gantt/baselines/gantt-baselines.controller.js"></script>
-    <script src="gantt/gantt.controller.js"></script>
-    <script src="gantt/tasks/gantt-task.controller.js"></script>
-    <script src="gantt/tasks/gantt-task-click.controller.js"></script>
+    <script src="gantt/controllers/gantt.controller.js"></script>
+    <script src="gantt/tasks/controllers/gantt-task.controller.js"></script>
+    <script src="gantt/tasks/controllers/gantt-task-click.controller.js"></script>
     <script src="gantt/options/gantt-timeline-options.controller.js"></script>
-    <script src="gantt/tasks/task-editor/gantt-task-editor.controller.js"></script>
-    <script src="gantt/tasks/task-editor/gantt-task-info-editor.controller.js"></script>
-    <script src="gantt/resources/gantt-task-resources-editor.controller.js"></script>
+    <script src="gantt/task-editor/gantt-task-editor.controller.js"></script>
+    <script src="gantt/task-editor/gantt-task-info-editor.controller.js"></script>
     <script src="gantt/resources/gantt-task-resource.controller.js"></script>
     <script src="gantt/tasks/context-menu/gantt-task-context-menu.controller.js"></script>
     <script src="gantt/context-actions-bar/gantt-context-actions.controller.js"></script>
     <script src="gantt/tabs/gantt-tabs.controller.js"></script>
+
+    <!--COMPONENTS-->
+    <script src="gantt/resources/gantt-resource.component.js"></script>
+    <script src="gantt/resources/gantt-resources-list.component.js"></script>
 
     <!--FILTERS-->
     <script src="gantt/date/gantt-date.filter.js"></script>
@@ -168,7 +182,7 @@
 
 <!--CONFIG-->
     <script src="app.config.js"></script>
-    <script src="app-dev.config.js"></script>
+    <script src="dev/app-dev.config.js"></script>
 
 <!--DEV-->
     <!--COMMON-->
@@ -187,11 +201,13 @@
         <script src="dev/gantt/mocks/gantt-tasks-test-data.js"></script>
         <script src="dev/gantt/mocks/gantt-resources-data-provider.service.mock.js"></script>
         <script src="dev/gantt/mocks/gantt-resources-test-data.js"></script>
+        <script src="dev/gantt/mocks/gantt-projects-data-provider.service.mock.js"></script>
+        <script src="dev/gantt/mocks/gantt-projects-test-data.js"></script>
 
 <!--TEST-->
     <script src="test/test.config.js"></script>
     <script src="test/test.controller.js"></script>
     <script src="test/test.directive.js"></script>
 
-</body>
+`</body>
 </html>

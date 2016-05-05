@@ -32,8 +32,8 @@
             setLogUserID: setLogUserID,
             getDOCID: getDOCID,
             setDOCID: setDOCID,
-            getProjectName: getProjectName,
-            setProjectName: setProjectName,
+            getProjectID: getProjectID,
+            setProjectID: setProjectID,
             LEFT_BLOCK_MAX_WIDTH: "45%",
             LEFT_BLOCK_MIN_WIDTH: "250px"
         };
@@ -82,11 +82,11 @@
             _DOCID = DOCID;
         }
 
-        function getProjectName() {
+        function getProjectID() {
             return _projectName;
         }
         
-        function setProjectName(projectName) {
+        function setProjectID(projectName) {
             _projectName = projectName;
         }
     }

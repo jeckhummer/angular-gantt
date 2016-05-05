@@ -18,10 +18,10 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="info-editor">
-                <url-locale-include alias="task-info-editor"></url-locale-include>
+                <ng-include src="'gantt/task-editor/gantt-task-info-editor.html'"></ng-include>
             </div>
             <div role="tabpanel" class="tab-pane" id="resources-editor">
-                <url-locale-include alias="task-resources-editor"></url-locale-include>
+                <gantt-resources-list></gantt-resources-list>
             </div>
         </div>
     </div>

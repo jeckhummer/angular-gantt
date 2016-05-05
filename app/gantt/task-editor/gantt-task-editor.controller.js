@@ -1,7 +1,7 @@
 (function(){
     angular.module('gantt').controller('GanttTaskEditorController', GanttTaskEditorController);
 
-    function GanttTaskEditorController(){
+    function GanttTaskEditorController(GanttResourcesService){
         var ctrl = this;
 
         $('#task-editor-tabs a').click(function (e) {

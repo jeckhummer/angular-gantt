@@ -3,7 +3,7 @@
 (function () {
     angular.module('common', [
         'common.status',
-        'common.locale',
+        // 'common.locale',
         'common.date'
     ]);
 }());

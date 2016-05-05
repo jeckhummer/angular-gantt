@@ -52,7 +52,7 @@
 
         function reload() {
             var suppressOK = true;
-            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Fetching tasks', suppressOK);
+            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Loading tasks', suppressOK);
         }
 
         function moveTaskUp(id){

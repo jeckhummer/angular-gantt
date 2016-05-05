@@ -4,9 +4,9 @@
     angular.module('timeline')
         .directive('timeline', TimelineDirective);
 
-    function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce, URLLocaleService) {
+    function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce) {
         var directive = {
-            templateUrl: URLLocaleService.getURL('timeline.timeline'),
+            templateUrl: 'timeline/timeline/timeline.directive.html',
             restrict: 'E',
             scope: true,
             link: function ($scope) {

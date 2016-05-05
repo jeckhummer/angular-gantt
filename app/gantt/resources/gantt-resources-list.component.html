@@ -1,0 +1,9 @@
+<div class="list-group">
+    <!--<gantt-resource ng-repeat="resource in ctrl.resources | orderBy: '-isAssignedToThisProject'">-->
+    <!--</gantt-resource>-->
+    <div ng-switch="$ctrl.state">
+        <div ng-switch-when="load.success"></div>
+    </div>
+    resources: {{$ctrl.resources | json}}
+    <pre>state: {{$ctrl.state | json}} </pre>
+</div>

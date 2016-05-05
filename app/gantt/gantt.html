@@ -3,13 +3,10 @@
      id="gantt">
     <div class="top-bar">
         <div class="gantt-toolbar">
-            <url-locale-include alias="toolbar"></url-locale-include>
-
+            <ng-include src="'gantt/context-actions-bar/gantt-context-actions-bar.html'"></ng-include>
             <!--<status></status>-->
         </div>
-
-        <url-locale-include alias="tabs"></url-locale-include>
-
+        <ng-include src="'gantt/tabs/gantt-tabs.html'"></ng-include>
         <div style="clear:both"></div>
     </div>
 
@@ -50,7 +47,7 @@
                      style="min-width: {{ganttCtrl.leftBlockMinWidth}}; max-width: {{ganttCtrl.leftBlockMaxWidth}};">
 
                     <div style="position: relative; top: -{{ganttCtrl.scrollPositionTop}}px;">
-                        <url-locale-include alias="task-info"></url-locale-include>
+                        <ng-include src="'gantt/tasks/gantt-tasks-info.html'"></ng-include>
                     </div>
                 </div>
 
@@ -60,7 +57,7 @@
 
                     <div class="full-wrapper">
                         <div style="width: {{ganttCtrl.zoom.getValue()}}%;">
-                            <url-locale-include alias="task"></url-locale-include>
+                            <ng-include src="'gantt/tasks/gantt-tasks.html'"></ng-include>
                         </div>
                         <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft() * ganttCtrl.zoom.getValue()/100}}%"></div>
                     </div>
@@ -71,12 +68,11 @@
     </div>
 
     <div class="dialogs">
-        <url-locale-include alias="options"></url-locale-include>
-        <url-locale-include alias="task-editor"></url-locale-include>
-        <url-locale-include alias="gantt-baselines-menu"></url-locale-include>
-        <url-locale-include alias="gantt-processing-lock"></url-locale-include>
+        <ng-include src="'gantt/options/gantt-options.html'"></ng-include>
+        <ng-include src="'gantt/task-editor/gantt-task-editor.html'"></ng-include>
+        <ng-include src="'gantt/baselines/gantt-baselines-menu.html'"></ng-include>
+        <ng-include src="'gantt/tabs/gantt-processing-lock.html'"></ng-include>
     </div>
 
-    <url-locale-include alias="task-context-menu"></url-locale-include>
-
+    <ng-include src="'gantt/tasks/context-menu/gantt-task-context-menu.html'"></ng-include>
 </div>

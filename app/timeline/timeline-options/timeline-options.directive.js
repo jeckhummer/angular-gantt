@@ -3,9 +3,9 @@
     angular.module('timeline')
         .directive('timelineOptions', TimelineOptionsDirective);
 
-    function TimelineOptionsDirective(URLLocaleService, TimelineService, $rootScope) {
+    function TimelineOptionsDirective(TimelineService, $rootScope) {
         var directive = {
-            templateUrl: URLLocaleService.getURL('timeline.options'),
+            templateUrl: 'timeline/timeline-options/timeline-options.directive.html',
             restrict: 'E',
             scope: true,
             link: function ($scope) {

@@ -10,7 +10,7 @@
         // var delayDisabled = true;
 
         var service = {
-            getResources: DelayWrapperFactoryService.create(_getResources, 4000, delayDisabled)
+            getResources: DelayWrapperFactoryService.create(_getResources, 2000, delayDisabled)
         };
 
         return service;

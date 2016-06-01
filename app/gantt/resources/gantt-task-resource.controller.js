@@ -3,18 +3,14 @@
 
     function GanttTaskResourceController(){
         var ctrl = this;
-
-        ctrl.init = init;
-
-        function init(data) {
+        ctrl.init = function (data) {
             ctrl.name = data.name;
             ctrl.projects = data.projects;
             ctrl.employmentHours = data.employmentHours;
             ctrl.employmentPercentage = data.employmentPercentage;
-            ctrl.isAssignedToThisProject = data.isAssignedToThisProject;
 
-            ctrl.projectsString = ctrl.projects.join(', ');
-            ctrl.projectsList = ctrl.projects.join('<br />');
+            ctrl.projectsString = ctrl.projects.map(project => project.name).join(', ');
+            ctrl.projectsList = ctrl.projects.map(project => project.name).join('<br />');
         }
     }
 })();

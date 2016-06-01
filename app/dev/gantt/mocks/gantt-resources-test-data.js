@@ -38,6 +38,13 @@
                 assignedToProjects: [5, 6],
                 employmentPercentage: 95,
                 employmentHours: 7.5
+            },
+            {
+                id: 6,
+                name: "Faruh",
+                assignedToProjects: [1, 2, 3, 4, 5 ,6],
+                employmentPercentage: 100,
+                employmentHours: 8
             }
         ];
 

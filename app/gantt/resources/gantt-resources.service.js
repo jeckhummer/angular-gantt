@@ -1,67 +1,54 @@
 'use strict';
 (function () {
-    angular.module('gantt').factory('GanttResourcesService', GanttResourcesService);
+    angular.module('gantt').service('GanttResourcesService', GanttResourcesService);
 
-    function GanttResourcesService($rootScope, GanttResourcesDataProviderService) {
-        var stateNotifier = new StateManager('gantt.resources', (state) => $rootScope.$broadcast(state));
+    function GanttResourcesService($rootScope, GanttProjectsService, GanttResourcesDataProviderService) {
+        var service = this;
+        var _IDToResourceDictionary = null;
+        var _ProjectIDToResourceDictionary = null;
+        service.ready = false;
 
-        var IDToResourceDictionary = null;
-        var ProjectToResourceDictionary = null;
-        
-        var service = {
-            getAssignedToProjectResources: getAssignedToProjectResources,
-            getResource: getResource,
-            reload: reload,
-            getState: stateNotifier.getState
-        };
+        GanttResourcesDataProviderService.getResources()
+            .then(function(data){
+                _IDToResourceDictionary = new Dictionary(data);
+                _ProjectIDToResourceDictionary = new Dictionary(data,
+                    (resource) => resource.assignedToProjects
+                );
 
-        _init();
-        return service;
-
-        function reload() {
-            stateNotifier.setState('load.start');
-
-            var promise = GanttResourcesDataProviderService.getResources();
-            promise.then(
-                function (resourcesData) {
-                    IDToResourceDictionary = new Dictionary(resourcesData);
-                    ProjectToResourceDictionary = new Dictionary(resourcesData,
-                        (resource) => resource.assignedToProjects,
-                        (resource) => resource.id
-                    );
-                    ProjectToResourceDictionary.chainTo(IDToResourceDictionary);
-
-                    stateNotifier.setState('loaded.success.2.3.4.5');
-                },
-                function (error) {
-                    stateNotifier.setState('loaded.error');
+                // если данные по проектам готовы, то используем их.
+                if (GanttProjectsService.ready) {
+                    onProjectsChanged(data);
                 }
-            ).finally(function () {
-                stateNotifier.setState('load.end');
+
+                // подписываемся на изменение данных.
+                // делать это можно только после того, как данные по ресурсам будут получены.
+                $rootScope.$on('gantt.projects.changed', function () {
+                    onProjectsChanged(data);
+                });
             });
 
-            return promise;
-        }
+        service.getResource = function (id) {
+            return _IDToResourceDictionary.get(id)[0];
+        };
+        service.getProjectResources = projectID => _ProjectIDToResourceDictionary.get(projectID);
 
-        function _init() {
-            stateNotifier.setState('init.start');
-
-            var promise = reload();
-            promise.finally(function () {
-                stateNotifier.setState('init.end');
+        function onProjectsChanged(data) {
+            data.forEach(function (resource) {
+                resource.projects = resource.assignedToProjects.map(
+                    projectID => GanttProjectsService.getProject(projectID)
+                );
             });
+            service.ready = true;
+            $rootScope.$broadcast('gantt.resources.changed');
         }
 
-        function getAssignedToProjectResources(projectID){
-            GanttResourcesDictionaryService.processRange(function (resource) {
-                // var project
-                // return
-            });
-        }
-
-        function getResource(id) {
-            var resource = IDToResourceDictionary.get(id);
-            return resource;
-        }
+        // function onTasksChanged(data) {
+        //     _TaskIDToResourceDictionary = new Dictionary(
+        //         GanttTasksService.getAll(),
+        //         task => task.id,
+        //         task => task.resourcesAssigned
+        //     );
+        //     _TaskIDToResourceDictionary.chainTo(_IDToResourceDictionary);
+        // }
     }
 })();

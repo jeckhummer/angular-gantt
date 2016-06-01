@@ -10,12 +10,13 @@
         // var delayDisabled = true;
 
         var service = {
-            getProjects: DelayWrapperFactoryService.create(_getProjects, 2000, delayDisabled)
+            getProjects: DelayWrapperFactoryService.create(_getProjects, 4000, delayDisabled)
         };
 
         return service;
 
         function _getProjects() {
+            // throw "error";
             return GanttProjectsTestData;
         }
     }

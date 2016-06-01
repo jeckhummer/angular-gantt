@@ -4,6 +4,7 @@
 
     function GanttProjectsService(GanttProjectsDictionaryService, GanttProjectsDataProviderService, $rootScope) {
         var service = {
+            ready: false,
             isEmpty: GanttProjectsDictionaryService.isEmpty,
             getProject: GanttProjectsDictionaryService.get,
             getProjects: GanttProjectsDictionaryService.getRange
@@ -20,6 +21,7 @@
                 GanttProjectsDictionaryService.addRange(data.projects);
 
                 $rootScope.$broadcast('gantt.projects.changed');
+                service.ready = true;
             });
         }
     }

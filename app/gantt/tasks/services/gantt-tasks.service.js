@@ -5,6 +5,7 @@
                                GanttTasksDataProviderService, GanttTasksHierarchyService,
                                GanttOptionsService, NotificationService) {
         var service = {
+            ready: false,
             reload: reload,
             getAll: getAll,
             getTask: GanttTasksDictionaryService.get,
@@ -70,11 +71,13 @@
             GanttTasksDictionaryService.addRange(tasks);
 
             $rootScope.$broadcast('tasks-changed', tasks);
+            service.ready = true;
         }
 
         function _modifyGanttState(action, msg, suppressOK){
             var promise = action().then(_initTasks);
             NotificationService.notifyLock(msg, promise, suppressOK);
+            service.ready = false;
             return promise;
         }
     }

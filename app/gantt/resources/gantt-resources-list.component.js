@@ -2,35 +2,55 @@
 
 (function () {
     angular.module('gantt').component('ganttResourcesList', {
-        templateUrl: 'gantt/resources/gantt-resources-list.component.html',
-        controller: GanttResourcesListController
+        template: `
+            <div class="list-group">
+                <a ng-controller="GanttTaskResourceController as resourceCtrl"
+                   ng-init="resourceCtrl.init(resource)"
+                   ng-repeat="resource in $ctrl.resources | orderBy: '-isAssignedToThisProject'"
+                   class="list-group-item"
+                   id="task-resources-list">
+                
+                    <div class="left-block">
+                        <h5 class="list-group-item-heading nowrap-ellipsis-text">{{resourceCtrl.name}}</h5>
+                        <div class="list-group-item-text">
+                            <div ng-show="resourceCtrl.projects.length > 0" class="nowrap-ellipsis-text">
+                                <i>Projects :</i> {{resourceCtrl.projectsString}}
+                            </div>
+                            <div ng-hide="resourceCtrl.projects.length > 0" class="nowrap-ellipsis-text">
+                                This resource is fully available.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <h5 class="list-group-item-heading">Employment:</h5>
+                        <div class="employment-block">
+                            <b>{{resourceCtrl.employmentHours}}</b> hrs. &nbsp; <b>{{resourceCtrl.employmentPercentage}}%</b>
+                        </div>
+                    </div>
+                </a> 
+            </div>
+        `,
+        controller: GanttResourcesListController,
+        bindings: {
+            taskId: '@'
+        }
     });
 
-    function GanttResourcesListController($scope, GanttResourcesService, GanttOptionsService){
+    function GanttResourcesListController($rootScope, $scope, GanttResourcesService, GanttTasksService){
         var ctrl = this;
-        _init();
+        ctrl.resources = [];
 
-        function _init(){
-            ctrl.state = GanttResourcesService.getState();
-            $scope.$on('gantt.resources.$state-change', _onStateChange);
+        if(GanttResourcesService.ready){
+            initResources();
         }
+        $rootScope.$on('gantt.resources.changed', initResources);
+        $scope.$watch('$ctrl.taskId', initResources);
 
-        function _onStateChange() {
-            ctrl.state = GanttResourcesService.getState();
-
-            switch(ctrl.state){
-                case 'loaded.success': _populateResources(); break;
-            }
-        }
-
-        function _populateResources() {
-            var resources = GanttResourcesService.getAll();
-            var currentProjectName = GanttOptionsService.getProjectName();
-
-            resources.map(function (resource) {
-                resource.isAssignedToThisProject = resource.projects.indexOf(currentProjectName) > -1;
+        function initResources() {
+            if(!GanttResourcesService.ready) return;
+            ctrl.resources = GanttTasksService.getTask(ctrl.taskId).resourcesAssigned.map(function(resID) {
+                return GanttResourcesService.getResource(resID);
             });
-            ctrl.resources = resources;
         }
     }
 }());

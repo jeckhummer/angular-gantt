@@ -1,16 +1,11 @@
 'use strict';
 (function () {
     angular.module('dev.common.delayed-response', [])
-        .factory('DelayedResponseFactoryService', DelayedResponseFactoryService);
+        .service('DelayedResponseFactoryService', DelayedResponseFactoryService);
 
     function DelayedResponseFactoryService($timeout, $q) {
-        var service = {
-            create: create
-        };
-
-        return service;
-
-        function create(responseData, options) {
+        var service = this;
+        service.create = function create(responseData, options) {
             var responsePromise;
             if(!!options.getIsErrorResponse()){
                 responsePromise = $q.reject(responseData.getErrorData());

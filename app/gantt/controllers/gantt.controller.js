@@ -51,7 +51,7 @@
             var projectID = GanttOptionsService.getProjectID();
             var projectName = `Project ID${projectID}`;
 
-            if(!GanttProjectsService.isEmpty()){
+            if(GanttProjectsService.state === 'ready' && !GanttProjectsService.isEmpty){
                 var project = GanttProjectsService.getProject(projectID);
                 if(project){
                     projectName = project.name;

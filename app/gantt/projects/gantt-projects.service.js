@@ -2,27 +2,35 @@
 (function () {
     angular.module('gantt').factory('GanttProjectsService', GanttProjectsService);
 
-    function GanttProjectsService(GanttProjectsDictionaryService, GanttProjectsDataProviderService, $rootScope) {
+    function GanttProjectsService(GanttProjectsDataProviderService, $rootScope) {
+        var _projectsDictionary = {};
+
         var service = {
-            ready: false,
-            isEmpty: GanttProjectsDictionaryService.isEmpty,
-            getProject: GanttProjectsDictionaryService.get,
-            getProjects: GanttProjectsDictionaryService.getRange
+            isEmpty: () => _projectsDictionary.isEmpty(),
+            getProject: id => {
+                return _projectsDictionary.get(id)[0];
+            },
+            reload: function reload(){
+                _setState('loading');
+
+                GanttProjectsDataProviderService.getProjects().then(
+                    function (data) {
+                        _projectsDictionary = new Dictionary(data);
+                        _setState('ready')
+                    },
+                    function (){
+                        _setState('error');
+                    }
+                );
+            }
         };
-        
-        _init();
+
+        service.reload();
         return service;
-        
-        function _init(){
-            var promise = GanttProjectsDataProviderService.getProjects();
 
-            promise.then(function (data) {
-                GanttProjectsDictionaryService.reset();
-                GanttProjectsDictionaryService.addRange(data.projects);
-
-                $rootScope.$broadcast('gantt.projects.changed');
-                service.ready = true;
-            });
+        function _setState(state){
+            service.state = state;
+            $rootScope.$broadcast('gantt.projects.state-changed', state);
         }
     }
 })();

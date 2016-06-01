@@ -6,7 +6,7 @@
             <div class="list-group">
                 <a ng-controller="GanttTaskResourceController as resourceCtrl"
                    ng-init="resourceCtrl.init(resource)"
-                   ng-repeat="resource in $ctrl.resources | orderBy: '-isAssignedToThisProject'"
+                   ng-repeat="resource in $ctrl.resources"
                    class="list-group-item"
                    id="task-resources-list">
                 
@@ -29,6 +29,10 @@
                     </div>
                 </a> 
             </div>
+            
+            <div ng-show="$ctrl.resources.length == 0">
+                No resources assigned to this task.
+            </div>
         `,
         controller: GanttResourcesListController,
         bindings: {
@@ -40,17 +44,16 @@
         var ctrl = this;
         ctrl.resources = [];
 
-        if(GanttResourcesService.ready){
-            initResources();
-        }
-        $rootScope.$on('gantt.resources.changed', initResources);
+        initResources();
+        $rootScope.$on('gantt.resources.state-changed', initResources);
         $scope.$watch('$ctrl.taskId', initResources);
 
         function initResources() {
-            if(!GanttResourcesService.ready) return;
-            ctrl.resources = GanttTasksService.getTask(ctrl.taskId).resourcesAssigned.map(function(resID) {
-                return GanttResourcesService.getResource(resID);
-            });
+            if(GanttResourcesService.state == 'ready') {
+                ctrl.resources = GanttTasksService.getTask(ctrl.taskId).resourcesAssigned.map(function (resID) {
+                    return GanttResourcesService.getResource(resID);
+                });
+            }
         }
     }
 }());

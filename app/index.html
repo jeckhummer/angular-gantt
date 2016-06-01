@@ -186,9 +186,15 @@
 
 <!--DEV-->
     <!--COMMON-->
-    <script src="dev/common/http-delay-decorator.js"></script>
-    <script src="dev/common/events-to-console-reflector.js"></script>
-    <script src="dev/common/delay-wrapper-factory-service.js"></script>
+        <!--DELAY-->
+        <script src="dev/common/delay/delayed-response.js"></script>
+        <script src="dev/common/delay/delayed-response-config.js"></script>
+        <script src="dev/common/delay/delayed-response-factory-service.js"></script>
+        <script src="dev/common/delay/http-delay-decorator.js"></script>
+        <script src="dev/common/delay/delay-wrapper-factory-service.js"></script>
+
+        <!--OTHER-->
+        <script src="dev/common/events-to-console-reflector.js"></script>
 
     <!--GANTT-->
         <!--MOCKS-->
@@ -199,10 +205,9 @@
         <script src="dev/gantt/mocks/gantt-config-test-data.js"></script>
         <script src="dev/gantt/mocks/gantt-task-data-provider.service.mock.js"></script>
         <script src="dev/gantt/mocks/gantt-tasks-test-data.js"></script>
-        <script src="dev/gantt/mocks/gantt-resources-data-provider.service.mock.js"></script>
+        <script src="gantt/resources/gantt-resources-data-provider.service.mock.js"></script>
         <script src="dev/gantt/mocks/gantt-resources-test-data.js"></script>
-        <script src="dev/gantt/mocks/gantt-projects-data-provider.service.mock.js"></script>
-        <script src="dev/gantt/mocks/gantt-projects-test-data.js"></script>
+        <script src="gantt/projects/gantt-projects-data-provider.service.mock.js"></script>
 
 <!--TEST-->
     <script src="test/test.config.js"></script>

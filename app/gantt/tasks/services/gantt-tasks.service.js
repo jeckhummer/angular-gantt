@@ -39,7 +39,6 @@
 
         function addTask(data) {
             var prepend = GanttOptionsService.getTaskAdditionStrategy();
-            //data.parentID = 999;
             return _modifyGanttState(()=>GanttTasksDataProviderService.addTask(data, prepend), 'Saving task');
         }
 
@@ -63,6 +62,7 @@
         function moveTaskDown(id){
             return _modifyGanttState(()=>GanttTasksDataProviderService.moveTaskDown(id), 'Moving task');
         }
+
 
         function _initTasks(tasksData) {
             var tasks = tasksData.map((data) => GanttTaskFactoryService.create(data));

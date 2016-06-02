@@ -30,7 +30,7 @@
                 </a> 
             </div>
             
-            <div ng-show="$ctrl.resources.length == 0">
+            <div ng-show="!$ctrl.resources.length" style="padding-bottom:10px;">
                 No resources assigned to this task.
             </div>
         `,
@@ -40,7 +40,7 @@
         }
     });
 
-    function GanttResourcesListController($rootScope, $scope, GanttResourcesService, GanttTasksService){
+    function GanttResourcesListController($rootScope, $scope, GanttResourcesService){
         var ctrl = this;
         ctrl.resources = [];
 
@@ -50,9 +50,7 @@
 
         function initResources() {
             if(GanttResourcesService.state == 'ready') {
-                ctrl.resources = GanttTasksService.getTask(ctrl.taskId).resourcesAssigned.map(function (resID) {
-                    return GanttResourcesService.getResource(resID);
-                });
+                ctrl.resources = GanttResourcesService.getTaskResources(ctrl.taskId);
             }
         }
     }

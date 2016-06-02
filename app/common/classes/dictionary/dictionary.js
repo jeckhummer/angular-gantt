@@ -41,15 +41,16 @@ function Dictionary(objects, keysProvider, valueProvider){
         var value = _valueProvider(object);
 
         keys.forEach(function (key) {
+            key = key.toString();
             if(_dictionary[key]){
                 _dictionary[key].push(value);
             }else{
                 _dictionary[key] = [value];
+                _keys.push(key);
             }
         });
 
         _values.push(value);
-        _keys = _keys.concat(keys);
     }
 
     function addRange(objects){
@@ -105,7 +106,7 @@ function Dictionary(objects, keysProvider, valueProvider){
 
     function chainTo(dictionary) {
         _chainedDictionary = dictionary;
-        return _chainedDictionary;
+        return _self;
     }
 
     function _defaultKeysProvider(object){

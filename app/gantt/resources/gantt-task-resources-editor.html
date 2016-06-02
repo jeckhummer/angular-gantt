@@ -2,16 +2,45 @@
     <div ng-if="ctrl.taskID">
         <div ng-show="ctrl.state == 'loading'" class="text-center" style="margin-top:15px;">
             <img src="rolling.gif" alt="" style="width:25px"> &nbsp;
-            Loading...
-        </div>
-
-        <div ng-show="ctrl.state == 'ready'">
-            <gantt-resources-list task-id="{{ctrl.taskID}}"></gantt-resources-list>
+            Wait a moment...
         </div>
 
         <div ng-show="ctrl.state == 'error'" class="alert alert-danger" role="alert">
             <strong>Error!</strong> Loading resources failed.
             <button ng-click="ctrl.retry()" class="btn btn-warning btn-xs pull-right">Reload</button>
+        </div>
+
+        <div ng-show="ctrl.state == 'ready'">
+            <gantt-resources-list task-id="{{ctrl.taskID}}"></gantt-resources-list>
+
+            <div class="form-group">
+                <label class="control-label">Resources assignment</label>
+                <div class="input-group">
+                    <ui-select ng-disabled="!ctrl.resources.length"
+                               allow-clear
+                               ng-model="ctrl.selectedResource"
+                               theme="bootstrap">
+                        <ui-select-match placeholder="Select a resource to assign to task">
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.resources | filter: $select.search">
+                            <span ng-bind-html="item.name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <span class="input-group-btn">
+                      <button type="button"
+                              ng-disabled="!ctrl.resources.length"
+                              ng-click="ctrl.assignResourceToTask()"
+                              class="btn btn-success">
+                        Assign
+                      </button>
+                    </span>
+
+                </div>
+            </div>
+
+            <div ng-show="!ctrl.resources.length"> No resources left to assign.</div>
         </div>
     </div>
 </div>

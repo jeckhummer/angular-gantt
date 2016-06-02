@@ -17,7 +17,7 @@
             ],
             'error!'
         );
-        var options = new DelayedResponseConfig(4 * 1000, 1);
+        var options = new DelayedResponseConfig(0 * 1000, 0);
 
         return {
             getProjects: DelayedResponseFactoryService.create(data, options)

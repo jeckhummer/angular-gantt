@@ -11,8 +11,7 @@
                 parentID: 0,
                 percentComplete: 50,
                 isMilestone: false,
-                order: 2,
-                resourcesAssigned: [1,2,3]
+                order: 2
             },
             {
                 id: 6,
@@ -22,8 +21,7 @@
                 parentID: 5,
                 percentComplete: 100,
                 isMilestone: true,
-                order: 1,
-                resourcesAssigned: [1]
+                order: 1
             },
             {
                 id: 9,
@@ -33,8 +31,7 @@
                 parentID: 5,
                 percentComplete: 88,
                 isMilestone: false,
-                order: 4,
-                resourcesAssigned: [2,5]
+                order: 4
             },
             {
                 id: 7,
@@ -44,8 +41,7 @@
                 parentID: 5,
                 percentComplete: 33,
                 isMilestone: false,
-                order: 2,
-                resourcesAssigned: [4,5]
+                order: 2
             },
             {
                 id: 8,
@@ -55,8 +51,7 @@
                 parentID: 5,
                 percentComplete: 39,
                 isMilestone: false,
-                order: 3,
-                resourcesAssigned: [2,4]
+                order: 3
             },
             {
                 id: 10,
@@ -66,8 +61,7 @@
                 parentID: 5,
                 percentComplete: 0,
                 isMilestone: true,
-                order: 5,
-                resourcesAssigned: [1,2,3,4]
+                order: 5
             },
             {
                 id: 1,
@@ -77,8 +71,7 @@
                 parentID: 0,
                 percentComplete: 66,
                 isMilestone: false,
-                order: 1,
-                resourcesAssigned: [4,5,6]
+                order: 1
             },
             {
                 id: 2,
@@ -88,8 +81,7 @@
                 parentID: 1,
                 percentComplete: 55,
                 isMilestone: false,
-                order: 1,
-                resourcesAssigned: [1,2,4,5,6]
+                order: 1
             },
             {
                 id: 11,
@@ -99,8 +91,7 @@
                 parentID: 2,
                 percentComplete: 55,
                 isMilestone: false,
-                order: 1,
-                resourcesAssigned: [1,2,3,4,5,6]
+                order: 1
             },
             {
                 id: 4,
@@ -110,8 +101,7 @@
                 parentID: 1,
                 percentComplete: 100,
                 isMilestone: false,
-                order: 3,
-                resourcesAssigned: []
+                order: 3
             },
             {
                 id: 12,
@@ -121,8 +111,7 @@
                 parentID: 1,
                 percentComplete: 77,
                 isMilestone: false,
-                order: 2,
-                resourcesAssigned: []
+                order: 2
             },
             // { id: 13, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},
             // { id: 14, name: "SubTask 1B", start: "2016-04-01", end: "2016-08-16", parentID: 1, percentComplete: 77, isMilestone: false, order:2},

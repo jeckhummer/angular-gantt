@@ -4,5 +4,6 @@ angular.module('gantt', [
     'ngSanitize',
     'frapontillo.bootstrap-switch',
     'common',
-    'angularResizable'
+    'angularResizable',
+    'ui.select'
 ]);

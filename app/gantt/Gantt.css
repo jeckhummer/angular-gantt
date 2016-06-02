@@ -369,6 +369,7 @@ button.list-group-item:focus {
     }
     #task-resources-list.list-group-item{
         display: flex;
+        padding: 6px 10px !important;
     }
     #task-resources-list .left-block{
         overflow: hidden;

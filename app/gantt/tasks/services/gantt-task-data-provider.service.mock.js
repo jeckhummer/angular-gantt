@@ -25,7 +25,8 @@
             getTasks: 7000,
             addTask: 3000,
             updateTask: 2000,
-            deleteTask: 2000
+            deleteTask: 2000,
+
         };
 
         _init(GanttTasksTestData.tasks);

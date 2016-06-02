@@ -4,7 +4,8 @@
 
     function GanttResourcesDataProviderService() {
         var service = {
-            getResources: getResources
+            getResources: getResources,
+            assignResource: assignResource
         };
 
         _init();
@@ -15,6 +16,9 @@
         }
 
         function getResources() {
+        }
+        function assignResource(resource, taskID) {
+            
         }
     }
 })();

@@ -21,11 +21,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="right-block">
+                    <div class="middle-block">
                         <h5 class="list-group-item-heading">Employment:</h5>
                         <div class="employment-block">
                             <b>{{resourceCtrl.employmentHours}}</b> hrs. &nbsp; <b>{{resourceCtrl.employmentPercentage}}%</b>
                         </div>
+                    </div>
+                    <div class="right-block">
+                        <span ng-click="ctrl.unassignResource(resource.id)" class="glyphicon glyphicon-remove" style="cursor: pointer;"></span>
                     </div>
                 </a> 
             </div>
@@ -43,6 +46,7 @@
     function GanttResourcesListController($rootScope, $scope, GanttResourcesService){
         var ctrl = this;
         ctrl.resources = [];
+        ctrl.unassignResource = unassignResource;
 
         initResources();
         $rootScope.$on('gantt.resources.state-changed', initResources);
@@ -52,6 +56,14 @@
             if(GanttResourcesService.state == 'ready') {
                 ctrl.resources = GanttResourcesService.getTaskResources(ctrl.taskId);
             }
+        }
+
+        function unassignResource(resourceID){
+            GanttResourcesService.unassignResource(ctrl.taskId, resourceID).then(
+                function () {
+                    GanttResourcesService.getResource(resourceID).assigned;
+                }
+            );
         }
     }
 }());

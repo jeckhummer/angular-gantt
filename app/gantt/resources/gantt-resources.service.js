@@ -17,6 +17,7 @@
         service.reload = reload;
         service.retry = retry;
         service.assignResourceToTask = assignResourceToTask;
+        service.unassignResourceFromTask = unassignResourceFromTask;
 
         service.reload();
 
@@ -91,6 +92,9 @@
                 }, function(){
                     _setState('error');
                 });
+        }
+        function unassignResourceFromTask(taskID, resourceID){
+            
         }
 
         function _onProjectsChanged(data) {

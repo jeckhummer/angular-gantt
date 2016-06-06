@@ -1,36 +1,27 @@
 'use strict';
 (function () {
-    angular.module('gantt').factory('GanttProjectsService', GanttProjectsService);
+    angular.module('gantt').service('GanttProjectsService', GanttProjectsService);
 
-    function GanttProjectsService(GanttProjectsDataProviderService, $rootScope) {
-        var _projectsDictionary = {};
+    function GanttProjectsService(GanttProjectsDataProviderService, GanttOptionsService) {
+        var service = this;
+        var _projectsDictionary = null;
+        var _currentProjectID = GanttOptionsService.getProjectID();
+        var _projectName = `Project ID${_currentProjectID}`;
 
-        var service = {
-            isEmpty: () => _projectsDictionary.isEmpty(),
-            getProject: id => {
-                return _projectsDictionary.get(id)[0];
-            },
-            reload: function reload(){
-                _setState('loading');
+        service.initialized = GanttProjectsDataProviderService.getProjects()
+            .then(function(data){
+                _projectsDictionary = new Dictionary(data);
+                _projectName = _projectsDictionary.get(_currentProjectID)[0].name;
+            });
 
-                GanttProjectsDataProviderService.getProjects().then(
-                    function (data) {
-                        _projectsDictionary = new Dictionary(data);
-                        _setState('ready')
-                    },
-                    function (){
-                        _setState('error');
-                    }
-                );
-            }
+        service.isEmpty = function(){
+            return _projectsDictionary.isEmpty();
         };
-
-        service.reload();
-        return service;
-
-        function _setState(state){
-            service.state = state;
-            $rootScope.$broadcast('gantt.projects.state-changed', state);
+        service.getProject = function(id){
+            return _projectsDictionary.get(id)[0];
+        };
+        service.getCurrentProjectName = function(){
+            return _projectName;
         }
     }
 })();

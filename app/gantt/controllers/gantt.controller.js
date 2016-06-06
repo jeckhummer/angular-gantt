@@ -13,7 +13,7 @@
             ganttCtrl.isMasterMode = GanttOptionsService.isMasterMode;
             ganttCtrl.getTodayLineLeft = TimelineService.getTodayLineWidth;
             ganttCtrl.getCurrentBaselineName = GanttBaselinesService.getCurrentBaselineName;
-            ganttCtrl.getProjectName = getProjectName;
+            ganttCtrl.getProjectName = GanttProjectsService.getCurrentProjectName;
             ganttCtrl.leftBlockWidth = 1000;
             ganttCtrl.leftBlockMinWidth = GanttOptionsService.LEFT_BLOCK_MIN_WIDTH;
             ganttCtrl.leftBlockMaxWidth = GanttOptionsService.LEFT_BLOCK_MAX_WIDTH;
@@ -45,22 +45,6 @@
         function isZoomed(){
             var zoom = GanttOptionsService.zoomOptions.getValue();
             return  100 < zoom;
-        }
-
-        function getProjectName() {
-            var projectID = GanttOptionsService.getProjectID();
-            var projectName = `Project ID${projectID}`;
-
-            if(GanttProjectsService.state === 'ready' && !GanttProjectsService.isEmpty){
-                var project = GanttProjectsService.getProject(projectID);
-                if(project){
-                    projectName = project.name;
-                }else{
-                    console.log(`Error: no project with id = ${projectID}.`);
-                }
-            }
-
-            return projectName;
         }
     }
 })();

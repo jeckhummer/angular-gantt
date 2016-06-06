@@ -2,25 +2,47 @@
 (function () {
     angular.module('gantt').service('GanttResourcesService', GanttResourcesService);
 
-    function GanttResourcesService($rootScope, GanttProjectsService, GanttResourcesDataProviderService, GanttOptionsService) {
+    function GanttResourcesService($q, GanttProjectsService, GanttOptionsService, GanttResourcesDataProviderService) {
         var service = this;
         var _IDToResourceDictionary = null;
         var _ProjectToResourceDictionary = null;
         var _TaskToResourceDictionary = null;
-        var _dataError = false;
 
         service.getResource = getResource;
         service.getResources = getResources;
         service.getAvailableForTaskResources = getAvailableForTaskResources;
         service.getProjectResources = getProjectResources;
         service.getTaskResources = getTaskResources;
-        service.reload = reload;
-        service.retry = retry;
         service.assignResourceToTask = assignResourceToTask;
         service.unassignResourceFromTask = unassignResourceFromTask;
 
-        service.reload();
+        service.initialized = $q.all([
+            GanttResourcesDataProviderService.getResources(),
+            GanttProjectsService.initialized
+        ])
+        .then(function(arr){
+            initDictionaries(arr[0]);
+        });
 
+        function initDictionaries(data){
+            _IDToResourceDictionary = new Dictionary(data);
+
+            _ProjectToResourceDictionary = new Dictionary(
+                _IDToResourceDictionary.getValues(),
+                (resource) => resource.assignedToProjects
+            );
+
+            _TaskToResourceDictionary = new Dictionary(
+                _IDToResourceDictionary.getValues(),
+                (resource) => resource.assignedToTasks
+            );
+
+            _IDToResourceDictionary.getValues().forEach(function (resource) {
+                resource.projects = resource.assignedToProjects.map(
+                    projectID => GanttProjectsService.getProject(projectID)
+                );
+            });
+        }
         function getResource(id) {
             return _IDToResourceDictionary.get(id)[0];
         }
@@ -38,76 +60,27 @@
         function getTaskResources(taskID) {
             return _TaskToResourceDictionary.get(taskID);
         }
-        function reload() {
-            _setState('loading');
-            GanttResourcesDataProviderService.getResources().then(
-                function (data) {
-                    _IDToResourceDictionary = new Dictionary(data);
-
-                    _ProjectToResourceDictionary = new Dictionary(
-                        _IDToResourceDictionary.getValues(),
-                        (resource) => resource.assignedToProjects
-                    );
-
-                    _TaskToResourceDictionary = new Dictionary(
-                        _IDToResourceDictionary.getValues(),
-                        (resource) => resource.assignedToTasks
-                    );
-
-                    // если данные по проектам готовы, то используем их.
-                    if (GanttProjectsService.state === 'ready') {
-                        _setState('ready');
-                        _onProjectsChanged(data);
-                    }
-
-                    // подписываемся на изменение данных.
-                    // делать это можно только после того, как данные по ресурсам будут получены.
-                    $rootScope.$on('gantt.projects.state-changed', function (event, state) {
-                        _setState(state);
-                        if (state == 'ready') {
-                            _onProjectsChanged(data);
-                        }
-                    });
-                },
-                function () {
-                    _setState('error');
-                    _dataError = true;
-                }
-            );
-        }
-        function retry() {
-            if (GanttProjectsService.state == 'error') {
-                _setState('loading');
-                GanttProjectsService.reload();
-            }
-            if (_dataError) {
-                service.reload();
-            }
-        }
         function assignResourceToTask(resourceID, taskID) {
-            _setState('loading');
-            GanttResourcesDataProviderService.assignResourceToTask(resourceID, taskID)
+            return GanttResourcesDataProviderService.assignResourceToTask(resourceID, taskID)
                 .then(function(){
-                    reload();
+                    var resource = _IDToResourceDictionary.get(resourceID)[0];
+                    resource.assignedToTasks.push(taskID);
+                    resource.assignedToProjects.push(GanttOptionsService.getProjectID());
+                    initDictionaries(_IDToResourceDictionary.getValues());
                 }, function(){
-                    _setState('error');
                 });
         }
-        function unassignResourceFromTask(taskID, resourceID){
-            
-        }
-
-        function _onProjectsChanged(data) {
-            data.forEach(function (resource) {
-                resource.projects = resource.assignedToProjects.map(
-                    projectID => GanttProjectsService.getProject(projectID)
-                );
-            });
-        }
-
-        function _setState(state) {
-            service.state = state;
-            $rootScope.$broadcast('gantt.resources.state-changed', state);
+        function unassignResourceFromTask(resourceID, taskID){
+            return GanttResourcesDataProviderService.unassignResourceFromTask(resourceID, taskID)
+                .then(function(){
+                    var resource = _IDToResourceDictionary.get(resourceID)[0];
+                    var index = resource.assignedToTasks.indexOf(parseInt(taskID));
+                    if(index > -1) {
+                        resource.assignedToTasks.splice(index, 1);
+                    }
+                    initDictionaries(_IDToResourceDictionary.getValues());
+                }, function(){
+                });
         }
     }
 })();

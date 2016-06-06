@@ -28,42 +28,26 @@
                         </div>
                     </div>
                     <div class="right-block">
-                        <span ng-click="ctrl.unassignResource(resource.id)" class="glyphicon glyphicon-remove" style="cursor: pointer;"></span>
+                        <span ng-click="$ctrl.onUnassign({resourceID: resource.id})" 
+                              class="glyphicon glyphicon-remove" 
+                              style="cursor: pointer;">
+                        </span>
                     </div>
                 </a> 
             </div>
             
-            <div ng-show="!$ctrl.resources.length" style="padding-bottom:10px;">
+            <div ng-show="!$ctrl.getTaskResources().length" style="padding-bottom:10px;">
                 No resources assigned to this task.
             </div>
         `,
         controller: GanttResourcesListController,
         bindings: {
-            taskId: '@'
+            onUnassign: '&',
+            resources: '<'
         }
     });
 
-    function GanttResourcesListController($rootScope, $scope, GanttResourcesService){
-        var ctrl = this;
-        ctrl.resources = [];
-        ctrl.unassignResource = unassignResource;
+    function GanttResourcesListController(GanttResourcesService){
 
-        initResources();
-        $rootScope.$on('gantt.resources.state-changed', initResources);
-        $scope.$watch('$ctrl.taskId', initResources);
-
-        function initResources() {
-            if(GanttResourcesService.state == 'ready') {
-                ctrl.resources = GanttResourcesService.getTaskResources(ctrl.taskId);
-            }
-        }
-
-        function unassignResource(resourceID){
-            GanttResourcesService.unassignResource(ctrl.taskId, resourceID).then(
-                function () {
-                    GanttResourcesService.getResource(resourceID).assigned;
-                }
-            );
-        }
     }
 }());

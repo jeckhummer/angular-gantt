@@ -67,7 +67,6 @@
                     resource.assignedToTasks.push(taskID);
                     resource.assignedToProjects.push(GanttOptionsService.getProjectID());
                     initDictionaries(_IDToResourceDictionary.getValues());
-                }, function(){
                 });
         }
         function unassignResourceFromTask(resourceID, taskID){
@@ -79,7 +78,6 @@
                         resource.assignedToTasks.splice(index, 1);
                     }
                     initDictionaries(_IDToResourceDictionary.getValues());
-                }, function(){
                 });
         }
     }

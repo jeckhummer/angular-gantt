@@ -1,29 +1,22 @@
 <div ng-controller="GanttTaskResourcesController as ctrl">
     <div ng-if="ctrl.taskID">
-        <div ng-show="ctrl.state == 'loading'" class="text-center" style="margin-top:15px;">
+        <div ng-if="ctrl.loaded">
+            <gantt-resources-list
+                resources="ctrl.getTaskResources()"
+                on-unassign="ctrl.unassignResourceFromTask(resourceID)">
+            </gantt-resources-list>
+        </div>
+
+        <div ng-show="ctrl.state == 'loading'" class="text-center" style="margin:15px;">
             <img src="rolling.gif" alt="" style="width:25px"> &nbsp;
-            Loading resources. Wait a moment...
+            {{ctrl.notification}}.  Wait a moment...
         </div>
 
         <div ng-show="ctrl.state == 'error'" class="alert alert-danger" role="alert">
-            <strong>Error!</strong> Loading resources failed.
+            <strong>Error!</strong> {{ctrl.notification}} failed.
         </div>
 
-        <div ng-show="ctrl.state == 'assigning'" class="text-center" style="margin-top:15px;">
-            <img src="rolling.gif" alt="" style="width:25px"> &nbsp;
-            Assigning resource. Wait a moment...
-        </div>
-        <div ng-show="ctrl.state == 'unassigning'" class="text-center" style="margin-top:15px;">
-            <img src="rolling.gif" alt="" style="width:25px"> &nbsp;
-            Deleting resource. Wait a moment...
-        </div>
-
-        <div ng-if="ctrl.state == 'ready'">
-            <gantt-resources-list
-                    resources="ctrl.getTaskResources()"
-                    on-unassign="ctrl.unassignResourceFromTask(resourceID)">
-            </gantt-resources-list>
-
+        <div ng-if="ctrl.loaded">
             <div class="form-group">
                 <label class="control-label">Resources assignment</label>
                 <div class="input-group">
@@ -47,7 +40,6 @@
                         Assign
                       </button>
                     </span>
-
                 </div>
             </div>
 

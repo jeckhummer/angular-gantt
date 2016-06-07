@@ -36,7 +36,7 @@
                 </a> 
             </div>
             
-            <div ng-show="!$ctrl.getTaskResources().length" style="padding-bottom:10px;">
+            <div ng-show="!$ctrl.resources.length" style="padding-bottom:10px;">
                 No resources assigned to this task.
             </div>
         `,

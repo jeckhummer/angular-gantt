@@ -38,9 +38,9 @@ function Dictionary(objects, keysProvider, valueProvider){
         if(!Array.isArray(keys)){
             keys = [keys];
         }
-        var value = _valueProvider(object);
 
         keys.forEach(function (key) {
+            var value = _valueProvider(object, key);
             key = key.toString();
             if(_dictionary[key]){
                 _dictionary[key].push(value);
@@ -48,9 +48,8 @@ function Dictionary(objects, keysProvider, valueProvider){
                 _dictionary[key] = [value];
                 _keys.push(key);
             }
+            _values.push(value);
         });
-
-        _values.push(value);
     }
 
     function addRange(objects){

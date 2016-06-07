@@ -5,8 +5,8 @@
         template: `
             <div class="list-group">
                 <a ng-controller="GanttTaskResourceController as resourceCtrl"
-                   ng-init="resourceCtrl.init(resource)"
-                   ng-repeat="resource in $ctrl.resources"
+                   ng-init="resourceCtrl.init(resource, $ctrl.taskId)"
+                   ng-repeat="resource in $ctrl.resources track by $ctrl.test(resource)"
                    class="list-group-item"
                    id="task-resources-list">
                 
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="right-block">
-                        <span ng-click="$ctrl.onUnassign({resourceID: resource.id})" 
+                        <span ng-click="$ctrl.onUnassign({resourceID: resource.resource.id})" 
                               class="glyphicon glyphicon-remove" 
                               style="cursor: pointer;">
                         </span>
@@ -46,8 +46,7 @@
             resources: '<'
         }
     });
-
     function GanttResourcesListController(GanttResourcesService){
-
+        this.test = (resource) => `${resource.resource.id} ${resource.hours}`;
     }
 }());

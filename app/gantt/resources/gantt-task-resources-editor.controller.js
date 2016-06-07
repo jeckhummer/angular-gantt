@@ -6,9 +6,9 @@
         var ctrl = this;
 
         ctrl.selectedResource = null;
-        ctrl.hoursEmployed = 0;
-        ctrl.resources = [];
+        ctrl.hoursEmployed = 1;
         ctrl.loaded = false;
+        ctrl.invalidHours = false;
         ctrl.getAvailableResources = getAvailableResources;
         ctrl.getTaskResources = getTaskResources;
         ctrl.assignResourceToTask = assignResourceToTask;
@@ -28,11 +28,19 @@
         }
 
         function assignResourceToTask() {
-            _changeState(
-                'Assigning resource',
-                GanttResourcesService.assignResourceToTask(ctrl.selectedResource.id, ctrl.taskID)
-            );
-            ctrl.selectedResource = null;
+            if(!/^[1-8](\.[0-9])*$/.test(ctrl.hoursEmployed) ||
+                parseFloat(ctrl.hoursEmployed) <= 0 ||
+                parseFloat(ctrl.hoursEmployed) > 8){
+                ctrl.invalidHours = true;
+            }else{
+                ctrl.invalidHours = false;
+                _changeState(
+                    'Assigning resource',
+                    GanttResourcesService.assignResourceToTask(ctrl.selectedResource.id, ctrl.taskID, ctrl.hoursEmployed)
+                );
+                ctrl.selectedResource = null;
+            }
+
         }
 
         function unassignResourceFromTask(resourceID) {

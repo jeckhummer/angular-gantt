@@ -34,7 +34,11 @@
 
             _TaskToResourceDictionary = new Dictionary(
                 _IDToResourceDictionary.getValues(),
-                (resource) => resource.assignedToTasks
+                (resource) => resource.assignedToTasks.map(task => task.id),
+                (resource, taskID) => ({
+                    resource: resource,
+                    hours: resource.assignedToTasks.filter(task => task.id == taskID)[0].hours
+                })
             );
 
             _IDToResourceDictionary.getValues().forEach(function (resource) {
@@ -51,7 +55,7 @@
         }
         function getAvailableForTaskResources(taskID) {
             return getResources().filter(function(resource){
-                return resource.assignedToTasks.indexOf(taskID) === -1;
+                return resource.assignedToTasks.map(task => task.id).indexOf(taskID) === -1;
             });
         }
         function getProjectResources(projectID) {
@@ -60,11 +64,11 @@
         function getTaskResources(taskID) {
             return _TaskToResourceDictionary.get(taskID);
         }
-        function assignResourceToTask(resourceID, taskID) {
-            return GanttResourcesDataProviderService.assignResourceToTask(resourceID, taskID)
+        function assignResourceToTask(resourceID, taskID, hoursEmployed) {
+            return GanttResourcesDataProviderService.assignResourceToTask(resourceID, taskID, hoursEmployed)
                 .then(function(){
                     var resource = _IDToResourceDictionary.get(resourceID)[0];
-                    resource.assignedToTasks.push(taskID);
+                    resource.assignedToTasks.push({id: taskID, hours: hoursEmployed});
                     resource.assignedToProjects.push(GanttOptionsService.getProjectID());
                     initDictionaries(_IDToResourceDictionary.getValues());
                 });
@@ -73,7 +77,7 @@
             return GanttResourcesDataProviderService.unassignResourceFromTask(resourceID, taskID)
                 .then(function(){
                     var resource = _IDToResourceDictionary.get(resourceID)[0];
-                    var index = resource.assignedToTasks.indexOf(parseInt(taskID));
+                    var index = resource.assignedToTasks.map(task => task.id).indexOf(parseInt(taskID));
                     if(index > -1) {
                         resource.assignedToTasks.splice(index, 1);
                     }

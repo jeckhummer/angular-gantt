@@ -59,7 +59,7 @@ function Dictionary(objects, keysProvider, valueProvider){
     }
 
     function get(key){
-        var values = _dictionary[key];
+        var values = _dictionary[key] || [];
 
         if(_chainedDictionary){
             var keys = values.slice();

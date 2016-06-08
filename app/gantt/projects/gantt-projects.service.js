@@ -2,25 +2,43 @@
 (function () {
     angular.module('gantt').service('GanttProjectsService', GanttProjectsService);
 
-    function GanttProjectsService(GanttProjectsDataProviderService, GanttOptionsService) {
+    function GanttProjectsService(GanttProjectsDataProviderService, GanttOptionsService, $rootScope) {
         var service = this;
+
+        var _projectsData = [];
         var _projectsDictionary = null;
         var _currentProjectID = GanttOptionsService.getProjectID();
         var _projectName = `Project ID${_currentProjectID}`;
-
-        service.initialized = GanttProjectsDataProviderService.getProjects()
+        var initialized = GanttProjectsDataProviderService.getProjects()
             .then(function(data){
-                _projectsDictionary = new Dictionary(data);
-                _projectName = _projectsDictionary.get(_currentProjectID)[0].name;
+                _projectsData = data;
+                init();
             });
 
-        service.isEmpty = function(){
+        service.initialized = initialized;
+        service.isEmpty = isEmpty;
+        service.getProject = getProject;
+        service.getCurrentProjectName = getCurrentProjectName;
+
+        init();
+
+        function init(){
+            _projectsDictionary = new Dictionary(_projectsData);
+            var project = _projectsDictionary.get(_currentProjectID)[0];
+            if(project){
+                _projectName = project.name;
+            }
+
+            $rootScope.$broadcast('projects.data-update');
+        }
+
+        function isEmpty(){
             return _projectsDictionary.isEmpty();
-        };
-        service.getProject = function(id){
+        }
+        function getProject(id){
             return _projectsDictionary.get(id)[0];
-        };
-        service.getCurrentProjectName = function(){
+        }
+        function getCurrentProjectName(){
             return _projectName;
         }
     }

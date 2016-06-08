@@ -61,7 +61,7 @@
                 ]
             }
         ];
-        var config = new DelayedResponseConfig(0 * 1000, 0);
+        var config = new DelayedResponseConfig(3 * 1000, 0);
 
         return {
             getResources: DelayedResponseFactoryService.create(new DelayedResponse(data, 'error'), config),

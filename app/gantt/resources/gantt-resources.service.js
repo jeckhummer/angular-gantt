@@ -2,12 +2,22 @@
 (function () {
     angular.module('gantt').service('GanttResourcesService', GanttResourcesService);
 
-    function GanttResourcesService($q, GanttProjectsService, GanttOptionsService, GanttResourcesDataProviderService) {
+    function GanttResourcesService($rootScope, GanttProjectsService, GanttOptionsService, GanttResourcesDataProviderService) {
         var service = this;
+
+        var _resourcesData = [];
+        var _resourcesDataPromise = GanttResourcesDataProviderService.getResources();
+        var initialized = _resourcesDataPromise
+            .then(function(data){
+                _resourcesData = data;
+                init();
+            });
+
         var _IDToResourceDictionary = null;
         var _ProjectToResourceDictionary = null;
         var _TaskToResourceDictionary = null;
 
+        service.initialized = initialized;
         service.getResource = getResource;
         service.getResources = getResources;
         service.getAvailableForTaskResources = getAvailableForTaskResources;
@@ -16,16 +26,15 @@
         service.assignResourceToTask = assignResourceToTask;
         service.unassignResourceFromTask = unassignResourceFromTask;
 
-        service.initialized = $q.all([
-            GanttResourcesDataProviderService.getResources(),
-            GanttProjectsService.initialized
-        ])
-        .then(function(arr){
-            initDictionaries(arr[0]);
-        });
+        init();
+        connect();
 
-        function initDictionaries(data){
-            _IDToResourceDictionary = new Dictionary(data);
+        function connect(){
+            $rootScope.$on('projects.data-update', init);
+        }
+
+        function init(){
+            _IDToResourceDictionary = new Dictionary(_resourcesData);
 
             _ProjectToResourceDictionary = new Dictionary(
                 _IDToResourceDictionary.getValues(),
@@ -41,12 +50,11 @@
                 })
             );
 
-            _IDToResourceDictionary.getValues().forEach(function (resource) {
-                resource.projects = resource.assignedToProjects.map(
-                    projectID => GanttProjectsService.getProject(projectID)
-                );
-            });
+            
+
+            $rootScope.$broadcast('resources.data-update');
         }
+
         function getResource(id) {
             return _IDToResourceDictionary.get(id)[0];
         }
@@ -70,7 +78,7 @@
                     var resource = _IDToResourceDictionary.get(resourceID)[0];
                     resource.assignedToTasks.push({id: taskID, hours: hoursEmployed});
                     resource.assignedToProjects.push(GanttOptionsService.getProjectID());
-                    initDictionaries(_IDToResourceDictionary.getValues());
+                    init(_IDToResourceDictionary.getValues());
                 });
         }
         function unassignResourceFromTask(resourceID, taskID){
@@ -81,7 +89,7 @@
                     if(index > -1) {
                         resource.assignedToTasks.splice(index, 1);
                     }
-                    initDictionaries(_IDToResourceDictionary.getValues());
+                    init(_IDToResourceDictionary.getValues());
                 });
         }
     }

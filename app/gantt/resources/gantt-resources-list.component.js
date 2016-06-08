@@ -6,17 +6,17 @@
             <div class="list-group">
                 <a ng-controller="GanttTaskResourceController as resourceCtrl"
                    ng-init="resourceCtrl.init(resource, $ctrl.taskId)"
-                   ng-repeat="resource in $ctrl.resources track by $ctrl.test(resource)"
+                   ng-repeat="resource in $ctrl.resources track by $ctrl.tracker(resource)"
                    class="list-group-item"
                    id="task-resources-list">
                 
                     <div class="left-block">
                         <h5 class="list-group-item-heading nowrap-ellipsis-text">{{resourceCtrl.name}}</h5>
                         <div class="list-group-item-text">
-                            <div ng-show="resourceCtrl.projects.length > 0" class="nowrap-ellipsis-text">
+                            <div ng-show="resourceCtrl.assignedToProjects.length > 0" class="nowrap-ellipsis-text">
                                 <i>Projects :</i> {{resourceCtrl.projectsString}}
                             </div>
-                            <div ng-hide="resourceCtrl.projects.length > 0" class="nowrap-ellipsis-text">
+                            <div ng-hide="resourceCtrl.assignedToProjects.length > 0" class="nowrap-ellipsis-text">
                                 This resource is fully available.
                             </div>
                         </div>
@@ -46,7 +46,7 @@
             resources: '<'
         }
     });
-    function GanttResourcesListController(GanttResourcesService){
-        this.test = (resource) => `${resource.resource.id} ${resource.hours}`;
+    function GanttResourcesListController(){
+        this.tracker = (resource) => `${resource.resource.id} ${resource.hours}`;
     }
 }());

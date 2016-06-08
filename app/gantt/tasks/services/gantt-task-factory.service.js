@@ -2,7 +2,7 @@
     angular.module('gantt').service('GanttTaskFactoryService', GanttTaskFactoryService);
 
     function GanttTaskFactoryService(DateService) {
-        this.create = (data)=> new Task(data);
+        this.create = function(data){ return new Task(data);};
 
         function Task(data) {
             var task = this;

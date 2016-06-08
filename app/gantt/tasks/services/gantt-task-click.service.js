@@ -34,13 +34,17 @@
 
         function selectAll() {
             var tasks = _getAllTasks();
-            tasks.forEach((task)=>tasksSelectionMap[task.id] = true);
+            tasks.forEach(function (task) {
+                tasksSelectionMap[task.id] = true;
+            });
             selectedTasksCount = GanttTasksService.getTasksCount();
         }
 
         function unselectAll() {
             var tasks = _getAllTasks();
-            tasks.forEach((task)=>tasksSelectionMap[task.id] = false);
+            tasks.forEach(function (task) {
+                tasksSelectionMap[task.id] = false;
+            });
             selectedTasksCount = 0;
         }
 
@@ -48,7 +52,7 @@
             lastRightClicked = id;
         }
 
-        function getRightClickedTaskID(){
+        function getRightClickedTaskID() {
             return lastRightClicked;
         }
 
@@ -56,18 +60,22 @@
             return tasksSelectionMap[id];
         }
 
-        function hasSelectedTasks(){
+        function hasSelectedTasks() {
             return selectedTasksCount > 0;
         }
 
         function getSelectedTasks() {
             var tasks = _getAllTasks();
-            var selected = tasks.filter((task)=>tasksSelectionMap[task.id]);
+            var selected = tasks.filter(function (task) {
+                return tasksSelectionMap[task.id];
+            });
             return selected;
         }
 
-        function getSelectedTasksIDs(){
-            return getSelectedTasks().map((task)=>task.id);
+        function getSelectedTasksIDs() {
+            return getSelectedTasks().map(function (task) {
+                return task.id;
+            });
         }
 
         function getSelectedTasksCount() {
@@ -75,7 +83,9 @@
         }
 
         function getSelectedTasksNames() {
-            var names = getSelectedTasks().map((task)=>task.name);
+            var names = getSelectedTasks().map(function (task) {
+                return task.name;
+            });
             return names;
         }
 

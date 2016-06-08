@@ -25,7 +25,7 @@
                         config.forEach(function (configItem) {
                            if(configItem.visible){
                                var type = TimelineTypes[configItem.typeName];
-                               if(!type) throw `Unknown timeline type: ${configItem.typeName}`;
+                               if(!type) throw 'Unknown timeline type: ' + configItem.typeName;
 
                                var gridObject = {
                                    grid: TimeLineGridService.generate(type, dateInterval),

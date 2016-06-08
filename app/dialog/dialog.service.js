@@ -32,12 +32,12 @@
         function activateDialog(dialogName, arg, block){
             activeDialog = dialogName;
             blockingMode = block;
-            $rootScope.$broadcast(`${dialogName}-opened`, arg);
+            $rootScope.$broadcast(dialogName + '-opened', arg);
         }
 
         function deactivateDialog(dialogName, arg){
             deactivate();
-            $rootScope.$broadcast(`${dialogName}-closed`, arg);
+            $rootScope.$broadcast(dialogName + '-closed', arg);
         }
 
         function isActiveDialog(dialogName) {

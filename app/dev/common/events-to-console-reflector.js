@@ -12,7 +12,7 @@
         var service = Object.assign($delegate, {
             $broadcast: function (name, args) {
                 if(name[0] != '$' && filters.indexOf(name) == -1) {
-                    console.log(`[${name}] event raised with args:`, args);
+                    console.log('[' + name + '] event raised with args:', args);
                 }
                 return originalMethod.apply($delegate,[name, args]);
             }

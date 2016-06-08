@@ -1,8 +1,8 @@
 (function(){
     angular.module('gantt').controller('GanttTaskController', GanttTaskController);
 
-    function GanttTaskController($scope, DateService, TimelineService, GanttBaselinesService,
-                            GanttTasksService, GanttOptionsService, GanttTasksHierarchyService){
+    function GanttTaskController($scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService,
+                                 GanttOptionsService, GanttTasksHierarchyService,GanttResourcesService){
         var ctrl = this;
         ctrl.moveTaskUp = moveTaskUp;
         ctrl.moveTaskDown = moveTaskDown;
@@ -11,10 +11,24 @@
 
         $scope.$watchCollection('task', init);
 
-        $scope.$on('boundaries-changed', () => initPosition(ctrl));
-        $scope.$on('boundaries-changed', () => initBaseline(ctrl));
-        $scope.$on('baselines-changed', () => initBaseline(ctrl));
-        $scope.$on('current-baseline-changed', () => initBaseline(ctrl));
+        $scope.$on('boundaries-changed', function(){ initPosition(ctrl) });
+        $scope.$on('boundaries-changed', function(){ initBaseline(ctrl) });
+        $scope.$on('baselines-changed', function(){ initBaseline(ctrl) });
+        $scope.$on('current-baseline-changed', function(){ initBaseline(ctrl) });
+        $scope.$on('resources.data-update', function(event){
+            console.log('resources.data-update');
+            initResourcesConflict();
+        });
+        $scope.$on('resources.assigned', function(event, resourceID, taskID){
+            if(ctrl.id == taskID){
+                console.log(resourceID + 'resource assigned to ' + taskID + ' task!');
+            }
+            initResourcesConflict();
+        });
+        $scope.$on('tasks-changed', function(){
+            console.log('tasks-changed');
+            initResourcesConflict();
+        });
 
         function init(task){
             if(task){
@@ -78,6 +92,24 @@
                 task.closerToEnd =
                     (100 - task.position.left - task.position.width) < +task.position.left;
             }
+        }
+
+        function initResourcesConflict(){
+            var tasks = GanttTasksService.getAll();
+            var task = GanttTasksService.getTask(ctrl.id);
+            var currTaskIndex = tasks.indexOf(task);
+            var currTaskResources = GanttResourcesService.getTaskResources(ctrl.id);
+            var intersections = tasks
+                .filter(function(task, index){
+                    return index > currTaskIndex;
+                })
+                .filter(function (task) {
+                    return DateInterval.intersect(ctrl.dateInterval, task.dateInterval).days > 0;
+                })
+                .filter(function(task){
+                    var resources = GanttResourcesService.getTaskResources(task.id);
+                    // return resources.map();
+                });
         }
 
         function moveTaskUp(id, event){

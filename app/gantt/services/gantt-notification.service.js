@@ -15,19 +15,19 @@
         }
 
         function notify(msg, promise, suppressOK) {
-            var _msg = `${msg}...`;
+            var _msg = msg + '...';
             StatusService.notifyFade(_msg, promise);
 
             return promise.then(
                 function () {
                     if (!suppressOK) {
-                        var _msg = `${msg} SUCCEED!`;
+                        var _msg = msg + ' SUCCEED!';
                         StatusService.notifyTimeoutFade(_msg);
                     }
                 },
                 function (error) {
                     var isError = true;
-                    var _msg = `${msg} FAILED! error: ${error}`;
+                    var _msg = msg + ' FAILED! error: ' + error;
                     StatusService.notify(_msg, isError);
                 }
             );

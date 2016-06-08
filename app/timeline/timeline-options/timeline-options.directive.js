@@ -22,7 +22,7 @@
                 }
 
                 function setStripesType(typeIndex){
-                    $scope.config.forEach((elem, ind) => elem.stripes = ind == typeIndex);
+                    $scope.config.forEach(function (elem, ind) { elem.stripes = ind == typeIndex; });
                 }
 
                 function getStripesTypeIndex() {

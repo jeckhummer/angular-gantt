@@ -18,70 +18,72 @@
         _init();
         return service;
 
-        function _init(){
+        function _init() {
             var tasks = GanttTasksDictionaryService.getRange();
             _tree = new Tree(tasks, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGetter, orderSetter);
 
-            function IDGetter(data){
+            function IDGetter(data) {
                 return data.id;
             }
 
-            function parentIDGetter(data){
+            function parentIDGetter(data) {
                 return data.parentID;
             }
 
-            function orderGetter(data){
+            function orderGetter(data) {
                 return data.order;
             }
 
-            function IDSetter(data, val){
+            function IDSetter(data, val) {
                 data.id = val;
             }
 
-            function parentIDSetter(data, val){
+            function parentIDSetter(data, val) {
                 data.parentID = val;
             }
 
-            function orderSetter(data, val){
+            function orderSetter(data, val) {
                 data.order = val;
             }
         }
 
-        function get(id){
+        function get(id) {
             var task = _tree.get(id);
             return task;
         }
 
-        function getAllTasks(){
-            var tasks = _tree.getAll((node) => GanttTasksDictionaryService.get(node.getID()));
+        function getAllTasks() {
+            var tasks = _tree.getAll(function (node) {
+                return GanttTasksDictionaryService.get(node.getID())
+            });
             return tasks;
         }
 
-        function getAllNodes(){
+        function getAllNodes() {
             var nodes = _tree.getAll();
             return nodes;
         }
 
-        function isFirstChild(id){
+        function isFirstChild(id) {
             return _tree.isFirstChild(id);
         }
 
-        function isLastChild(id){
+        function isLastChild(id) {
             return _tree.isLastChild(id);
         }
 
-        function isParent(id){
+        function isParent(id) {
             return _tree.isParent(id);
         }
 
-        function isChildOf(id, suspectParentID){
+        function isChildOf(id, suspectParentID) {
             var node = get(id);
             var parentNode = get(node.getParentID());
             var parentID = parentNode.getID();
             var isChild = false;
 
-            while(parentID !== null){
-                if(parentID == suspectParentID){
+            while (parentID !== null) {
+                if (parentID == suspectParentID) {
                     isChild = true;
                     break;
                 }

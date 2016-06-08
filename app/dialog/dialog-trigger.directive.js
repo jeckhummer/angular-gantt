@@ -21,10 +21,10 @@
         return directive;
 
         function link(scope, element, attrs, triggerCtrl, $transclude){
-            var trigger = $transclude((element)=>{
-                element.attr('ng-click', `triggerCtrl.toggle()`);
+            var trigger = $transclude(function (element){
+                element.attr('ng-click', 'triggerCtrl.toggle()');
                 if(triggerCtrl.isToggle)
-                    element.attr('ng-class', `{'active': triggerCtrl.isActive()}`);
+                    element.attr('ng-class', "{'active': triggerCtrl.isActive()}");
                 var innerHtml = element.html();
                 element.empty();
                 element.removeAttr('dialog-trigger');

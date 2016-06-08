@@ -79,7 +79,9 @@
 
         function getBaselineNames(){
             var names = [];
-            angular.forEach(baselines, (_, name)=> names.push(name));
+            angular.forEach(baselines, function (_, name) {
+                names.push(name);
+            });
             return names;
         }
 

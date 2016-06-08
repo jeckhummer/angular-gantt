@@ -8,7 +8,7 @@
         var _projectsData = [];
         var _projectsDictionary = null;
         var _currentProjectID = GanttOptionsService.getProjectID();
-        var _projectName = `Project ID${_currentProjectID}`;
+        var _projectName = 'Project ID' + _currentProjectID;
         var initialized = GanttProjectsDataProviderService.getProjects()
             .then(function(data){
                 _projectsData = data;
@@ -18,7 +18,6 @@
         service.initialized = initialized;
         service.isEmpty = isEmpty;
         service.getProject = getProject;
-        // service.getCurrentProjectName = getCurrentProjectName;
 
         init();
 
@@ -38,8 +37,5 @@
         function getProject(id){
             return _projectsDictionary.get(id)[0];
         }
-        // function getCurrentProjectName(){
-        //     return _projectName;
-        // }
     }
 })();

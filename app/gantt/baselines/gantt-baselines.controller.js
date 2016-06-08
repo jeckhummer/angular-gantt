@@ -80,7 +80,7 @@
                 tasksTotalCount == selectedTasksCount || selectedTasksCount == 0;
 
             return !allTasksSelected ?
-                (selectedTasksCount == 1 ? '1 task' : `${selectedTasksCount} tasks`) :
+                (selectedTasksCount == 1 ? '1 task' : selectedTasksCount + 'tasks') :
                 "All Tasks";
         }
 
@@ -91,7 +91,9 @@
             var allTasksNames = GanttTasksService.getTasksNames();
             var names = selectedTasksNames.length ? selectedTasksNames : allTasksNames;
 
-            names.forEach((name)=>str += `${name}<br />`);
+            names.forEach(function(name){
+                str += name + '<br />';
+            });
             return str;
         }
     }

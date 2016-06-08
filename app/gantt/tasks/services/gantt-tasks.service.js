@@ -26,7 +26,7 @@
             reload();
         }
 
-        function getAll(){
+        function getAll() {
             var tasks = GanttTasksHierarchyService.getAllTasks();
             return tasks;
         }
@@ -39,33 +39,47 @@
 
         function addTask(data) {
             var prepend = GanttOptionsService.getTaskAdditionStrategy();
-            return _modifyGanttState(()=>GanttTasksDataProviderService.addTask(data, prepend), 'Saving task');
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.addTask(data, prepend);
+            }, 'Saving task');
         }
 
         function updateTask(data) {
-            return _modifyGanttState(()=>GanttTasksDataProviderService.updateTask(data), 'Updating task');
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.updateTask(data);
+            }, 'Updating task');
         }
 
         function deleteTask(id) {
-            return _modifyGanttState(()=>GanttTasksDataProviderService.deleteTask(id), 'Deleting task');
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.deleteTask(id);
+            }, 'Deleting task');
         }
 
         function reload() {
             var suppressOK = true;
-            return _modifyGanttState(()=>GanttTasksDataProviderService.getTasks(), 'Loading tasks', suppressOK);
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.getTasks();
+            }, 'Loading tasks', suppressOK);
         }
 
-        function moveTaskUp(id){
-            return _modifyGanttState(()=>GanttTasksDataProviderService.moveTaskUp(id), 'Moving task');
+        function moveTaskUp(id) {
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.moveTaskUp(id);
+            }, 'Moving task');
         }
 
-        function moveTaskDown(id){
-            return _modifyGanttState(()=>GanttTasksDataProviderService.moveTaskDown(id), 'Moving task');
+        function moveTaskDown(id) {
+            return _modifyGanttState(function () {
+                return GanttTasksDataProviderService.moveTaskDown(id);
+            }, 'Moving task');
         }
 
 
         function _initTasks(tasksData) {
-            var tasks = tasksData.map((data) => GanttTaskFactoryService.create(data));
+            var tasks = tasksData.map(function (data) {
+                return GanttTaskFactoryService.create(data);
+            });
 
             GanttTasksDictionaryService.reset();
             GanttTasksDictionaryService.addRange(tasks);
@@ -74,7 +88,7 @@
             service.ready = true;
         }
 
-        function _modifyGanttState(action, msg, suppressOK){
+        function _modifyGanttState(action, msg, suppressOK) {
             var promise = action().then(_initTasks);
             NotificationService.notifyLock(msg, promise, suppressOK);
             service.ready = false;

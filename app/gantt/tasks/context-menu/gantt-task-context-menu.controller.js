@@ -22,7 +22,7 @@
 
         function deleteSelectedTasks(){
             var selectedTasksIDs = TaskClickService.getSelectedTasksIDs();
-            angular.forEach(selectedTasksIDs, (id)=>{
+            angular.forEach(selectedTasksIDs, function (id) {
                 GanttTasksService.deleteTask(id);
             });
             TaskClickService.unselectAll();

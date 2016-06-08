@@ -64,7 +64,7 @@
                         console.log('[timeline options] fetching error: ' + error);
                     });
 
-                calculateBoundariesTriggers.forEach((event)=>{
+                calculateBoundariesTriggers.forEach(function (event) {
                     $rootScope.$on(event, calculateBoundaries);
                 });
 

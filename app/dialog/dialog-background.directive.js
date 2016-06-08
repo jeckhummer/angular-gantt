@@ -14,11 +14,11 @@
 
         function link(scope, element, attrs){
             var groupName = attrs['dialog-background'];
-            var background = angular.element(`
-                <div ng-show="dialogCtrl.isActive()"
-                     ng-click="dialogCtrl.onClick()"
-                     class="fog-cover"></div>
-            `);
+            var background = angular.element(
+                '<div ng-show="dialogCtrl.isActive()"' +
+                     'ng-click="dialogCtrl.onClick()"' +
+                     'class="fog-cover"></div>'
+            );
             $compile(background)(scope);
             element.css('position', 'relative');
             element.append(background);
@@ -32,10 +32,10 @@
             function _initDialogWindow(window){
                 var name = $(window).attr('dialog-window');
 
-                var windowWrapper = $compile(`
-                    <div ng-click="$event.stopPropagation();"
-                         ng-show="dialogCtrl.dialogIsActive('${name}')"></div>
-                `)(scope);
+                var windowWrapper = $compile(
+                    '<div ng-click="$event.stopPropagation();"' +
+                         'ng-show="dialogCtrl.dialogIsActive(\'' + name +'\')"></div>'
+                )(scope);
 
                 windowWrapper.append(window);
                 background.append(windowWrapper);

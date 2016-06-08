@@ -33,7 +33,9 @@
         return service;
 
         function _init(tasksData) {
-            _dictionary = new IDDictionary((task)=>task.id);
+            _dictionary = new IDDictionary(function (task) {
+                return task.id;
+            });
             _dictionary.addRange(tasksData);
 
             _tree = new Tree(tasksData, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGetter, orderSetter);
@@ -74,7 +76,9 @@
         function addTask(taskData, prepend) {
             console.log('saving gantt task: ', taskData);
 
-            var newID = Math.max.apply(null, _dictionary.processRange((task)=>task.id)) + 1;
+            var newID = Math.max.apply(null, _dictionary.processRange(function (task) {
+                return task.id;
+            })) + 1;
             taskData.id = newID;
 
             var parentID = taskData.parentID;

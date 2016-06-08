@@ -28,9 +28,11 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
         parentIDSetter(_rootScopeData, null);
         orderSetter(_rootScopeData, 1);
 
-        _rootNode =_createNode(_rootScopeData);
+        _rootNode = _createNode(_rootScopeData);
 
-        _dictionary = new IDDictionary((node)=>node.getID());
+        _dictionary = new IDDictionary(function (node) {
+            return node.getID();
+        });
         _dictionary.add(_rootNode);
 
         _data.forEach(function (dataItem) {
@@ -55,7 +57,9 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
     }
 
     function getAll(processor) {
-        var _processor = processor || function (node) { return node; };
+        var _processor = processor || function (node) {
+                return node;
+            };
 
         var nodes = _recursiveWalk(_rootNode);
         return nodes;
@@ -182,7 +186,7 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
     //    }
     //}
 
-    function move(ID, newParentID, prepend){
+    function move(ID, newParentID, prepend) {
         var node = get(ID);
         var oldParentID = node.getParentID();
         var oldParentNode = get(oldParentID);
@@ -191,14 +195,14 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
         node.setParentID(newParentID);
 
         oldParentNode.removeChild(node);
-        if(prepend){
+        if (prepend) {
             newParentNode.prependChild(node);
-        }else{
+        } else {
             newParentNode.appendChild(node);
         }
     }
 
-    function remove(ID){
+    function remove(ID) {
         var node = get(ID);
         var parentID = node.getParentID();
         var parentNode = get(parentID);
@@ -231,7 +235,7 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
         return ID != null && children.length > 0;
     }
 
-    function _recurRemove(node){
+    function _recurRemove(node) {
         var ID = node.getID();
         var children = node.getChildren();
 
@@ -255,7 +259,7 @@ function Tree(data, IDGetter, IDSetter, parentIDGetter, parentIDSetter, orderGet
     function _setNestingLevel(node) {
         var parentID = node.getParentID();
         var parentNode = get(parentID);
-        if(parentNode){
+        if (parentNode) {
             node.level = parentNode.level + 1;
         }
 

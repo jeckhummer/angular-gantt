@@ -6,25 +6,33 @@
         var ctrl = this;
 
         ctrl.selectedResource = null;
+        ctrl.assignedResources = [];
+        ctrl.availableResources = [];
         ctrl.hoursEmployed = 1;
         ctrl.loaded = false;
         ctrl.invalidHours = false;
-        ctrl.getAvailableResources = getAvailableResources;
-        ctrl.getTaskResources = getTaskResources;
         ctrl.assignResourceToTask = assignResourceToTask;
         ctrl.unassignResourceFromTask = unassignResourceFromTask;
 
         init();
+        connect();
 
-        function init(){
+        function connect(){
             $scope.$on('task-editor-opened', function(event, taskID){
                 ctrl.taskID = taskID;
+                init();
             });
-            _changeState('Loading resources', GanttResourcesService.initialized.then(() => ctrl.loaded = true));
+            $scope.$on('resources.data-update', init);
+            $scope.$on('projects.data-update', init);
+            _changeState('Loading resources', GanttResourcesService.initialized.then(function () {
+                ctrl.loaded = true;
+            }));
         }
-
-        function getAvailableResources(){
-            return GanttResourcesService.getAvailableForTaskResources(ctrl.taskID);
+        function init() {
+            if(ctrl.taskID){
+                ctrl.availableResources = GanttResourcesService.getAvailableForTaskResources(ctrl.taskID);
+                ctrl.assignedResources = GanttResourcesService.getTaskResources(ctrl.taskID);
+            }
         }
 
         function assignResourceToTask() {
@@ -48,10 +56,6 @@
                 'Unassigning resource',
                 GanttResourcesService.unassignResourceFromTask(resourceID, ctrl.taskID)
             );
-        }
-
-        function getTaskResources() {
-            return GanttResourcesService.getTaskResources(ctrl.taskID);
         }
 
         function _changeState(notification, promise) {

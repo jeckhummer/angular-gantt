@@ -33,6 +33,7 @@
 
             <div>
                 <div class="task_name text-left" style="">
+                    <!--{{taskCtrl.id}}.-->
                     {{taskCtrl.name}}
                     <!-- - id {{taskCtrl.id}} - order {{taskCtrl.order}} - p {{taskCtrl.parentID}}-->
                 </div>
@@ -60,8 +61,17 @@
                 </span>
             </span>
 
-            <span class="glyphicon glyphicon-warning-sign"
+            <span ng-show="taskCtrl.hasConflict"
+                  class="glyphicon glyphicon-warning-sign"
+                  data-placement="left"
+                  data-toggle="tooltip"
+                  data-html="true"
+                  title="<u>Overused resources</u>: <br />{{taskCtrl.conflicts}}"
                   style="position: absolute; right: 45px; top: 30px;  color: red"></span>
+
+            <script> $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            }) </script>
         </div>
     </div>
 </div>

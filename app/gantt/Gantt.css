@@ -400,3 +400,7 @@ button.list-group-item:focus {
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
+
+.list-group-item-heading.error{
+    color: red !important;
+}

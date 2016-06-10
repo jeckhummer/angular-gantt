@@ -6,7 +6,11 @@
        id="task-resources-list">
 
         <div class="left-block">
-            <h5 class="list-group-item-heading nowrap-ellipsis-text">{{resourceCtrl.name}}</h5>
+            <h5 class="list-group-item-heading nowrap-ellipsis-text"
+                ng-class="{'error': resourceCtrl.hasConflict}">
+                <!--{{resourceCtrl.id}} -->
+                {{resourceCtrl.name}}
+            </h5>
             <div class="list-group-item-text">
                 <div ng-show="resourceCtrl.assignedToProjects.length > 0" class="nowrap-ellipsis-text">
                     <i>Projects :</i> {{resourceCtrl.projectsString}}

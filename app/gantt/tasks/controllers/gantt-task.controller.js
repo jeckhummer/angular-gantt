@@ -2,12 +2,13 @@
     angular.module('gantt').controller('GanttTaskController', GanttTaskController);
 
     function GanttTaskController($scope, DateService, TimelineService, GanttBaselinesService, GanttTasksService,
-                                 GanttOptionsService, GanttTasksHierarchyService,GanttResourcesService){
+                                 GanttOptionsService, GanttTasksHierarchyService, GanttResourcesActivityService){
         var ctrl = this;
         ctrl.moveTaskUp = moveTaskUp;
         ctrl.moveTaskDown = moveTaskDown;
         ctrl.indent = GanttOptionsService.indentOptions;
         ctrl.isMasterMode = GanttOptionsService.isMasterMode;
+        ctrl.conflict = false;
 
         $scope.$watchCollection('task', init);
 
@@ -15,20 +16,8 @@
         $scope.$on('boundaries-changed', function(){ initBaseline(ctrl) });
         $scope.$on('baselines-changed', function(){ initBaseline(ctrl) });
         $scope.$on('current-baseline-changed', function(){ initBaseline(ctrl) });
-        $scope.$on('resources.data-update', function(event){
-            console.log('resources.data-update');
-            initResourcesConflict();
-        });
-        $scope.$on('resources.assigned', function(event, resourceID, taskID){
-            if(ctrl.id == taskID){
-                console.log(resourceID + 'resource assigned to ' + taskID + ' task!');
-            }
-            initResourcesConflict();
-        });
-        $scope.$on('tasks-changed', function(){
-            console.log('tasks-changed');
-            initResourcesConflict();
-        });
+        $scope.$on('resources.data-update', initResourcesConflict);
+        $scope.$on('tasks-changed', initResourcesConflict);
 
         function init(task){
             if(task){
@@ -68,6 +57,7 @@
 
                 initPosition(ctrl);
                 initBaseline(ctrl);
+                initResourcesConflict();
             }
         }
 
@@ -95,21 +85,34 @@
         }
 
         function initResourcesConflict(){
-            var tasks = GanttTasksService.getAll();
-            var task = GanttTasksService.getTask(ctrl.id);
-            var currTaskIndex = tasks.indexOf(task);
-            var currTaskResources = GanttResourcesService.getTaskResources(ctrl.id);
-            var intersections = tasks
-                .filter(function(task, index){
-                    return index > currTaskIndex;
+            var conflicts = GanttResourcesActivityService.getConflicts(ctrl.id);
+            if(conflicts && conflicts.length > 0) {
+                ctrl.hasConflict = true;
+                ctrl.conflicts = conflicts.map(function (c) {
+                    return c.conflicts.map(function (x) {
+                        // return {
+                        //     name: x.resourceName,
+                        //     hours: x.hours,
+                        //     interval: c.interval
+                        // }
+                        return x.resourceName;
+                    });
                 })
-                .filter(function (task) {
-                    return DateInterval.intersect(ctrl.dateInterval, task.dateInterval).days > 0;
+                .reduce(function (acc, x) {
+                    return acc.concat(x);
+                }, [])
+                .map(function (x) {
+                    return '<span style="white-space: nowrap;">' + x + '</span>';
                 })
-                .filter(function(task){
-                    var resources = GanttResourcesService.getTaskResources(task.id);
-                    // return resources.map();
-                });
+                .unique()
+                .join('<br />');
+                console.log(ctrl.conflicts);
+                // ctrl.conflict = true;
+            }else{
+                ctrl.hasConflict = false;
+            }
+
+            // console.log(ctrl.id, conflicts);
         }
 
         function moveTaskUp(id, event){

@@ -2,7 +2,7 @@
 (function () {
     angular.module('gantt').controller('GanttTaskResourcesController', GanttTaskResourcesController);
 
-    function GanttTaskResourcesController($scope, GanttResourcesService) {
+    function GanttTaskResourcesController($scope, GanttResourcesService, GanttResourcesActivityService) {
         var ctrl = this;
 
         ctrl.selectedResource = null;

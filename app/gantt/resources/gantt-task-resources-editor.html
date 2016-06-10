@@ -3,7 +3,8 @@
         <div ng-if="ctrl.loaded">
             <gantt-resources-list
                     resources="ctrl.assignedResources"
-                    on-unassign="ctrl.unassignResourceFromTask(resourceID)">
+                    on-unassign="ctrl.unassignResourceFromTask(resourceID)"
+                    task-id="{{ctrl.taskID}}">
             </gantt-resources-list>
         </div>
 

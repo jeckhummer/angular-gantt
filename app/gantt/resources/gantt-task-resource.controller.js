@@ -1,12 +1,13 @@
 (function(){
     angular.module('gantt').controller('GanttTaskResourceController', GanttTaskResourceController);
 
-    function GanttTaskResourceController(GanttProjectsService, $scope){
+    function GanttTaskResourceController(GanttProjectsService, $scope, GanttResourcesActivityService){
         var ctrl = this;
         ctrl.init = init;
 
-        function init(data) {
+        function init(data, taskID) {
             var resource = data.resource;
+            ctrl.taskID = taskID;
             ctrl.id = resource.id;
             ctrl.name = resource.name;
             ctrl.assignedToProjects = resource.assignedToProjects;
@@ -14,7 +15,9 @@
             ctrl.employmentPercentage = Math.floor(100 * ctrl.employmentHours / 8);
 
             initProjectNames();
+            initConflicts();
             $scope.$on('projects.data-update', initProjectNames);
+            $scope.$on('conflicts.data-update', initConflicts);
         }
 
         function initProjectNames() {
@@ -25,6 +28,10 @@
 
             ctrl.projectsString = projectNames.join(', ');
             ctrl.projectsList = projectNames.join('<br />');
+        }
+
+        function initConflicts() {
+            ctrl.hasConflict = GanttResourcesActivityService.isResourceInConflict(ctrl.id, ctrl.taskID);
         }
     }
 })();

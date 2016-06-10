@@ -50,7 +50,7 @@
                 ]
             }, {
                 "id": 6,
-                "name": "Flek Dos",
+                "name": "Farukh Karamaliyev",
                 "assignedToProjects": [2, 3, 4, 5, 6],
                 "assignedToTasks": [
                     {"id": 1, "hours": 3},
@@ -61,7 +61,7 @@
                 ]
             }
         ];
-        var config = new DelayedResponseConfig(3 * 1000, 0);
+        var config = new DelayedResponseConfig(0 * 1000, 0);
 
         return {
             getResources: DelayedResponseFactoryService.create(new DelayedResponse(data, 'error'), config),

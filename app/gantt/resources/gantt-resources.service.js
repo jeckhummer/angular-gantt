@@ -22,6 +22,7 @@
         service.getResources = getResources;
         service.getAvailableForTaskResources = getAvailableForTaskResources;
         service.getProjectResources = getProjectResources;
+        service.isResourceAssignedToTask = isResourceAssignedToTask;
         service.getTaskResources = getTaskResources;
         service.assignResourceToTask = assignResourceToTask;
         service.unassignResourceFromTask = unassignResourceFromTask;
@@ -91,7 +92,7 @@
                     resource.assignedToTasks.push({id: taskID, hours: hoursEmployed});
                     resource.assignedToProjects.push(GanttOptionsService.getProjectID());
                     init(_IDToResourceDictionary.getValues());
-                    $rootScope.$broadcast('resources.assigned', resourceID, taskID);
+                    $rootScope.$broadcast('data-update', resourceID, taskID);
                 });
         }
 
@@ -108,7 +109,15 @@
                         resource.assignedToTasks.splice(index, 1);
                     }
                     init(_IDToResourceDictionary.getValues());
+                    $rootScope.$broadcast('resources.data-update', resourceID, taskID);
                 });
+        }
+
+        function isResourceAssignedToTask(resourceID, taskID) {
+            return getTaskResources(taskID)
+                .map(function (data) {
+                    return data.resource.id;
+                }).indexOf(parseInt(resourceID)) > -1;
         }
     }
 })();

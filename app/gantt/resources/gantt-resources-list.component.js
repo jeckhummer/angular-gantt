@@ -6,7 +6,8 @@
         controller: GanttResourcesListController,
         bindings: {
             onUnassign: '&',
-            resources: '<'
+            resources: '<',
+            taskId: '@'
         }
     });
     function GanttResourcesListController(){

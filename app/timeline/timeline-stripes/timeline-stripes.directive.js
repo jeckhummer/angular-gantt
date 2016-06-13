@@ -5,7 +5,7 @@
 
     function TimelineStripesDirective(TimeLineGridService, TimelineService, TimelineTypes) {
         var directive = {
-            templateUrl: 'timeline/timeline-stripes/timeline-stripes.directive.html',
+            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline-stripes/timeline-stripes.directive.html',
             restrict: 'E',
             scope: true,
             link: function ($scope) {

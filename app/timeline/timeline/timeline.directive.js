@@ -6,7 +6,7 @@
 
     function TimelineDirective (TimelineTypes, TimeLineGridService, TimelineService, $sce) {
         var directive = {
-            templateUrl: 'timeline/timeline/timeline.directive.html',
+            templateUrl: 'jsWidgets/angular-gantt/app/timeline/timeline/timeline.directive.html',
             restrict: 'E',
             scope: true,
             link: function ($scope) {

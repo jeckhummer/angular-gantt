@@ -3,10 +3,10 @@
      id="gantt">
     <div class="top-bar">
         <div class="gantt-toolbar">
-            <ng-include src="'gantt/context-actions-bar/gantt-context-actions-bar.html'"></ng-include>
+            <ng-include src="'jsWidgets/angular-gantt/app/gantt/context-actions-bar/gantt-context-actions-bar.html'"></ng-include>
             <!--<status></status>-->
         </div>
-        <ng-include src="'gantt/tabs/gantt-tabs.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/tabs/gantt-tabs.html'"></ng-include>
         <div style="clear:both"></div>
     </div>
 
@@ -47,7 +47,7 @@
                      style="min-width: {{ganttCtrl.leftBlockMinWidth}}; max-width: {{ganttCtrl.leftBlockMaxWidth}};">
 
                     <div style="position: relative; top: -{{ganttCtrl.scrollPositionTop}}px;">
-                        <ng-include src="'gantt/tasks/gantt-tasks-info.html'"></ng-include>
+                        <ng-include src="'jsWidgets/angular-gantt/app/gantt/tasks/gantt-tasks-info.html'"></ng-include>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
 
                     <div class="full-wrapper">
                         <div style="width: {{ganttCtrl.zoom.getValue()}}%;">
-                            <ng-include src="'gantt/tasks/gantt-tasks.html'"></ng-include>
+                            <ng-include src="'jsWidgets/angular-gantt/app/gantt/tasks/gantt-tasks.html'"></ng-include>
                         </div>
                         <div class="today-line" style="left: {{ganttCtrl.getTodayLineLeft() * ganttCtrl.zoom.getValue()/100}}%"></div>
                     </div>
@@ -68,11 +68,11 @@
     </div>
 
     <div class="dialogs">
-        <ng-include src="'gantt/options/gantt-options.html'"></ng-include>
-        <ng-include src="'gantt/task-editor/gantt-task-editor.html'"></ng-include>
-        <ng-include src="'gantt/baselines/gantt-baselines-menu.html'"></ng-include>
-        <ng-include src="'gantt/tabs/gantt-processing-lock.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/options/gantt-options.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/task-editor/gantt-task-editor.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/baselines/gantt-baselines-menu.html'"></ng-include>
+        <ng-include src="'jsWidgets/angular-gantt/app/gantt/tabs/gantt-processing-lock.html'"></ng-include>
     </div>
 
-    <ng-include src="'gantt/tasks/context-menu/gantt-task-context-menu.html'"></ng-include>
+    <ng-include src="'jsWidgets/angular-gantt/app/gantt/tasks/context-menu/gantt-task-context-menu.html'"></ng-include>
 </div>

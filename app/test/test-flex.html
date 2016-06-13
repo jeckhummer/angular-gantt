@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .container{
+            background-color: #EEE;
+            display: flex;
+            padding: 0px;
+            overflow: hidden;
+        }
+        .item{
+            outline: 1px solid #CCC;
+            background-color: #DDD;
+        }
+        .first-container{
+            width: 60px;
+        }
+        .second-container{
+            width: 1000px;
+            height: 200px;
+            margin-top: 20px;
+        }
+        .text-item {
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .block-item{
+            flex-basis: 500px;
+        }
+        .first-text-item{
+            flex-shrink: 0;
+        }
+        .second-text-item{
+            flex-shrink: 1;
+        }
+        .last-block-item{
+            flex-grow: 2;
+            flex-shrink: 2;
+        }
+        .middle-block-item{
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+        .first-block-item{
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="first-container container">
+    <div class="text-item item first-text-item">text 1</div>
+    <div class="text-item item second-text-item">text 2</div>
+</div>
+
+<div class="second-container container">
+    <div class="block-item item first-block-item"></div>
+    <div class="block-item item middle-block-item"></div>
+    <div class="block-item item last-block-item"></div>
+</div>
+
+<div style="display:flex; width: 400px;">
+    <div style="flex-grow: 1;  overflow: hidden; -ms-text-overflow: ellipsis;text-overflow: ellipsis;">
+        jksdfhjksdfhsjkdfhsdjkf kjsdkfsdfk kjsdkfsdfk kjsdkfsdfk
+    </div>
+    <div style="flex-grow: 0; flex-basis: 100px;"> ggg</div>
+</div>
+
+</body>
+</html>

@@ -106,7 +106,6 @@
                 })
                 .unique()
                 .join('<br />');
-                console.log(ctrl.conflicts);
                 // ctrl.conflict = true;
             }else{
                 ctrl.hasConflict = false;

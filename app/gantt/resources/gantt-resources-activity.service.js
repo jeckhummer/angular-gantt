@@ -50,7 +50,6 @@
             }
 
             var intervals = sortedTimeEdges.map(function (curr) {
-                // console.log(test(curr));
                 var interval = null;
                 if(prev && !(prev.type == 'end' && curr.type == 'start')){
                     interval = {
@@ -66,19 +65,11 @@
                     starts.splice(starts.indexOf(curr.taskID), 1);
                 }
                 prev = curr;
-                // interval && console.log("left: [" + interval.left.taskName + "] " + interval.left.type + " - " + interval.left.date.format('D MMM YYYY') +
-                //     "\nright: [" + interval.right.taskName + "] " + interval.right.type + " - " + interval.right.date.format('D MMM YYYY') + ' | ' +
-                //     interval.intersections.join(', ') + '\n\n'
-                // );
                 return interval;
             })
             .filter(function (interval) {
                 return interval;
             });
-
-            // console.log(intervals);
-            // console.log(sortedTimeEdges.map(test).join('\n'));
-            console.log('----------------------------------------------------')
 
             var activity = intervals.map(function (interval) {
                 var intervalActivity = {};
@@ -102,9 +93,6 @@
                 });
             });
 
-            console.log('activity', activity);
-            console.log('resource activity', resourceActivity);
-
             var intervalConflicts = activity.map(function (intervalActivity) {
                 var resourcesConflicts = {};
 
@@ -117,8 +105,6 @@
 
                 return $.isEmptyObject(resourcesConflicts) ? null : resourcesConflicts;
             });
-
-            console.log('interval conflicts', intervalConflicts);
 
             var taskConflicts = intervalConflicts.map(function (intervalConflict, i) {
                 if(intervalConflict !== null){
@@ -152,8 +138,6 @@
                 return all.concat(x);
             }, []);
 
-            console.log('conflict tasks', taskConflicts);
-
             service._taskToConflictsDictionary = new Dictionary(
                 taskConflicts,
                 function (conflict) {
@@ -173,7 +157,6 @@
             );
 
             $rootScope.$broadcast('conflicts.data-update');
-            // console.log(_taskToConflictsDictionary.get(6));
         }
 
         function getConflicts(taskID) {

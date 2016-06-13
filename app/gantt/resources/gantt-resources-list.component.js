@@ -2,7 +2,7 @@
 
 (function () {
     angular.module('gantt').component('ganttResourcesList', {
-        templateUrl: 'gantt/resources/gantt-resources-list.component.html',
+        templateUrl: 'jsWidgets/angular-gantt/app/gantt/resources/gantt-resources-list.component.html',
         controller: GanttResourcesListController,
         bindings: {
             onUnassign: '&',
